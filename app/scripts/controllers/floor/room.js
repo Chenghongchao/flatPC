@@ -127,7 +127,9 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     roomnumber:$scope.media.floor.roomnumber,
                     typeid:$scope.media.floor.typeid,
                     roomstyle:$scope.media.floor.floortype,
-                    startfloor:$scope.media.floor.startfloor
+                    startfloor:$scope.media.floor.startfloor,
+                    prefix:$scope.media.floor.prefix,
+                    suite:$scope.media.floor.suite
                 };
                 RoomService.multiAdd(param).success(function(data){
                     $rootScope.loading = false;
