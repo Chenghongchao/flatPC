@@ -119,10 +119,17 @@
                 <tfoot><tr><td colspan="10" style="height:300px;vertical-align: middle;" class="empty">没有任何权限</td></tr></tfoot>
             </table>
         </div>
+
         <ul class="page-tabs-nav">
             <li ng-if="media.menuCheck(1)" ng-class="{'active':media.tab == 1}" ng-click="media.setTab(1)">打分信息</li>
             <li ng-if="media.menuCheck(2)" ng-class="{'active':media.tab == 2}" ng-click="media.setTab(2)">打分查询</li>
             <li ng-if="media.menuCheck(3)" ng-class="{'active':media.tab == 3}" ng-click="media.setTab(3)">排行榜</li>
+
+            <div ng-if="media.menuCheck(1)" class="dataSelect">
+                不合格寝室<input value="请选择时间区间" datepicker>
+                <button class="ALiconfont icon-search"></button>
+            </div>
+
         </ul>
         <ul class="page-tabs-container">
             <li ng-if="media.menuCheck(1)" class="fadeIn animated active" ng-class="{'active':media.tab == 1}">
