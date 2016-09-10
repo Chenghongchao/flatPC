@@ -42,8 +42,9 @@ angular.module('flatpcApp')
         },
         getFlat:function(){
 			var ids = [];
+            var isAll = false; //是否有勾选全部楼栋
 			if(this.flats && this.flats.length==1 && "0"==this.flats[0].flatId){
-                if($scope.form.flag==0) $scope.form.flag = 1;
+                isAll = true;
             }else{
 				var check = function(id){
 					for(var i=0;i < ids.length;i++){
@@ -52,10 +53,18 @@ angular.module('flatpcApp')
 					return true;
 				};
 				this.flats.forEach(function (flat) {
-					if(check(flat.flatId))
+                    if("0"==flat.flatId){
+                        if(false==isAll) isAll = true;
+                    }else if(check(flat.flatId)){
 						ids.push(flat.flatId);
+                    }
 				})
 				ids = ids.length>0?ids.toString():"";
+                if(true===isAll && $scope.form.flag==0){
+                    $scope.form.flag = 1;
+                }else if(false===isAll && $scope.form.flag==1){
+                    $scope.form.flag = 0;
+                }
 			}
             return ids;
         }
