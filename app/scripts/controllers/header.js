@@ -186,7 +186,12 @@ angular.module('flatpcApp')
                         var form = document.createElement("form");
                         form.target = "test";
                         form.method = "post";
-                        form.action = "/index.php?s=/Home/User/logout.html";
+                        if("GY"==localStorage.logoutTag){
+                            form.action = "http://www.houqinbao.com/login/#/login";
+                        }else{
+                            form.action = "/index.php?s=/Home/User/logout.html";
+
+                        }
                         
                         form.submit();
                         location.href = '/';

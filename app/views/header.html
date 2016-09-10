@@ -10,7 +10,8 @@
             <li ng-if="headerMenu(318)" data-toggle="wechat" ng-class="{'active':sysMenu[0]=='wechat'}"><a ng-click="headerSwitch(1,'wechat')" target="page-tab">微信平台</a></li>
             <li ng-if="headerMenu(1)" data-toggle="flat" ng-class="{'active':sysMenu[0]=='flat'}" ng-click="headerSwitch(0,'flat')"><a href="#index">公寓管理</a></li>
             <li ng-if="headerMenu(4)" data-toggle="repair" ng-class="{'active':sysMenu[0]=='repair'}"><a ng-click="headerSwitch(1,'repair')">智能报修</a></li>
-            <li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">水电缴费</a></li>
+            <!--<li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">水电缴费</a></li>-->
+            <li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a href="http://pay.houqinbao.com/#/login" target="_blank">水电缴费</a></li>
             <li ng-if="headerMenu(317)" data-toggle="food" ng-class="{'active':sysMenu[0]=='food'}"><a ng-click="headerSwitch(1,'food')">订餐</a></li>
             <li ng-if="headerMenu(370)" data-toggle="water" ng-class="{'active':sysMenu[0]=='water'}"><a ng-click="headerSwitch(1,'water')" target="page-tab">订水</a></li>
             <li ng-if="headerMenu(459)" data-toggle="mall" ng-class="{'active':sysMenu[0]=='mall'}"><a ng-click="headerSwitch(1,'mall')" >商城</a></li>

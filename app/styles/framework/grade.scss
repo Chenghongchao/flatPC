@@ -199,16 +199,33 @@
   position: absolute;
   top:8px;
   right:15px;
-  input{
-      margin: 0 2px 0 7px;
-      text-align: center;
+  span{
+      float: left;
+      line-height: 26px;
+  }
+  .dataBox{ 
+      position: relative;
+      float: left;
+      width: 240px;
+      margin: 0 5px 0 8px;
+      .form-control{
+          height: 26px;
+          line-height: 26px;
+          border: 1px solid #c1c1c1;
+      }
+      i{
+          position: absolute; 
+          top: 6px; 
+          right: 6px; 
+      }
   }
   button{ 
+      float: left;
       width: 26px;
       height: 26px;
       display: inline-block;
       background: #fff;
-      border: 1px solid #999;
+      border: 1px solid #c1c1c1;
       font-size: 14px;
       color: #999;
       text-align: center;

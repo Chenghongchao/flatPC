@@ -232,7 +232,7 @@ angular.module('flatpcApp')
         $rootScope.loading = false;
         $scope.login = function () {
             if($scope.media.user.length > 0 && $scope.media.pass.length > 0 /*&& $scope.media.code.length > 0*/){
-                $rootScope.loading = true;
+                $rootScope.loading = false;
                 PublicService.login({
                     useraccount:$scope.media.user,
                     password:$scope.media.pass,
@@ -271,6 +271,7 @@ angular.module('flatpcApp')
                         sessionStorage.role = data.data.role;
                         sessionStorage.takephoto = data.data.takephoto;
                         sessionStorage.check = data.data.check;
+                        sessionStorage.loginoutTag = "GY";//标记是从公寓系统登录
                         
                         setcookie('adminId', data.data.adminId);
                         setcookie('token', data.data.token);
@@ -290,6 +291,7 @@ angular.module('flatpcApp')
                         setcookie('role', data.data.role);
                         setcookie('takephoto', data.data.takephoto);
                         setcookie('check', data.data.check);
+                        setcookie('logoutTag', "GY");//标记是从公寓系统登录
 
                         // document.cookie = "adminId="+data.data.adminId;
                         // document.cookie = "token="+data.data.token;
