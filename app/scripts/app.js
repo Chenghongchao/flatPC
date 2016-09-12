@@ -720,6 +720,57 @@ angular
             }
         }
     })
+    .state('safeCheck', {
+        url: "/safeCheck",
+        views: {
+            "": {
+                templateUrl: 'views/safety/safeCheck.html',
+                controller: 'safeCheckCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('checkResult', {
+        url: "/checkResult",
+        views: {
+            "": {
+                templateUrl: 'views/safety/checkResult.html',
+                controller: 'checkResultCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('safeSet', {
+        url: "/safeSet",
+        views: {
+            "": {
+                templateUrl: 'views/safety/safeSet.html',
+                controller: 'safeSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('floor', {
         url: "/floor",
         views: {
