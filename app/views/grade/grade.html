@@ -127,14 +127,14 @@
             <li ng-if="media.menuCheck(2)" ng-class="{'active':media.tab == 2}" ng-click="media.setTab(2)">打分查询</li>
             <li ng-if="media.menuCheck(3)" ng-class="{'active':media.tab == 3}" ng-click="media.setTab(3)">排行榜</li>
 
-            <!--<div ng-show="media.source == 1 && media.tab == 1" class="dataSelect">
+            <div ng-show="media.source == 1 && media.tab == 1" class="dataSelect">
                 <span>不合格寝室</span>
                 <div class="dataBox">
-                    <input type="text" id="config-demo" class="form-control" placeholder="请选择时间区间">
+                    <input type="text" id="config-demo" class="form-control" value="" placeholder="请选择时间区间">
                     <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                 </div>
-                <button class="ALiconfont icon-search"></button>
-            </div>-->
+                <button class="ALiconfont icon-search" ng-click="searchHandler();"></button>
+            </div>
 
         </ul>
         <ul class="page-tabs-container">
@@ -542,9 +542,9 @@
         </div>
     </div>
 </div>
-<!--<script>
+<script>
     //日期选择控件配置
-    $(document).ready(function() {
+    /*$(document).ready(function() {
         $('#config-demo').daterangepicker({
             autoApply: true,
             startDate: "2016/09/04",
@@ -566,5 +566,5 @@
                 var date = new Date(start);
                 var strDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
         });
-    });
-</script>-->
+    });*/
+</script>

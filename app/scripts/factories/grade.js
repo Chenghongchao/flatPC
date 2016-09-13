@@ -745,6 +745,19 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     };
+	var getListByDate = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/dayscore/get_grade_room_list/?'
+        + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
+        + '&date=' + (param.date || null)
+		+ '&flatid=' + (param.flatid || null)
+		+ '&begindate=' + (param.begindate || null)
+		+ '&enddate=' + (param.enddate || null)
+        + '&grade=' + (param.grade || null);
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    };
+
     //随机获取楼栋信息
     var randomFlat =function() {
         var url = AppConfig.WEB_ROOT + 'flatdata/school/random_flat/?'
@@ -785,6 +798,7 @@ angular.module('flatpcApp')
         delSpot:delSpot,
         getFlatByCheckId:getFlatByCheckId,
         dayCompletion:dayCompletion,
+		getListByDate:getListByDate,
         randomFlat:randomFlat
     }
 }]);

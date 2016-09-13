@@ -154,6 +154,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             }else return false;
         },
         setWeek:function (week) {
+			$('#config-demo').val("");
             this.week = week;
             refresh();
         },
@@ -1142,4 +1143,69 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         }
     };
     
+	//实例化日期控件
+	$scope.search = {
+		begindate: null,
+		enddate: null
+	}
+	$('#config-demo').daterangepicker({
+		autoApply: true,
+		autoUpdateInput: false,
+		startDate: new Date().Format('yyyy-MM-dd'),
+		endDate: new Date().Format('yyyy-MM-dd'),
+		opens: "left",
+		locale : {
+			format: "YYYY/MM/DD",
+			applyLabel : '确定',  
+			cancelLabel : '取消',  
+			fromLabel : '起始时间',  
+			toLabel : '结束时间',  
+			customRangeLabel : '自定义',  
+			daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],  
+			monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月',  
+					'七月', '八月', '九月', '十月', '十一月', '十二月' ],  
+			firstDay : 1  
+		}
+	}, function(start, end, label) {//格式化日期显示框
+		$scope.search.begindate = new Date(start).Format('yyyy-MM-dd');
+		$scope.search.enddate = new Date(end).Format('yyyy-MM-dd');
+	});
+	$('#config-demo').on('apply.daterangepicker', function(ev, picker) {
+		$(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+	});
+	$('#config-demo').on('cancel.daterangepicker', function(ev, picker) {
+		$(this).val('');
+	});
+
+	$scope.searchHandler = function(){
+		if($scope.media.flatid.length<1)return;
+        $rootScope.loading = true;
+		GradeService.getListByDate({
+            date:new Date($scope.media.week.year + '-' + $scope.media.week.month + '-' + $scope.media.week.day).Format('yyyy-MM-dd'),
+			flatid: $scope.media.flatid,
+			begindate: $scope.search.begindate,
+			enddate: $scope.search.enddate,
+			grade: 1 //不合格
+		}).success(function (data) {
+			$rootScope.loading = false;
+			if(data.code == 0){
+				data.list.floorList = data.list.floorList || [];
+				data.list.floorList.forEach(function(list,index){
+					list.roomList = list.roomList || [];
+					list.roomList =  $filter('sliceArray')(list.roomList,10,index);
+					// console.log(index);
+				});
+				$scope.flat = data.list;
+				$scope.flat.flatName = $scope.media.campus + '-' + $scope.media.liveArea + '-' + $scope.media.title;
+			}else if(data.code == 4037){
+						swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+						location.href="#login";$rootScope.loading = false;
+					}
+			else
+				swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+			
+			// console.log(data);
+		})
+	}
+
 }]);
