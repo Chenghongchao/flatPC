@@ -14,7 +14,8 @@ angular.module('flatpcApp')
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            params:param
+            params:param,
+            isFour:isFour
         }).error(function (error) {
             swal("提示", "网络错误！", "error"); 
         });//.get(url,param);
@@ -85,6 +86,7 @@ angular.module('flatpcApp')
         });//.get(url,param);
     }
     var multiAdd = function(param){
+
         var url = AppConfig.WEB_ROOT + 'flatdata/rooms/batch_add_room/';
         return $http({
             url:url,

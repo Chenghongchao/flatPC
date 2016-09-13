@@ -13,7 +13,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             memo:'',
             floornumber:0,
             roomnumber:0,
-            startfloor:1
+            startfloor:1,
+			isFour:0
         },
         room:{
             type:0,
@@ -98,6 +99,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     typeid:$scope.media.floor.typeid,
                     roomstyle:$scope.media.floor.roomstyle,
                     startfloor:$scope.media.floor.startfloor,
+					isFour: $scope.media.floor.isFour,
                     prefix:$scope.media.floor.prefix,
                     suite:$scope.media.floor.suite,
                     floortype:$scope.media.floor.floortype,
@@ -128,6 +130,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     typeid:$scope.media.floor.typeid,
                     roomstyle:$scope.media.floor.floortype,
                     startfloor:$scope.media.floor.startfloor,
+					isFour: $scope.media.floor.isFour,
                     prefix:$scope.media.floor.prefix,
                     suite:$scope.media.floor.suite
                 };

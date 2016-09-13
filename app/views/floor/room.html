@@ -98,7 +98,11 @@
                                     </td>
                                 </tr>
                                 <tr ng-show="media.floor.type == 2">
-                                    <td class="require">每层房间数</td><td><input type="text" ng-model="media.floor.roomnumber" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>
+                                    <td class="require">每层房间数</td>
+                                    <td>
+                                        <input type="text" ng-model="media.floor.roomnumber" ng-disabled="(media.floor.type==2&&!menuCheck(152))" />
+                                        <label><input type="checkbox" ng-model="media.floor.isFour" ng-true-value="1" ng-false-value="0"/>四位数（勾选后起始为1001）</label>
+                                    </td>
                                 </tr>
                                 <tr ng-show="media.floor.type == 2">
                                     <td>房间号前缀</td><td><input type="text" ng-model="media.floor.prefix" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>
