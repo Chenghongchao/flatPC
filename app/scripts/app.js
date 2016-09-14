@@ -32,6 +32,7 @@ angular
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
     UCENTER:'http://code.houqinbao.com:3338/ucenter',
     EXAM:'http://test.houqinbao.com/Examination/',
+    HOTEL:'http://120.26.48.150/hotel/',
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -1207,6 +1208,57 @@ angular
             "": {
                 templateUrl: 'views/shower/setting.html',
                 controller: 'settingCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bookinggrade', {
+        url: "/bookinggrade",
+        views: {
+            "": {
+                templateUrl: 'views/hotel/bookinggrade.html',
+                controller: 'bookingGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('roomgrade', {
+        url: "/roomgrade",
+        views: {
+            "": {
+                templateUrl: 'views/hotel/roomgrade.html',
+                controller: 'roomGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('hotelset', {
+        url: "/hotelset",
+        views: {
+            "": {
+                templateUrl: 'views/hotel/hotelset.html',
+                controller: 'hotelSetCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

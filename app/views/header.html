@@ -22,6 +22,7 @@
             <li ng-if="headerMenu(416)" data-toggle="exammessage" ng-class="{'active':sysMenu[0]=='exammessage'}"><a ng-click="headerSwitch(0,'exammessage')"  href="#exammessage">考试系统</a></li>
             <li ng-if="headerMenu(401)" data-toggle="report" ng-class="{'active':sysMenu[0]=='report'}"><a ng-click="headerSwitch(0,'report')" href="#index">预报到管理</a></li>
             <li ng-if="headerMenu(421)" data-toggle="entry" ng-class="{'active':sysMenu[0]=='entry'}"><a ng-click="headerSwitch(0,'entry')" href="#index">出入管理</a></li>
+            <li ng-if="headerMenu(466)" data-toggle="bookinggrade" ng-class="{'active':sysMenu[0]=='bookinggrade'}"><a ng-click="headerSwitch(0,'bookinggrade')" href="#bookinggrade">宾馆预约</a></li>
             <li ng-if="headerMenu(2)" data-toggle="center" ng-class="{'active':sysMenu[0]=='center'}"><a ng-click="headerSwitch(0,'center')" href="#index">数据中心</a></li>
             <li ng-if="headerMenu(3)" data-toggle="admin" ng-class="{'active':sysMenu[0]=='admin'}"><a ng-click="headerSwitch(0,'admin')" href="#index">系统设置</a></li>
             
@@ -65,6 +66,7 @@
                 <li ng-if="headerMenu(416)" data-toggle="exammessage" ng-class="{'active':sysMenu[0]=='exammessage'}"><a ng-click="headerSwitch(0,'exammessage')"  href="#exammessage">考试系统</a></li>
                 <li ng-if="headerMenu(401)" data-toggle="report" ng-class="{'active':sysMenu[0]=='report'}"><a ng-click="headerSwitch(0,'report')" href="#index">预报到管理</a></li>
                 <li ng-if="headerMenu(421)" data-toggle="entry" ng-class="{'active':sysMenu[0]=='entry'}"><a ng-click="headerSwitch(0,'entry')" href="#index">出入管理</a></li>
+                <li ng-if="headerMenu(466)" data-toggle="bookinggrade" ng-class="{'active':sysMenu[0]=='bookinggrade'}"><a ng-click="headerSwitch(0,'bookinggrade')" href="#bookinggrade">宾馆预约</a></li>
                 <li ng-if="headerMenu(2)" data-toggle="center" ng-class="{'active':sysMenu[0]=='center'}"><a ng-click="headerSwitch(0,'center')" href="#index">数据中心</a></li>
                 <li ng-if="headerMenu(3)" data-toggle="admin" ng-class="{'active':sysMenu[0]=='admin'}"><a ng-click="headerSwitch(0,'admin')" href="#index">系统设置</a></li>
             
@@ -222,6 +224,14 @@
                                     出入管理
                                     <div style="float:right">
                                         <input bs-switch ng-change="toggleSave()" ng-model="media.entry" type="checkbox" switch-size="mini"  switch-on-text="开" switch-off-text="关">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-group-item b-l-primary">
+                                    宾馆预约
+                                    <div style="float:right">
+                                        <input bs-switch ng-change="toggleSave()" ng-model="media.bookinggrade" type="checkbox" switch-size="mini"  switch-on-text="开" switch-off-text="关">
                                     </div>
                                 </a>
                             </li>

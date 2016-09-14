@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flatpcApp')
-.controller('safeCheckCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
+.controller('checkResultCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
         '公寓管理','安全检查','检查结果'

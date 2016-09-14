@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('flatpcApp')
-.controller('safeCheckCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
+.controller('roomGradeCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '公寓管理','安全检查','安全检查'
+        '宾馆预定','房间管理'
     ];
     //跳转到什么地方去
-    $scope.parent = "flat";
+    $scope.parent = "bookinggrade";
     $scope.loaded = function(){
         $rootScope.loading = false;
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.FRAME+"index.php?m=SafetyCheck&c=Index&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode+"#3";
+    a.href = AppConfig.HOTEL + "index.php?m=Admin&c=Hourse&a=lists&"+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
     a.target="page-frame";
     a.click();
 }]);

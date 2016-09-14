@@ -162,5 +162,24 @@
     </li>
 </ul>
 
+<ul ng-show="sysMenu[0]=='hotel'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(467)" ng-class="{'active':sysMenu[1]=='bookinggrade'}" ng-click="switch('bookinggrade')">
+        <a href="#bookinggrade" title="预约管理">
+            <i class="ALiconfont icon-14news" style="font-size:23px"></i> 预约管理
+        </a>
+    </li>
+    <li ng-if="menuCheck(468)" ng-class="{'active':sysMenu[1]=='roomgrade'}" ng-click="switch('roomgrade')">
+        <a href="#roomgrade" title="房型管理">
+            <i class="ALiconfont icon-shezhi" style="font-size:23px"></i> 房型管理
+        </a>
+    </li> 
+    <li ng-if="menuCheck(469)" ng-class="{'active':sysMenu[1]=='hotelset'}" ng-click="switch('hotelset')">
+        <a href="#hotelset" title="酒店管理">
+            <i class="ALiconfont icon-yonghubiao" style="font-size:23px"></i> 酒店管理
+        </a>
+    </li>
+</ul>
+
 </div>
 <i class="collapse" ng-click="changeMini()"></i>

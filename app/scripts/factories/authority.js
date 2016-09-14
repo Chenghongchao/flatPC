@@ -73,6 +73,15 @@ angular.module('flatpcApp')
                         }else if(menuCheck(420)){
                             menus.push('exampeople');
                         }else menus.push(' ');
+                    }else if(menuCheck(466)){
+                         menus.push('bookinggrade');
+                        if(menuCheck(467)){
+                            menus.push('bookinggrade');
+                        }else if(menuCheck(468)){
+                            menus.push('roomgrade');
+                        }else if(menuCheck(469)){
+                            menus.push('hotelset');
+                        }else menus.push(' ');
                     }
                     menus.push(' ')
                     return menus;
@@ -557,13 +566,11 @@ angular.module('flatpcApp')
              case 'exams':
                 if(menuCheck(417))
                      return ['exammessage','exams','exams'];
-
                 else
                     return null;
              case 'examgrade':
                 if(menuCheck(418))
                      return ['exammessage','examgrade','examgrade'];
-
                 else
                     return null;
              case 'exammessage':
@@ -574,12 +581,23 @@ angular.module('flatpcApp')
              case 'exampeople':
                 if(menuCheck(420))
                      return ['exammessage','exampeople','exampeople'];
-
                 else
                     return null;
-            
-                   
-                    
+             case 'bookinggrade':
+                if(menuCheck(367))
+                    return ['hotel','bookinggrade','bookinggrade'];
+                else
+                    return null; 
+             case 'roomgrade':
+                if(menuCheck(367))
+                    return ['hotel','roomgrade','roomgrade'];
+                else
+                    return null; 
+             case 'hotelset':
+                if(menuCheck(367))
+                    return ['hotel','hotelset','hotelset'];
+                else
+                    return null;           
         }
         return null;
     };
