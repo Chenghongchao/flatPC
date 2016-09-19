@@ -73,7 +73,7 @@ angular.module('flatpcApp')
                 break;
             case '语言生':
             case '交换生':
-                $scope.media.degreeyear = '8';
+                $scope.media.degreeyear = '-1';
                 break;
             default:
                 $scope.media.degreeyear = '';
