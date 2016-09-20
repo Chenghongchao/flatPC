@@ -1185,7 +1185,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
 			flatid: $scope.media.flatid,
 			begindate: $scope.search.begindate,
 			enddate: $scope.search.enddate,
-			grade: 1 //不合格
+			grade: -1 //不合格
 		}).success(function (data) {
 			$rootScope.loading = false;
 			if(data.code == 0){
