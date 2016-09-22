@@ -291,7 +291,7 @@ angular.module('flatpcApp')
                         setcookie('role', data.data.role);
                         setcookie('takephoto', data.data.takephoto);
                         setcookie('check', data.data.check);
-                        setcookie('logoutTag', "GY");//标记是从公寓系统登录
+                        setcookie('loginoutTag', "GY");//标记是从公寓系统登录
 
                         // document.cookie = "adminId="+data.data.adminId;
                         // document.cookie = "token="+data.data.token;

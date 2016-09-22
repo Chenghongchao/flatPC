@@ -168,7 +168,8 @@ angular.module('flatpcApp')
                         delcookie('tokenMessage');
                         delcookie('schoolname');
                         delcookie('check');
-                        
+                        delcookie('loginoutTag');
+                        var loginoutTag = sessionStorage.getItem("loginoutTag");
                         sessionStorage.removeItem('adminId');
                         sessionStorage.removeItem('token');
                         sessionStorage.removeItem('nodeIds');
@@ -189,13 +190,15 @@ angular.module('flatpcApp')
                         sessionStorage.removeItem('check');
                         sessionStorage.removeItem('tokenMessage');
                         sessionStorage.removeItem('schoolname');
+                        sessionStorage.removeItem('loginoutTag');
                         var form = document.createElement("form");
                         form.target = "test";
                         form.method = "post";
                         form.action = "/index.php?s=/Home/User/logout.html";
                         
                         form.submit();
-                        if("GY"==localStorage.logoutTag){
+                        
+                        if("GY" == loginoutTag){
                             location.href = '/login';
                         }else{
                             location.href = '/';
