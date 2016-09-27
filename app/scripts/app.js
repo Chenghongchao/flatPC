@@ -33,6 +33,7 @@ angular
     UCENTER:'http://code.houqinbao.com:3338/ucenter',
     EXAM:'http://test.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
+    QUESTION:'http://120.26.48.150/question/',
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -1276,6 +1277,40 @@ angular
             "": {
                 templateUrl: 'views/hotel/persongrade.html',
                 controller: 'personGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('questionnaire', {
+        url: "/questionnaire",
+        views: {
+            "": {
+                templateUrl: 'views/question/questionnaire.html',
+                controller: 'questionNaireCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('questionstatist', {
+        url: "/questionstatist",
+        views: {
+            "": {
+                templateUrl: 'views/question/questionstatist.html',
+                controller: 'questionStatistCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

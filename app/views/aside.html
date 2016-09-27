@@ -186,5 +186,19 @@
     </li>
 </ul>
 
+<ul ng-show="sysMenu[0]=='question'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(475)" ng-class="{'active':sysMenu[1]=='questionnaire'}" ng-click="switch('questionnaire')">
+        <a href="#questionnaire" title="问卷设置">
+            <i class="ALiconfont icon-yixiangdengji" style="font-size:23px"></i> 问卷设置
+        </a>
+    </li>
+    <li ng-if="menuCheck(476)" ng-class="{'active':sysMenu[1]=='questionstatist'}" ng-click="switch('questionstatist')">
+        <a href="#questionstatist" title="统计管理">
+            <i class="ALiconfont icon-toupiao" style="font-size:23px"></i> 统计管理
+        </a>
+    </li> 
+</ul>
+
 </div>
 <i class="collapse" ng-click="changeMini()"></i>

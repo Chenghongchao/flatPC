@@ -84,6 +84,13 @@ angular.module('flatpcApp')
                         }else if(menuCheck(473)){
                             menus.push('persongrade');
                         }else menus.push(' ');
+                    }else if(menuCheck(474)){
+                         menus.push('questionnaire');
+                        if(menuCheck(475)){
+                            menus.push('questionnaire');
+                        }else if(menuCheck(476)){
+                            menus.push('questionstatist');
+                        }else menus.push(' ');
                     }
                     menus.push(' ')
                     return menus;
@@ -604,7 +611,17 @@ angular.module('flatpcApp')
                 if(menuCheck(473))
                     return ['hotel','persongrade','persongrade'];
                 else
-                    return null;           
+                    return null; 
+             case 'questionnaire':
+                if(menuCheck(475))
+                    return ['question','questionnaire','questionnaire'];
+                else
+                    return null;
+             case 'questionstatist':
+                if(menuCheck(476))
+                    return ['question','questionstatist','questionstatist'];
+                else
+                    return null;            
         }
         return null;
     };

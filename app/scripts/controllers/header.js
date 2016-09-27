@@ -131,6 +131,12 @@ angular.module('flatpcApp')
                         return;
                     }
                     break;
+                case 'questionnaire':
+                    if(!$rootScope.menuCheck(474)){
+                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                        return;
+                    }
+                    break;
             }
             $rootScope.sysMenu[0] = name;
             $rootScope.sysMenu[1] = name;
@@ -231,7 +237,8 @@ angular.module('flatpcApp')
             report:!new RegExp(",report,").test(","+toggles+","),
             exammessage:!new RegExp(",exammessage,").test(","+toggles+","),
             entry:!new RegExp(",entry,").test(","+toggles+","),
-            bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+",")
+            bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+","),
+            questionnaire:!new RegExp(",questionnaire,").test(","+toggles+",")
         }
         $scope.change = function name(params) {
             swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
@@ -283,6 +290,7 @@ angular.module('flatpcApp')
             if(!$scope.media.exammessage)str += "exammessage,";
             if(!$scope.media.entry)str += "entry,";
             if(!$scope.media.bookinggrade)str += "bookinggrade,";
+            if(!$scope.media.questionnaire)str += "questionnaire,";
 
             if(str.length>0){
                 localStorage.toggles = str.substring(0,str.length-1);
