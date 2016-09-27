@@ -179,6 +179,11 @@
             <i class="ALiconfont icon-yonghubiao" style="font-size:23px"></i> 酒店管理
         </a>
     </li>
+    <li ng-if="menuCheck(473)" ng-class="{'active':sysMenu[1]=='persongrade'}" ng-click="switch('persongrade')">
+        <a href="#persongrade" title="人员管理">
+            <i class="ALiconfont icon-tiaosu" style="font-size:23px"></i> 人员管理
+        </a>
+    </li>
 </ul>
 
 </div>

@@ -1270,6 +1270,23 @@ angular
             }
         }
     })
+    .state('persongrade', {
+        url: "/persongrade",
+        views: {
+            "": {
+                templateUrl: 'views/hotel/persongrade.html',
+                controller: 'personGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('large', {
     url: "/large",
     views: {
