@@ -323,6 +323,14 @@ table{
     }
     
 }
+.page-account{
+    border-top: none;
+    .table-container{
+        top:45px;
+        border-top: 1px solid #eeeff1;
+    }
+
+}
 
 .floor-list{
     margin-top:-1px;
