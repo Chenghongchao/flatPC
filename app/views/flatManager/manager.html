@@ -148,7 +148,7 @@
                                                     <option value="0" ng-if="flat.liveAreaList!=null && flat.liveAreaList.length>0">全部生活区</option>
                                                     <option ng-repeat="liveArea in flat.liveAreaList" value="{{liveArea.liveAreaId}}">{{liveArea.title}}</option>
                                                 </select>
-                                                <select class="form-control" ng-model="flat.flatId" >
+                                                <select class="form-control" ng-model="flat.flatId" ng-change="selecter.flatSelecter(flat)">
                                                     <option value="">选择楼栋</option>
                                                     <option value="0" ng-if="flat.flatList!=null && flat.flatList.length>0 && form.flag!=2">全部楼栋</option>
                                                     <option ng-if="form.flag!=2" ng-repeat="flat in flat.flatList" value="{{flat.flatId}}">{{flat.title}}</option>

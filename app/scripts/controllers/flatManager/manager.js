@@ -59,13 +59,13 @@ angular.module('flatpcApp')
 						ids.push(flat.flatId);
                     }
 				})
-				ids = ids.length>0?ids.toString():"";
                 if(true===isAll && $scope.form.flag==0){
                     $scope.form.flag = 1;
                 }else if(false===isAll && $scope.form.flag==1){
                     $scope.form.flag = 0;
                 }
 			}
+            ids = ids.length>0 ? ids.toString() : "";
             return ids;
         }
     }
@@ -128,6 +128,7 @@ angular.module('flatpcApp')
 				$scope.form.flag = 1;
 			}else if(flat.flatId){
                 if($scope.form.flag==1) $scope.form.flag = 0;
+                if(flat.campusId && flat.liveAreaId) return;
                 for(var i=0;i < $rootScope.treeFlat.cmpusList.length;i++){
                     if($rootScope.treeFlat.cmpusList[i].liveAreaList && (flat.flatId || flat.liveAreaId))
                         for(var j=0;j < $rootScope.treeFlat.cmpusList[i].liveAreaList.length;j++){
@@ -177,7 +178,6 @@ angular.module('flatpcApp')
             useraccount:$scope.form.useraccount,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-            // flatids: $scope.form.flag>0? null: ids,
             flatids: ids,
             flag: $scope.form.flag,
 			areaid: $scope.form.areaid,

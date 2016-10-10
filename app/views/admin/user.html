@@ -28,11 +28,6 @@
         </ul>
     </div>
 
-    <!--<div class="accountTabs">
-        <a ng-click="" class="active">账号列表</a>
-        <a ng-click="">账号批量导入</a>
-    </div>-->
-
     <div class="page-tabs" tabs style="left:225px">
         <ul class="page-tabs-nav">
             <li class="active" ng-click="media.setTab(1)">账号列表</li>
@@ -109,149 +104,23 @@
             </li>
 
             <li class="fadeIn animated" ng-class="{'active':media.tab == 2}">
-                <div class="accountBatch">121212</div>
+                <div class="accountBatch"><iframe  id="myiframe" onload="changeFrameHeight()" width="100%" frameborder="0" src="http://code.houqinbao.com:3338/Apartment/index.php?m=Apartment&c=Account&a=index&token=11417CCE5965A5C1B5CF0A06939A3A18&schoolcode=11481"></iframe></div>
             </li>
         </ul>
     </div>
 
-
-
-    <!--<div class="accountList" id="accountList">
-        <div ng-if="menuCheck(233)" class="xzbtn">
-            <button class="btn btn-success" ng-click="showCard('#userForm',dataInit)">新建帐号</button>
-        </div>
-        <div class="table-container" style="left:225px;bottom:54px;">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th class="sort" ng-class="{'sort-up':media.orderfield=='userAccount' && media.ordertype=='asc','sort-down':media.orderfield=='userAccount' && media.ordertype=='desc'}" ng-click="setOrder('userAccount')">帐号</th>
-                        <th class="sort" ng-class="{'sort-up':media.orderfield=='userName' && media.ordertype=='asc','sort-down':media.orderfield=='userName' && media.ordertype=='desc'}" ng-click="setOrder('userName')">用户名</th>
-                        <th class="sort" ng-class="{'sort-up':media.orderfield=='roleName' && media.ordertype=='asc','sort-down':media.orderfield=='roleName' && media.ordertype=='desc'}" ng-click="setOrder('roleName')">角色</th>
-                        <th ng-if="menuCheck(234)">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="user in list">
-                        <td>{{user.userAccount}}</td><td>{{user.userName}}</td><td>{{user.roleName}}</td>
-                        <td ng-if="menuCheck(234)">
-                            <button type="button" class="btn btn-link btn-xs" ng-click="showCard('#userForm',dataInit(user))">编辑</button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="10" ng-hide="media.recordCount" class="empty">没有检索帐号信息</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="page-controller" style="left:225px;">
-            <div class="page-number">
-                <ul class="pagination">
-                    <li ng-class="{disabled:media.epage<2}">
-                        <a aria-label="Previous" ng-click="setPage(-1)">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li ng-show="media.epage-2>0"><a ng-click="setPage(-2)">{{media.epage-2}}</a></li>
-                    <li ng-show="media.epage-1>0"><a ng-click="setPage(-1)">{{media.epage-1}}</a></li>
-                    <li class="active"><a>{{media.epage}}</a></li>
-                    <li ng-show="media.epage+1<=media.pageCount"><a ng-click="setPage(1)">{{media.epage+1}}</a></li>
-                    <li ng-show="media.epage+2<=media.pageCount"><a ng-click="setPage(2)">{{media.epage+2}}</a></li>
-                    <li ng-class="{disabled:media.epage>=media.pageCount}">
-                        <a aria-label="Next" ng-click="setPage(1)">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="page-size">
-                共{{media.recordCount}}条记录，每页显示
-                <div class="btn-group dropup">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{media.pagesize}} <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" style="min-width:54px">
-                        <li ng-click="setPageSize(10)"><a>10</a></li>
-                        <li ng-click="setPageSize(20)"><a>20</a></li>
-                        <li ng-click="setPageSize(30)"><a>30</a></li>
-                        <li ng-click="setPageSize(50)"><a>50</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accountBatch" id="accountBatch">121212</div>-->
-
-
-    <!--<div class="table-container" style="left:225px;bottom:54px;">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th class="sort" ng-class="{'sort-up':media.orderfield=='userAccount' && media.ordertype=='asc','sort-down':media.orderfield=='userAccount' && media.ordertype=='desc'}" ng-click="setOrder('userAccount')">帐号</th>
-                    <th class="sort" ng-class="{'sort-up':media.orderfield=='userName' && media.ordertype=='asc','sort-down':media.orderfield=='userName' && media.ordertype=='desc'}" ng-click="setOrder('userName')">用户名</th>
-                    <th class="sort" ng-class="{'sort-up':media.orderfield=='roleName' && media.ordertype=='asc','sort-down':media.orderfield=='roleName' && media.ordertype=='desc'}" ng-click="setOrder('roleName')">角色</th>
-                    <th ng-if="menuCheck(234)">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in list">
-                    <td>{{user.userAccount}}</td><td>{{user.userName}}</td><td>{{user.roleName}}</td>
-                    <td ng-if="menuCheck(234)">
-                        <button type="button" class="btn btn-link btn-xs" ng-click="showCard('#userForm',dataInit(user))">编辑</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="10" ng-hide="media.recordCount" class="empty">没有检索帐号信息</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div class="page-controller" style="left:225px;">
-        <div class="page-number">
-            <ul class="pagination">
-                <li ng-class="{disabled:media.epage<2}">
-                    <a aria-label="Previous" ng-click="setPage(-1)">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li ng-show="media.epage-2>0"><a ng-click="setPage(-2)">{{media.epage-2}}</a></li>
-                <li ng-show="media.epage-1>0"><a ng-click="setPage(-1)">{{media.epage-1}}</a></li>
-                <li class="active"><a>{{media.epage}}</a></li>
-                <li ng-show="media.epage+1<=media.pageCount"><a ng-click="setPage(1)">{{media.epage+1}}</a></li>
-                <li ng-show="media.epage+2<=media.pageCount"><a ng-click="setPage(2)">{{media.epage+2}}</a></li>
-                <li ng-class="{disabled:media.epage>=media.pageCount}">
-                    <a aria-label="Next" ng-click="setPage(1)">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="page-size">
-            共{{media.recordCount}}条记录，每页显示
-            <div class="btn-group dropup">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{media.pagesize}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" style="min-width:54px">
-                    <li ng-click="setPageSize(10)"><a>10</a></li>
-                    <li ng-click="setPageSize(20)"><a>20</a></li>
-                    <li ng-click="setPageSize(30)"><a>30</a></li>
-                    <li ng-click="setPageSize(50)"><a>50</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>-->
-
-
-
-
-
+    <script>
+        function changeFrameHeight(){
+            var ifm= document.getElementById("myiframe"); 
+            ifm.height=document.documentElement.clientHeight - 146;
+        }
+        window.onresize=function(){  
+            changeFrameHeight();  
+        } 
+    </script>
 
 </div>
+
 
 <div class="info-card fadeIn animated" id="userForm" info-card data-userid = "form.status">
     <div class="info-card-wrapper">
