@@ -233,6 +233,21 @@ angular.module('flatpcApp')
                     return ['flat','safetyCheck','safeSet'];
                 else
                     return null;
+             case 'checkResults':
+                if(menuCheck(479))
+                    return ['flat','bedroomCheck','checkResults'];
+                else
+                    return null;
+             case 'resultsCount':
+                if(menuCheck(480))
+                    return ['flat','bedroomCheck','resultsCount'];
+                else
+                    return null;
+             case 'bedroomCheckSet':
+                if(menuCheck(481))
+                    return ['flat','bedroomCheck','bedroomCheckSet'];
+                else
+                    return null;
             case 'scoreStatistics':
                 if(menuCheck(301))
                     return ['flat','grade','scoreStatistics'];

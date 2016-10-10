@@ -30,6 +30,11 @@
             <i class="ALiconfont icon-kuaisuchaxun" style="font-size:20px"></i> 安全检查
         </a>
     </li>
+    <li ng-if="menuCheck(477)" ng-class="{'active':sysMenu[1]=='bedroomCheck'}" ng-click="switch('bedroomCheck')">
+        <a href="#index" title="寝室检查">
+            <i class="ALiconfont icon-qinshichaxun" style="font-size:20px"></i> 寝室检查
+        </a>
+    </li>
 </ul>
 <!--这个地方必须写成sysMenu[0]不然authority.js这个文件就不能添加点击后的样式-->
 <ul ng-show="sysMenu[0]=='report'">

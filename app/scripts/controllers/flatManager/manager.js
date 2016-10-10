@@ -177,7 +177,8 @@ angular.module('flatpcApp')
             useraccount:$scope.form.useraccount,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-            flatids: $scope.form.flag>0? null: ids,
+            // flatids: $scope.form.flag>0? null: ids,
+            flatids: ids,
             flag: $scope.form.flag,
 			areaid: $scope.form.areaid,
             roleid:$scope.form.roleid

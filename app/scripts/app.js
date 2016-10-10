@@ -775,6 +775,57 @@ angular
             }
         }
     })
+    .state('checkResults', {
+        url: "/checkResults",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/checkResults.html',
+                controller: 'checkResultsCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('resultsCount', {
+        url: "/resultsCount",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/resultsCount.html',
+                controller: 'resultsCountCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bedroomCheckSet', {
+        url: "/bedroomCheckSet",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/bedroomCheckSet.html',
+                controller: 'bedroomCheckSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('floor', {
         url: "/floor",
         views: {
