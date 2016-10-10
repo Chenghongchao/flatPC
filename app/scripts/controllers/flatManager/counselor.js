@@ -55,9 +55,9 @@ angular.module('flatpcApp')
                     if(check(cla.classId))
                         ids.push(cla.classId);
                 })
+                ids = ids.length>0?ids.toString():"";
                 $scope.form.flag = 0;
             }
-            ids = ids.length>0 ? ids.toString() : "";
             return ids;
         }
     }
@@ -86,6 +86,7 @@ angular.module('flatpcApp')
     }
     //二级连选的select
     $scope.selecter = {
+        
         collegeSelecter : function(cla){
             $scope.form.collegeid=cla.collegeId || '';
             //用collegeId获取classList
@@ -149,15 +150,16 @@ angular.module('flatpcApp')
     }
     $scope.editSave = function (fun) {
         var ids = $scope.form.getClass();
+        // if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1 || ids.length < 1)return;
         if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1) return;
         $rootScope.loading = true;
         CollegeService.editManager({
             adminid:$scope.form.adminid,
             username:$scope.form.username,
-            flag: $scope.form.flag,
-            classids:ids,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
+            flag: $scope.form.flag,
+            classids:ids,
             roleid:$scope.form.roleid
         }).success(function (data) {
             $rootScope.loading = false;

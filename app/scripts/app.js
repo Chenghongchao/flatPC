@@ -20,7 +20,9 @@ angular
   ])
   .constant('AppConfig',{
     //   
-      WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
+      //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
+      
+      WEB_ROOT:'http://192.168.2.110:8080/Geese_Apartment/',
         //WEB_ROOT:'http://192.168.2.138:8080/Geese_Apartment/',
         // WEB_ROOT:'http://114.55.17.193/Geese_Apartment/',
     // WEB_ROOT:'http://127.0.0.1:8080/Geese_Apartment/',
