@@ -105,9 +105,6 @@ angular.module('flatpcApp')
 				if(flat.liveAreaList){
                     flat.flatId = "";
                     flat.flatList = [];
-                    // for(var i=0; i<flat.liveAreaList.length; i++){
-                    //     flat.flatList = flat.flatList.concat(flat.liveAreaList[i].flatList);
-                    // }
 				}
 			}else if(flat.liveAreaId){
                 flat.flatId = '';

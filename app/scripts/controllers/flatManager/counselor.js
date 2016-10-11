@@ -16,7 +16,6 @@ angular.module('flatpcApp')
         password:'',
         password1:'',
         useraccount:'',
-        flag:0,
         phone:'',
         collegeid:'',
         jobnumber:'',
@@ -31,35 +30,52 @@ angular.module('flatpcApp')
         },
         addClass:function () {
             var cla = {
-                collegeId:($scope.media.collegeid || '') + "",
-                collegeList:$rootScope.treeCollege[0].collegeList,
-                classId:($scope.media.classid || '') + "",
+                collegeId:$scope.media.collegeid || '',
+                collegeList:$rootScope.treeCollege,
+                classId:$scope.media.classid || '',
                 classList:[],
             }
             $scope.selecter.classSelecter(cla);
-            console.log(cla);
             this.classes.push(cla);
         },
+        // getClass:function(){
+        //     var ids = [];
+        //     if(this.classes && this.classes.length==1 && "0"==this.classes[0].classId){
+        //         $scope.form.flag = 1;
+        //     }else{
+        //         var check = function(id){
+        //             for(var i=0;i < ids.length;i++){
+        //                 if(id.length < 1 || ids[i] == id)return false;
+        //             }
+        //             return true;
+        //         };
+        //         this.classes.forEach(function (cla) {
+        //             if(check(cla.classId))
+        //                 ids.push(cla.classId);
+        //         })
+        //         ids = ids.length>0?ids.toString():"";
+        //         $scope.form.flag = 0;
+        //     }
+        //     return ids;
+        // }
         getClass:function(){
-            var ids = [];
-            if(this.classes && this.classes.length==1 && "0"==this.classes[0].classId){
-                $scope.form.flag = 1;
-            }else{
-                var check = function(id){
-                    for(var i=0;i < ids.length;i++){
-                        if(id.length < 1 || ids[i] == id)return false;
+            var array = {
+                collegeids:[], //学院ID集合
+                classids:[] //班级ID集合
+            };
+            this.classes.forEach(function (cla) {
+                if("1"==cla.classId){ //选择了全部班级，则记录该学院ID
+                    if(array.collegeids.indexOf(cla.collegeId)==-1){
+                        array.collegeids.push(cla.collegeId);
                     }
-                    return true;
-                };
-                this.classes.forEach(function (cla) {
-                    if(check(cla.classId))
-                        ids.push(cla.classId);
-                })
-                ids = ids.length>0?ids.toString():"";
-                $scope.form.flag = 0;
-            }
-            return ids;
+                }else if(array.collegeids.indexOf(cla.collegeId)==-1 //记录该班级ID
+                      && array.classids.indexOf(cla.classId)==-1){
+                    array.classids.push(cla.classId);
+                }
+            })
+            return array;
         }
+  
     }
     $scope.dataInit = function (user) {
         $scope.form.status= user.adminId ? 1 : 0;
@@ -85,19 +101,22 @@ angular.module('flatpcApp')
         $scope.form.adminid=user.adminId || '';
     }
     //二级连选的select
-    $scope.selecter = {
-        
+    $scope.selecter = {    
         collegeSelecter : function(cla){
-            $scope.form.collegeid=cla.collegeId || '';
             //用collegeId获取classList
             cla.classId = '';
-            var college = cla.collegeId?$filter('filter')($rootScope.treeCollege[0].collegeList,{collegeId:cla.collegeId}):[];
-            cla.classList = (college.length>0 && college[0].classList)?college[0].classList : [];
-            //console.log(this.classList);
+            if("1"==cla.collegeId){ //选择了全部班级
+				if(cla.classList){
+                    cla.classList = [];
+				}
+			}else{
+                var college = cla.collegeId?$filter('filter')($rootScope.treeCollege[0].collegeList,{collegeId:cla.collegeId}):[];
+                cla.classList = (college.length>0 && college[0].classList)?college[0].classList : [];
+            }
         },
         classSelecter : function(cla){
             //用classId反向获取collegeId和classList
-            if(cla.classId){
+            if(cla.classId && "1"!=cla.classId){
                 var college = $rootScope.treeCollege[0].collegeList;
                 for(var i=0 ; i < college.length;i++){
                     var list = cla.classId?$filter('filter')(college[i].classList,{classId:cla.classId}):[];
@@ -114,13 +133,13 @@ angular.module('flatpcApp')
         }
     }
     $scope.addSave = function (fun) {
-        var ids = $scope.form.getClass();
+        var arrayIds = $scope.form.getClass();
         if($scope.form.password.length < 1 || $scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1)return;
-        if($scope.form.flag==0 && ids.length < 1){
-            swal("提示", "请选择班级", "error"); 
-            return;
-        }else if($scope.form.password != $scope.form.password1){
+		if($scope.form.password != $scope.form.password1){
             swal("提示", "两次密码输入不一致", "error"); 
+            return;
+        }else if(arrayIds.collegeids.length < 1 && arrayIds.classids.length < 1){
+            swal("提示", "请选择班级", "error"); 
             return;
         }
         $rootScope.loading = true;
@@ -129,10 +148,9 @@ angular.module('flatpcApp')
             password:$scope.form.password,
             useraccount:$scope.form.useraccount,
             phone:$scope.form.phone,
-            collegeid:$scope.form.collegeid,
             jobnumber:$scope.form.jobnumber,
-            flag: $scope.form.flag,
-            classids:ids,
+            collegeid: arrayIds.collegeids.length>0 ? arrayIds.collegeids.toString() : null,
+            classids: arrayIds.classids.length>0 ? arrayIds.classids.toString() : null,
             roleid:$scope.form.roleid
         }).success(function (data) {
             $rootScope.loading = false;
@@ -149,17 +167,20 @@ angular.module('flatpcApp')
         })
     }
     $scope.editSave = function (fun) {
-        var ids = $scope.form.getClass();
-        // if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1 || ids.length < 1)return;
+        var arrayIds = $scope.form.getClass();
         if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1) return;
+        if(arrayIds.collegeids.length < 1 && arrayIds.classids.length < 1){
+            swal("提示", "请选择班级", "error"); 
+            return;
+        }
         $rootScope.loading = true;
         CollegeService.editManager({
             adminid:$scope.form.adminid,
             username:$scope.form.username,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-            flag: $scope.form.flag,
-            classids:ids,
+            collegeid: arrayIds.collegeids.length>0 ? arrayIds.collegeids.toString() : null,
+            classids: arrayIds.classids.length>0 ? arrayIds.classids.toString() : null,
             roleid:$scope.form.roleid
         }).success(function (data) {
             $rootScope.loading = false;
