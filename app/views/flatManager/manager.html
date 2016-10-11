@@ -177,13 +177,13 @@
                                                 </select>
                                                 <select class="form-control" ng-change="selecter.liveAreaSelecter(flat)" ng-model="flat.liveAreaId">
                                                     <option value="">选择生活区</option>
-                                                    <option value="0" ng-if="flat.liveAreaList!=null && flat.liveAreaList.length>0">全部生活区</option>
+                                                    <option value="1" ng-if="flat.liveAreaList!=null && flat.liveAreaList.length>0">全部生活区</option>
                                                     <option ng-repeat="liveArea in flat.liveAreaList" value="{{liveArea.liveAreaId}}">{{liveArea.title}}</option>
                                                 </select>
                                                 <select class="form-control" ng-model="flat.flatId" ng-change="selecter.flatSelecter(flat)">
                                                     <option value="">选择楼栋</option>
-                                                    <option value="0" ng-if="flat.flatList!=null && flat.flatList.length>0 && form.flag!=2">全部楼栋</option>
-                                                    <option ng-if="form.flag!=2" ng-repeat="flat in flat.flatList" value="{{flat.flatId}}">{{flat.title}}</option>
+                                                    <option value="1" ng-if="flat.flatList!=null && flat.flatList.length>0">全部楼栋</option>
+                                                    <option ng-if="flat.liveAreaId!='1'" ng-repeat="flat in flat.flatList" value="{{flat.flatId}}">{{flat.title}}</option>
                                                 </select>
                                                 <a ng-if="form.flats.length>1" class="remove-flat" ng-click="form.removeFlat($index)"><i class="ALiconfont icon-close1"></i></a>
                                             </li>

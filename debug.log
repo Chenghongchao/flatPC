@@ -188,3 +188,15 @@
 [1010/090955:ERROR:process_reader_win.cc(232)] ReadMemory at 0xe59000 of 28672 bytes failed: 仅完成部分的 ReadProcessMemory 或 WriteProcessMemory 请求。 (0x12B)
 [1010/090955:ERROR:crash_report_exception_handler.cc(102)] WriteEverything failed
 [1010/090955:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess, ntstatus=-1073741558
+[1011/091732:ERROR:process_info.cc(608)] range at 0xfe7ff000, size 0x230 fully unreadable
+[1011/091732:ERROR:process_info.cc(608)] range at 0xfe7fe000, size 0xf84 fully unreadable
+[1011/102648:ERROR:process_info.cc(608)] range at 0xff62f000, size 0x230 fully unreadable
+[1011/102648:ERROR:process_info.cc(608)] range at 0xff62e000, size 0xf84 fully unreadable
+[1011/115047:ERROR:process_info.cc(608)] range at 0xfee9c000, size 0x230 fully unreadable
+[1011/115047:ERROR:process_info.cc(608)] range at 0xfee9f000, size 0xf84 fully unreadable
+[1011/115523:ERROR:process_info.cc(608)] range at 0xff20d000, size 0x230 fully unreadable
+[1011/115523:ERROR:process_info.cc(608)] range at 0xff209000, size 0xf84 fully unreadable
+[1011/115532:ERROR:process_info.cc(608)] range at 0xfebae000, size 0x230 fully unreadable
+[1011/115532:ERROR:process_info.cc(608)] range at 0xfebac000, size 0xf84 fully unreadable
+[1011/115539:ERROR:process_info.cc(608)] range at 0xff164000, size 0x230 fully unreadable
+[1011/115539:ERROR:process_info.cc(608)] range at 0xff16f000, size 0xf84 fully unreadable

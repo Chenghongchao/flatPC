@@ -16,7 +16,6 @@ angular.module('flatpcApp')
         password:'',
         password1:'',
         useraccount:'',
-        flag: 0, // 0--正常；1--全部楼栋； 2--全部生活区
         phone:'',
         jobnumber:'',
         roleid:'',
@@ -41,32 +40,28 @@ angular.module('flatpcApp')
             this.flats.push(flat);
         },
         getFlat:function(){
-			var ids = [];
-            var isAll = false; //是否有勾选全部楼栋
-			if(this.flats && this.flats.length==1 && "0"==this.flats[0].flatId){
-                isAll = true;
-            }else{
-				var check = function(id){
-					for(var i=0;i < ids.length;i++){
-						if(id.length < 1 || ids[i] == id)return false;
-					}
-					return true;
-				};
-				this.flats.forEach(function (flat) {
-                    if("0"==flat.flatId){
-                        if(false==isAll) isAll = true;
-                    }else if(check(flat.flatId)){
-						ids.push(flat.flatId);
+            var array = {
+                campusids:[], //校区ID集合
+                liveareaids:[], //生活区ID集合
+                flatids:[] //楼栋ID集合
+            };
+            this.flats.forEach(function (flat) {
+                if("1"==flat.liveAreaId){ //选择了全部生活区，则记录该校区ID
+                    if(array.campusids.indexOf(flat.campusId)==-1){
+                        array.campusids.push(flat.campusId);
                     }
-				})
-                if(true===isAll && $scope.form.flag==0){
-                    $scope.form.flag = 1;
-                }else if(false===isAll && $scope.form.flag==1){
-                    $scope.form.flag = 0;
+                }else if("1"==flat.flatId){ //选择了全部楼栋，则记录该生活区ID
+                    if(array.campusids.indexOf(flat.campusId)==-1
+                    && array.liveareaids.indexOf(flat.liveAreaId)==-1){
+                        array.liveareaids.push(flat.liveAreaId);
+                    }
+                }else if(array.campusids.indexOf(flat.campusId)==-1 //记录该楼栋ID
+                      && array.liveareaids.indexOf(flat.liveAreaId)==-1 
+                      && array.flatids.indexOf(flat.flatId)==-1){
+                    array.flatids.push(flat.flatId);
                 }
-			}
-            ids = ids.length>0 ? ids.toString() : "";
-            return ids;
+            })
+            return array;
         }
     }
     $scope.dataInit = function (user) {
@@ -105,18 +100,16 @@ angular.module('flatpcApp')
             }
         },
         liveAreaSelecter : function(flat){
-			$scope.form.areaid = flat.liveAreaId;
             //用liveAreaId获取flatList
-            if("0"==flat.liveAreaId){ //选择了全部生活区
-				$scope.form.flag = 2;
+            if("1"==flat.liveAreaId){ //选择了全部生活区
 				if(flat.liveAreaList){
+                    flat.flatId = "";
                     flat.flatList = [];
-                    for(var i=0; i<flat.liveAreaList.length; i++){
-                        flat.flatList = flat.flatList.concat(flat.liveAreaList[i].flatList);
-                    }
+                    // for(var i=0; i<flat.liveAreaList.length; i++){
+                    //     flat.flatList = flat.flatList.concat(flat.liveAreaList[i].flatList);
+                    // }
 				}
 			}else if(flat.liveAreaId){
-                if($scope.form.flag==2) $scope.form.flag =0;
                 flat.flatId = '';
                 var liveArea = flat.liveAreaId?$filter('filter')(flat.liveAreaList,{liveAreaId:flat.liveAreaId}):[];
                 flat.flatList = (liveArea.length>0 && liveArea[0].flatList)?liveArea[0].flatList : [];
@@ -124,10 +117,7 @@ angular.module('flatpcApp')
         },
         flatSelecter : function(flat){
             //用 flatId或liveAreaId 反向获取 campusId、liveAreaId、liveAreaList和flatList
-            if("0"==flat.flatId){ //选择了全部楼栋
-				$scope.form.flag = 1;
-			}else if(flat.flatId){
-                if($scope.form.flag==1) $scope.form.flag = 0;
+            if(flat.flatId && "1"!=flat.flatId){
                 if(flat.campusId && flat.liveAreaId) return;
                 for(var i=0;i < $rootScope.treeFlat.cmpusList.length;i++){
                     if($rootScope.treeFlat.cmpusList[i].liveAreaList && (flat.flatId || flat.liveAreaId))
@@ -162,13 +152,13 @@ angular.module('flatpcApp')
         }
     }
     $scope.addSave = function (fun) {
-        var ids = $scope.form.getFlat();
+        var arrayIds = $scope.form.getFlat();
         if($scope.form.password.length < 1 || $scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1)return;
-		if($scope.form.flag==0 && ids.length < 1){
-            swal("提示", "请选择楼栋", "error"); 
-            return;
-        }else if($scope.form.password != $scope.form.password1){
+		if($scope.form.password != $scope.form.password1){
             swal("提示", "两次密码输入不一致", "error"); 
+            return;
+        }else if(arrayIds.campusids.length < 1 && arrayIds.liveareaids.length < 1 && arrayIds.flatids.length < 1){
+            swal("提示", "请填写楼栋信息", "error"); 
             return;
         }
         $rootScope.loading = true;
@@ -178,9 +168,9 @@ angular.module('flatpcApp')
             useraccount:$scope.form.useraccount,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-            flatids: ids,
-            flag: $scope.form.flag,
-			areaid: $scope.form.areaid,
+            campusid: arrayIds.campusids.length>0 ? arrayIds.campusids.toString() : null,
+            areaid: arrayIds.liveareaids.length>0 ? arrayIds.liveareaids.toString() : null,
+            flatids: arrayIds.flatids.length>0 ? arrayIds.flatids.toString() : null,
             roleid:$scope.form.roleid
         }).success(function (data) {
             $rootScope.loading = false;
@@ -197,21 +187,21 @@ angular.module('flatpcApp')
         })
     }
     $scope.editSave = function (fun) {
-        var ids = $scope.form.getFlat();
+        var arrayIds = $scope.form.getFlat();
         if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1)return;
-        if($scope.form.flag==0 && ids.length < 1){
-            swal("提示", "请选择楼栋", "error"); 
+        if(arrayIds.campusids.length < 1 && arrayIds.liveareaids.length < 1 && arrayIds.flatids.length < 1){
+            swal("提示", "请填写楼栋信息", "error"); 
             return;
         }
 		$rootScope.loading = true;
         FlatService.editManager({
             adminid:$scope.form.adminid,
             username:$scope.form.username,
-            flatids:ids,
-			flag: $scope.form.flag,
+            campusid: arrayIds.campusids.length>0 ? arrayIds.campusids.toString() : null,
+            areaid: arrayIds.liveareaids.length>0 ? arrayIds.liveareaids.toString() : null,
+            flatids: arrayIds.flatids.length>0 ? arrayIds.flatids.toString() : null,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-			areaid: $scope.form.areaid,
             roleid:$scope.form.roleid
         }).success(function (data) {
             $rootScope.loading = false;

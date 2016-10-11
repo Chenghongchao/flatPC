@@ -75,8 +75,7 @@ angular.module('flatpcApp')
             $scope.role.remark = '';
             $scope.role.status = true;
         }
-        return function () {
-            
+        return function () { 
         }
     }
     $scope.addSave = function () {
