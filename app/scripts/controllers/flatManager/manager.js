@@ -344,4 +344,11 @@ angular.module('flatpcApp')
             $rootScope.loading = false;
         })
     }
+
+    //iframe 账号批量导入
+    var a = document.createElement('a');
+    a.href = AppConfig.FRAME+"index.php?m=Apartment&c=Account&a=floor&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    a.target="page-frame";
+    a.click();
+
   }]);

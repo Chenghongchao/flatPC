@@ -240,8 +240,18 @@ angular.module('flatpcApp')
             bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+","),
             questionnaire:!new RegExp(",questionnaire,").test(","+toggles+",")
         }
+        // $scope.change = function name(params) {
+        //     swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
+        // }
         $scope.change = function name(params) {
-            swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
+			if(AppConfig.roleId == 2 ){
+				swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
+			}else{
+                $('#newPassword').addClass('show');
+				$('#newPassword').find('.info-card-close').click(function(){
+					$('#newPassword').removeClass('show');
+				});
+			}
         }
         $scope.editSave = function (fun) {
             if($scope.media.old.length > 0 && $scope.media.newPassword.length > 0 && $scope.media.confirm.length > 0)
@@ -263,8 +273,15 @@ angular.module('flatpcApp')
                     }).success(function (data) {
                         $rootScope.loading = false;
                             if(data.code == 0){
-                                swal("提示","修改成功！", "success"); 
-                                if(fun && typeof fun == 'function') fun();
+                                swal({   
+									title: "提示",   
+									text: "修改成功!",   
+									type: "success",  
+									confirmButtonText: "重新登录",   
+									closeOnConfirm: true 
+									}, function(){   
+										location.href = '/login'
+								});
                             }
                             else
                                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 

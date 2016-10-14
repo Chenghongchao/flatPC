@@ -8,8 +8,8 @@
  * Controller of the flatpcApp
  */
 angular.module('flatpcApp')
-  .controller('UserCtrl', ['$scope','$rootScope','UserService','$filter',
-  function ($scope,$rootScope,UserService,$filter) {
+  .controller('UserCtrl', ['$scope','$rootScope','AppConfig','UserService','$filter',
+  function ($scope,$rootScope,AppConfig,UserService,$filter) {
 //基础的页码、排序等等选项
     $scope.media = {
         epage:1,
@@ -206,4 +206,11 @@ angular.module('flatpcApp')
             $rootScope.loading = false;
         })
     }
+
+    //iframe 账号批量导入
+    var a = document.createElement('a');
+    a.href = AppConfig.FRAME+"index.php?m=Apartment&c=Account&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    a.target="page-frame";
+    a.click();
+
   }]);
