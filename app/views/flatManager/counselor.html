@@ -10,7 +10,7 @@
     </ul>
 </div>
 <!--<div class="tool-bar">
-    <div>
+    <div ng-if="menuCheck(486)">
         <button class="btn btn-success" ng-click="showCard('#userForm',dataInit)">新建帐号</button>
     </div>
 </div>-->
@@ -36,13 +36,13 @@
     <div class="page-tabs" tabs style="left:225px">
         <ul class="page-tabs-nav">
             <li class="active" ng-click="media.setTab(1)">账号列表</li>
-            <li ng-click="media.setTab(2)">账号批量导入</li>
+            <li ng-if="menuCheck(488)" ng-click="media.setTab(2)">账号批量导入</li>
         </ul>
 
          <ul class="page-tabs-container">
             <li class="fadeIn animated active" ng-class="{'active':media.tab == 1}">
                 <div class="accountList">
-                    <div ng-if="menuCheck(233)" class="xzbtn">
+                    <div ng-if="menuCheck(486)" class="xzbtn">
                         <button class="btn btn-success" ng-click="showCard('#userForm',dataInit)">新建帐号</button>
                     </div>
                     <div class="table-container" style="left:0;bottom:54px; top:55px; background:#fff;">
@@ -54,7 +54,7 @@
                                     <th>姓名</th>
                                     <th>工号</th>
                                     <th>管理班级</th>
-                                    <th>操作</th>
+                                    <th ng-if="menuCheck(487)">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
                                             <li ng-repeat="cla in item.classIds">{{cla.className}}</li>
                                         </ul>
                                     </td>
-                                    <td style="vertical-align:middle">
+                                    <td ng-if="menuCheck(487)" style="vertical-align:middle">
                                         <button type="button" class="btn btn-link btn-xs" ng-click="showCard('#userForm',dataInit(item))">编辑</button>
                                     </td>
                                 </tr>
@@ -207,9 +207,9 @@
                                 <tr>
                                     <td></td>
                                     <td class="td-btn-box">
-                                        <a ng-hide="form.status" class="btn btn-success" ng-click="addSave(closeCard())">提交</a>
-                                        <a ng-show="form.status" class="btn btn-primary" ng-click="editSave(closeCard())">保存</a>
-                                        <a ng-show="form.status" class="btn btn-danger" ng-click="deletess(closeCard())">删除</a>
+                                        <a ng-if="menuCheck(486)" ng-hide="form.status" class="btn btn-success" ng-click="addSave(closeCard())">提交</a>
+                                        <a ng-if="menuCheck(487)" ng-show="form.status" class="btn btn-primary" ng-click="editSave(closeCard())">保存</a>
+                                        <a ng-if="menuCheck(491)" ng-show="form.status" class="btn btn-danger" ng-click="deletess(closeCard())">删除</a>
                                     </td>
                                 </tr>
                             </tbody>
