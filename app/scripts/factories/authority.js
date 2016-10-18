@@ -73,6 +73,11 @@ angular.module('flatpcApp')
                         }else if(menuCheck(420)){
                             menus.push('exampeople');
                         }else menus.push(' ');
+                    }else if(menuCheck(492)){
+                         menus.push('physical');
+                        if(menuCheck(493)){
+                            menus.push('physical');
+                        }else menus.push(' ');
                     }else if(menuCheck(466)){
                          menus.push('bookinggrade');
                         if(menuCheck(467)){
@@ -605,6 +610,11 @@ angular.module('flatpcApp')
              case 'exampeople':
                 if(menuCheck(420))
                      return ['exammessage','exampeople','exampeople'];
+                else
+                    return null;
+             case 'physical':
+                if(menuCheck(493))
+                     return ['physical','physical','physical'];
                 else
                     return null;
              case 'bookinggrade':

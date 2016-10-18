@@ -119,6 +119,12 @@ angular.module('flatpcApp')
                         return;
                     }
                     break;
+                case 'physical':
+                    if(!$rootScope.menuCheck(492)){
+                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                        return;
+                    }
+                    break;
                 case 'entry':
                     if(!$rootScope.menuCheck(421)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
@@ -236,6 +242,7 @@ angular.module('flatpcApp')
             order:!new RegExp(",order,").test(","+toggles+","),
             report:!new RegExp(",report,").test(","+toggles+","),
             exammessage:!new RegExp(",exammessage,").test(","+toggles+","),
+            physical:!new RegExp(",physical,").test(","+toggles+","),
             entry:!new RegExp(",entry,").test(","+toggles+","),
             bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+","),
             questionnaire:!new RegExp(",questionnaire,").test(","+toggles+",")
@@ -305,6 +312,7 @@ angular.module('flatpcApp')
             if(!$scope.media.order)str += "order,";
             if(!$scope.media.report)str += "report,";
             if(!$scope.media.exammessage)str += "exammessage,";
+            if(!$scope.media.physical)str += "physical,";
             if(!$scope.media.entry)str += "entry,";
             if(!$scope.media.bookinggrade)str += "bookinggrade,";
             if(!$scope.media.questionnaire)str += "questionnaire,";

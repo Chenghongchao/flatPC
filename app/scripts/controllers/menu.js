@@ -94,8 +94,7 @@ angular.module('flatpcApp')
             case 'food':
             case 'water':
             case 'mall':
-            case 'pay':
-            
+            case 'pay':            
             case 'message':
                 menus.push($stateParams.p);
                 $rootScope.headerSwitch(1,$stateParams.p);

@@ -37,6 +37,7 @@ angular
     REPORT:'http://test.houqinbao.com/Report/',
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
     UCENTER:'http://code.houqinbao.com:3338/ucenter',
+    PHYSICAL:'http://code.houqinbao.com:3338/physical/',
     EXAM:'http://test.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
     QUESTION:'http://120.26.48.150/question/',
@@ -1980,6 +1981,23 @@ angular
             "": {
                 templateUrl: 'views/exam/exammessage.html',
                 controller: 'exammessageCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('physical', {
+        url: "/physical",
+        views: {
+            "": {
+                templateUrl: 'views/physical/physical.html',
+                controller: 'physicalCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

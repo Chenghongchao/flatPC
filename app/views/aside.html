@@ -167,6 +167,15 @@
     </li>
 </ul>
 
+<ul ng-show="sysMenu[0]=='physical'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(493)" ng-class="{'active':sysMenu[1]=='physical'}" ng-click="switch('physical')">
+        <a href="#physical" title="体检查询">
+            <i class="ALiconfont icon-14news" style="font-size:23px"></i> 体检查询
+        </a>
+    </li>
+</ul>
+
 <ul ng-show="sysMenu[0]=='hotel'">
     <!--默认选中哪一个选项-->
     <li ng-if="menuCheck(467)" ng-class="{'active':sysMenu[1]=='bookinggrade'}" ng-click="switch('bookinggrade')">
