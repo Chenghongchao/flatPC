@@ -38,7 +38,7 @@ angular
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
     UCENTER:'http://code.houqinbao.com:3338/ucenter',
     PHYSICAL:'http://code.houqinbao.com:3338/physical/',
-    EXAM:'http://test.houqinbao.com/Examination/',
+    EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
     QUESTION:'http://120.26.48.150/question/',
       schoolCode:0,
