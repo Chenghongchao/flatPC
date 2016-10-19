@@ -28,12 +28,10 @@
         </ul>
     </div>
 
-    
-
     <div class="page-tabs" tabs style="left:225px">
         <ul class="page-tabs-nav">
             <li class="active" ng-click="media.setTab(1)">账号列表</li>
-            <li ng-if="menuCheck(489)" ng-click="media.setTab(2)">账号批量导入</li>
+            <li ng-show="menuCheck(489)" ng-click="media.setTab(2)">账号批量导入</li>
         </ul>
 
         <ul class="page-tabs-container">
@@ -105,7 +103,7 @@
                 </div>
             </li>
 
-            <li class="fadeIn animated" ng-class="{'active':media.tab == 2}">
+            <li class="fadeIn animated"  ng-class="{'active':media.tab == 2}">
                 <div class="accountBatch">
                     <iframe id="myiframe" onload="changeFrameHeight()" name="page-frame" frameborder="0" width="100%" height="100%" frame-load></iframe>
                 </div>

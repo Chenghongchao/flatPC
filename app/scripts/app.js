@@ -1142,6 +1142,23 @@ angular
             }
         }
     })
+    .state('padmanage', {
+        url: "/padmanage",
+        views: {
+            "": {
+                templateUrl: 'views/pad/padmanage.html',
+                controller: 'padManageCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
      .state('graduate', {
         url: "/leaveschool",
         views: {

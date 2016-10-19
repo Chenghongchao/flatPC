@@ -383,6 +383,11 @@ angular.module('flatpcApp')
                     return ['admin','role','menu'];
                 else
                     return null;
+            case 'padmanage':
+                if(menuCheck(510))
+                    return ['admin','pad','padmanage'];
+                else
+                    return null;   
             case 'graduate':
                 if(menuCheck(377))
                     return ['graduate','graduate','leaveschool'];
@@ -646,7 +651,7 @@ angular.module('flatpcApp')
                 if(menuCheck(476))
                     return ['question','questionstatist','questionstatist'];
                 else
-                    return null;            
+                    return null;        
         }
         return null;
     };

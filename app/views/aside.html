@@ -115,6 +115,11 @@
             <i class="ALiconfont icon-jiaoseshezhi" style="font-size:22px"></i> 角色管理
         </a>
     </li>
+    <li ng-if="menuCheck(508)" ng-class="{'active':sysMenu[1]=='pad'}" ng-click="switch('pad')">
+        <a href="#index" title="PAD管理">
+            <i class="ALiconfont icon-yubaodao" style="font-size:22px"></i> PAD管理
+        </a>
+    </li>
 </ul>
 
 <ul ng-show="sysMenu[0]=='graduate'">

@@ -469,6 +469,17 @@
             </li>
         </ul>
     </li>
+    <li ng-if="menuCheck(509)" ng-show="sysMenu[1]=='pad'">
+        <div class="menu-title">PAD管理</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(510)">
+                <a href="#padmanage">
+                    <i class="ALiconfont icon-baodaotongji" style="background-color:#fc7257;font-size:24px"></i>
+                    功能管理
+                </a>
+            </li>
+        </ul>
+    </li>
     <!--整个数据中心-->
     <li ng-if="menuCheck(103)" ng-show="sysMenu[1]=='data'">
         <div class="menu-title">基础设置</div>
