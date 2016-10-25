@@ -82,6 +82,8 @@ angular.module('flatpcApp')
                          menus.push('bookinggrade');
                         if(menuCheck(467)){
                             menus.push('bookinggrade');
+                        }else if(menuCheck(511)){
+                            menus.push('datastatistics');
                         }else if(menuCheck(468)){
                             menus.push('roomgrade');
                         }else if(menuCheck(469)){
@@ -625,6 +627,11 @@ angular.module('flatpcApp')
              case 'bookinggrade':
                 if(menuCheck(467))
                     return ['hotel','bookinggrade','bookinggrade'];
+                else
+                    return null; 
+             case 'datastatistics':
+                if(menuCheck(511))
+                    return ['hotel','datastatistics','datastatistics'];
                 else
                     return null; 
              case 'roomgrade':

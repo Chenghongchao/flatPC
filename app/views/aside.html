@@ -188,6 +188,11 @@
             <i class="ALiconfont icon-14news" style="font-size:23px"></i> 预约管理
         </a>
     </li>
+    <li ng-if="menuCheck(511)" ng-class="{'active':sysMenu[1]=='datastatistics'}" ng-click="switch('datastatistics')">
+        <a href="#datastatistics" title="数据统计">
+            <i class="ALiconfont icon-chart" style="font-size:20px"></i> 数据统计
+        </a>
+    </li> 
     <li ng-if="menuCheck(468)" ng-class="{'active':sysMenu[1]=='roomgrade'}" ng-click="switch('roomgrade')">
         <a href="#roomgrade" title="房型管理">
             <i class="ALiconfont icon-shezhi" style="font-size:23px"></i> 房型管理

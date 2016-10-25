@@ -1312,6 +1312,23 @@ angular
             }
         }
     })
+    .state('datastatistics', {
+        url: "/datastatistics",
+        views: {
+            "": {
+                templateUrl: 'views/hotel/datastatistics.html',
+                controller: 'dataStatisticsCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('roomgrade', {
         url: "/roomgrade",
         views: {

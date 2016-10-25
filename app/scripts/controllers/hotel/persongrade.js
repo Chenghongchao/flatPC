@@ -4,7 +4,7 @@ angular.module('flatpcApp')
 .controller('personGradeCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '宾馆预定','人员管理'
+        '宾馆预约','人员管理'
     ];
     //跳转到什么地方去
     $scope.parent = "bookinggrade";
