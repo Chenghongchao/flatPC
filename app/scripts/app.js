@@ -22,7 +22,8 @@ angular
     //   
       //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
 
-      WEB_ROOT:'http://114.55.228.113/Geese_Apartment/',
+      //WEB_ROOT:'http://114.55.228.113/Geese_Apartment/',
+      WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
       
       //WEB_ROOT:'http://192.168.2.110:8080/Geese_Apartment/',
 
