@@ -192,19 +192,11 @@ angular.module('flatpcApp')
                     return ['flat','check','late'];
                 else
                     return null;
-            case 'flatManager':
-            // return ['flat','flatManager','flatManager'];
-                if(menuCheck(323))
-                    return ['flat','flatManager','flatManager'];
+            case 'logs':
+                if(menuCheck(521))
+                    return ['flat','journal','logs'];
                 else
-                    return null;
-            case 'counselor':
-            // return ['flat','flatManager','counselor'];
-                if(menuCheck(340))
-                    return ['flat','flatManager','counselor'];
-                else
-                    return null;
-
+                    return null;        
             case 'dormitoryWeek':
                 if(menuCheck(442))
                     return ['flat','dormitoryCheck','dormitoryWeek'];
@@ -370,6 +362,16 @@ angular.module('flatpcApp')
                     return ['admin','admin','group'];
                 else
                     return null;
+            case 'flatManager':
+                if(menuCheck(522))
+                    return ['admin','admin','flatManager'];
+                else
+                    return null;
+            case 'counselor':
+                if(menuCheck(523))
+                    return ['admin','admin','counselor'];
+                else
+                    return null;        
             case 'role':
                 if(menuCheck(123))
                     return ['admin','role','role'];
@@ -443,11 +445,16 @@ angular.module('flatpcApp')
                     return ['flat','flat','kuaicha'];
                 else
                     return null;
-             case 'hutiao':
+            case 'hutiao':
                 if(menuCheck(390))
                     return ['flat','flat','hutiao'];
                 else
                     return null;
+            case 'roomchange':
+                if(menuCheck(524))
+                    return ['flat','flat','roomchange'];
+                else
+                    return null;        
             case 'weigui':
                 if(menuCheck(392))
                     return ['flat','check','weigui'];
@@ -461,6 +468,11 @@ angular.module('flatpcApp')
             case 'latego':
                 if(menuCheck(395))
                     return ['flat','check','latego'];
+                else
+                    return null;
+            case 'logs':
+                if(menuCheck(521))
+                    return ['flat','journal','logs'];
                 else
                     return null;
             case 'repdc':

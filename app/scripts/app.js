@@ -22,7 +22,6 @@ angular
     //   
       //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
 
-      //WEB_ROOT:'http://114.55.228.113/Geese_Apartment/',
       WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
       
       //WEB_ROOT:'http://192.168.2.110:8080/Geese_Apartment/',
@@ -630,40 +629,7 @@ angular
             }
         }
     })
-    .state('flatManager', {
-        url: "/flatManager",
-        views: {
-            "": {
-                templateUrl: 'views/flatManager/manager.html',
-                controller: 'FlatManagerCtrl'
-            },
-            "aside": {
-                templateUrl: "views/aside.html",
-                controller: 'AsideCtrl'
-            },
-            "header": {
-                templateUrl: "views/header.html",
-                controller: 'HeaderCtrl'
-            }
-        }
-    })
-    .state('counselor', {
-        url: "/counselor",
-        views: {
-            "": {
-                templateUrl: 'views/flatManager/counselor.html',
-                controller: 'CounselorCtrl'
-            },
-            "aside": {
-                templateUrl: "views/aside.html",
-                controller: 'AsideCtrl'
-            },
-            "header": {
-                templateUrl: "views/header.html",
-                controller: 'HeaderCtrl'
-            }
-        }
-    })
+    
     .state('dormitoryWeek', {
         url: "/dormitoryWeek",
         views: {
@@ -789,6 +755,23 @@ angular
             "": {
                 templateUrl: 'views/bedroom/checkResults.html',
                 controller: 'checkResultsCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('logs', {
+        url: "/logs",
+        views: {
+            "": {
+                templateUrl: 'views/journal/logs.html',
+                controller: 'logsCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",
@@ -1081,6 +1064,40 @@ angular
             "": {
                 templateUrl: 'views/admin/group.html',
                 controller: 'GroupCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('flatManager', {
+        url: "/flatManager",
+        views: {
+            "": {
+                templateUrl: 'views/admin/manager.html',
+                controller: 'FlatManagerCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('counselor', {
+        url: "/counselor",
+        views: {
+            "": {
+                templateUrl: 'views/admin/counselor.html',
+                controller: 'CounselorCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",
@@ -1472,6 +1489,23 @@ angular
             "": {
                 templateUrl: 'views/flatManager/hutiao.html',
                 controller: 'hutiaoCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('roomchange', {
+        url: "/roomchange",
+        views: {
+            "": {
+                templateUrl: 'views/flatManager/roomchange.html',
+                controller: 'roomchangeCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

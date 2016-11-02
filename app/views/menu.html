@@ -43,10 +43,16 @@
                     调宿
                 </a>
             </li>
-              <li ng-if="menuCheck(390)">
+            <li ng-if="menuCheck(390)">
                 <a href="#hutiao">
                     <i class="ALiconfont icon-duidiao" style="line-height: 45px;background-color:#38adff;font-size:32px"></i>
                     相互调宿
+                </a>
+            </li>
+            <li ng-if="menuCheck(524)">
+                <a href="#roomchange">
+                    <i class="ALiconfont icon-duidiao" style="line-height: 45px;background-color:#ff6600;font-size:32px"></i>
+                    房间调宿
                 </a>
             </li>
             <li ng-if="menuCheck(29)">
@@ -306,26 +312,18 @@
             </li>
         </ul>
     </li>
-    <li ng-if="menuCheck(322)" ng-show="sysMenu[1]=='flatManager'">
-    <!--<li ng-show="sysMenu[1]=='flatManager'">-->
-        <div class="menu-title">人员管理</div>
+    <li ng-if="menuCheck(520)" ng-show="sysMenu[1]=='journal'">
+        <div class="menu-title">日志管理</div>
         <ul class="menu-list">
-            <li ng-if="menuCheck(323)">
-            <!--<li>-->
-                <a href="#flatManager">
-                    <i class="ALiconfont icon-zhanghaoguanli" style="background-color:#fc7257;font-size:28px"></i>
-                    楼栋管理员
-                </a>
-            </li>
-            <li ng-if="menuCheck(340)">
-                <a href="#counselor">
-                    <i class="ALiconfont icon-zhanghaoguanli" style="background-color:#02cf97;font-size:28px"></i>
-                    辅导员
+            <li ng-if="menuCheck(521)">
+                <!--<a href="#logs">-->
+                    <a>
+                    <i class="ALiconfont icon-crmtubiao67" style="background-color:#ff9c00;font-size:28px;line-height:44px;"></i>
+                    日志
                 </a>
             </li>
         </ul>
     </li>
-
     <li ng-if="menuCheck(441)" ng-show="sysMenu[1]=='dormitoryCheck'">
         <div class="menu-title">查宿舍</div>
         <ul class="menu-list">
@@ -424,7 +422,7 @@
     </li>
     
     <li ng-if="menuCheck(106)" ng-show="sysMenu[1]=='admin'">
-        <div class="menu-title">帐号管理</div>
+        <div class="menu-title">账号管理</div>
         <ul class="menu-list">
             <li ng-if="menuCheck(111)">
                 <a href="#admin">
@@ -435,13 +433,25 @@
             <li ng-if="menuCheck(117)">
                 <a href="#group">
                     <i class="ALiconfont icon-xiaji" style="background-color:#38adff;font-size:24px"></i>
-                    帐号组
+                    账号组
                 </a>
             </li>
             <li ng-if="menuCheck(114)">
                 <a href="#user">
                     <i class="ALiconfont icon-iconfonticonfontzhiweiguanli" style="background-color:#02cf97;font-size:30px;"></i>
-                    帐号管理
+                    账号管理
+                </a>
+            </li>
+            <li ng-if="menuCheck(522)">
+                <a href="#flatManager">
+                    <i class="ALiconfont icon-zhanghaoguanli" style="background-color:#fc7257;font-size:28px"></i>
+                    楼栋管理员
+                </a>
+            </li>
+            <li ng-if="menuCheck(523)">
+                <a href="#counselor">
+                    <i class="ALiconfont icon-zhanghaoguanli" style="background-color:#ff6600;font-size:28px"></i>
+                    辅导员
                 </a>
             </li>
         </ul>

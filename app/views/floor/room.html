@@ -108,7 +108,12 @@
                                     <td>房间号前缀</td><td><input type="text" ng-model="media.floor.prefix" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>
                                 </tr>
                                 <tr ng-show="media.floor.type == 2">
-                                    <td>套房数</td><td><input type="text" ng-model="media.floor.suite" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>
+                                    <td>套房数</td>
+                                    <!--<td><input type="text" ng-model="media.floor.suite" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>-->
+                                    <td>
+                                        <input type="text" ng-model="media.floor.suite"  ng-disabled="(media.floor.type==2&&!menuCheck(152))" />
+                                        <label><input type="checkbox" ng-model="media.floor.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间显示为101-1</label>
+                                    </td>
                                 </tr>
                                 <tr ng-hide="media.floor.type == 2">
                                     <td class="require">排序</td>
@@ -197,7 +202,12 @@
                                     <td>房间号前缀</td><td><input type="text" ng-disabled="(media.room.type&&!menuCheck(149)) || (media.room.type==0&&!menuCheck(148))" ng-model="media.room.prefix" /></td>
                                 </tr>
                                 <tr ng-if="media.room.type==0">
-                                    <td>套房数</td><td><input type="text" ng-disabled="(media.room.type&&!menuCheck(149)) || (media.room.type==0&&!menuCheck(148))" ng-model="media.room.suite" /></td>
+                                    <td>套房数</td>
+                                    <!--<td><input type="text" ng-disabled="(media.room.type&&!menuCheck(149)) || (media.room.type==0&&!menuCheck(148))" ng-model="media.room.suite" /></td>-->
+                                    <td>
+                                        <input type="text" ng-model="media.room.suite"  ng-disabled="(media.room.type&&!menuCheck(149)) || (media.room.type==0&&!menuCheck(148))" />
+                                        <label><input type="checkbox" ng-model="media.room.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间显示为101-1</label>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="require">户型</td>
