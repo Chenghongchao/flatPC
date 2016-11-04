@@ -261,6 +261,7 @@
                                 <th>导入类型</th>
                                 <th class="sort" ng-class="{'sort-up':media.orderfield=='addTime' && media.ordertype=='asc','sort-down':media.orderfield=='addTime' && media.ordertype=='desc'}" ng-click="setOrder('addTime')">创建时间</th>
                                 <th>错误日志</th>
+                                <td>下载导入文件</td>
                                 <th>查看</th>
                             </tr>
                         </thead>
@@ -269,7 +270,9 @@
                                 <td>{{import.title}}</td>
                                 <td>{{import.importType}}</td>
                                 <td>{{import.addTime}}</td>
-                                <td>{{import.errorNumber}}个错误信息</td><td><a ng-if="menuCheck(220)" class="btn btn-link btn-xs" ng-click="download(import.importId)">导出错误数据</a></td>
+                                <td>{{import.errorNumber}}个错误信息</td>
+                                <td><a ng-if="menuCheck(220)" class="btn btn-link btn-xs" ng-click="downloadImfile(import.importfileid)">下载导入文件</a></td>
+                                <td><a ng-if="menuCheck(220)" class="btn btn-link btn-xs" ng-click="download(import.importId)">导出错误数据</a></td>
                             </tr>
                         </tbody>
                         <tfoot>

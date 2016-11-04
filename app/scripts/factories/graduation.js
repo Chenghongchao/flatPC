@@ -92,6 +92,14 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     }
+    var downloadImportfile = function(param){
+        console.log(param);
+        var url = AppConfig.WEB_ROOT + 'public/uploadfile/export_import/?importid=' + param
+        + "&token=" + AppConfig.token;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
     var getListByStudent = function(param){
         var url = AppConfig.WEB_ROOT + 'apartment/arrears/get_stu_arrears_list/?schoolcode=' + AppConfig.schoolCode
         +'&token='+AppConfig.token
@@ -143,6 +151,7 @@ angular.module('flatpcApp')
         getImport:getImport,
         downloadOriginal:downloadOriginal,
         downloadImport:downloadImport,
+        downloadImportfile:downloadImportfile,
         getListByStudent:getListByStudent,
         getListByRoom:getListByRoom,
         deal:deal,

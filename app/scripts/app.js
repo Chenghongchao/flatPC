@@ -23,6 +23,7 @@ angular
       //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
 
       WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
+      //WEB_ROOT_DOWNLOAD:'http://test.houqinbao.com/gyxt_api/',
       
       //WEB_ROOT:'http://192.168.2.110:8080/Geese_Apartment/',
 
@@ -766,12 +767,12 @@ angular
             }
         }
     })
-    .state('logs', {
-        url: "/logs",
+    .state('weekCheck', {
+        url: "/weekCheck",
         views: {
             "": {
-                templateUrl: 'views/journal/logs.html',
-                controller: 'logsCtrl'
+                templateUrl: 'views/bedroom/weekCheck.html',
+                controller: 'weekCheckCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",
@@ -806,6 +807,23 @@ angular
             "": {
                 templateUrl: 'views/bedroom/bedroomCheckSet.html',
                 controller: 'bedroomCheckSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('logs', {
+        url: "/logs",
+        views: {
+            "": {
+                templateUrl: 'views/journal/logs.html',
+                controller: 'logsCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

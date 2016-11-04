@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flatpcApp')
-.controller('checkResultsCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
+.controller('weekCheckCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
         '公寓管理','寝室检查','半月评分'

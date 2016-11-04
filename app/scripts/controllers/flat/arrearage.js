@@ -199,6 +199,7 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
         refresh();
     }
     $scope.download = function(id){
+        console.log(id);
         $rootScope.loading = true;
         GraduationService.downloadImport(id).success(function(data){
             //console.log(data.data.fileUrl);
@@ -212,7 +213,22 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
             $rootScope.loading = false;
         })
-        
+    }
+    $scope.downloadImfile = function(id){
+        $rootScope.loading = true;
+        GraduationService.downloadImportfile(id).success(function(data){
+            console.log(data);
+            //console.log(data.data.fileUrl);
+            if(data.code == 0){
+                location.href=data.data.fileUrl;
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+        })
     }
     $scope.downloadOriginal = function(id){
         $rootScope.loading = true;
@@ -227,8 +243,7 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
             else
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
             $rootScope.loading = false;
-        })
-        
+        }) 
     }
     var uploadExcel = null;
     $scope.uploadFile = function(event){
@@ -261,6 +276,14 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
                 swal("提示","上传成功！", "success");
                 if(fun && typeof fun == 'function') fun();
             }else if(data.code == 4037){
+                    // swal({   
+                    //     title: "提示",   
+                    //     text: "'错误代码：'+ data.code + '，' + data.msg",   
+                    //     type: "error",  
+                    //     closeOnConfirm: true 
+                    //     }, function(){   
+                    //         $('#multiAdd').removeClass('show');
+                    // });
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
                     location.href="#login";$rootScope.loading = false;
                 }
@@ -287,7 +310,7 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
                 $scope.media.pageCount = data.data.pageCount;
             }else if(data.code == 4037){
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
-                    location.href="#login";$rootScope.loading = false;
+                    location.href="#login";$rootScope.loading = false; 
                 }
             else
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
