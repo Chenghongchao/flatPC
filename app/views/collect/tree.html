@@ -62,8 +62,8 @@
                      <!--<li ng-if="menuCheck(167)"><a class="add" ng-click="add(1,list)"><i class="ALiconfont icon-plus1"></i> 添加学院</a></li>-->
                 </ul>
             </li>
-            <li ng-if="menuCheck(167)"><a class="add" ng-click="add(-1)"><i class="ALiconfont icon-plus1"></i> 批量导入班级</a></li>
-            <li><a class="add" ng-click="add(-2)"><i class="ALiconfont icon-plus1"></i> 批量导入学院</a></li>
+            <li ng-if="menuCheck(167)"><a class="add" ng-click="batImportClassHandler()"><i class="ALiconfont icon-plus1"></i> 批量导入班级</a></li>
+            <li ng-if="menuCheck(167)"><a class="add" ng-click="batImportCollegeHandler()"><i class="ALiconfont icon-plus1"></i> 批量导入学院</a></li>
         </ul>
     </div>
     <div class="page-main" style="left:225px;top:0px" ng-show="media.type == -1">

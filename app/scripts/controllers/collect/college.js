@@ -1,13 +1,8 @@
 angular.module('flatpcApp')
 .controller('SchoolCtrl', ['$scope','AppConfig','$rootScope','CollegeService',function($scope,AppConfig,$rootScope,CollegeService) {
-   //批量导入班级，直接加载到控制器头部就行了
     $scope.parent = "flat";
     $rootScope.loading = false;
-    var a = document.createElement('a');
-    a.href = AppConfig.FRAME + "index.php?m=Stmessage&c=ImportClass&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
-    a.target="page-frame";
-    a.click();
-
+    
     $scope.media = {
         status:1,
         type:1,
@@ -92,7 +87,9 @@ angular.module('flatpcApp')
         $scope.media.degree='';
         $scope.media.degreeyear='';
         $scope.media.listOrder= 1;
-        $scope.media.collegeId = item.collegeId || '';
+		if(item){
+			$scope.media.collegeId = item.collegeId || '';
+		}
         $scope.media.history = false;
         
     }
@@ -219,6 +216,22 @@ angular.module('flatpcApp')
         
     }
     
+	//批量导入班级
+	$scope.batImportClassHandler = function(){
+		$scope.add(-1);
+        var a = document.createElement('a');
+		a.href = AppConfig.FRAME + "index.php?m=Stmessage&c=ImportClass&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+		a.target="page-frame";
+		a.click();
+    }
+	//批量导入学院
+	$scope.batImportCollegeHandler = function(){
+		$scope.add(-1);
+        var a = document.createElement('a');
+		a.href = AppConfig.FRAME + "index.php?m=Stmessage&c=ImportClass&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+		a.target="page-frame";
+		a.click();
+    }
     
     if(!$rootScope.treeCollege)
         refresh().then(function(){
