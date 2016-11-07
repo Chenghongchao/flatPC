@@ -63,14 +63,13 @@ angular.module('flatpcApp')
                     a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
                     a.click();
                     break;
-                case 'pay':
-                    if(!$rootScope.menuCheck(5)){
-                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
-                        return;
-                    }
-                    
-                    swal("提示","敬请期待", "info"); 
-                    return;
+                // case 'hydropower':
+                //     if(!$rootScope.menuCheck(5)){
+                //         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                //         return;
+                //     }                   
+                //     swal("提示","敬请期待", "info"); 
+                //     return;
                     
                 case 'center':
                     if(!$rootScope.menuCheck(2)){
@@ -234,7 +233,7 @@ angular.module('flatpcApp')
             food:!new RegExp(",food,").test(","+toggles+","),
             water:!new RegExp(",water,").test(","+toggles+","),
             mall:!new RegExp(",mall,").test(","+toggles+","),
-            pay:!new RegExp(",pay,").test(","+toggles+","),
+            hydropower:!new RegExp(",hydropower,").test(","+toggles+","),
             center:!new RegExp(",center,").test(","+toggles+","),
             admin:!new RegExp(",admin,").test(","+toggles+","),
             message:!new RegExp(",message,").test(","+toggles+","),
@@ -304,7 +303,7 @@ angular.module('flatpcApp')
             if(!$scope.media.food)str += "food,";
             if(!$scope.media.water)str += "water,";
             if(!$scope.media.mall)str += "mall,";
-            if(!$scope.media.pay)str += "pay,";
+            if(!$scope.media.hydropower)str += "hydropower,";
             if(!$scope.media.center)str += "center,";
             if(!$scope.media.admin)str += "admin,";
             if(!$scope.media.message)str += "message,";

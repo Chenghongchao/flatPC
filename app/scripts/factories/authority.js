@@ -98,6 +98,19 @@ angular.module('flatpcApp')
                         }else if(menuCheck(476)){
                             menus.push('questionstatist');
                         }else menus.push(' ');
+                    }else if(menuCheck(5)){
+                        menus.push('hydropower');
+                        if(menuCheck(526)){
+                            menus.push('hydropower');
+                        }else if(menuCheck(527)){
+                            menus.push('hydwrite');
+                        }else if(menuCheck(528)){
+                            menus.push('hydpayment');
+                        }else if(menuCheck(529)){
+                            menus.push('hydset');
+                        }else if(menuCheck(530)){
+                            menus.push('hydhistory');
+                        }else menus.push(' ');
                     }
                     menus.push(' ')
                     return menus;
@@ -675,7 +688,32 @@ angular.module('flatpcApp')
                 if(menuCheck(476))
                     return ['question','questionstatist','questionstatist'];
                 else
-                    return null;        
+                    return null; 
+             case 'hydropower':
+                if(menuCheck(526))
+                    return ['hydropower','hydropower','hydropower'];
+                else
+                    return null; 
+             case 'hydwrite':
+                if(menuCheck(527))
+                    return ['hydropower','hydwrite','hydwrite'];
+                else
+                    return null;  
+             case 'hydpayment':
+                if(menuCheck(528))
+                    return ['hydropower','hydpayment','hydpayment'];
+                else
+                    return null;  
+             case 'hydset':
+                if(menuCheck(529))
+                    return ['hydropower','hydset','hydset'];
+                else
+                    return null; 
+             case 'hydhistory':
+                if(menuCheck(30))
+                    return ['hydropower','hydhistory','hydhistory'];
+                else
+                    return null;      
         }
         return null;
     };

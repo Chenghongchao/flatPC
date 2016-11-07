@@ -225,13 +225,13 @@ angular.module('flatpcApp')
 		a.click();
     }
 	//批量导入学院
-	$scope.batImportCollegeHandler = function(){
-		$scope.add(-1);
-        var a = document.createElement('a');
-		a.href = AppConfig.FRAME + "index.php?m=Stmessage&c=ImportClass&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
-		a.target="page-frame";
-		a.click();
-    }
+	// $scope.batImportCollegeHandler = function(){
+	// 	$scope.add(-1);
+    //     var a = document.createElement('a');
+	// 	a.href = AppConfig.FRAME + "index.php?m=Stmessage&c=ImportClass&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+	// 	a.target="page-frame";
+	// 	a.click();
+    // }
     
     if(!$rootScope.treeCollege)
         refresh().then(function(){

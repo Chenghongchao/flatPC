@@ -39,6 +39,7 @@ angular
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
     UCENTER:'http://code.houqinbao.com:3338/ucenter',
     PHYSICAL:'http://code.houqinbao.com:3338/physical/',
+    HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',
     EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
     QUESTION:'http://120.26.48.150/question/',
@@ -2095,7 +2096,95 @@ angular
                 controller: 'HeaderCtrl'
             }
         }
+    })
+    .state('hydropower', {
+        url: "/hydropower",
+        views: {
+            "": {
+                templateUrl: 'views/hydropower/hydropower.html',
+                controller: 'hydropowerCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('hydwrite', {
+        url: "/hydwrite",
+        views: {
+            "": {
+                templateUrl: 'views/hydropower/hydwrite.html',
+                controller: 'hydWriteCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('hydpayment', {
+        url: "/hydpayment",
+        views: {
+            "": {
+                templateUrl: 'views/hydropower/hydpayment.html',
+                controller: 'hydPaymentCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('hydset', {
+        url: "/hydset",
+        views: {
+            "": {
+                templateUrl: 'views/hydropower/hydset.html',
+                controller: 'hydSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('hydhistory', {
+        url: "/hydhistory",
+        views: {
+            "": {
+                templateUrl: 'views/hydropower/hydhistory.html',
+                controller: 'hydHistoryCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
     });
+    
+
+
     $urlRouterProvider.otherwise('/login');
   });
   

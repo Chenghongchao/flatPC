@@ -229,5 +229,35 @@
     </li> 
 </ul>
 
+<ul ng-show="sysMenu[0]=='hydropower'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(526)" ng-class="{'active':sysMenu[1]=='hydropower'}" ng-click="switch('hydropower')">
+        <a href="#hydropower" title="水电统计">
+            <i class="ALiconfont icon-yixiangdengji" style="font-size:23px"></i> 水电统计
+        </a>
+    </li>
+    <li ng-if="menuCheck(527)" ng-class="{'active':sysMenu[1]=='hydwrite'}" ng-click="switch('hydwrite')">
+        <a href="#hydwrite" title="水电录入">
+            <i class="ALiconfont icon-yixiangdengji" style="font-size:23px"></i> 水电录入 
+        </a>
+    </li> 
+    <li ng-if="menuCheck(528)" ng-class="{'active':sysMenu[1]=='hydpayment'}" ng-click="switch('hydpayment')">
+        <a href="#hydpayment" title="缴费模式">
+            <i class="ALiconfont icon-jiaofei" style="font-size:23px"></i> 缴费模式 
+        </a>
+    </li> 
+    <li ng-if="menuCheck(529)" ng-class="{'active':sysMenu[1]=='hydset'}" ng-click="switch('hydset')">
+        <a href="#hydset" title="设置缴费单价">
+            <i class="ALiconfont icon-shezhi" style="font-size:23px"></i> 设置缴费单价 
+        </a>
+    </li> 
+        <li ng-if="menuCheck(530)" ng-class="{'active':sysMenu[1]=='hydhistory'}" ng-click="switch('hydhistory')">
+        <a href="#hydhistory" title="缴费记录">
+            <i class="ALiconfont icon-lishijilu" style="font-size:23px"></i> 缴费记录 
+        </a>
+    </li> 
+</ul>
+
+
 </div>
 <i class="collapse" ng-click="changeMini()"></i>
