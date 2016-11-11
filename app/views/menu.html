@@ -67,10 +67,17 @@
                     审批
                 </a>
             </li>
-              <li ng-if="menuCheck(412)">
+            <li ng-if="menuCheck(412)">
                 <a href="#biandong">
                     <i class="ALiconfont icon-tsjilu" style="background-color:#fc7257; font-size:28px"></i>
                     人员变动记录
+                </a>
+            </li>
+            <li ng-if="menuCheck(531)">
+                <!--<a href="#staycost">-->
+                    <a>
+                    <i class="ALiconfont icon-tsjilu" style="background-color:#38adff; font-size:28px"></i>
+                    住宿费</br>变动记录
                 </a>
             </li>
         </ul>
@@ -316,8 +323,7 @@
         <div class="menu-title">日志管理</div>
         <ul class="menu-list">
             <li ng-if="menuCheck(521)">
-                <!--<a href="#logs">-->
-                    <a>
+                <a href="#logs">
                     <i class="ALiconfont icon-rizhi" style="line-height:44px; background-color:#38adff; font-size:32px;"></i>
                     日志
                 </a>
@@ -401,8 +407,7 @@
                 </a>
             </li>
             <li ng-if="menuCheck(525)">
-                <!--<a href="#weekCheck">-->
-                <a>
+                <a href="#weekCheck">
                     <i class="ALiconfont icon-kuaisuchaxun" style="line-height:42px; background-color:#fc7257;font-size:28px"></i>
                     周评分
                 </a>

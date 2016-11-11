@@ -439,4 +439,20 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
 
     //批量退宿舍时，初始化“请选择毕业年”范围
     $scope.form.initSelectYearsData();
+
+
+    //  iframe 毕业退宿床位分布
+    var a = document.createElement('a');
+    a.href = AppConfig.FRAME+"index.php?m=Apartment&c=ExitRoom&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    a.target="page-frame";
+    a.click();
+
+
+    // var h = 0;
+    //   window.onload = function(){
+
+    //    h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    //    document.getElementById("frame-height").style.height = h+"px";
+    //   }
 }]);

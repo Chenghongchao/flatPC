@@ -1944,6 +1944,23 @@ angular
             }
         }
     })
+    .state('staycost', {
+        url: "/staycost",
+        views: {
+            "": {
+                templateUrl: 'views/flat/staycost.html',
+                controller: 'stayCostCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('dormrefer', {
         url: "/dormrefer",
         views: {
