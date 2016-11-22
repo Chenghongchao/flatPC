@@ -15,7 +15,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             roomnumber:0,
             startfloor:1,
 			isFour:0,
-            line:0
+            line:0,
+            isletter:''
         },
         room:{
             type:0,
@@ -27,7 +28,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             typeid:'',
             roomnum:'',
             memo:'',
-            line:0
+            line:0,
+            isletter:''
         }
     }
     
@@ -107,7 +109,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     suite:$scope.media.floor.suite,
                     floortype:$scope.media.floor.floortype,
                     floorname:$scope.media.floor.floorname,
-                    memo:$scope.media.floor.memo
+                    memo:$scope.media.floor.memo,
+
+                    isletter:$scope.media.floor.isletter
+
                 }).success(function(data){
                     alert(0);
                     // console.log(data);
@@ -136,13 +141,15 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
 					isFour: $scope.media.floor.isFour,
                     line: $scope.media.floor.line,
                     prefix:$scope.media.floor.prefix,
-                    suite:$scope.media.floor.suite
+                    suite:$scope.media.floor.suite,
+                    isletter:$scope.media.floor.isletter
                 };
                 RoomService.multiAdd(param).success(function(data){
                     $rootScope.loading = false;
-                    if($scope.media.typeid==null){
+                    if($scope.media.floor.typeid==null){
                         swal("提示","请选择户型","error");
-                    }else if($scope.media.flatid==null){
+                    }else
+                     if($scope.media.flatid==null){
                         swal("提示","请添加楼栋信息","error");
                     }else if($scope.media.floor.floortype != $scope.sex && "混住" !=$scope.sex){
                         swal("提示","与当前楼栋性别不符合","error"); 
@@ -172,24 +179,50 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             }
         },
         editSave:function () {
+             if($scope.sex == '混住'){
+                
+            //     swal({
+			// 			title: "提示",   
+			// 			text: "修改成功",
+			// 			type: "success",
+			// 			showCancelButton: false,
+			// 			closeOnConfirm: true,
+			// 			showLoaderOnConfirm: false,
+			// 		},
+            //         function(fun){ 
+			// 			if(fun && typeof fun == 'function') fun();
+            //             refresh($scope.media.flatid);
+			// 			$('#floorAdd').removeClass('show');
+			// 		});
+            //     return false;
+            }else 
+            if( $scope.media.floor.floortype != $scope.sex ){
+                swal("提示","与当前楼栋性别不符合","error");
+                return false;
+            }
             $rootScope.loading = true;
+            var newtypeid ;
+            if($scope.media.floor.typeid==""){
+                newtypeid = 0;
+            }else{
+                newtypeid=$scope.media.floor.typeid;
+            }
             var param={
                 token:AppConfig.token,
                 floorid:$scope.media.floor.floorid,
                 listorder:$scope.media.floor.listorder,
-                typeid:$scope.media.floor.typeid,
+                typeid:newtypeid,
                 floortype:$scope.media.floor.floortype,
                 floorname:$scope.media.floor.floorname,
                 memo:$scope.media.floor.memo
             };
             RoomService.editFloor(param).success(function(data){
                 $rootScope.loading = false;
-                if($scope.media.typeid==null){
-                    swal("提示","请选择户型","error");
-                }else if($scope.media.flatid==null){
+                // if($scope.media.typeid==null){
+                //     swal("提示","请选择户型","error");
+                // }else 
+                if($scope.media.flatid==null){
                     swal("提示","请添加楼栋信息","error");
-                }else if($scope.media.floor.floortype != $scope.sex && "混住" !=$scope.sex){
-                    swal("提示","与当前楼栋性别不符合","error"); 
                 }else if(data.code == 0){
                     //swal("提示", "修改成功！", "success");
                     swal({
@@ -285,7 +318,20 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
         }
     }
     $scope.room = {
+
+
+
+
+
         addSave:function (fun) {
+
+            if($scope.sex == '混住'){
+                swal("提示", "添加成功！", "success");
+            }else if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
+                swal("提示","与当前楼栋性别不符合","error");
+                return false;
+            }
+            
             var param = {
                 token:AppConfig.token,
                 floorid:$scope.media.floor.floorid,
@@ -298,7 +344,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 prefix:$scope.media.room.prefix,
                 suite:$scope.media.room.suite,
                 memo:$scope.media.room.memo,
-                line:$scope.media.room.line
+                line:$scope.media.room.line,
+                isletter:$scope.media.room.isletter
             };
             if($scope.media.room.listtype < 2){
                 if($scope.media.room.listroom.length > 0)
@@ -329,6 +376,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             
         },
         editSave:function (fun) {
+             if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
+                swal("提示","与当前楼栋性别不符合","error");
+                return false;
+            }
             var param = {
                 token:AppConfig.token,
                 roomid:$scope.media.room.roomid,

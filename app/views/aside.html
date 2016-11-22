@@ -152,6 +152,14 @@
         </a>
     </li>
 </ul>
+<ul ng-show="sysMenu[0]=='meet'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(550)" ng-class="{'active':sysMenu[1]=='meet'}" ng-click="switch('meet')">
+        <a href="#meet" title="报名项目">
+            <i class="ALiconfont icon-yuyueshouli" style="font-size:23px"></i> 报名项目
+        </a>
+    </li>     
+</ul>
 
 <ul ng-show="sysMenu[0]=='exammessage'">
     <!--默认选中哪一个选项-->

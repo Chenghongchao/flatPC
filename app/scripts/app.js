@@ -43,6 +43,7 @@ angular
     EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
     QUESTION:'http://120.26.48.150/question/',
+    MEET:'http://code.houqinbao.com:3338/meet/',
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -1281,6 +1282,23 @@ angular
             }
         }
     })
+    .state('meet', {
+        url: "/meet",
+        views: {
+            "": {
+                templateUrl: 'views/enrol/meet.html',
+                controller: 'meetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('order', {
         url: "/order",
         views: {
@@ -1332,6 +1350,7 @@ angular
             }
         }
     })
+    
     .state('bookinggrade', {
         url: "/bookinggrade",
         views: {
@@ -1757,6 +1776,244 @@ angular
             }
         }
     })
+    .state('statisticsLd', {
+        url: "/statisticsLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/statisticsLd.html',
+                controller: 'statisticsLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('statisticsXy', {
+        url: "/statisticsXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/statisticsXy.html',
+                controller: 'statisticsXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('timeSd', {
+        url: "/timeSd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/timeSd.html',
+                controller: 'timeSdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('timeGr', {
+        url: "/timeGr",
+        views: {
+            "": {
+                templateUrl: 'views/entry/timeGr.html',
+                controller: 'timeGrCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('unusualLd', {
+        url: "/unusualLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/unusualLd.html',
+                controller: 'unusualLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('unusualXy', {
+        url: "/unusualXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/unusualXy.html',
+                controller: 'unusualXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('nobackLd', {
+        url: "/nobackLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/nobackLd.html',
+                controller: 'nobackLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('nobackXy', {
+        url: "/nobackXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/nobackXy.html',
+                controller: 'nobackXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('wanguiXy', {
+        url: "/wanguiXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/wanguiXy.html',
+                controller: 'wanguiXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('wanguiLd', {
+        url: "/wanguiLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/wanguiLd.html',
+                controller: 'wanguiLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('nocardXy', {
+        url: "/nocardXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/nocardXy.html',
+                controller: 'nocardXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('nocardLd', {
+        url: "/nocardLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/nocardLd.html',
+                controller: 'nocardLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('unusualentryLd', {
+        url: "/unusualentryLd",
+        views: {
+            "": {
+                templateUrl: 'views/entry/unusualentryLd.html',
+                controller: 'unusualentryLdCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('unusualentryXy', {
+        url: "/unusualentryXy",
+        views: {
+            "": {
+                templateUrl: 'views/entry/unusualentryXy.html',
+                controller: 'unusualentryXyCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('actionwarn', {
         url: "/actionwarn",
         views: {
@@ -2121,10 +2378,10 @@ angular
                 templateUrl: 'views/hydropower/hydropower.html',
                 controller: 'hydropowerCtrl'
             },
-            "aside": {
-                templateUrl: "views/aside.html",
-                controller: 'AsideCtrl'
-            },
+            // "aside": {
+            //     templateUrl: "views/aside.html",
+            //     controller: 'AsideCtrl'
+            // },
             "header": {
                 templateUrl: "views/header.html",
                 controller: 'HeaderCtrl'

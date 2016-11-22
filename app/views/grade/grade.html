@@ -382,7 +382,7 @@
                                 <li ng-if="cardMedia.menuCheck(3)" ng-click="cardMedia.setTab(3)" ng-class="{'active':cardMedia.tab ==3}">照片</li>
                                 <li ng-if="cardMedia.menuCheck(4)" ng-click="cardMedia.setTab(4)" ng-class="{'active':cardMedia.tab ==4}">寝室违章</li>
                             </ul>
-                            <ul class="page-tabs-container grade-container grade-tool-on" >
+                            <ul class="page-tabs-container grade-container grade-tool-on" style="margin-bottom:0;">
                                 <li ng-if="cardMedia.menuCheck(1)" class="fadeIn animated" ng-class="{'active':cardMedia.tab ==1}">
                                     <table class="table table-bordered bg-white">
                                         <thead>
@@ -390,7 +390,7 @@
                                         </thead>
                                         <tbody ng-repeat="category in cardMedia.room || []">
                                             <tr><th>{{category.typeName || category.title}}</th><th></th><th></th></tr>
-                                            <tr ng-repeat="item in category.itemList || category.subNodes">
+                                            <tr ng-repeat="item in category.itemList || category.subNodes" style="min-height:40px;">
                                                 <td>{{item.number || ($index+1)}}</td>
                                                 <td>{{item.title + (item.standardType?'':('（' +  (item.maxScore||item.fullMark||0) + '）'))}}</td>
                                                 <td class="grade-handle">
@@ -525,17 +525,17 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="grade-tool-bar">
-                            <div>
-                                <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab-1)" ng-class="{'btn-default disabled':cardMedia.tab-1<1,'btn-stroke btn-info':cardMedia.tab-1>0}"><i class="ALiconfont icon-sortleft"></i></a>
+                    </div>
+                    <div class="grade-tool-bar clearfix grade-foot-bar">
+                            <div style="float:left; width:10%">
+                                <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab-1)" ng-class="{'btn-default disabled':cardMedia.tab-1<1,'btn-stroke btn-info':cardMedia.tab-1>0}" style="border-radius: 5px;"><i class="ALiconfont icon-sortleft"></i></a>
                             </div>
-                            <div>
-                                <a ng-if="media.tab==1 && cardMedia.menuCheck(5)" class="btn btn-info" ng-click="cardMedia.gradeSave(closeCard('#gradeCard'))">保存并关闭</a>
+                            <div style="float:left; width:80%; text-align: center" >
+                                <a ng-if="media.tab==1 && cardMedia.menuCheck(5)" class="btn btn-info" ng-click="cardMedia.gradeSave(closeCard('#gradeCard'))" style="padding: 9px 12px; width: 200px;border-radius: 5px;">保存并关闭</a>
                             </div>
-                            <div>
-                                <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab+1)" ng-class="{'disabled btn-default':cardMedia.tab+1>4,'btn-stroke btn-info':cardMedia.tab+1<5}"><i class="ALiconfont icon-sortright"></i></a>
+                            <div style="float:right">
+                                <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab+1)" ng-class="{'disabled btn-default':cardMedia.tab+1>4,'btn-stroke btn-info':cardMedia.tab+1<5}" style="border-radius: 5px;"><i class="ALiconfont icon-sortright"></i></a>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

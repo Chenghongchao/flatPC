@@ -25,11 +25,13 @@ angular.module('flatpcApp')
                     a.href = "/index.php?s=/addon/HomePage/HomePage/lists.html";
                     a.click();
                     break;
-                case 'food':
+                case 'food': 
                     if(!$rootScope.menuCheck(317)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
+
+                    
                     a.href="/index.php?s=/addon/Dingcan/Dingcan/lists.html";
                     a.click();
                     break;
@@ -63,13 +65,15 @@ angular.module('flatpcApp')
                     a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
                     a.click();
                     break;
-                // case 'hydropower':
-                //     if(!$rootScope.menuCheck(5)){
-                //         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
-                //         return;
-                //     }                   
-                //     swal("提示","敬请期待", "info"); 
-                //     return;
+                    
+                case 'shuidian':
+                    if(!$rootScope.menuCheck(5)){
+                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                        return;
+                    }                   
+                    a.href= AppConfig.HYDROPOWER + "index.php?m=Pay&c=Index&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode; 
+                    a.click();
+                    break;
                     
                 case 'center':
                     if(!$rootScope.menuCheck(2)){
@@ -138,6 +142,12 @@ angular.module('flatpcApp')
                     break;
                 case 'questionnaire':
                     if(!$rootScope.menuCheck(474)){
+                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                        return;
+                    }
+                    break;
+                case 'meet':
+                    if(!$rootScope.menuCheck(549)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
@@ -244,7 +254,8 @@ angular.module('flatpcApp')
             physical:!new RegExp(",physical,").test(","+toggles+","),
             entry:!new RegExp(",entry,").test(","+toggles+","),
             bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+","),
-            questionnaire:!new RegExp(",questionnaire,").test(","+toggles+",")
+            questionnaire:!new RegExp(",questionnaire,").test(","+toggles+","),
+            meet:!new RegExp(",meet,").test(","+toggles+","),
         }
         // $scope.change = function name(params) {
         //     swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
@@ -315,6 +326,7 @@ angular.module('flatpcApp')
             if(!$scope.media.entry)str += "entry,";
             if(!$scope.media.bookinggrade)str += "bookinggrade,";
             if(!$scope.media.questionnaire)str += "questionnaire,";
+            if(!$scope.media.meet)str += "meet,";
 
             if(str.length>0){
                 localStorage.toggles = str.substring(0,str.length-1);

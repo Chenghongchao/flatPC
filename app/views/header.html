@@ -10,14 +10,16 @@
             <li ng-if="headerMenu(318)" data-toggle="wechat" ng-class="{'active':sysMenu[0]=='wechat'}"><a ng-click="headerSwitch(1,'wechat')" target="page-tab">微信平台</a></li>
             <li ng-if="headerMenu(1)" data-toggle="flat" ng-class="{'active':sysMenu[0]=='flat'}" ng-click="headerSwitch(0,'flat')"><a href="#index">公寓管理</a></li>
             <li ng-if="headerMenu(4)" data-toggle="repair" ng-class="{'active':sysMenu[0]=='repair'}"><a ng-click="headerSwitch(1,'repair')">智能报修</a></li>
-            <li ng-if="headerMenu(5)" data-toggle="hydropower" ng-class="{'active':sysMenu[0]=='hydropower'}"><a ng-click="headerSwitch(0,'hydropower')" href="#hydropower">水电缴费</a></li>
+            <!--<li ng-if="headerMenu(5)" data-toggle="hydropower" ng-class="{'active':sysMenu[0]=='hydropower'}"><a ng-click="headerSwitch(0,'hydropower')" href="#hydropower">水电缴费</a></li>-->
+            <li ng-if="headerMenu(5)" data-toggle="shuidian" ng-class="{'active':sysMenu[0]=='shuidian'}"><a ng-click="headerSwitch(1,'shuidian')">水电缴费</a></li>
             <!--<li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">水电缴费</a></li>-->
             <!--<li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a href="http://pay.houqinbao.com/#/login" target="_blank">水电缴费</a></li>-->
-            <li ng-if="headerMenu(317)" data-toggle="food" ng-class="{'active':sysMenu[0]=='food'}"><a ng-click="headerSwitch(1,'food')">订餐</a></li>
+            <li ng-if="headerMenu(317)" data-toggle="food" ng-class="{'active':sysMenu[0]=='food'}"><a ng-click="headerSwitch(1,'food')" >订餐</a></li>
             <li ng-if="headerMenu(370)" data-toggle="water" ng-class="{'active':sysMenu[0]=='water'}"><a ng-click="headerSwitch(1,'water')" target="page-tab">订水</a></li>
             <li ng-if="headerMenu(459)" data-toggle="mall" ng-class="{'active':sysMenu[0]=='mall'}"><a ng-click="headerSwitch(1,'mall')" >商城</a></li>
             <li ng-if="headerMenu(319)" data-toggle="message" ng-class="{'active':sysMenu[0]=='message'}"><a ng-click="headerSwitch(1,'message')">服务监督</a></li>
             <li ng-if="headerMenu(367)" data-toggle="order" ng-class="{'active':sysMenu[0]=='order'}"><a ng-click="headerSwitch(0,'order')" href="#order">浴室预定</a></li>
+            <li ng-if="headerMenu(549)" data-toggle="meet" ng-class="{'active':sysMenu[0]=='meet'}"><a ng-click="headerSwitch(0,'meet')" href="#meet">报名系统</a></li>
             <!--<li ng-if="headerMenu(367)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">浴室预定</a></li>-->
             <li ng-if="headerMenu(371)" data-toggle="graduate" ng-class="{'active':sysMenu[0]=='graduate'}"><a ng-click="headerSwitch(0,'graduate')" href="#index">毕业离校</a></li>
             <li ng-if="headerMenu(416)" data-toggle="exammessage" ng-class="{'active':sysMenu[0]=='exammessage'}"><a ng-click="headerSwitch(0,'exammessage')" href="#exammessage">考试系统</a></li>
@@ -38,7 +40,7 @@
         </ul>
     </div>
     <div class="menu-nav" style="right:120px;width:80px"><div>
-        <a target="_blank" href="http://www.houqinbao.com/index.php?s=/ don/Help/Help/index.html">帮助</a>
+        <a target="_blank" href="http://www.houqinbao.com/index.php?s=/addon/Help/Help/index.html">帮助</a>
     </div></div>
     <div class="user-nav" style="right:200px;width:80px">
         <div>
@@ -56,13 +58,15 @@
                 <li ng-if="headerMenu(318)" data-toggle="wechat" ng-class="{'active':sysMenu[0]=='wechat'}"><a ng-click="headerSwitch(1,'wechat')" target="page-tab">微信平台</a></li>
                 <li ng-if="headerMenu(1)" data-toggle="flat" ng-class="{'active':sysMenu[0]=='flat'}" ng-click="headerSwitch(0,'flat')"><a href="#index">公寓管理</a></li>
                 <li ng-if="headerMenu(4)" data-toggle="repair" ng-class="{'active':sysMenu[0]=='repair'}"><a ng-click="headerSwitch(1,'repair')">智能报修</a></li>
-                <li ng-if="headerMenu(5)" data-toggle="hydropower" ng-class="{'active':sysMenu[0]=='hydropower'}"><a ng-click="headerSwitch(0,'hydropower')" href="#hydropower">水电缴费</a></li>
+                <!--<li ng-if="headerMenu(5)" data-toggle="hydropower" ng-class="{'active':sysMenu[0]=='hydropower'}"><a ng-click="headerSwitch(0,'hydropower')" href="#hydropower">水电缴费</a></li>-->
+                <li ng-if="headerMenu(5)" data-toggle="shuidian" ng-class="{'active':sysMenu[0]=='shuidian'}"><a ng-click="headerSwitch(1,'shuidian')">水电缴费</a></li>
                 <!--<li ng-if="headerMenu(5)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">水电缴费</a></li>-->
                 <li ng-if="headerMenu(317)" data-toggle="food" ng-class="{'active':sysMenu[0]=='food'}"><a ng-click="headerSwitch(1,'food')">订餐</a></li>
                 <li ng-if="headerMenu(370)" data-toggle="water" ng-class="{'active':sysMenu[0]=='water'}"><a ng-click="headerSwitch(1,'water')" target="page-tab">订水</a></li>
                 <li ng-if="headerMenu(459)" data-toggle="mall" ng-class="{'active':sysMenu[0]=='mall'}"><a ng-click="headerSwitch(1,'mall')" >商城</a></li>
                 <li ng-if="headerMenu(319)" data-toggle="message" ng-class="{'active':sysMenu[0]=='message'}"><a ng-click="headerSwitch(1,'message')">服务监督</a></li>
                 <li ng-if="headerMenu(367)" data-toggle="order" ng-class="{'active':sysMenu[0]=='order'}"><a ng-click="headerSwitch(0,'order')" href="#order">浴室预定</a></li>
+                <li ng-if="headerMenu(549)" data-toggle="meet" ng-class="{'active':sysMenu[0]=='meet'}"><a ng-click="headerSwitch(0,'meet')" href="#meet">报名系统</a></li>
                 <!--<li ng-if="headerMenu(367)" data-toggle="pay" ng-class="{'active':sysMenu[0]=='pay'}"><a ng-click="headerSwitch(1,'pay')" target="page-tab">浴室预定</a></li>-->
                 <li ng-if="headerMenu(371)" data-toggle="graduate" ng-class="{'active':sysMenu[0]=='graduate'}"><a ng-click="headerSwitch(0,'graduate')" href="#index">毕业离校</a></li>
                 <li ng-if="headerMenu(416)" data-toggle="exammessage" ng-class="{'active':sysMenu[0]=='exammessage'}"><a ng-click="headerSwitch(0,'exammessage')"  href="#exammessage">考试系统</a></li>
@@ -196,6 +200,14 @@
                                     浴室预定
                                     <div style="float:right">
                                         <input bs-switch ng-change="toggleSave()" ng-model="media.order" type="checkbox" switch-size="mini"  switch-on-text="开" switch-off-text="关">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-group-item b-l-primary">
+                                    报名系统
+                                    <div style="float:right">
+                                        <input bs-switch ng-change="toggleSave()" ng-model="media.meet" type="checkbox" switch-size="mini"  switch-on-text="开" switch-off-text="关">
                                     </div>
                                 </a>
                             </li>

@@ -115,6 +115,19 @@
                                         <label><input type="checkbox" ng-model="media.floor.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间显示为101-1</label>
                                     </td>
                                 </tr>
+                                <tr ng-show="media.floor.type == 2">
+                                    <td>套房显示类型</td>
+                                    <td>
+                                        <label style="margin-right:30px;">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="media.floor.isletter" value="0">
+                                            数字1234
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="media.floor.isletter" value="1">
+                                            英文ABCD
+                                        </label>
+                                    </td>
+                                </tr>
                                 <tr ng-hide="media.floor.type == 2">
                                     <td class="require">排序</td>
                                     <td>
@@ -125,9 +138,10 @@
                                     <td class="require">户型</td>
                                     <td>
                                         <select id="hx" ng-model="media.floor.typeid" ng-disabled="(media.floor.type==0&&!menuCheck(145)) || (media.floor.type==1&&!menuCheck(146))||(media.floor.type==2&&!menuCheck(152))">
-                                            <option value="">户型</option>
+                                            
+                                            <option ng-show="typeId==0" value="{{type.typeId}}">多种户型</option>
                                             <!--<option value="">多种户型</option>-->
-                                            <option ng-repeat="type in treeType" ng-selected="media.floor.roomstyle == type.typeId" value="{{type.typeId}}">{{type.typeId==0?"多种户型":(type.title)}}</option>
+                                            <option ng-repeat="type in treeType" ng-selected="media.floor.typeid == type.typeId" value="{{type.typeId}}">{{type.title}}</option>
                                         </select>
                                         <span style="color:red">{{media.msg}}</span>
                                     </td>
@@ -208,6 +222,19 @@
                                     <td>
                                         <input type="text" ng-model="media.room.suite"  ng-disabled="(media.room.type&&!menuCheck(149)) || (media.room.type==0&&!menuCheck(148))" />
                                         <label><input type="checkbox" ng-model="media.room.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间显示为101-1</label>
+                                    </td>
+                                </tr>
+                                <tr ng-show="media.room.type==0">
+                                    <td>套房显示类型</td>
+                                    <td>
+                                        <label style="margin-right:30px;">
+                                            <input type="radio" name="optionsRadios" ng-model="media.room.isletter" value="0">
+                                            数字1234
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="optionsRadios" ng-model="media.room.isletter" value="1">
+                                            英文ABCD
+                                        </label>
                                     </td>
                                 </tr>
                                 <tr>

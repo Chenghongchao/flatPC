@@ -51,7 +51,7 @@ angular.module('flatpcApp')
                         if(menuCheck(13)){
                             menus.push('admin');
                         }else if(menuCheck(12)){
-                            menus.push('role');
+                            menus.push('role');order
                         }else menus.push(' ');
                     }else if(menuCheck(367)){
                          menus.push('shower');
@@ -446,6 +446,12 @@ angular.module('flatpcApp')
                     return ['order','order','order'];
                 else
                     return null;
+             case 'meet':
+                if(menuCheck(550))
+                //头部菜单，左侧菜单，规则名
+                    return ['meet','meet','meet'];
+                else
+                    return null;
              case 'showper':
                 if(menuCheck(367))
                 //头部菜单，左侧菜单，规则名
@@ -552,6 +558,76 @@ angular.module('flatpcApp')
             case 'fastquery':
                 if(menuCheck(431))
                     return ['entry','entry','fastquery'];
+                else
+                    return null;
+            case 'statisticsLd':
+                if(menuCheck(533))
+                    return ['entry','entry','statisticsLd'];
+                else
+                    return null;
+            case 'statisticsXy':
+                if(menuCheck(535))
+                    return ['entry','entry','statisticsXy'];
+                else
+                    return null;
+            case 'timeSd':
+                if(menuCheck(536))
+                    return ['entry','entry','timeSd'];
+                else
+                    return null;
+            case 'timeGr':
+                if(menuCheck(537))
+                    return ['entry','entry','timeGr'];
+                else
+                    return null;
+            case 'unusualLd':
+                if(menuCheck(539))
+                    return ['entry','entry','unusualLd'];
+                else
+                    return null;
+            case 'unusualXy':
+                if(menuCheck(540))
+                    return ['entry','entry','unusualXy'];
+                else
+                    return null;
+            case 'nobackLd':
+                if(menuCheck(541))
+                    return ['entry','entry','nobackLd'];
+                else
+                    return null;
+            case 'nobackXy':
+                if(menuCheck(542))
+                    return ['entry','entry','nobackXy'];
+                else
+                    return null;
+            case 'wanguiLd':
+                if(menuCheck(543))
+                    return ['entry','entry','wanguiLd'];
+                else
+                    return null;
+            case 'wanguiXy':
+                if(menuCheck(544))
+                    return ['entry','entry','wanguiXy'];
+                else
+                    return null;
+            case 'nocardLd':
+                if(menuCheck(545))
+                    return ['entry','entry','nocardLd'];
+                else
+                    return null;
+            case 'nocardXy':
+                if(menuCheck(546))
+                    return ['entry','entry','nocardXy'];
+                else
+                    return null;
+            case 'unusualentryLd':
+                if(menuCheck(547))
+                    return ['entry','entry','unusualentryLd'];
+                else
+                    return null;
+            case 'unusualentryXy':
+                if(menuCheck(548))
+                    return ['entry','entry','unusualentryXy'];
                 else
                     return null;
             case 'actionwarn':
