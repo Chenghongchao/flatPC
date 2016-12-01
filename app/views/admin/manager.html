@@ -70,7 +70,12 @@
                                     <td style="vertical-align:middle">{{item.jobNumber}}</td>
                                     <td style="vertical-align:middle">
                                         <ul>
-                                            <li ng-repeat="flat in item.flatIds">{{flat.flatName}}</li>
+                                            <li ng-repeat="flat in item.flatlist">
+                                                {{flat.areaname}}-
+                                                <span ng-if="flat.flatname.length>0">{{flat.flatname[0]}}</span>
+                                                <span ng-if="flat.flatname.length>1">,{{flat.flatname[1]}}</span>
+                                                <span ng-if="flat.flatname.length>2">等共{{flat.flatcount}}个楼栋</span>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td ng-if="menuCheck(484)" style="vertical-align:middle">

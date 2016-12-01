@@ -21,7 +21,9 @@ angular.module('flatpcApp')
         jobnumber:'',
         roleid:'',
         adminid:'',
-        classes:[],
+        isshow:0,
+        classes:[],  //选择的班级数据
+        classnames: null,
         removeClass:function(index){
             this.classes.splice(index,1);
             if(this.classes.length < 1){
@@ -29,11 +31,18 @@ angular.module('flatpcApp')
             }
         },
         addClass:function () {
+            //关闭其他下拉框
+            this.classes.forEach(function (data, index, array) {
+                if(data.showClassMenu) data.showClassMenu = false;
+            })
+            //新增一条记录
             var cla = {
                 collegeId:$scope.media.collegeid || '',
                 collegeList:$rootScope.treeCollege,
                 classId:$scope.media.classid || '',
                 classList:[],
+                checkedAll: false,  //是否全选
+                showClassMenu: false     //是否显示班级下拉
             }
             $scope.selecter.classSelecter(cla);
             this.classes.push(cla);
@@ -59,24 +68,72 @@ angular.module('flatpcApp')
         //     return ids;
         // }
         getClass:function(){
-            var array = {
+            var ids = {
                 collegeids:[], //学院ID集合
                 classids:[] //班级ID集合
             };
             this.classes.forEach(function (cla) {
-                if("1"==cla.classId){ //选择了全部班级，则记录该学院ID
-                    if(array.collegeids.indexOf(cla.collegeId)==-1){
-                        array.collegeids.push(cla.collegeId);
+                if(cla.checkedAll){ //选择了全部班级，则记录该学院ID
+                    if(ids.collegeids.indexOf(cla.collegeId)==-1){
+                        ids.collegeids.push(cla.collegeId);
                     }
-                }else if(array.collegeids.indexOf(cla.collegeId)==-1 //记录该班级ID
-                      && array.classids.indexOf(cla.classId)==-1){
-                    array.classids.push(cla.classId);
+                }else{ //记录该班级ID
+                    cla.classList.forEach(function (data, index, array) {
+                        if(data.checked && ids.classids.indexOf(data.classId)==-1){
+                            ids.classids.push(data.classId);
+                        }
+                    })
+                }
+                
+                // else if(ids.collegeids.indexOf(cla.collegeId)==-1 //记录该班级ID
+                //       && ids.classids.indexOf(cla.classId)==-1){
+                //     ids.classids.push(cla.classId);
+                // }
+            })
+            return ids;
+        },
+        classCheckAll : function(cla){
+            var names = [];
+            cla.classList.forEach(function (data, index, array) {
+                data.checked = cla.checkedAll;
+                if(cla.checkedAll){
+                    names[names.length] = data.className;
                 }
             })
-            return array;
+            if(names.length>2){
+                cla.text = names[0]+","+names[1]+"…";
+            }else if(names.length==2){
+                cla.text = names[0]+","+names[1];
+            }else if(names.length==1){
+                cla.text = names[0];
+            }else{
+                cla.text = null;
+            }
+        },
+        classCheckEvent : function(cla){
+            var names = [];
+            cla.classList.forEach(function (data, index, array) {
+                if(data.checked){
+                    names[names.length] = data.className;
+                }else if(cla.checkedAll){
+                    cla.checkedAll = false;
+                }
+            })
+            if(names.length==cla.classList.length){
+                cla.checkedAll = true;
+            }
+            if(names.length>2){
+                cla.text = names[0]+","+names[1]+"…";
+            }else if(names.length==2){
+                cla.text = names[0]+","+names[1];
+            }else if(names.length==1){
+                cla.text = names[0];
+            }else{
+                cla.text = null;
+            }
         }
-  
     }
+      
     $scope.dataInit = function (user) {
         $scope.form.status= user.adminId ? 1 : 0;
         $scope.form.username= user.userName || '';
@@ -87,10 +144,13 @@ angular.module('flatpcApp')
         $scope.form.jobnumber=user.jobNumber || '';
         $scope.form.roleid= '' + (user.roleId || '');
         $scope.form.classes = [];
+        alert(JSON.stringify(user));
         if(user.classIds && user.classIds.length>0){
             user.classIds.forEach(function (cla) {
                 var item = {
-                    classId:cla.classId
+                    classId:cla.classId,
+                    checkedAllClass: false,  //是否全选
+                    showClassMenu: false     //是否显示班级下拉
                 }
                 $scope.selecter.classSelecter(item);
                 $scope.form.classes.push(item);
@@ -104,14 +164,9 @@ angular.module('flatpcApp')
     $scope.selecter = {    
         collegeSelecter : function(cla){
             //用collegeId获取classList
-            cla.classId = '';
-            if("1"==cla.collegeId){ //选择了全部班级
-				if(cla.classList){
-                    cla.classList = [];
-				}
-			}else{
-                var college = cla.collegeId?$filter('filter')($rootScope.treeCollege[0].collegeList,{collegeId:cla.collegeId}):[];
-                cla.classList = (college.length>0 && college[0].classList)?college[0].classList : [];
+            var college = cla.collegeId?$filter('filter')($rootScope.treeCollege[0].collegeList,{collegeId:cla.collegeId}):[];
+            if(college.length>0 && college[0].classList){
+                cla.classList = angular.copy(college[0].classList);
             }
         },
         classSelecter : function(cla){
@@ -122,7 +177,7 @@ angular.module('flatpcApp')
                     var list = cla.classId?$filter('filter')(college[i].classList,{classId:cla.classId}):[];
                     if(list.length > 0 && list[0].classId==cla.classId){
                         cla.collegeId = college[i].collegeId + "";
-                        cla.classList = college[i].classList;
+                        cla.classList = angular.copy( college[i].classList);
                         cla.classId = cla.classId + "";
                         break;
                     }
@@ -151,7 +206,8 @@ angular.module('flatpcApp')
             jobnumber:$scope.form.jobnumber,
             collegeid: arrayIds.collegeids.length>0 ? arrayIds.collegeids.toString() : null,
             classids: arrayIds.classids.length>0 ? arrayIds.classids.toString() : null,
-            roleid:$scope.form.roleid
+            roleid:$scope.form.roleid,
+            isshow: $scope.form.isshow? 1 : 0
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){
@@ -181,7 +237,8 @@ angular.module('flatpcApp')
             jobnumber:$scope.form.jobnumber,
             collegeid: arrayIds.collegeids.length>0 ? arrayIds.collegeids.toString() : null,
             classids: arrayIds.classids.length>0 ? arrayIds.classids.toString() : null,
-            roleid:$scope.form.roleid
+            roleid:$scope.form.roleid,
+            isshow: $scope.form.isshow? 1 : 0
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){
@@ -312,6 +369,16 @@ angular.module('flatpcApp')
                 $scope.list = data.list.dataList;
                 $scope.media.recordCount = data.list?data.list.recordCount:0;
                 $scope.media.pageCount = data.list?data.list.pageCount:0;
+                //班级名称处理成数组
+                angular.forEach($scope.list, function(data,index,array){
+                    angular.forEach(data.classList, function(data_class,index_class,array_class){
+                        var name_array = [];
+                        if(data_class.classname){
+                            name_array = data_class.classname.split(",");
+                        }
+                        data_class.classname = name_array;                        
+                    });
+                });
             }else if(data.code == 4037){
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
                 location.href="#login";$rootScope.loading = false;

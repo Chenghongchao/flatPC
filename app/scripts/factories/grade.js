@@ -33,13 +33,200 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     };
-    var setGrade = function (param,type) {
+    //获取快速打分列表
+    var getQuickScoreList = function (param) {
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/get_week_list/?'
+                + 'schoolcode=' + AppConfig.schoolCode + '&flatid=' + (param.flatid || "")
+                + '&semesterid=' + (param.semesterid || "")
+                + '&currentweek=' + (param.currentweek || "");
+                break;
+            case 1:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/get_day_list/?'
+                + 'schoolcode=' + AppConfig.schoolCode
+                + '&flatid=' + (param.flatid || "") + '&date=' + ( new Date(param.date).Format('yyyy-MM-dd') || new Date().Format('yyyy-MM-dd'));
+                break;
+            case 2:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/get_month_list/?'
+                + 'schoolcode=' + AppConfig.schoolCode
+                + '&flatid=' + (param.flatid || "") + '&date=' + (new Date(param.date + '-01').Format('yyyy-MM') || new Date().Format('yyyy-MM'));
+                break;
+            case 3:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/get_check_list/?'
+                + 'schoolcode=' + AppConfig.schoolCode
+                + '&flatid=' + (param.flatid || "") + '&checkid=' + (param.checkid || "");
+                break;
+            default:
+                break;
+        }
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }; 
+    //保存快速打分成绩
+    var allQuickScores = function(param){
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/week_score';
+                break;
+            case 1:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/day_score';
+                break;
+            case 2:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/month_score';
+                break;
+            case 3:
+                url = AppConfig.WEB_ROOT + 'evaluation/quickscore/check_score';
+                break;
+        }
+      
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });//.get(url,param);
+    };
+    
+    //获取导入数据列表
+    var getImport = function(param){
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                url = AppConfig.WEB_ROOT + 'evaluation/weekexport/get_import_list/?'
+                + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
+                + '&epage=' + (param.epage || 1) + '&pagesize=' + (param.pagesize || 10);
+                break;
+            case 1:
+                url = AppConfig.WEB_ROOT + 'evaluation/dayexport/get_import_list/?'
+                + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
+                + '&epage=' + (param.epage || 1) + '&pagesize=' + (param.pagesize || 10);
+                break;
+            case 2:
+                url = AppConfig.WEB_ROOT + 'evaluation/monthexport/get_import_list/?'
+                + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
+                + '&epage=' + (param.epage || 1) + '&pagesize=' + (param.pagesize || 10);
+                break;
+            case 3:
+                url = AppConfig.WEB_ROOT + 'evaluation/checkexport/get_import_list/?'
+                + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
+                + '&epage=' + (param.epage || 1) + '&pagesize=' + (param.pagesize || 10);
+                break;
+        }
+        return $http.get(url,param);
+    }
+
+    //下载样表
+    var downloadSampleTable = function(param){
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                if(param) url = AppConfig.WEB_ROOT + 'evaluation/weekexport/sample_table/?';
+                else  url = AppConfig.WEB_ROOT + 'evaluation/weekexport/sample_table/?';
+                url += 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token;
+                break;
+            case 1:
+                if(param) url = AppConfig.WEB_ROOT + 'evaluation/dayexport/sample_table/?';
+                else  url = AppConfig.WEB_ROOT + 'evaluation/dayexport/sample_table/?';
+                url += 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token;
+                break;
+            case 2:
+                if(param) url = AppConfig.WEB_ROOT + 'evaluation/monthexport/sample_table/?';
+                else  url = AppConfig.WEB_ROOT + 'evaluation/monthexport/sample_table/?';
+                url += 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token;
+                break;
+            case 3:
+                if(param) url = AppConfig.WEB_ROOT + 'evaluation/checkexport/sample_table/?';
+                else  url = AppConfig.WEB_ROOT + 'evaluation/checkexport/sample_table/?';
+                url += 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token;
+                break;
+            }
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    };
+    //导入数据
+    var importScoresData = function(param){
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                url = AppConfig.WEB_ROOT + 'evaluation/weekexport/import_list/';
+                break;
+            case 1:
+                url = AppConfig.WEB_ROOT + 'evaluation/dayexport/import_list/';
+                break;
+            case 2:
+                url = AppConfig.WEB_ROOT + 'evaluation/monthexport/import_list/';
+                break;
+            case 3:
+                url = AppConfig.WEB_ROOT + 'evaluation/checkexport/import_list/';
+                break;
+        }
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': undefined
+            },
+            data:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+    //下载错误数据
+    var downloadImport = function(param){
+        param.type = param.type || 0;
+        var url = "";
+        switch (param.type) {
+            case 0:
+                url = AppConfig.WEB_ROOT + 'evaluation/weekexport/export_error/?importid=' + param.id
+                + "&token=" + AppConfig.token;;
+                break;
+            case 1:
+                url = AppConfig.WEB_ROOT + 'evaluation/dayexport/export_error/?importid=' + param.id
+                + "&token=" + AppConfig.token;;
+                break;
+            case 2:
+                url = AppConfig.WEB_ROOT + 'evaluation/monthexport/export_error/?importid=' + param.id
+                + "&token=" + AppConfig.token;;
+                break;
+            case 3:
+                url = AppConfig.WEB_ROOT + 'evaluation/checkexport/export_error/?importid=' + param.id
+                + "&token=" + AppConfig.token;;
+                break;
+        }
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+    var downloadImportfile = function(param){
+        console.log(param);
+        var url = AppConfig.WEB_ROOT + 'public/uploadfile/export_import/?importid=' + param
+        + "&token=" + AppConfig.token;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+
+    var setGrade = function (param,mold) {
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
         param.adminid = param.adminid || AppConfig.adminid;
-        type = type || param.type || 0;
+        mold = mold || param.mold || 0;
         var url = "";
-        switch (type) {
+        switch (mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/add_room_score/';
                 break;
@@ -66,13 +253,13 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });//.get(url,param);
     };
-    var editGrade = function (param,type) {
+    var editGrade = function (param,mold) {
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
         param.adminid = param.adminid || AppConfig.adminid;
-        type = type || param.type || 0;
+        mold = mold || param.mold || 0;
         var url = "";
-        switch (type) {
+        switch (mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/edit_room_score/';
                 break;
@@ -100,9 +287,9 @@ angular.module('flatpcApp')
         });//.get(url,param);
     };
     var getGrade = function (param) {
-        param.type = param.type || 0;
+        param.mold = param.mold || 0;
         var url = "";
-        switch (param.type) {
+        switch (param.mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_room_message/?';
                 break;
@@ -125,9 +312,9 @@ angular.module('flatpcApp')
         });
     };
     var getGradeImgs = function (param) {
-        param.type = param.type || 0;
+        param.mold = param.mold || 0;
         var url = "";
-        switch (param.type) {
+        switch (param.mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_pictures/?'
                 + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
@@ -190,13 +377,13 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });//.get(url,param);
     };
-    var setBedGrade = function (param,type) {
+    var setBedGrade = function (param,mold) {
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
         param.adminid = param.adminid || AppConfig.adminid;
-        type = type || param.type || 0;
+        mold = mold || param.type || 0;
         var url = "";
-        switch (type) {
+        switch (mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/add_bed_score/';
                 break;
@@ -223,11 +410,11 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });//.get(url,param);
     };
-    var editBedGrade = function (param,type) {
+    var editBedGrade = function (param,mold) {
         param.token = param.token || AppConfig.token;
-        type = type || param.type || 0;
+        mold = mold || param.mold || 0;
         var url = "";
-        switch (type) {
+        switch (mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/edit_bed_score/';
                 break;
@@ -255,9 +442,9 @@ angular.module('flatpcApp')
         });//.get(url,param);
     };
     var getBedGrade = function (param) {
-        param.type = param.type || 0;
+        param.mold = param.mold || 0;
         var url = "";
-        switch (param.type) {
+        switch (param.mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_bed_message/?'
                 + 'semesterid=' + (param.semesterid || "") + '&currentweek=' + (param.currentweek || "");
@@ -282,6 +469,7 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     };
+    
     var getList = function(param){
         param.type = param.type || 0;
         var url = "";
@@ -408,9 +596,9 @@ angular.module('flatpcApp')
     var downloadTopList = function (param) {
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
-        param.type = param.type || 0;
+        param.mold = param.mold || 0;
         var url = "";
-        switch (param.type) {
+        switch (param.mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/ranking_list_export/?'
                 + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
@@ -525,6 +713,10 @@ angular.module('flatpcApp')
         });
     };
     
+
+
+
+
     var getSettingList = function(param){
         param = param || {type:0};
         var url = AppConfig.WEB_ROOT + 'evaluation/scsetups/get_list/?'
@@ -766,8 +958,25 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     };
+
+    //复制打分表
+    var copyTable = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/scsetups/copy_table?schoolcode='+AppConfig.schoolCode;
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });//.get(url,param);
+    }
+    
     return {
         getListByFlat:getListByFlat,
+        getQuickScoreList:getQuickScoreList,
         setGrade:setGrade,
         editGrade:editGrade,
         getGrade:getGrade,
@@ -799,6 +1008,13 @@ angular.module('flatpcApp')
         getFlatByCheckId:getFlatByCheckId,
         dayCompletion:dayCompletion,
 		getListByDate:getListByDate,
-        randomFlat:randomFlat
+        randomFlat:randomFlat,
+        copyTable:copyTable,
+        allQuickScores:allQuickScores,
+        downloadSampleTable:downloadSampleTable,
+        importScoresData:importScoresData,
+        getImport:getImport,
+        downloadImport:downloadImport,
+        downloadImportfile:downloadImportfile
     }
 }]);

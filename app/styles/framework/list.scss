@@ -398,6 +398,7 @@ table{
                 color: #4bb622;
             }
             .room-item{
+                width:10%;
                 position: relative;
                 overflow: hidden;
                 text-align: center;
@@ -414,7 +415,7 @@ table{
                 flex-direction:column;
                 -webkit-flex-direction:column;
                 &>div:first-of-type,li{
-                    height: 30px;
+                    // height: 30px;
                     line-height: 30px;
                 }
                 &>div:first-of-type{
@@ -517,6 +518,188 @@ table{
                 }
                 .add-before + div{
                     float: right;
+                }
+                input{
+                        width:97%; 
+                        height:30px; 
+                        text-align:center;
+                    }
+                .bed-item{
+                    margin-bottom:8px;
+                    span{
+                        width:97%; 
+                        height:100%; 
+                        display:inline-block; 
+                        background:#f6f7f8; 
+                        margin:2px 0;
+                    }
+                }
+            }
+            &.room-list-row
+            {
+                &:nth-of-type(2n+1) .room-item>div:first-of-type{
+                    background-color: #fff;
+                }
+                .room-item
+                {
+                    border-top:none;
+                    border-bottom:1px solid #dfe0e0;
+					cursor:pointer;
+                    &>div.other{
+                        background-color: #f2f2f2 !important;
+                    }
+                }
+                
+            }
+        }
+
+        .quickroom-list{
+            width:100%;
+            display: inline-block;
+            span.bed-empty{
+                color: #4bb622;
+                
+            }
+            .room-item{
+                float:left;
+                width:10%; 
+                position: relative;
+                overflow: hidden;
+                text-align: center;
+                background-color: #fff;
+                border-top:1px solid #dfe0e0;
+                &>div:first-of-type,li{
+                    // height: 30px;
+                    line-height: 30px;
+                }
+                &>div:first-of-type{
+                    min-width: 100px;
+                    background-color: #f6f7f8;
+                    border-right:1px solid #dedfdf;
+                    color: #333;
+                    &.graded{
+                        color: #4bb622;
+                        &::before{
+                            content: "√ ";
+                        }
+                        padding-right:10px;
+                    }
+                    
+                    &.room-add{
+                        color: #4bb622;
+                        &::before{
+                            content: "\e671";
+                            font-family: "ALiconfont" !important;
+                            font-style: normal;
+                            -webkit-font-smoothing: antialiased;
+                            -webkit-text-stroke-width: 0.2px;
+                            -moz-osx-font-smoothing: grayscale;
+                            font-size: 14px;
+                        }
+                    }
+                    
+                }
+                a.passed{
+                    color: #4bb622;
+                    background-color: #f2f2f2;
+                }
+                a.fail{
+                    color: #f33;
+                }
+                &>div:nth-of-type(2){
+                    -webkit-box-flex:1;
+                    box-flex:1;
+                    flex:1;
+                    -webkit-flex: 1;
+                    display: box;
+                    display: -webkit-box;
+                    display: flex;
+                    display: -webkit-flex;
+                    box-align:center ;
+                    -webkit-box-align:center;
+                    -moz-box-align:center;
+                    -ms-box-align:center;
+                    align-items:center ;
+                    -webkit-align-items:center;
+                    background-color: #f2f2f2;
+                    a{
+                        -webkit-box-flex:1;
+                        box-flex:1;
+                        flex:1;
+                        -webkit-flex: 1;
+                        color: #888;
+                    }
+                }
+                li{
+                    border-right: 1px solid #f6f7f8;
+                    border-bottom: 1px solid #f6f7f8;
+                    a{
+                        display: block;
+                        border-left: 1px solid #f6f7f8;
+                        margin-left: -1px;
+                    }
+                    &.grade-danger a{
+                        color:#f33;
+                    }
+                }
+                .add-after,.add-before{
+                    position: absolute;
+                    top:0;
+                    height: 30px;
+                    width: 30%;
+                    i{
+                        position: absolute;
+                        top:0;
+                        height: 30px;
+                        line-height: 30px;
+                        width: 20px;
+                        background-color: #4bb622;
+                        color: #fff;
+                        font-size: 13px;
+                    }
+                }
+                .add-after{
+                    right: 0;
+                    i{
+                        right: -21px;;
+                    }
+                }
+                .add-before{
+                    left: 0;
+                    i{
+                        left: -21px;
+                    }
+                }
+                .add-before + div{
+                    float: right;
+                }
+                input{
+                        width:97%; 
+                        height:30px; 
+                        text-align:center;
+                    }
+                .bed-item{
+                    margin-bottom:8px;
+                    span{
+                        width:97%; 
+                        height:30px; 
+                        display:inline-block; 
+                        background:#f6f7f8; 
+                        margin:2px 0;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    li{
+                        height:75px;
+                        .bedname{
+                            width:97%;
+                            height:30px;
+                            display: inline-block; 
+                            margin-top: 0;
+                            }
+                    }
+                    
                 }
             }
             &.room-list-row

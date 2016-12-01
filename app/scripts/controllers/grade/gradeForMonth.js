@@ -281,6 +281,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
     
     
     $scope.cardMedia = {
+        roomGradeType: 0, //寝室打分类型
+        bedGradeType: 0,  //床位打分类型
         tab:1,
         setTab:function (n) {
             if(n < 1 || n > 4) return;
@@ -368,7 +370,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         getData:function (n,fun) {
             var that = this;
             this.tab = n || this.tab;
-            
+            this.roomGradeType = 0; //初始化为寝室正常打分
+            this.bedGradeType = 0;  //初始化为床位正常打分
             switch (this.tab) {
                 case 1:
                     if(this.item.roomScoreId){
@@ -376,11 +379,13 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         return GradeService.getGrade({
                             token:AppConfig.token,
                             roomscoreid:this.item.roomScoreId,
-                            type:2
+                            mold:2
                         }).success(function (data) {
                             $rootScope.loading = false;
                             if(data.code == 0){
                                 that.room = data.data;
+                                that.roomGradeType =data.type;
+                                that.score =data.score;
                                 that.getSum(true);
                                 that.getBedData();
                             }else if(data.code == 4037){
@@ -460,18 +465,24 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 token:AppConfig.token,
                 roomid:this.item.roomId,
                 date:new Date($scope.media.week.year + '-' + $scope.media.week.month + '-01').Format('yyyy-MM'),
-                type:2
+                mold:2
             }).success(function (data) {
                 $rootScope.loading = false;
                 if(data.code == 0){
                     that.bed = data.data;
                     that.bedScoreId = 1;
+                    that.bedGradeType =data.type;
                     if(data.data.length>0 && $scope.media.tab==1){
                         that.bed.forEach(function (bed) {
                             if(bed.itemList.length < 1){
                                 that.bedScoreId = 0;
                                 bed.itemList = [];
-                                bed.totalScore = 0;
+                                // bed.totalScore = 0;
+                                //console.log(bed.totalScore);
+                                if(typeof(bed.totalScore) == 'undefined'){
+                                    bed.totalScore = '100';
+                                }
+                                that.totalScore = bed.totalScore;
                                 var options = [];
                                 if($rootScope.treeMonth[0] && $rootScope.treeMonth[0].typeList && $rootScope.treeMonth[0].typeList[0].itemList)
                                 {
@@ -559,11 +570,20 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             if($scope.media.tab == 1 && this.menuCheck(5)){
                 if(item.score < 0){
                     item.score = item.score==-1?-2:-1;
-                }else
-                if(item.score + n <= (item.fullMark || item.maxScore) && item.score + n >= 0){
+                }else if(item.score + n <= (item.fullMark || item.maxScore) && item.score + n >= 0){
                     item.score += n;
                 }
             }
+        },
+        gradeKs:function (n) {
+            if((n<0 && $scope.cardMedia.score > 0) || (n>0 && $scope.cardMedia.score <100)){
+                $scope.cardMedia.score = $scope.cardMedia.score+n; 
+            }  
+        },
+        gradeKsBed:function (bed,n) {
+            if((n<0 && bed.totalScore > 0) || (n>0 && bed.totalScore <100)){
+                bed.totalScore = bed.totalScore+n; 
+            }  
         },
         addRule:function (list,item) {
             for(var i=0;i <list.length;i++){
@@ -611,12 +631,16 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     return null;
                 }   
             }
-            if(this.room&& this.room.length>0){
+            if((this.room&& this.room.length>0)|| this.roomGradeType){
                 this.roomGrade(fun);
             }
-            else if(this.bed && this.bed.length>0) this.bedGrade(fun);
-            else if(this.img)this.gradeImg(fun);
-            else if(this.rule)this.ruleSave(fun);
+            else if(this.bed && this.bed.length>0) {
+                this.bedGrade(fun);
+            }else if(this.img){
+                this.gradeImg(fun);
+            }else if(this.rule){
+                this.ruleSave(fun);
+            }
         },
         roomGrade:function(fun){
             var grades = "[",that = this;
@@ -630,16 +654,14 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             })
             if(grades.length > 2)
                 grades = grades.substring(0,grades.length-1) + ']';
-            else return;
-            // //console.log(grades); 
-            if(grades.length > 0){
-                $rootScope.loading = true;
-                if(this.item.roomScoreId){
+            if(this.item.roomScoreId){
                     GradeService.editGrade({
                         token:AppConfig.token,
                         roomscoreid:this.item.roomScoreId,
                         scoreitem:grades,
-                        type:2
+                        type: that.roomGradeType ? that.roomGradeType : null,
+                        score: that.roomGradeType ? that.score : null,
+                        mold:2
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -664,7 +686,6 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     });
                 }
                 else{
-                    
                     GradeService.setGrade({
                         token:AppConfig.token,
                         schoolcode:AppConfig.schoolCode,
@@ -674,7 +695,9 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         scoreitem:grades,
                         typeid:$rootScope.treeMonth[0].typeList[0].typeId,
                         tableid:$rootScope.treeMonth[0].tableId,
-                        type:2
+                        mold:2,
+                        type: that.roomGradeType ? that.roomGradeType : null,
+                        score: that.roomGradeType ? that.score : null,
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -698,7 +721,6 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         }
                     });
                 }
-            }
         },
         bedGrade:function(fun){
             var grades = "[",that = this;
@@ -735,7 +757,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             // //console.log(grades);
             if(grades.length > 0){
                 $rootScope.loading = true;
-                if(this.bedScoreId){
+                if(that.bedGradeType){
                     GradeService.editBedGrade({
                         token:AppConfig.token,
                         roomid:this.item.roomId,
@@ -743,7 +765,9 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         scoreitem:grades,
                         typeid:$rootScope.treeMonth[0].typeList[1].typeId,
                         tableid:$rootScope.treeMonth[0].tableId,
-                        type:2
+                        type:that.bedGradeType,
+                        score:that.score,
+                        mold:2
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -775,7 +799,9 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         scoreitem:grades,
                         typeid:$rootScope.treeMonth[0].typeList[1].typeId,
                         tableid:$rootScope.treeMonth[0].tableId,
-                        type:2
+                        type:that.bedGradeType,
+                        score:that.score,
+                        mold:2
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -1136,6 +1162,43 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 //console.log(data);
             })
         }else if($scope.media.tab == 2){
+            GradeService.getQuickScoreList({
+                flatid:$scope.media.flatid,
+                date:new Date($scope.media.week.year + '-' + $scope.media.week.month + '-01').Format('yyyy-MM'),
+                type:2
+            }).success(function (data) {
+                $rootScope.loading = false;
+                if(data.code == 0){
+                    $scope.bedstatus = data.data.status;
+                    $scope.ksdfFlatList = data.data.list;
+                    $scope.ksdfFlatList.forEach(function(floor, index, array){
+                        floor.roomlist = floor.roomlist || [];
+                        floor.roomlist =  $filter('sliceArray')(floor.roomlist,10,index);
+                    });
+                }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+                else
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            })
+        }else if($scope.media.tab == 3){
+            GradeService.getImport({
+                type:2
+            }).success(function (data) {
+                $rootScope.loading = false;
+                    if(data.code == 0){
+                        $scope.importList = data.data.list;
+                        $scope.media.recordCount = data.data.recordCount;
+                        $scope.media.pageCount = data.data.pageCount;
+                    }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+                    else
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error");   
+            })
+        }else if($scope.media.tab == 4){
             GradeService.getList({
                 epage:$scope.media.epage,
                 pagesize:$scope.media.pagesize,
@@ -1164,7 +1227,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
                 // //console.log(data);
             })
-        }else if($scope.media.tab == 3){
+        }else if($scope.media.tab == 5){
             GradeService.getTopList({
                 epage:$scope.media.epage,
                 pagesize:$scope.media.pagesize,
@@ -1196,5 +1259,175 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             })
         }
     };
+
+    //快速打分(月)
+    $scope.saveQuickScores = function(pama){
+        swal({   
+                title: "确认保存",   
+                text: "确认保存抽查打分的成绩吗？",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "确定",   
+                cancelButtonText: "取消",   
+                closeOnConfirm: false 
+            }, 
+            function(){
+                $rootScope.loading = true;
+                return GradeService.allQuickScores({
+                    schoolcode:AppConfig.schoolCode,
+                    date: new Date($scope.media.week.year + '-' + $scope.media.week.month + '-01').Format('yyyy-MM'),
+                    adminid:AppConfig.adminId,
+                    roomtypeid: $rootScope.treeMonth[0].typeList[0].typeId,
+                    bedtypeid: $rootScope.treeMonth[0].typeList[1].typeId,
+                    roomlist: $scope.getKsdfRoomsScores(),
+                    bedlist: $scope.getKsdfBedsScores(),
+                    type:2
+                }).success(function(data){
+                    $rootScope.loading = false;
+                    if(data.code == 0){
+                        swal("提示", "保存成功！", "success"); 
+                        if(fun) fun();
+                        refresh();
+                    }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+                    else
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                });
+        });
+    };
+    //获取快速打分寝室分
+    $scope.getKsdfRoomsScores = function(){
+        var roomlist = [];
+        angular.forEach($scope.ksdfFlatList, function(floor,index_floor,array_floor){
+           angular.forEach(floor.roomlist, function(data,index,array){
+                angular.forEach(data, function(room, index_room,array_room){
+                    roomlist[roomlist.length] = {
+                        "roomid": room.roomId,
+                        "score": room.score=="尚未打分" ? "" : room.score,
+                        "roomscoreid": room.roomScoreId
+                    }
+                });
+            });
+        });
+        return roomlist;
+    }
+    //获取快速打分床位分
+    $scope.getKsdfBedsScores = function(){
+        var bedlist = [];
+        angular.forEach($scope.ksdfFlatList, function(floor,index_floor,array_floor){
+           angular.forEach(floor.roomlist, function(roomrow,index_rrow,array_rrow){
+                angular.forEach(roomrow, function(room, index_room,array_room){
+                    angular.forEach(room.bedlist, function(bed, index_bed,array_bed){
+                        bedlist[bedlist.length] = {
+                            "bedid": bed.bedid,
+                            "score": bed.score=="尚未打分" ? "" : bed.score,
+                            "bedscoreid": bed.bedscoreid
+                        }
+                    })
+                });
+            });
+        });
+        return bedlist;
+    }
+
+    //下载样表(月)
+    $scope.downloadGradeScoreTable = function(){
+        $rootScope.loading = true;
+        GradeService.downloadSampleTable({
+                type:2
+        }).success(function(data){
+            if(data.code == 0){
+                location.href=data.data.fileUrl;
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+        }) 
+    }
+    $scope.uploadFile = function(event){
+        var files = event.target.files;
+        ////console.log(files);
+        if(files[0].name.split(".").pop() != "xls" && files[0].name.split(".").pop() != "xlsx"){
+            swal('提示', '文件格式不正确！请上传*.xls或*.xlsx文件', 'error'); 
+            return false;
+        }//console.log(files[0].name);
+        $scope.importFileName = files[0].name;
+        uploadExcel = files[0];
+        $scope.$digest();
+    };
+    //数据导入
+    $scope.subImport = function(fun){
+        if(!uploadExcel)return;
+        var form = document.createElement('form');
+        form.enctype = 'multipart/form-data';
+        var fdata = new FormData(form);
+        if (!fdata) { swal('提示', '你的浏览器不支持文件上传！', 'error'); return false; };
+        fdata.append('file', uploadExcel);
+        fdata.append('title',$scope.importFileName);
+        fdata.append('token',AppConfig.token);
+        fdata.append('schoolcode',AppConfig.schoolCode);
+        fdata.append('roomtypeid',$rootScope.treeMonth[0].typeList[0].typeId);
+        fdata.append('bedtypeid',$rootScope.treeMonth[0].typeList[1].typeId);
+        fdata.append('adminid',AppConfig.adminId);
+        // console.log(uploadExcel);
+        $rootScope.loading = true;
+        return GradeService.importScoresData(fdata,$scope.type).success(function(data){
+            //console.log(data);
+            if(data.code == 0){
+                swal("提示","上传成功！", "success");
+                if(fun && typeof fun == 'function') fun();
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+            refresh();
+        })
+    }
+    //下载错误数据
+    $scope.download = function(id){
+        console.log(id);
+        $rootScope.loading = true;
+        GradeService.downloadImport({
+            id:id,
+            type:0
+            }).success(function(data){
+            //console.log(data.data.fileUrl);
+            if(data.code == 0){
+                location.href=data.data.fileUrl;
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+        })
+    }
+    //下载导入文件
+    $scope.downloadImfile = function(id){
+        $rootScope.loading = true;
+        GradeService.downloadImportfile(id).success(function(data){
+            console.log(data);
+            //console.log(data.data.fileUrl);
+            if(data.code == 0){
+                location.href=data.data.fileUrl;
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+        })
+    }
     
 }]);

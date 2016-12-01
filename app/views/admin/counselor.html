@@ -65,7 +65,12 @@
                                     <td style="vertical-align:middle">{{item.jobNumber}}</td>
                                     <td style="vertical-align:middle">
                                         <ul>
-                                            <li ng-repeat="cla in item.classIds">{{cla.className}}</li>
+                                            <li ng-repeat="cla in item.classList">
+                                                {{cla.collegename}}-
+                                                <span ng-if="cla.classname.length>0">{{cla.classname[0]}}</span>
+                                                <span ng-if="cla.classname.length>1">,{{cla.classname[1]}}</span>
+                                                <span ng-if="cla.classname.length>2">等共{{cla.classcount}}个班级</span>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td ng-if="menuCheck(487)" style="vertical-align:middle">
@@ -142,7 +147,7 @@
                         <table class="table-form table-bordered bg-white">
                             <tbody>
                                 <tr>
-                                    <td class="require">工号</td>
+                                    <td width="180" class="require">工号</td>
                                     <td><input type="text" ng-model="form.jobnumber" /></td>
                                 </tr>
                                 <tr>
@@ -157,17 +162,35 @@
                                     <td class="require">班级</td>
                                     <td>
                                         <ul>    
-                                            <li style="padding:5px 0" ng-repeat="cla in form.classes">
-                                                <select class="form-control" ng-change="selecter.collegeSelecter(cla)" ng-model="cla.collegeId">
+                                            <li style="position:relative;padding:5px 0;" ng-repeat="cla in form.classes">
+                                                <select class="form-control" ng-change="selecter.collegeSelecter(cla)" ng-model="cla.collegeId" style="width:167px;">
                                                     <option value="">选择学院</option>
                                                     <option ng-repeat="college in treeCollege[0].collegeList" value="{{college.collegeId}}">{{college.collegeName}}</option>
                                                 </select>
-                                                <select class="form-control" ng-model="cla.classId">
-                                                    <option value="">选择班级</option>
+                                                <!--<select class="form-control" ng-model="cla.classId">
+                                                    <option value="">{{form.classnames ? form.classnames : "选择班级"}}</option>
                                                     <option value="1" ng-if="cla.classList!=null && cla.classList.length>0">全部班级</option>
                                                     <option ng-repeat="item in cla.classList" value="{{item.classId}}">{{item.className}}</option>
-                                                </select>
-                                                <a ng-if="form.classes.length>1" class="remove-flat" ng-click="form.removeClass($index)"><i class="ALiconfont icon-close1"></i></a>
+                                                </select>-->
+                                                
+                                                
+                                                <div class="dropdown selectdropdown" style="position:absolute; top:5px; left:176px; width:167px;">
+                                                    <button class="btn btn-default claBtn" ng-click="cla.showClassMenu=!cla.showClassMenu" style="width:167px;height:28px;line-height: 28px;padding: 0 0 0 10px;text-align: left; border: 1px solid #d6d8db;">
+                                                        <span>{{cla.text ? cla.text : "选择班级"}}</span>
+                                                        <i class="chkname" id="chkname"></i>
+                                                        <span class="caret" style="position: absolute;top: 15px;right: 5px;"></span>
+                                                    </button>
+                                                    <ul class="dropdownmenuClass" ng-show="cla.showClassMenu" style="width: 167px;border: 1px solid #ccc;padding: 6px 10px;background:#fff; border:1px solid #d6d8db;border-top:none;">
+                                                        <li value=""><label><input type="checkbox" ng-model="cla.checkedAll" ng-click="form.classCheckAll(cla)">全部班级</label></li>
+                                                        <li ng-repeat="item in cla.classList">
+                                                            <label>
+                                                                <input class="chkbox" type="checkbox" ng-model="item.checked" ng-click="form.classCheckEvent(cla)">{{item.className}}
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                
+                                                <a ng-if="form.classes.length>1" class="remove-flat" ng-click="form.removeClass($index)" style="top:2px;left:176px;"><i class="ALiconfont icon-close1"></i></a>
                                             </li>
                                             <li style="padding-top:5px"><a class="btn btn-href btn-xs" ng-click="form.addClass()">新增班级</a></li>
                                         </ul>
@@ -176,7 +199,7 @@
                                 <tr>
                                     <td class="require">角色</td>
                                     <td>
-                                        <select ng-model="form.roleid">
+                                        <select ng-model="form.roleid" style="width:167px;">
                                             <option value="">请选择角色</option>
                                             <option ng-repeat="role in roles || []" value="{{role.roleId}}" ng-selected="form.roleid == role.roleId">{{role.title}}</option>
                                         </select>
@@ -194,6 +217,11 @@
                                     <td class="require">确认密码</td>
                                     <td><input type="password" ng-model="form.password1" /></td>
                                 </tr>
+                                <tr>
+                                    <td class="require">在学生信息卡显示</td>
+                                    <td><input bs-switch ng-model="form.isshow" type="checkbox" switch-size="mini" switch-on-text="开启" switch-off-text="关闭"></td>
+                                </tr>
+                                
                                 <tr>
                                     <td></td>
                                     <td class="td-btn-box">

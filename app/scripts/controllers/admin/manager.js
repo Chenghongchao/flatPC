@@ -334,6 +334,16 @@ angular.module('flatpcApp')
                 $scope.list = data.list.dataList;
                 $scope.media.recordCount = data.list?data.list.recordCount:0;
                 $scope.media.pageCount = data.list?data.list.pageCount:0;
+                //楼栋名称处理成数组
+                angular.forEach($scope.list, function(data,index,array){
+                    angular.forEach(data.flatlist, function(data_flat,index_flat,array_flat){
+                        var name_array = [];
+                        if(data_flat.flatname){
+                            name_array = data_flat.flatname.split(",");
+                        }
+                        data_flat.flatname = name_array;                        
+                    });
+                });
             }else if(data.code == 4037){
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
                 location.href="#login";$rootScope.loading = false;

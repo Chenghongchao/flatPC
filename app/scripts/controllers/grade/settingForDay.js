@@ -8,8 +8,8 @@
  * Controller of the flatpcApp
  */
 angular.module('flatpcApp')
-.controller('GradeSettingForDayCtrl', ['$scope','AppConfig','$rootScope', 'GradeService',
-function($scope,AppConfig,$rootScope,GradeService) {
+.controller('GradeSettingForDayCtrl', ['$scope','AppConfig','$rootScope','RoomService','GradeService',
+function($scope,AppConfig,$rootScope,RoomService,GradeService) {
     $scope.media = {
         status:1,
         type:0,
@@ -24,12 +24,15 @@ function($scope,AppConfig,$rootScope,GradeService) {
         fid:0,
         standardtype:0,
         fullmark:0,
+        pointmark:1,
         typeTitle:'',
         parentTitle:'',
         passvalue:0,
         bettervalue:0,
         passcontinuity:0,
         passnumber:0,
+        flatTypeList:null,
+        flatTypeId: null,
         isLeaf:false
     };
     $scope.show = function(type,item,obj,category,option){
@@ -59,6 +62,8 @@ function($scope,AppConfig,$rootScope,GradeService) {
         $scope.media.bettervalue=item.betterValue || 0;
         $scope.media.passcontinuity=item.passContinuity || 0;
         $scope.media.passnumber=item.passNumber || 0;
+        $scope.media.flatTypeId = item.flattypeid || null;
+        $scope.refreshCheckedFlatType();
     }
     $scope.add = function(type,item,obj,category){
         $scope.media.status = 1;
@@ -89,12 +94,20 @@ function($scope,AppConfig,$rootScope,GradeService) {
         }else{
             $scope.media.isLeaf = false;
         }
+        $scope.media.flatTypeId = "";
+        $scope.refreshCheckedFlatType();
     }
     $scope.addSave = function(){
-        
-        $rootScope.loading = true;
         (function () {
             if($scope.media.type){
+                if($scope.media.pointmark < 1){
+                    swal("提示", "单次点击扣分数值不得小于1", "warning"); 
+                    return;
+                }else if($scope.media.pointmark > $scope.media.fullmark){
+                    swal("提示", "单次点击扣分数值不得大于分值", "warning"); 
+                    return;
+                }
+                $rootScope.loading = true;
                 return GradeService.addSetting({
                     token:AppConfig.token,
                     schoolcode:AppConfig.schoolCode,
@@ -103,17 +116,21 @@ function($scope,AppConfig,$rootScope,GradeService) {
                     number:$scope.media.number,
                     title:$scope.media.isLeaf?$scope.media.title:$scope.media.parentTitle,
                     fullmark:$scope.media.fullmark,
+                    pointmark:$scope.media.pointmark,
                     listorder:$scope.media.listorder,
                     standardtype:$scope.media.standardtype
                 })
             }else
+                var flatTypeIds = $scope.getFlatTypeCheckedIds();
+                $rootScope.loading = true;
                 return GradeService.addSettingTable({
                     token:AppConfig.token,
                     schoolcode:AppConfig.schoolCode,
                     type:1,
                     title:$scope.media.tableTitle,
                     isopen:$scope.media.isopen?1:0,
-                    listorder:$scope.media.listorder
+                    listorder:$scope.media.listorder,
+                    flattypeid:flatTypeIds.toString()
                 })
         })().success(function(data){
             $rootScope.loading = false;
@@ -135,17 +152,26 @@ function($scope,AppConfig,$rootScope,GradeService) {
         $rootScope.loading = true;
         (function () {
             if($scope.media.type){
+                if($scope.media.pointmark < 1){
+                    swal("提示", "单次点击扣分数值不得小于1", "warning"); 
+                    return;
+                }else if($scope.media.pointmark > $scope.media.fullmark){
+                    swal("提示", "单次点击扣分数值不得大于分值", "warning"); 
+                    return;
+                }
                 if($scope.media.type>1){
                     return GradeService.editSetting({
                         token:AppConfig.token,
                         itemid:$scope.media.itemid,
                         title:$scope.media.isLeaf?$scope.media.title:$scope.media.parentTitle,
                         fullmark:$scope.media.fullmark,
+                        pointmark:$scope.media.pointmark,
                         number:$scope.media.number,
                         standardtype:$scope.media.standardtype,
                         listorder:$scope.media.listorder
                     })
                 }else{
+                    $rootScope.loading = true;
                     return GradeService.editSettingType({
                         token:AppConfig.token,
                         typeid:$scope.media.typeid,
@@ -158,12 +184,15 @@ function($scope,AppConfig,$rootScope,GradeService) {
                 }
                 
             }else{
+                var flatTypeIds = $scope.getFlatTypeCheckedIds();
+                $rootScope.loading = true;
                 return GradeService.editSettingTable({
                     token:AppConfig.token,
                     isopen:$scope.media.isopen?1:0,
                     title:$scope.media.tableTitle,
                     tableid:$scope.media.tableid,
-                    listorder:$scope.media.listorder
+                    listorder:$scope.media.listorder,
+                    flattypeid:flatTypeIds.toString()
                 })
             }
         })().success(function(data){
@@ -222,6 +251,48 @@ function($scope,AppConfig,$rootScope,GradeService) {
         });
     }
     
+    //复制打分表(周、日、月、抽查)
+    $scope.copyTableTo = function(type){
+        var text = null;
+        if(type==0){
+            text = "周";
+        }else if(type==1){
+            text = "日";
+        }else if(type==2){
+            text = "月";
+        }else if(type==3){
+            text = "抽查";
+        }
+        swal({   
+                title: "确认复制", 
+                text: "真的复制该打分表到"+text+"打分吗？",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "确定",   
+                cancelButtonText: "取消",   
+                closeOnConfirm: false 
+            }, 
+            function(){
+                $rootScope.loading = true;
+                return GradeService.copyTable({
+                    tableid: $scope.media.tableid,
+                    type:type
+                }).success(function(data){
+                    $rootScope.loading = false;
+                    if(data.code == 0){
+                        swal("提示", "复制成功！", "success"); 
+                        if(fun) fun();
+                        refresh();
+                    }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+                    else
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                });
+        });
+    },
 
     refresh(true);
 
@@ -234,6 +305,7 @@ function($scope,AppConfig,$rootScope,GradeService) {
             console.log(data);
             if(data.code == 0){
                 $scope.day = data.data;
+                $scope.getFlatTypeList();
             }else if(data.code == 4037){
                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
                             location.href="#login";$rootScope.loading = false;
@@ -242,6 +314,51 @@ function($scope,AppConfig,$rootScope,GradeService) {
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
             $rootScope.loading = false;
             
+        });
+    }
+    
+    // 获取户型
+    $scope.getFlatTypeList = function() {
+        RoomService.getTypeList().success(function(data){
+            if(data.code == 0){
+                $scope.media.flatTypeList = data.data;
+                $scope.refreshCheckedFlatType();
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            $rootScope.loading = false;
+        });
+    }
+    
+    $scope.getFlatTypeCheckedIds = function(){
+        var ids = [];
+        angular.forEach($scope.media.flatTypeList, function(data,index,array){
+            if(data.checked){
+               ids[ids.length] = data.typeId;
+            }
+        });
+        return ids;
+    }
+
+    $scope.refreshCheckedFlatType =  function(){
+        $scope.clearCheckedFlatType();
+        if($scope.media.flatTypeId && $scope.media.flatTypeList){
+            var flatTypeIds = $scope.media.flatTypeId.split(",");
+            angular.forEach($scope.media.flatTypeList, function(data,index,array){
+                for(var i=0; i<flatTypeIds.length; i++){
+                    if(data.typeId == flatTypeIds[i]){
+                        data.checked = true;
+                    }
+                }
+            });
+        }
+    }
+    $scope.clearCheckedFlatType =  function(){
+        angular.forEach($scope.media.flatTypeList, function(data,index,array){
+            data.checked = false;
         });
     }
 }]);

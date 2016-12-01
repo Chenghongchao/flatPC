@@ -124,8 +124,10 @@
 
         <ul class="page-tabs-nav">
             <li ng-if="media.menuCheck(1)" ng-class="{'active':media.tab == 1}" ng-click="media.setTab(1)">打分信息</li>
-            <li ng-if="media.menuCheck(2)" ng-class="{'active':media.tab == 2}" ng-click="media.setTab(2)">打分查询</li>
-            <li ng-if="media.menuCheck(3)" ng-class="{'active':media.tab == 3}" ng-click="media.setTab(3)">排行榜</li>
+            <li ng-if="media.menuCheck(2)" ng-class="{'active':media.tab == 2}" ng-click="media.setTab(2)">快速打分</li>
+            <li ng-if="media.menuCheck(3)" ng-class="{'active':media.tab == 3}" ng-click="media.setTab(3)">打分成绩导入</li>
+            <li ng-if="media.menuCheck(4)" ng-class="{'active':media.tab == 4}" ng-click="media.setTab(4)">打分查询</li>
+            <li ng-if="media.menuCheck(5)" ng-class="{'active':media.tab == 5}" ng-click="media.setTab(5)">排行榜</li>
 
             <div ng-show="media.source == 1 && media.tab == 1" class="dataSelect">
                 <span>不合格寝室</span>
@@ -136,6 +138,9 @@
                 <button class="ALiconfont icon-search" ng-click="searchHandler();"></button>
             </div>
 
+            <div ng-show="media.tab == 2" style="position:absolute; right:20px; top:3px;">
+                <button class="btn btn-info" ng-click="saveQuickScores()">保存成绩</button>
+            </div>
         </ul>
         <ul class="page-tabs-container">
             <li ng-if="media.menuCheck(1)" class="fadeIn animated active" ng-class="{'active':media.tab == 1}">
@@ -176,6 +181,158 @@
                 </ul>
             </li>
             <li ng-if="media.menuCheck(2)" class="fadeIn animated" ng-class="{'active':media.tab == 2}">
+                <ul class="floor-list">
+                    <li ng-repeat="floor in ksdfFlatList">
+                        <div class="floor-title">
+                            <div class="title-full">
+                                {{floor.floorname}}
+                            </div>
+                            <!--<div class="progress-box">
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar progress-bar-success" style="width:{{(floor.roomNumber - floor.notRoomNumber)/floor.roomNumber * 100}}%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-number">
+                                <span>{{floor.roomNumber - floor.notRoomNumber}}</span>/{{floor.roomNumber}}
+                            </div>
+                            <div class="grade-number">
+                                <span>{{floor.average}}</span>分
+                            </div>-->
+                        </div>
+
+                        <ul class="quickroom-list" ng-repeat="rooms in floor.roomlist">
+                            <li class="room-item" ng-repeat="room in rooms">
+                                <div ng-class="{'graded':room.roomScoreId}">{{room.roomNum}}</div>
+                                <ul>
+                                    <li>
+                                        <input ng-if="room.grade!=2" ng-model="room.score" value="{{room.roomscoreid?room.score:'尚未打分'}}">
+                                        <a class="passed" ng-if="room.grade == 2">
+                                            免
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="bed-item" ng-if="bedstatus == 0">
+                                    <li ng-repeat="bed in room.bedlist">
+                                        <span title="{{bed.name?bed.name:'空闲'}}">{{bed.name?bed.name:'空闲'}}</span>
+                                        <div class="bedname"> 
+                                            <input ng-if="bed.name" ng-model="bed.score" value="{{bed.score?bed.score:'尚未打分'}}">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+                 
+            </li>
+            <li ng-if="media.menuCheck(3)" class="fadeIn animated" ng-class="{'active':media.tab == 3}" >
+                <div class="tool-bar">
+                    <div>
+                        <a class="btn btn-success" ng-click="showCard('#multiAdd',importInit())">数据导入</a>
+                    </div>
+                    <div>
+                        <a class="btn btn-default" ng-click="downloadGradeScoreTable()">下载样表</a>
+                    </div>
+                </div>
+                <div class="table-container" style="top:50px;background-color:#fff;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="sort"  ng-class="{'sort-up':media.orderfield=='title' && media.ordertype=='asc','sort-down':media.orderfield=='title' && media.ordertype=='desc'}" ng-click="setOrder('title')">导入名称</th>
+                                <th>导入类型</th>
+                                <th class="sort" ng-class="{'sort-up':media.orderfield=='addTime' && media.ordertype=='asc','sort-down':media.orderfield=='addTime' && media.ordertype=='desc'}" ng-click="setOrder('addTime')">创建时间</th>
+                                <th>错误日志</th>
+                                <td>下载导入文件</td>
+                                <th>导出错误数据</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr ng-repeat="import in importList">
+                                <td>{{import.title}}</td>
+                                <td>{{import.importType}}</td>
+                                <td>{{import.addTime}}</td>
+                                <td>{{import.errorNumber}}个错误信息</td>
+                                <td><a ng-if="menuCheck(220)" class="btn btn-link btn-xs" ng-click="downloadImfile(import.importfileid)">下载导入文件</a></td>
+                                <td><a ng-if="menuCheck(220)" class="btn btn-link btn-xs" ng-click="download(import.importId)">导出错误数据</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" ng-hide="media.recordCount" class="empty">没有检索到导入历史记录</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="page-controller">
+                    <div class="page-number">
+                        <ul class="pagination">
+                            <li ng-class="{disabled:media.epage<2}">
+                                <a aria-label="Previous" ng-click="setPage(-1)">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li ng-show="media.epage-2>0"><a ng-click="setPage(-2)">{{media.epage-2}}</a></li>
+                            <li ng-show="media.epage-1>0"><a ng-click="setPage(-1)">{{media.epage-1}}</a></li>
+                            <li class="active"><a>{{media.epage}}</a></li>
+                            <li ng-show="media.epage+1<=media.pageCount"><a ng-click="setPage(1)">{{media.epage+1}}</a></li>
+                            <li ng-show="media.epage+2<=media.pageCount"><a ng-click="setPage(2)">{{media.epage+2}}</a></li>
+                            <li ng-class="{disabled:media.epage>=media.pageCount}">
+                                <a aria-label="Next" ng-click="setPage(1)">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="page-size">
+                        共 {{media.recordCount}} 条记录，每页显示
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{media.pagesize}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" style="min-width:54px">
+                                <li ng-click="setPageSize(10)"><a>10</a></li>
+                                <li ng-click="setPageSize(20)"><a>20</a></li>
+                                <li ng-click="setPageSize(30)"><a>30</a></li>
+                                <li ng-click="setPageSize(50)"><a>50</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card fadeIn animated" id="multiAdd" info-card>
+                    <div class="info-card-wrapper">
+                        <div class="info-card-dialog">
+                            <div class="info-card-content">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        数据导入
+                                        <a class="info-card-close"><i class="ALiconfont icon-close"></i></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table-form table-bordered bg-white">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="require">导入名称</td><td><input type="text" ng-model="importName" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="require">选择文件</td>
+                                                    <td>{{importFileName}} <div class="btn btn-primary btn-sm" input-file change = "uploadFile">点击选择</div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <a class="btn btn-success" ng-click="subImport(closeCard('#multiAdd'))">确认导入</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li ng-if="media.menuCheck(4)" class="fadeIn animated" ng-class="{'active':media.tab == 4}">
                 <div class="search-bar">
                     <!--div>
                         <select class="form-control">
@@ -281,7 +438,7 @@
                     </div>
                 </div>
             </li>
-            <li ng-if="media.menuCheck(3)" class="fadeIn animated" ng-class="{'active':media.tab == 3}">
+            <li ng-if="media.menuCheck(5)" class="fadeIn animated" ng-class="{'active':media.tab == 5}">
                 <div class="search-bar">
                     <div class="bar-full">
                         <div class="btn-group" role="group" ng-show="media.flatid1">
@@ -384,7 +541,21 @@
                             </ul>
                             <ul class="page-tabs-container grade-container grade-tool-on" style="margin-bottom:0;">
                                 <li ng-if="cardMedia.menuCheck(1)" class="fadeIn animated" ng-class="{'active':cardMedia.tab ==1}">
-                                    <table class="table table-bordered bg-white">
+                                    <table ng-if="cardMedia.roomGradeType==1" class="table table-bordered bg-white" style="height:150px;">
+                                        <tr>
+                                        <td>快速打分/成绩导入</td>
+                                        <td width="180" class="grade-handle">
+                                            <div>
+                                                <div ng-if="cardMedia.score>-1" ng-click="cardMedia.gradeKs(-1)"><i class="ALiconfont icon-minus3"></i></div>
+                                                <div ng-class="{'minuses':(cardMedia.score>-1 && cardMedia.score<(cardMedia.maxScore||cardMedia.fullMark)),'pass':cardMedia.score==-1,'fail':cardMedia.score==-2}">{{cardMedia.score>-1?cardMedia.score:''}}</div>
+                                                <div ng-if="cardMedia.score>-1" ng-click="cardMedia.gradeKs(1)"><i class="ALiconfont icon-plus3"></i></div>                                              
+                                            </div>                                           
+                                        </td>
+                                        </tr>
+                                        <tr></tr>
+                                    </table>
+
+                                    <table ng-if="cardMedia.roomGradeType==0" class="table table-bordered bg-white">
                                         <thead>
                                             <tr><th>序号</th><th>打分项目</th><th>打分</th></tr>
                                         </thead>
@@ -395,9 +566,9 @@
                                                 <td>{{item.title + (item.standardType?'':('（' +  (item.maxScore||item.fullMark||0) + '）'))}}</td>
                                                 <td class="grade-handle">
                                                     <div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-1,item)"><i class="ALiconfont icon-minus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-(item.pointmark),item)"><i class="ALiconfont icon-minus3"></i></div>
                                                         <div ng-click="cardMedia.grade(0,item)" ng-class="{'minuses':(item.score>-1 && item.score<(item.maxScore||item.fullMark)),'pass':item.score==-1,'fail':item.score==-2}">{{item.score>-1?item.score:''}}</div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(1,item)"><i class="ALiconfont icon-plus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade((item.pointmark),item)"><i class="ALiconfont icon-plus3"></i></div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -420,19 +591,43 @@
                                     </table>
                                 </li>
                                 <li ng-if="cardMedia.menuCheck(2)" class="fadeIn animated" ng-class="{'active':cardMedia.tab ==2}">
-                                    <table class="table table-bordered bg-white">
+
+                                    <table ng-if="cardMedia.bedGradeType==1" class="table table-bordered bg-white" style="height:150px; text-aline:center;">
+                                        <thead>
+                                            <tr><th>序号</th><th>学生</th><th>打分成绩</th></tr>
+                                        </thead>
+                                        <tbody ng-repeat="bed in cardMedia.bed">
+                                            <tr> 
+                                                <td>{{bed.bedName || bed.bedNum}}</td>
+                                                <td> -{{bed.studentName + '（' + bed.studentNumber + '）'}}</td>
+                                                <td width="186" class="grade-handle">
+                                                    <div> 
+                                                        <div ng-if="bed.totalScore>-1" ng-click="cardMedia.gradeKsBed(bed, -1)"><i class="ALiconfont icon-minus3"></i></div>
+                                                        <div ng-class="{'minuses':(bed.totalScore>-1 && bed.totalScore<(bed.maxScore||bed.fullMark)),'pass':bed.totalScore==-1,'fail':bed.totalScore==-2}">{{bed.totalScore>-1?bed.totalScore:''}}</div>
+                                                        <div ng-if="bed.totalScore>-1" ng-click="cardMedia.gradeKsBed(bed, 1)"><i class="ALiconfont icon-plus3"></i></div>                                              
+                                                    </div> 
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table ng-if="cardMedia.bedGradeType==0" class="table table-bordered bg-white">
                                         <thead>
                                             <tr><th>序号</th><th>打分项目</th><th>打分</th></tr>
                                         </thead>
                                         <tbody ng-repeat="bed in cardMedia.bed">
-                                            <tr><th>{{bed.bedName || bed.bedNum}}</th><th> -{{bed.studentName + '（' + bed.studentNumber + '）'}}</th><th class="grade-number">{{cardMedia.getBedSum(bed)}}</th></tr>
+                                            <tr>
+                                                <th>{{bed.bedName || bed.bedNum}}</th>
+                                                <th> -{{bed.studentName + '（' + bed.studentNumber + '）'}}</th>
+                                                <th class="grade-number">{{cardMedia.getBedSum(bed)}}</th>
+                                            </tr>
                                             <tr ng-repeat="item in bed.itemList">
                                                 <td>{{item.number || ($index + 1)}}</td><td>{{item.title + (item.standardType?'':('（' + (item.maxScore||0) + '）'))}}</td>
                                                 <td class="grade-handle">
                                                     <div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-1,item)"><i class="ALiconfont icon-minus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-(item.pointmark || 1),item)"><i class="ALiconfont icon-minus3"></i></div>
                                                         <div ng-click="cardMedia.grade(0,item)" ng-class="{'minuses':(item.score>-1 && item.score<(item.maxScore||item.fullMark)),'pass':item.score==-1,'fail':item.score==-2}">{{item.score>-1?item.score:''}}</div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(1,item)"><i class="ALiconfont icon-plus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade((item.pointmark || 1),item)"><i class="ALiconfont icon-plus3"></i></div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -542,29 +737,3 @@
         </div>
     </div>
 </div>
-<script>
-    //日期选择控件配置
-    /*$(document).ready(function() {
-        $('#config-demo').daterangepicker({
-            autoApply: true,
-            startDate: "2016/09/04",
-            endDate: "2016/09/10",
-            opens: "left",
-            locale : {
-                format: "YYYY/MM/DD",
-                applyLabel : '确定',  
-                cancelLabel : '取消',  
-                fromLabel : '起始时间',  
-                toLabel : '结束时间',  
-                customRangeLabel : '自定义',  
-                daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],  
-                monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月',  
-                        '七月', '八月', '九月', '十月', '十一月', '十二月' ],  
-                firstDay : 1  
-            }
-        }, function(start, end, label) {//格式化日期显示框
-                var date = new Date(start);
-                var strDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-        });
-    });*/
-</script>

@@ -25,7 +25,7 @@ angular
       WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
       //WEB_ROOT_DOWNLOAD:'http://test.houqinbao.com/gyxt_api/',
       
-      //WEB_ROOT:'http://192.168.2.110:8080/Geese_Apartment/',
+    //WEB_ROOT:'http://192.168.2.116:8080/Geese_Apartment/',
 
         //WEB_ROOT:'http://192.168.2.138:8080/Geese_Apartment/',
 

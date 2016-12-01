@@ -105,7 +105,7 @@
                         <tr ng-show="media.type==1">
                             <td class="require">免检条件</td>
                             <td>
-                                <input type="text" ng-model="media.passcontinuity" />
+                                <input type="text" ng-model="media.passcontinuity"/>
                                 <span class="form-tips">达到“免检”所需要的连续“优秀”评级的次数</span> 
                             </td>
                         </tr>
@@ -115,8 +115,17 @@
                         <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">分值</td><td><input type="text" ng-model="media.fullmark" /></td>
                         </tr>
+                        <tr ng-show="media.isLeaf && media.standardtype==0">
+                            <td class="require">单次点击扣分数值</td><td><input type="text" ng-model="media.pointmark"/></td>
+                        </tr>
                         <tr ng-hide="media.type==1">
                             <td class="require">排序</td><td><input type="text" ng-model="media.listorder" /></td>
+                        </tr>
+                        <tr ng-hide="media.type">
+                            <td class="require">关联户型</td>
+                            <td>
+                                <label ng-repeat="flatType in media.flatTypeList" style="width:100%;"><input type="checkbox" ng-model="flatType.checked" /> {{flatType.title}}</label>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -125,6 +134,17 @@
                                     <button ng-show="media.status" ng-click="addSave()" class="btn btn-success">提交</button>
                                     <button ng-hide="media.status" ng-click="editSave()" class="btn btn-info">保存</button>
                                     <button ng-hide="media.status" ng-click="delete()" class="btn btn-danger">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-hide="media.type || media.status">
+                            <td>快速复制</td>
+                            <td>
+                                <div class="btn-box">
+                                    <button  ng-click="copyTableTo(0)" class="btn btn-grey">复制到周</button>
+                                    <button  ng-click="copyTableTo(1)" class="btn btn-grey">复制到日</button>
+                                    <button  ng-click="copyTableTo(2)" class="btn btn-grey">复制到月</button>
+                                    <button  ng-click="copyTableTo(3)" class="btn btn-grey">复制到抽查</button>
                                 </div>
                             </td>
                         </tr>
@@ -227,8 +247,17 @@
                         <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">分值</td><td><input type="text" ng-model="media.fullmark" /></td>
                         </tr>
+                        <tr ng-show="media.isLeaf && media.standardtype==0">
+                            <td class="require">单次点击扣分数值</td><td><input type="text" ng-model="media.pointmark"/></td>
+                        </tr>
                         <tr ng-hide="media.type==1">
                             <td class="require">排序</td><td><input type="text" ng-model="media.listorder" /></td>
+                        </tr>
+                        <tr ng-hide="media.type">
+                            <td class="require">关联户型</td>
+                            <td>
+                                <label ng-repeat="flatType in media.flatTypeList" style="width:100%;"><input type="checkbox" ng-model="flatType.checked" /> {{flatType.title}}</label>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -237,6 +266,17 @@
                                     <button ng-show="media.status" ng-click="addSave()" class="btn btn-success">提交</button>
                                     <button ng-hide="media.status" ng-click="editSave()" class="btn btn-info">保存</button>
                                     <button ng-hide="media.status" ng-click="delete()" class="btn btn-danger">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-hide="media.type || media.status">
+                            <td>快速复制</td>
+                            <td>
+                                <div class="btn-box">
+                                    <button  ng-click="copyTableTo(0)" class="btn btn-grey">复制到周</button>
+                                    <button  ng-click="copyTableTo(1)" class="btn btn-grey">复制到日</button>
+                                    <button  ng-click="copyTableTo(2)" class="btn btn-grey">复制到月</button>
+                                    <button  ng-click="copyTableTo(3)" class="btn btn-grey">复制到抽查</button>
                                 </div>
                             </td>
                         </tr>
@@ -339,8 +379,17 @@
                         <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">分值</td><td><input type="text" ng-model="media.fullmark" /></td>
                         </tr>
+                        <tr ng-show="media.isLeaf && media.standardtype==0">
+                            <td class="require">单次点击扣分数值</td><td><input type="text" ng-model="media.pointmark"/></td>
+                        </tr>
                         <tr ng-hide="media.type==1">
                             <td class="require">排序</td><td><input type="text" ng-model="media.listorder" /></td>
+                        </tr>
+                        <tr ng-hide="media.type">
+                            <td class="require">关联户型</td>
+                            <td>
+                                <label ng-repeat="flatType in media.flatTypeList" style="width:100%;"><input type="checkbox" ng-model="flatType.checked" /> {{flatType.title}}</label>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -349,6 +398,17 @@
                                     <button ng-show="media.status" ng-click="addSave()" class="btn btn-success">提交</button>
                                     <button ng-hide="media.status" ng-click="editSave()" class="btn btn-info">保存</button>
                                     <button ng-hide="media.status" ng-click="delete()" class="btn btn-danger">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-hide="media.type || media.status">
+                            <td>快速复制</td>
+                            <td>
+                                <div class="btn-box">
+                                    <button  ng-click="copyTableTo(0)" class="btn btn-grey">复制到周</button>
+                                    <button  ng-click="copyTableTo(1)" class="btn btn-grey">复制到日</button>
+                                    <button  ng-click="copyTableTo(2)" class="btn btn-grey">复制到月</button>
+                                    <button  ng-click="copyTableTo(3)" class="btn btn-grey">复制到抽查</button>
                                 </div>
                             </td>
                         </tr>
@@ -451,8 +511,17 @@
                         <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">分值</td><td><input type="text" ng-model="media.fullmark" /></td>
                         </tr>
+                        <tr ng-show="media.isLeaf && media.standardtype==0">
+                            <td class="require">单次点击扣分数值</td><td><input type="text" ng-model="media.pointmark"/></td>
+                        </tr>
                         <tr ng-hide="media.type==1">
                             <td class="require">排序</td><td><input type="text" ng-model="media.listorder" /></td>
+                        </tr>
+                        <tr ng-hide="media.type">
+                            <td class="require">关联户型</td>
+                            <td>
+                                <label ng-repeat="flatType in media.flatTypeList" style="width:100%;"><input type="checkbox" ng-model="flatType.checked" /> {{flatType.title}}</label>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -461,6 +530,17 @@
                                     <button ng-show="media.status" ng-click="addSave()" class="btn btn-success">提交</button>
                                     <button ng-hide="media.status" ng-click="editSave()" class="btn btn-info">保存</button>
                                     <button ng-hide="media.status" ng-click="delete()" class="btn btn-danger">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-hide="media.type || media.status">
+                            <td>快速复制</td>
+                            <td>
+                                <div class="btn-box">
+                                    <button  ng-click="copyTableTo(0)" class="btn btn-grey">复制到周</button>
+                                    <button  ng-click="copyTableTo(1)" class="btn btn-grey">复制到日</button>
+                                    <button  ng-click="copyTableTo(2)" class="btn btn-grey">复制到月</button>
+                                    <button  ng-click="copyTableTo(3)" class="btn btn-grey">复制到抽查</button>
                                 </div>
                             </td>
                         </tr>
