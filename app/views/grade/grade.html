@@ -566,9 +566,9 @@
                                                 <td>{{item.title + (item.standardType?'':('（' +  (item.maxScore||item.fullMark||0) + '）'))}}</td>
                                                 <td class="grade-handle">
                                                     <div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-(item.pointmark),item)"><i class="ALiconfont icon-minus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade(-(item.pointmark || 1),item)"><i class="ALiconfont icon-minus3"></i></div>
                                                         <div ng-click="cardMedia.grade(0,item)" ng-class="{'minuses':(item.score>-1 && item.score<(item.maxScore||item.fullMark)),'pass':item.score==-1,'fail':item.score==-2}">{{item.score>-1?item.score:''}}</div>
-                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade((item.pointmark),item)"><i class="ALiconfont icon-plus3"></i></div>
+                                                        <div ng-if="item.score>-1" ng-click="cardMedia.grade((item.pointmark || 1),item)"><i class="ALiconfont icon-plus3"></i></div>
                                                     </div>
                                                 </td>
                                             </tr>

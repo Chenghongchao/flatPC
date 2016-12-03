@@ -318,6 +318,25 @@
             </li>
         </ul>
     </li>
+
+    <li ng-if="menuCheck(551)" ng-show="sysMenu[1]=='check'">
+        <div class="menu-title">辅导员查看</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(552)">
+                <a href="#lategoCounselor">
+                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#02cf97; font-size:25px"></i>
+                    晚出
+                </a>
+            </li>
+            <li ng-if="menuCheck(553)">
+                <a href="#lateCounselor">
+                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#38adff; font-size:25px"></i>
+                    晚归
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li ng-if="menuCheck(520)" ng-show="sysMenu[1]=='journal'">
         <div class="menu-title">日志管理</div>
         <ul class="menu-list">
@@ -352,7 +371,7 @@
             </li>
         </ul>
     </li>
-
+    
     <li ng-if="menuCheck(445)" ng-show="sysMenu[1]=='dormitoryCheck'">
         <div class="menu-title">设置</div>
         <ul class="menu-list">
@@ -373,6 +392,12 @@
                 <a href="#safeCheck">
                     <i class="ALiconfont icon-kuaisuchaxun" style="line-height:42px; background-color:#ff9c00;font-size:28px"></i>
                     安全检查
+                </a>
+            </li>
+            <li ng-if="menuCheck(554)">
+                <a href="#singleCheck">
+                    <i class="ALiconfont icon-cc-chart" style="line-height:42px; background-color:#fc7257;font-size:28px"></i>
+                    单项检查统计
                 </a>
             </li>
             <li ng-if="menuCheck(463)">

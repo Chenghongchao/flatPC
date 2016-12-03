@@ -21,7 +21,10 @@ angular.module('flatpcApp')
         jobnumber:'',
         roleid:'',
         adminid:'',
-        isshow:0,
+        isshow:false,
+        selectClassList:[],
+        selectCollegeId:'',
+        flag:0,
         classes:[],  //选择的班级数据
         classnames: null,
         removeClass:function(index){
@@ -30,22 +33,30 @@ angular.module('flatpcApp')
                 this.addClass();
             }
         },
-        addClass:function () {
+        addClass:function () { //selectClassList = [], selectCollegeId = '', flag = 0
+            
             //关闭其他下拉框
             this.classes.forEach(function (data, index, array) {
                 if(data.showClassMenu) data.showClassMenu = false;
             })
             //新增一条记录
             var cla = {
-                collegeId:$scope.media.collegeid || '',
+                // collegeId:$scope.media.collegeid || '',
+                collegeId:$scope.form.selectCollegeId,
                 collegeList:$rootScope.treeCollege,
                 classId:$scope.media.classid || '',
                 classList:[],
+                selectClassList:$scope.form.selectClassList,
                 checkedAll: false,  //是否全选
                 showClassMenu: false     //是否显示班级下拉
             }
             $scope.selecter.classSelecter(cla);
+            if($scope.form.flag != 1)
+                $scope.form.classCheckEvent(cla);
             this.classes.push(cla);
+            $scope.form.flag = 1;
+            $scope.form.selectClassList = [];
+            $scope.form.selectCollegeId = '';
         },
         // getClass:function(){
         //     var ids = [];
@@ -72,24 +83,34 @@ angular.module('flatpcApp')
                 collegeids:[], //学院ID集合
                 classids:[] //班级ID集合
             };
-            this.classes.forEach(function (cla) {
-                if(cla.checkedAll){ //选择了全部班级，则记录该学院ID
-                    if(ids.collegeids.indexOf(cla.collegeId)==-1){
-                        ids.collegeids.push(cla.collegeId);
-                    }
-                }else{ //记录该班级ID
-                    cla.classList.forEach(function (data, index, array) {
-                        if(data.checked && ids.classids.indexOf(data.classId)==-1){
-                            ids.classids.push(data.classId);
-                        }
-                    })
+            var arr = [];
+            this.classes.forEach(function (cla) { 
+                for(var i = 0; i < cla.classList.length; i++){ 
+                    if(cla.classList[i].checked == true){
+                        arr.push( cla.classList[i].classId ); 
+                    } 
+                    
                 }
+                
+                // if(cla.checkedAll){ //选择了全部班级，则记录该学院ID
+                //     if(ids.collegeids.indexOf(cla.collegeId)==-1){
+                //         ids.collegeids.push(cla.collegeId);
+                //     }
+                // }else{ //记录该班级ID
+                //     cla.classList.forEach(function (data, index, array) {
+                //         if(data.checked && ids.classids.indexOf(data.classId)==-1){
+                //             ids.classids.push(data.classId);
+                //         }
+                //     })
+                // }
                 
                 // else if(ids.collegeids.indexOf(cla.collegeId)==-1 //记录该班级ID
                 //       && ids.classids.indexOf(cla.classId)==-1){
                 //     ids.classids.push(cla.classId);
                 // }
             })
+            ids.classids[0] = arr.join(",");
+            console.log(ids);
             return ids;
         },
         classCheckAll : function(cla){
@@ -133,8 +154,9 @@ angular.module('flatpcApp')
             }
         }
     }
-      
-    $scope.dataInit = function (user) {
+
+    $scope.adddataInit = function (user) {
+        
         $scope.form.status= user.adminId ? 1 : 0;
         $scope.form.username= user.userName || '';
         $scope.form.password= '';
@@ -144,7 +166,6 @@ angular.module('flatpcApp')
         $scope.form.jobnumber=user.jobNumber || '';
         $scope.form.roleid= '' + (user.roleId || '');
         $scope.form.classes = [];
-        alert(JSON.stringify(user));
         if(user.classIds && user.classIds.length>0){
             user.classIds.forEach(function (cla) {
                 var item = {
@@ -159,6 +180,70 @@ angular.module('flatpcApp')
             $scope.form.addClass();
         }
         $scope.form.adminid=user.adminId || '';
+        
+       
+    }
+      
+    $scope.dataInit = function (user) {
+        $scope.form.status= user.adminId ? 1 : 0;
+        $scope.form.username= user.userName || '';
+        $scope.form.password= '';
+        $scope.form.password1= '';
+        $scope.form.useraccount=user.userAccount || '';
+        $scope.form.phone=user.phone || '';
+        $scope.form.jobnumber=user.jobNumber || '';
+        $scope.form.roleid= '' + (user.roleId || '');
+        $scope.form.classes = [];
+        $scope.form.isshow = user.isshow?true:false;
+        if(user.classIds && user.classIds.length>0){
+            user.classIds.forEach(function (cla) {
+                var item = {
+                    classId:cla.classId,
+                    checkedAllClass: false,  //是否全选
+                    showClassMenu: false     //是否显示班级下拉
+                }
+                $scope.selecter.classSelecter(item);
+                $scope.form.classes.push(item);
+            })
+        }else{
+            $scope.form.addClass();
+        }
+        $scope.form.adminid=user.adminId || '';
+
+        CollegeService.getAdminclasslist({
+            adminid:$scope.form.adminid,
+            schoolcode:AppConfig.schoolCode
+        }).success(function (data) {
+            $rootScope.loading = false;
+            if(data.code == 0){
+                for(var i = 0; i < data.list.collegelist.length; i++){
+                    var info =  data.list.collegelist[i];
+                    // var cla = {
+                    //     // collegeId:$scope.media.collegeid || '',
+                    //     collegeId:selectCollegeId,
+                    //     collegeList:$rootScope.treeCollege,
+                    //     classId:$scope.media.classid || '',
+                    //     classList:[],
+                    //     selectClassList:selectClassList,
+                    //     checkedAll: false,  //是否全选
+                    //     showClassMenu: false     //是否显示班级下拉
+                    // }
+                    // $scope.selecter.classSelecter(cla);
+                    $scope.form.selectClassList = info.classList;
+                    $scope.form.selectCollegeId = ''+info.collegeid+'';
+                    $scope.form.flag            = 0;
+                    $scope.form.addClass();
+                }
+                $(".clearfix:eq(0)").hide();
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+        })
+         
+
     }
     //二级连选的select
     $scope.selecter = {    
@@ -166,6 +251,15 @@ angular.module('flatpcApp')
             //用collegeId获取classList
             var college = cla.collegeId?$filter('filter')($rootScope.treeCollege[0].collegeList,{collegeId:cla.collegeId}):[];
             if(college.length>0 && college[0].classList){
+                for(var i = 0; i < college[0].classList.length; i++){
+                    for(var j = 0; j < cla.selectClassList.length; j++){
+                        if(cla.selectClassList[j].classid == college[0].classList[i].classId){
+                            college[0].classList[i].checked = true;
+                        }
+                    }
+                }
+                
+                // $scope.form.classCheckAll(cla);
                 cla.classList = angular.copy(college[0].classList);
             }
         },
@@ -238,7 +332,7 @@ angular.module('flatpcApp')
             collegeid: arrayIds.collegeids.length>0 ? arrayIds.collegeids.toString() : null,
             classids: arrayIds.classids.length>0 ? arrayIds.classids.toString() : null,
             roleid:$scope.form.roleid,
-            isshow: $scope.form.isshow? 1 : 0
+            isshow: $scope.form.isshow ? 1 : 0
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){

@@ -20,23 +20,59 @@ angular.module('flatpcApp')
         jobnumber:'',
         roleid:'',
         adminid:'',
-        flats : [],
+        flats : [], //选择的楼栋数据
         removeFlat:function(index){
             this.flats.splice(index,1);
             if(this.flats.length < 1){
                 this.addFlat();
             }
         },
-        addFlat:function () {
-            var flat = {
-                campusId:$scope.media.campusid || '',
-                campusList:$rootScope.treeFlat,
-                liveAreaId:$scope.media.liveareaid || '',
-                liveAreaList:[],
-                flatId:$scope.media.flatid || '',
-                flatList:[],
+        addFlat:function (campusId, liveAreaId, selectFlatList) {
+            ////关闭其他下拉框
+            this.flats.forEach(function (data, index, array) {
+                if(data.showFlatMenu) data.showFlatMenu = false;
+            })
+            var liveAreaList = [];
+            var flatList     = [];
+            for(var i = 0; i < $rootScope.treeFlat.cmpusList.length; i++){
+                if($rootScope.treeFlat.cmpusList[i].campusId == campusId){
+                    liveAreaList = $rootScope.treeFlat.cmpusList[i].liveAreaList;
+                    for(var j = 0; j < $rootScope.treeFlat.cmpusList[i].liveAreaList.length; j++){
+                        if($rootScope.treeFlat.cmpusList[i].liveAreaList[j].liveAreaId == liveAreaId){
+                            flatList = $rootScope.treeFlat.cmpusList[i].liveAreaList[j].flatList;
+                        }
+                    }
+                }
             }
-            $scope.selecter.flatSelecter(flat);
+            var flat = {
+                campusId:campusId,
+                campusList:$rootScope.treeFlat,
+                liveAreaId:liveAreaId,
+                liveAreaList:liveAreaList,
+                flatId:$scope.media.flatid || '',
+                flatList:flatList,
+                showFlatMenu:false,  //是否显示班级下拉
+                checkedAll: false,  //是否全选
+            }
+           
+            // var flat = {
+            //     campusId:$scope.media.campusid || '',
+            //     campusList:$rootScope.treeFlat,
+            //     liveAreaId:$scope.media.liveareaid || '',
+            //     liveAreaList:[],
+            //     flatId:$scope.media.flatid || '',
+            //     flatList:[],
+            //     showFlatMenu:false,  //是否显示班级下拉
+            //     checkedAll: false,  //是否全选
+            // }
+            for(var i = 0; i < flat.flatList.length; i++){
+                for(var j = 0; j < selectFlatList.length; j++){
+                    if(selectFlatList[j].flatId == flat.flatList[i].flatId){
+                        flat.flatList[i].checked = true;
+                    }
+                }
+            }
+            this.flatCheckEvent(flat);
             this.flats.push(flat);
         },
         getFlat:function(){
@@ -45,25 +81,144 @@ angular.module('flatpcApp')
                 liveareaids:[], //生活区ID集合
                 flatids:[] //楼栋ID集合
             };
+            var arr = [];
             this.flats.forEach(function (flat) {
-                if("1"==flat.liveAreaId){ //选择了全部生活区，则记录该校区ID
-                    if(array.campusids.indexOf(flat.campusId)==-1){
-                        array.campusids.push(flat.campusId);
+                
+                for(var i = 0; i < flat.flatList.length; i++){
+                    
+                    // if(flat.flatList[i].checked == true){
+                    //     arr.push(flat.flatList[i].flatId);
+                     
+                    // }
+                    
+                    if(flat.flatList[i].checked == true){
+                        arr.push( flat.flatList[i].flatId );
+                      
                     }
-                }else if("1"==flat.flatId){ //选择了全部楼栋，则记录该生活区ID
-                    if(array.campusids.indexOf(flat.campusId)==-1
-                    && array.liveareaids.indexOf(flat.liveAreaId)==-1){
-                        array.liveareaids.push(flat.liveAreaId);
-                    }
-                }else if(array.campusids.indexOf(flat.campusId)==-1 //记录该楼栋ID
-                      && array.liveareaids.indexOf(flat.liveAreaId)==-1 
-                      && array.flatids.indexOf(flat.flatId)==-1){
-                    array.flatids.push(flat.flatId);
+                     
+                    // if(typeof(flat.flatList[i].checked == 'undefined')){
+                    //     if(flat.flatList[i].checked == true){
+                    //         array.flatids[j] = flat.flatList[i].flatId;
+                    //         j++;
+                    //     }
+                    // }
+                }
+                // if(flat.checkedAll){ //选择了全部生活区，则记录该校区ID
+                //     if(array.campusids.indexOf(flat.campusId)==-1){
+                //         array.campusids.push(flat.campusId);
+                //     }
+                // }else if("1"==flat.flatId){ //选择了全部楼栋，则记录该生活区ID
+                //     if(array.campusids.indexOf(flat.campusId)==-1
+                //     && array.liveareaids.indexOf(flat.liveAreaId)==-1){
+                //         array.liveareaids.push(flat.liveAreaId);
+                //     }
+                // }
+                // else if(array.campusids.indexOf(flat.campusId)==-1 //记录该楼栋ID
+                //       && array.liveareaids.indexOf(flat.liveAreaId)==-1 
+                //       && array.flatids.indexOf(flat.flatId)==-1){
+                //     array.flatids.push(flat.flatId);
+                // }
+                //  if(flat.checkedAll){ //选择了全部楼栋，则记录该生活区ID
+                     
+                //     // alert('1');
+                //     // if(array.campusids.indexOf(flat.campusId)==-1
+                //     // && array.liveareaids.indexOf(flat.liveAreaId)==-1){
+                //     //     array.liveareaids.push(flat.liveAreaId);
+                //     //     array.liveareaids.push(flat.liveAreaId);
+                //     // }
+                // }else{ //记录该楼栋ID
+                //     // alert('2');
+                //     // flat.flatList.forEach(function (data, index, array) {
+                //     //     if(array.campusids.indexOf(flat.campusId)==-1
+                //     //       && array.liveareaids.indexOf(flat.liveAreaId)==-1 
+                //     //       && array.flatids.indexOf(flat.flatId)==-1){
+                //     //         array.flatids.push(flat.flatId);
+                //     //     }
+                //     // })
+                // }
+            })
+            
+            // return array.flatids = arr;
+            // console.log(array);
+             array.flatids[0] = arr.join(",");
+ 
+             return array;
+            
+        },
+
+        flatCheckAll : function(flat){
+            var names = [];
+            flat.flatList.forEach(function (data, index, array) {
+                data.checked = flat.checkedAll;
+                if(flat.checkedAll){
+                    names[names.length] = data.title;
                 }
             })
-            return array;
+            if(names.length>2){
+                flat.text = names[0]+","+names[1]+"…";
+            }else if(names.length==2){
+                flat.text = names[0]+","+names[1];
+            }else if(names.length==1){
+                flat.text = names[0];
+            }else{
+                flat.text = null;
+            }
+        },
+        flatCheckEvent : function(flat){ 
+            var names = [];
+            flat.flatList.forEach(function (data, index, array) { 
+                if(data.checked){
+                    names[names.length] = data.title;
+
+                }else if(flat.checkedAll){
+                    flat.checkedAll = false;
+                }
+                
+            })
+            if(names.length==flat.flatList.length){
+                flat.checkedAll = true;
+            }
+            if(names.length>2){
+                flat.text = names[0]+","+names[1]+"…";
+            }else if(names.length==2){
+                flat.text = names[0]+","+names[1];
+            }else if(names.length==1){
+                flat.text = names[0];
+            }else{
+                flat.text = null;
+            }
         }
     }
+    
+
+    
+
+    $scope.adddataInit = function (user) {
+        $scope.form.status= user.adminId ? 1 : 0;
+        $scope.form.username= user.userName || '';
+        $scope.form.password= '';
+        $scope.form.password1= '';
+        $scope.form.useraccount=user.userAccount || '';
+        $scope.form.phone=user.phone || '';
+        $scope.form.jobnumber=user.jobNumber || '';
+        $scope.form.roleid= '' + (user.roleId || '');
+        $scope.form.flats = []
+        if(user.flatIds && user.flatIds.length>0){
+            user.flatIds.forEach(function (flat) {
+                var item = {
+                    flatId:flat.flatId,
+                    checkedAllFlat: false,  //是否全选
+                    showFlatMenu: false     //是否显示班级下拉
+                }
+                $scope.selecter.flatSelecter(item);
+                $scope.form.flats.push(item);
+            })
+        }else{
+            $scope.form.addFlat();
+        }
+        $scope.form.adminid=user.adminId || '';
+    }
+
     $scope.dataInit = function (user) {
         $scope.form.status= user.adminId ? 1 : 0;
         $scope.form.username= user.userName || '';
@@ -77,7 +232,9 @@ angular.module('flatpcApp')
         if(user.flatIds && user.flatIds.length>0){
             user.flatIds.forEach(function (flat) {
                 var item = {
-                    flatId:flat.flatId
+                    flatId:flat.flatId,
+                    checkedAllFlat: false,  //是否全选
+                    showFlatMenu: false     //是否显示班级下拉
                 }
                 $scope.selecter.flatSelecter(item);
                 $scope.form.flats.push(item);
@@ -86,6 +243,32 @@ angular.module('flatpcApp')
             $scope.form.addFlat();
         }
         $scope.form.adminid=user.adminId || '';
+
+
+        FlatService.getAdminFlatlist({
+            adminid:$scope.form.adminid,
+            schoolcode:AppConfig.schoolCode
+        }).success(function (data) {
+            $rootScope.loading = false;
+            if(data.code == 0){
+                console.log(data);
+                for(var i = 0; i < data.data.cmpusList.length; i++){
+                    var info =  data.data.cmpusList[i];
+                    for(var j = 0; j < info.liveAreaList.length; j++){
+                        $scope.form.addFlat(info.campusId, info.liveAreaList[j].liveAreaId, info.liveAreaList[j].flatList);
+                    }
+                }
+                $(".clearfix:eq(0)").hide();
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+        })
+
+
+
     }
     //二级连选的select
     $scope.selecter = {
@@ -168,7 +351,7 @@ angular.module('flatpcApp')
             campusid: arrayIds.campusids.length>0 ? arrayIds.campusids.toString() : null,
             areaid: arrayIds.liveareaids.length>0 ? arrayIds.liveareaids.toString() : null,
             flatids: arrayIds.flatids.length>0 ? arrayIds.flatids.toString() : null,
-            roleid:$scope.form.roleid
+            roleid:$scope.form.roleid,
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){
@@ -185,6 +368,7 @@ angular.module('flatpcApp')
     }
     $scope.editSave = function (fun) {
         var arrayIds = $scope.form.getFlat();
+        console.log(arrayIds)
         if($scope.form.username.length < 1 || $scope.form.jobnumber.length < 1 || $scope.form.phone.length < 1 || $scope.form.roleid.length < 1 || $scope.form.useraccount.length < 1)return;
         if(arrayIds.campusids.length < 1 && arrayIds.liveareaids.length < 1 && arrayIds.flatids.length < 1){
             swal("提示", "请填写楼栋信息", "error"); 
@@ -199,7 +383,7 @@ angular.module('flatpcApp')
             flatids: arrayIds.flatids.length>0 ? arrayIds.flatids.toString() : null,
             phone:$scope.form.phone,
             jobnumber:$scope.form.jobnumber,
-            roleid:$scope.form.roleid
+            roleid:$scope.form.roleid,
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){

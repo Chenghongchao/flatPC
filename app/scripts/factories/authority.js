@@ -235,6 +235,11 @@ angular.module('flatpcApp')
                     return ['flat','safetyCheck','safeCheck'];
                 else
                     return null;
+            case 'singleCheck':
+                if(menuCheck(461))
+                    return ['flat','safetyCheck','singleCheck'];
+                else
+                    return null;
              case 'checkResult':
                 if(menuCheck(444))
                     return ['flat','safetyCheck','checkResult'];
@@ -492,6 +497,16 @@ angular.module('flatpcApp')
             case 'latego':
                 if(menuCheck(395))
                     return ['flat','check','latego'];
+                else
+                    return null;
+            case 'lategoCounselor':
+                if(menuCheck(552))
+                    return ['flat','check','lategoCounselor'];
+                else
+                    return null;
+            case 'lateCounselor':
+                if(menuCheck(553))
+                    return ['flat','check','lateCounselor'];
                 else
                     return null;
             case 'logs':

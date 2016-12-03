@@ -156,24 +156,9 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     };
-    //导入数据
-    var importScoresData = function(param){
-        param.type = param.type || 0;
-        var url = "";
-        switch (param.type) {
-            case 0:
-                url = AppConfig.WEB_ROOT + 'evaluation/weekexport/import_list/';
-                break;
-            case 1:
-                url = AppConfig.WEB_ROOT + 'evaluation/dayexport/import_list/';
-                break;
-            case 2:
-                url = AppConfig.WEB_ROOT + 'evaluation/monthexport/import_list/';
-                break;
-            case 3:
-                url = AppConfig.WEB_ROOT + 'evaluation/checkexport/import_list/';
-                break;
-        }
+    //导入数据(周)
+    var importScoresWeek = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/weekexport/import_list/';
         return $http({
             url:url,
             method:"POST",
@@ -185,6 +170,49 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });
     }
+    //导入数据(日)
+    var importScoresDay = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/dayexport/import_list/';
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': undefined
+            },
+            data:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+    //导入数据(月)
+    var importScoresMonth = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/monthexport/import_list/';
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': undefined
+            },
+            data:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+    //导入数据(抽查)
+    var importScoresCheck = function(param){
+        var url = AppConfig.WEB_ROOT + 'evaluation/checkexport/import_list/';
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': undefined
+            },
+            data:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
+
     //下载错误数据
     var downloadImport = function(param){
         param.type = param.type || 0;
@@ -378,10 +406,11 @@ angular.module('flatpcApp')
         });//.get(url,param);
     };
     var setBedGrade = function (param,mold) {
+        debugger;
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
         param.adminid = param.adminid || AppConfig.adminid;
-        mold = mold || param.type || 0;
+        mold = mold || param.mold || 0;
         var url = "";
         switch (mold) {
             case 0:
@@ -713,10 +742,6 @@ angular.module('flatpcApp')
         });
     };
     
-
-
-
-
     var getSettingList = function(param){
         param = param || {type:0};
         var url = AppConfig.WEB_ROOT + 'evaluation/scsetups/get_list/?'
@@ -1012,9 +1037,14 @@ angular.module('flatpcApp')
         copyTable:copyTable,
         allQuickScores:allQuickScores,
         downloadSampleTable:downloadSampleTable,
-        importScoresData:importScoresData,
+        // importScoresData:importScoresData,
         getImport:getImport,
         downloadImport:downloadImport,
-        downloadImportfile:downloadImportfile
+        downloadImportfile:downloadImportfile,
+        importScoresWeek:importScoresWeek,
+        importScoresDay:importScoresDay,
+        importScoresMonth:importScoresMonth,
+        importScoresCheck:importScoresCheck
+
     }
 }]);

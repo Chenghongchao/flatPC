@@ -229,6 +229,13 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
+    var getAdminFlatlist = function(param){
+        var url = AppConfig.WEB_ROOT + 'management/flatadmin/get_admin_flat_list/?adminid=' + param.adminid
+        + '&schoolcode='+ AppConfig.schoolCode;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
     return {
         getList:getList,
         getFlat:getFlat,
@@ -248,6 +255,7 @@ angular.module('flatpcApp')
         getManagerList:getManagerList,
         addManager:addManager,
         editManager:editManager,
-        delManager:delManager
+        delManager:delManager,
+        getAdminFlatlist:getAdminFlatlist
     }
 }]);

@@ -22,7 +22,7 @@ angular
     //   
       //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
 
-      WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
+     WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
       //WEB_ROOT_DOWNLOAD:'http://test.houqinbao.com/gyxt_api/',
       
     //WEB_ROOT:'http://192.168.2.116:8080/Geese_Apartment/',
@@ -31,7 +31,7 @@ angular
 
         // WEB_ROOT:'http://114.55.17.193/Geese_Apartment/',
     // WEB_ROOT:'http://127.0.0.1:8080/Geese_Apartment/',
-    //   WEB_ROOT:'http://ap.houqinbao.com/Geese_Apartment/',
+     //WEB_ROOT:'http://ap.houqinbao.com/Geese_Apartment/',
     WEB_ROOT_MESSAGE:'http://120.55.84.193/Geese_Quality_Supervision/',
     FRAME:'http://code.houqinbao.com:3338/Apartment/',
     //FRAME:'http://192.168.2.138/Apartment/',
@@ -707,6 +707,23 @@ angular
             "": {
                 templateUrl: 'views/safety/safeCheck.html',
                 controller: 'safeCheckCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('singleCheck', {
+        url: "/singleCheck",
+        views: {
+            "": {
+                templateUrl: 'views/safety/singleCheck.html',
+                controller: 'singleCheckCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",
@@ -1572,6 +1589,41 @@ angular
             }
         }
     })
+    .state('lategoCounselor', {
+        url: "/lategoCounselor",
+        views: {
+            "": {
+                templateUrl: 'views/checkIn/lategoCounselor.html',
+                controller: 'lategoCounselorCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('lateCounselor', {
+        url: "/lateCounselor",
+        views: {
+            "": {
+                templateUrl: 'views/checkIn/lateCounselor.html',
+                controller: 'lateCounselorCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+
     .state('repdc', {
         url: "/repdc",
         views: {

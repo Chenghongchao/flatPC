@@ -266,7 +266,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     semesterid:$rootScope.treeTerm[this.yearIndex].semesterList[this.termIndex].semesterId,
                     currentweek:this.week,
                     tobed:this.tobed,
-                    type:0
+                    mold:0
                 }).success(function (data) {
                     $rootScope.loading = false;
                     if(data.code == 0){
@@ -427,7 +427,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         roomid:that.item.roomId,
                         semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
                         currentweek:$scope.media.week,
-                        type:0
+                        mold:0
                     }).success(function (data) {
                         $rootScope.loading = false;
                         
@@ -749,13 +749,17 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 else if(that.rule)that.ruleSave(fun);
                 return;
             }
-            // //console.log(this.room);
             this.bed.forEach(function (item,i) {
                 var list = item.itemList;
-                // //console.log(list);
-                for(var j = 0;j < list.length; j++){
-                    grades += '{"itemid":' + list[j].itemId + ',"studentkey":"' + item.studentKey +  '","bedid":"' + item.bedId + '","score":' + list[j].score +'},';
+
+                if(that.bedGradeType == 0){
+                    for(var j = 0;j < list.length; j++){
+                        grades += '{"itemid":' + list[j].itemId + ',"studentkey":"' + item.studentKey +  '","bedid":"' + item.bedId + '","score":' + list[j].score +'},';
+                    }
+                }else{
+                    grades += '{"studentkey":"' + item.studentKey +  '","bedid":"' + item.bedId + '","score":' + item.totalScore +'},';
                 }
+
             })
             if(grades.length > 2)
                 grades = grades.substring(0,grades.length-1) + ']';
@@ -1367,6 +1371,18 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         uploadExcel = files[0];
         $scope.$digest();
     };
+    var uploadExcel = null;
+    $scope.uploadFile = function(event){
+        var files = event.target.files;
+        ////console.log(files);
+        if(files[0].name.split(".").pop() != "xls" && files[0].name.split(".").pop() != "xlsx"){
+            swal('提示', '文件格式不正确！请上传*.xls或*.xlsx文件', 'error'); 
+            return false;
+        }//console.log(files[0].name);
+        $scope.importFileName = files[0].name;
+        uploadExcel = files[0];
+        $scope.$digest();
+    };
     //数据导入保存
     $scope.subImport = function(fun){
         if(!uploadExcel)return;
@@ -1383,7 +1399,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         fdata.append('adminid',AppConfig.adminId);
         // console.log(uploadExcel);
         $rootScope.loading = true;
-        return GradeService.importScoresData(fdata,$scope.type).success(function(data){
+        return GradeService.importScoresWeek(fdata,$scope.type).success(function(data){
             //console.log(data);
             if(data.code == 0){
                 swal("提示","上传成功！", "success");

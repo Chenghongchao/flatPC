@@ -128,6 +128,13 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "error"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
+    var getAdminclasslist = function(param){
+        var url = AppConfig.WEB_ROOT + 'management/instructor/get_adminclass_list/?adminid=' + param.adminid
+        + '&schoolcode='+ AppConfig.schoolCode;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "error"); 
+        });
+    }
     var editManager = function(param){
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
@@ -171,6 +178,7 @@ angular.module('flatpcApp')
         getManagerList:getManagerList,
         addManager:addManager,
         editManager:editManager,
-        delManager:delManager
+        delManager:delManager,
+        getAdminclasslist:getAdminclasslist
     }
 }]);

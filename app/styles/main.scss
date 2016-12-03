@@ -406,3 +406,34 @@ div.imgError::before{
   .daterangepicker .calendar.left {
     clear: none !important; } }
 //日期选择控件 2016.09.23 结束
+
+
+//账号管理-辅导员-新增账号下拉框
+.dropdownmenuClass{ 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    float: left;
+    min-width: 160px;
+    padding: 5px 8px;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+.claBtn{
+  height: 40px;
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+  border-radius: 4px;
+
+}

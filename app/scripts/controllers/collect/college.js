@@ -243,7 +243,7 @@ angular.module('flatpcApp')
             $scope.show(1,$rootScope.treeCollege[0].collegeList[0]);
         $rootScope.loading = false;
     }
-        
+    refresh();    
     function refresh(){
         $rootScope.loading = true;
         return CollegeService.getList(AppConfig.schoolCode).success(function(data){
