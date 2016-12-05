@@ -37,7 +37,7 @@ angular.module('flatpcApp')
     //         refresh();
     //     }
     //     else
-    //         swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+    //         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
     // });
     $scope.show = function (type,item,admin) {
         // if(!item.adminId)return;
@@ -81,11 +81,11 @@ angular.module('flatpcApp')
                     return;
                 }
                 if($scope.media.password!=$scope.media.password1){
-                    swal("提示","两次密码不一致！", "error"); 
+                    swal("提示","两次密码不一致！", "warning"); 
                     return;
                 }
                 if($scope.media.universityid.length>5){
-                    swal("提示","学校编码不能大于5", "error"); 
+                    swal("提示","学校编码不能大于5", "warning"); 
                     return;
                 }
                 $rootScope.loading = true;
@@ -107,11 +107,11 @@ angular.module('flatpcApp')
                         $scope.media.adminid = data.data.adminId;
                         refresh();
                     }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     $rootScope.loading = false;
                 });
             case 1:
@@ -127,11 +127,11 @@ angular.module('flatpcApp')
                         $scope.media.admintypeid = data.data.adminTypeId;
                         refresh();
                     }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     $rootScope.loading = false;
                 });
             
@@ -148,7 +148,7 @@ angular.module('flatpcApp')
                     return;
                 }
                 if($scope.media.universityid.length>5){
-                    swal("提示","学校编码不能大于5", "error"); 
+                    swal("提示","学校编码不能大于5", "warning"); 
                     return;
                 }
                 
@@ -168,11 +168,11 @@ angular.module('flatpcApp')
                         swal("提示"," 修改成功！", "success"); 
                         refresh();
                     }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     $rootScope.loading = false;
                 });
             case 1:
@@ -192,11 +192,11 @@ angular.module('flatpcApp')
                         swal("提示"," 修改成功！", "success"); 
                         refresh();
                     }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     $rootScope.loading = false;
                 });
         }
@@ -226,11 +226,11 @@ angular.module('flatpcApp')
                             $scope.media.status = 1;
                             refresh();
                         }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                         else
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         $rootScope.loading = false;
                     });
                 case 1:
@@ -242,11 +242,11 @@ angular.module('flatpcApp')
                             $scope.media.status = 1;
                             refresh();
                         }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                         else
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         $rootScope.loading = false;
                     });
             }
@@ -266,11 +266,11 @@ angular.module('flatpcApp')
                 }
             });
         }else if(data.code == 4037){
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 location.href="#login";$rootScope.loading = false;
             }
         else
-            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
     });
     
     function refresh(){
@@ -279,11 +279,11 @@ angular.module('flatpcApp')
             if(data.code == 0){
                 $scope.admins = data.list;
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         });
     }
@@ -324,11 +324,11 @@ angular.module('flatpcApp')
                 $scope.roleMedia.recordCount = data.data?data.data.recordCount:0;
                 $scope.roleMedia.pageCount = data.data?data.data.pageCount:0;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     
@@ -374,10 +374,10 @@ angular.module('flatpcApp')
                 if(fun)fun();
                 roleRefresh();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             }
         })
     }
@@ -396,10 +396,10 @@ angular.module('flatpcApp')
                 if(fun)fun();
                 roleRefresh();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             }
         })
     }
@@ -426,10 +426,10 @@ angular.module('flatpcApp')
                     if(fun)fun();
                     roleRefresh();
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             })
                 
@@ -447,11 +447,11 @@ angular.module('flatpcApp')
                     $rootScope.treeMenus = data.list;
                     $scope.menuInit(item);
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             });
         }else{
             // console.log(item.type);
@@ -534,11 +534,11 @@ angular.module('flatpcApp')
                      AppConfig.nodeIds = ',' + sessionStorage.nodeIds + ',';
                  }
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     function compute(list,fun) {

@@ -3,7 +3,7 @@ angular.module('flatpcApp')
     var getList = function(param){
         var url = AppConfig.WEB_ROOT + 'accountmanage/admins/get_list/?token='+AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addAdmin = function(param){
@@ -17,7 +17,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editAdmin = function(param){
@@ -31,7 +31,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delAdmin = function(param){
@@ -45,7 +45,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var addAdminGroup = function(param){
@@ -59,7 +59,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editAdminGroup  = function(param){
@@ -73,7 +73,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delAdminGroup  = function(param){
@@ -87,13 +87,13 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getDictionary = function () {
         var url = AppConfig.WEB_ROOT + 'public/dictionary/get_list/?schoolcode='+AppConfig.schoolCode;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     return {

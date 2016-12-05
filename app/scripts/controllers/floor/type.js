@@ -36,13 +36,13 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
         var files = event.target.files;
         var s = files[0].name.split(".").pop();
         if(s != "jpg" && s != "png" && s != "jpeg"){
-            swal('提示', '文件格式不正确！请上传*.jpg或*.png文件', 'error'); 
+            swal('提示', '文件格式不正确！请上传*.jpg或*.png文件', 'warning'); 
             return false;
         }
         var form = document.createElement('form');
         form.enctype = 'multipart/form-data';
         var fdata = new FormData(form);
-        if (!fdata) { swal('提示', '你的浏览器不支持文件上传！', 'error'); return false; };
+        if (!fdata) { swal('提示', '你的浏览器不支持文件上传！', 'warning'); return false; };
         fdata.append('img', files[0]);
         
         fdata.append('token', AppConfig.token);
@@ -54,11 +54,11 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
                 $scope.roomType.roomPic = data.data.serverPath;
                 $scope.roomType.fileid = data.data.fileId;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     $scope.addSave = function(){
@@ -81,11 +81,11 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
                 swal("提示", "添加成功！", "success"); 
                 refresh();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
         });
     }
@@ -109,11 +109,11 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
                 swal("提示", "修改成功！", "success");
                 refresh();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     $scope.delete = function(){
@@ -138,11 +138,11 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
                     swal("提示", "删除成功！", "success");
                     refresh();
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             });
         });
         
@@ -162,10 +162,10 @@ function($scope,AppConfig,$rootScope,RoomService,PublicService) {
             if(data.code == 0)
                 $rootScope.treeType = data.data;
             else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         });
     }

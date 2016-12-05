@@ -3,7 +3,7 @@ angular.module('flatpcApp')
     var getList = function(schoolcode){
         var url = AppConfig.WEB_ROOT + 'stmessage/collegeclass/get_list/?schoolcode='+schoolcode+'&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getGrade = function(){
@@ -24,7 +24,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editCollege = function(param){
@@ -37,7 +37,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delCollege = function(param){
@@ -50,7 +50,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var addClass = function(param){
@@ -63,7 +63,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editClass = function(param){
@@ -76,7 +76,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delClass = function(param){
@@ -89,13 +89,13 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getListByGrade = function(schoolcode){
         var url = AppConfig.WEB_ROOT + 'stmessage/collegeclass/get_list_class/?schoolcode='+schoolcode+'&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getManagerList = function(param){
@@ -110,7 +110,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addManager = function(param){
@@ -125,14 +125,14 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
     var getAdminclasslist = function(param){
         var url = AppConfig.WEB_ROOT + 'management/instructor/get_adminclass_list/?adminid=' + param.adminid
         + '&schoolcode='+ AppConfig.schoolCode;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var editManager = function(param){
@@ -147,7 +147,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
     var delManager = function(param){
@@ -162,7 +162,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
     return {

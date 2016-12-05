@@ -645,90 +645,94 @@
         <ul class="menu-list">
             <li ng-if="menuCheck(533)">
                 <a href="#statisticsLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="line-height:42px; background-color:#38adff; font-size:30px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="line-height:42px; background-color:#02cf97; font-size:30px"></i>
                     出入统计总览<br>(楼栋)
                 </a>
             </li>
             <li ng-if="menuCheck(535)">
                 <a href="#statisticsXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#02cf97;font-size:25px"></i>
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#fc7257;font-size:25px"></i>
                     出入统计总览(学院班级)
                 </a>
             </li>
             <li ng-if="menuCheck(536)">
                 <a href="#timeSd">
-                    <i class="ALiconfont icon-kschaxun" style="background-color:#fc7257;font-size:25px"></i>
+                    <i class="ALiconfont icon-kschaxun" style="background-color:#1296db;font-size:25px"></i>
                     出入时段统计
                 </a>
             </li>
             <li ng-if="menuCheck(537)">
                 <a href="#timeGr">
-                    <i class="ALiconfont icon-yuyueshouli" style="background-color:#1296db;font-size:25px"></i>
+                    <i class="ALiconfont icon-yuyueshouli" style="background-color:#ff9c00;font-size:25px"></i>
                     个人在寝时间统计
                 </a>
             </li>
         </ul>
     </li>
-    <li ng-if="menuCheck(538)" ng-show="sysMenu[1]=='entry'">
+    <li ng-if="menuCheck(538)" ng-show="sysMenu[1]=='entry'" style="max-width:350px;">
         <div class="menu-title">异常统计</div>
         <ul class="menu-list">
             <li ng-if="menuCheck(539)">
                 <a href="#unusualLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="line-height:42px; background-color:#38adff; font-size:30px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="line-height:42px; background-color:#9c59b8; font-size:30px"></i>
                     异常总览<br>(楼栋)
-                </a>
-            </li>
-            <li ng-if="menuCheck(540)">
-                <a href="#unusualXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#38adff;font-size:25px"></i>
-                    异常总览(学院班级)
                 </a>
             </li>
             <li ng-if="menuCheck(541)">
                 <a href="#nobackLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#ff9c00;font-size:25px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#38adff;font-size:25px"></i>
                     未归统计(楼栋)
-                </a>
-            </li>
-            <li ng-if="menuCheck(542)">
-                <a href="#nobackXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#ff9c00;font-size:25px"></i>
-                    未归统计(学院班级)
                 </a>
             </li>
             <li ng-if="menuCheck(543)">
                 <a href="#wanguiLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#9c59b8;font-size:25px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#fc7257;font-size:25px"></i>
                     晚归统计(楼栋)
-                </a>
-            </li>
-            <li ng-if="menuCheck(544)">
-                <a href="#wanguiXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#9c59b8;font-size:25px"></i>
-                    晚归统计(学院班级)
                 </a>
             </li>
             <li ng-if="menuCheck(545)">
                 <a href="#nocardLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#f4ea2a;font-size:25px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#02cf97;font-size:25px"></i>
                     未带卡出入统计(楼栋)
-                </a>
-            </li>
-            <li ng-if="menuCheck(546)">
-                <a href="#nocardXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#f4ea2a;font-size:25px"></i>
-                    未带卡出入统计(学院班级)
                 </a>
             </li>
             <li ng-if="menuCheck(547)">
                 <a href="#unusualentryLd">
-                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#fc7257;font-size:25px"></i>
+                    <i class="ALiconfont icon-xuexiaoshq" style="background-color:#ff9c00;font-size:25px"></i>
                     异常出入统计(楼栋)
                 </a>
             </li>
+            <li ng-if="menuCheck(540)">
+                <a href="#unusualXy">
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#9c59b8;font-size:25px"></i>
+                    异常总览(学院班级)
+                </a>
+            </li>
+
+            <li ng-if="menuCheck(542)">
+                <a href="#nobackXy">
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#38adff;font-size:25px"></i>
+                    未归统计(学院班级)
+                </a>
+            </li>
+
+            <li ng-if="menuCheck(544)">
+                <a href="#wanguiXy">
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#fc7257;font-size:25px"></i>
+                    晚归统计(学院班级)
+                </a>
+            </li>
+
+            <li ng-if="menuCheck(546)">
+                <a href="#nocardXy">
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#02cf97;font-size:25px"></i>
+                    未带卡出入统计(学院班级)
+                </a>
+            </li>
+
             <li ng-if="menuCheck(548)">
                 <a href="#unusualentryXy">
-                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#fc7257;font-size:25px"></i>
+                    <i class="ALiconfont icon-zoujinxueyuan" style="background-color:#ff9c00;font-size:25px"></i>
                     异常出入统计(学院班级)
                 </a>
             </li>

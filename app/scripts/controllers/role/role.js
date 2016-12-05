@@ -45,11 +45,11 @@ angular.module('flatpcApp')
                 $scope.media.recordCount = data.data?data.data.recordCount:0;
                 $scope.media.pageCount = data.data?data.data.pageCount:0;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     
@@ -105,12 +105,12 @@ angular.module('flatpcApp')
 						$('#roleAdd').removeClass('show');
 					});
             }else if($scope.role.title ==null&&data.code!= 4037){
-                    swal("提示","含有非法字符","error"); 
+                    swal("提示","含有非法字符","warning"); 
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             }
         })
     }
@@ -139,10 +139,10 @@ angular.module('flatpcApp')
 						$('#roleAdd').removeClass('show');
 					});
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             }
         })
     }
@@ -179,10 +179,10 @@ angular.module('flatpcApp')
 						$('#roleAdd').removeClass('show');
 					});
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             })
                 
@@ -198,11 +198,11 @@ angular.module('flatpcApp')
                     $rootScope.treeMenu = data.list;
                     $scope.menuInit(item);
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             });
         }else{
             
@@ -284,11 +284,11 @@ angular.module('flatpcApp')
                      AppConfig.nodeIds = ',' + sessionStorage.nodeIds + ',';
                  }
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     function compute(list,fun) {

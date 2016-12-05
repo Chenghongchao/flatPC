@@ -3,7 +3,7 @@ angular.module('flatpcApp')
     var getList = function(flatid){
         var url = AppConfig.WEB_ROOT + 'flatdata/rooms/get_rooms_list/?flatid=' + flatid + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addFloor = function(param){
@@ -17,7 +17,7 @@ angular.module('flatpcApp')
             params:param,
             isFour:isFour
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editFloor = function(param){
@@ -30,7 +30,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delFloor = function(param){
@@ -43,7 +43,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var addRoom = function(param){
@@ -56,7 +56,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editRoom = function(param){
@@ -69,7 +69,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delRoom = function(param){
@@ -82,7 +82,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var multiAdd = function(param){
@@ -96,13 +96,13 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getTypeList = function(){
         var url = AppConfig.WEB_ROOT + '/flatdata/types/get_type_list/?schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addType = function(param){
@@ -115,7 +115,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url);
     }
     var editType = function(param){
@@ -128,7 +128,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url);
     }
     var delType = function(param){
@@ -141,28 +141,28 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url);
     }
     var getListByName = function(param){
         var url = AppConfig.WEB_ROOT + 'flatdata/rooms/get_empty_beds/?flatid=' + (param.flatid || "") 
         + '&token=' + (param.token || AppConfig.token) + '&roomname=' + (param.roomname || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getStudentByRoomId = function(param){
         var url = AppConfig.WEB_ROOT + 'flatdata/rooms/get_room_people/?' 
         + 'token=' + (param.token || AppConfig.token) + '&roomid=' + (param.roomid || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getBedByRoomName = function (param) {
         var url = AppConfig.WEB_ROOT + 'flatdata/rooms/get_roomname_people/?' 
         + 'token=' + (param.token || AppConfig.token) + '&flatid=' + (param.flatid || "")+ '&roomname=' + (param.roomname || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     return {

@@ -244,11 +244,11 @@ angular.module('flatpcApp')
                         refresh();
                         if(fun && typeof fun == 'function') fun();
                     }else if(data.code == 4037){
-                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                     location.href="#login";$rootScope.loading = false;
                                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 })
             })
         }else if ($scope.form.display==0){
@@ -274,11 +274,11 @@ angular.module('flatpcApp')
                     refresh();
                     if(fun && typeof fun == 'function') fun();
                 }else if(data.code == 4037){
-                                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                 location.href="#login";$rootScope.loading = false;
                             }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         }else if($scope.form.display==2){
             flatids = "all",
@@ -303,11 +303,11 @@ angular.module('flatpcApp')
                     refresh();
                     if(fun && typeof fun == 'function') fun();
                 }else if(data.code == 4037){
-                                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                                 location.href="#login";$rootScope.loading = false;
                             }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         }
     }
@@ -334,11 +334,11 @@ angular.module('flatpcApp')
                 refresh();
                 if(fun && typeof fun == 'function') fun();
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     // $scope.delete = function (fun) {
@@ -363,11 +363,11 @@ angular.module('flatpcApp')
     //                 refresh();
     //                 if(fun && typeof fun == 'function') fun();
     //             }else if(data.code == 4037){
-    //                         swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+    //                         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
     //                         location.href="#login";$rootScope.loading = false;
     //                     }
     //             else
-    //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+    //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
     //         })
     //     });
     // }
@@ -434,18 +434,18 @@ angular.module('flatpcApp')
                         $rootScope.treeTerm = data.data;
                         getFlat();
                     }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 });
             }
         }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         }
     });
     
@@ -456,11 +456,11 @@ angular.module('flatpcApp')
                     $rootScope.treeFlat = data.data;
                     getRole();
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             });
         }
         else {
@@ -477,11 +477,11 @@ angular.module('flatpcApp')
                 $scope.roles = data.data.list;
                 refresh();
             }else if(data.code == 4037){
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 location.href="#login";
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     function refresh(n) {
@@ -493,11 +493,11 @@ angular.module('flatpcApp')
                 $scope.media.recordCount = data.list?data.list.recordCount:0;
                 $scope.media.pageCount = data.list?data.list.pageCount:0;
             }else if(data.code == 4037){
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 location.href="#login";$rootScope.loading = false;
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
             $rootScope.loading = false;
         })

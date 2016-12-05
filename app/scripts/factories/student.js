@@ -3,7 +3,7 @@ angular.module('flatpcApp')
     var getStudent = function(studentid){
         var url = AppConfig.WEB_ROOT + 'stmessage/tmessage/get_student_message/?student_key=' + studentid + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getList = function(param){
@@ -17,7 +17,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addStudent = function(param){
@@ -30,7 +30,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editStudent = function(param){
@@ -44,7 +44,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delStudent = function(param){
@@ -57,7 +57,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var importStudent = function(param){
@@ -70,7 +70,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.post(url,param,{ headers: { 'Content-Type': undefined }});
     }
     var downloadStudent = function(param){
@@ -82,14 +82,14 @@ angular.module('flatpcApp')
         + (param.collegeid?('&collegeid='+param.collegeid):'')
         + (param.classid?('&classid='+param.classid):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var downloadOriginal = function(param){
         var url = AppConfig.WEB_ROOT + 'stmessage/tmessage/sample_table/?'
         + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getImport = function(param){
@@ -104,7 +104,7 @@ angular.module('flatpcApp')
         var url = AppConfig.WEB_ROOT + 'stmessage/tmessage/export_error/?importid=' + param
         + "&token=" + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var uploadImg = function(param){
@@ -118,7 +118,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getListByName = function (param) {
@@ -126,7 +126,7 @@ angular.module('flatpcApp')
         + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
         + '&keyword=' + (param.keyword || "") + '&collegeid=' + (param.collegeid || "") + '&classid=' + (param.classid || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getListWithBed = function (param) {
@@ -134,7 +134,7 @@ angular.module('flatpcApp')
         + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
         + '&keyword=' + (param.keyword || "") + '&collegeid=' + (param.collegeid || "") + '&classid=' + (param.classid || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getListWithBedByFlat = function (param) {
@@ -142,7 +142,7 @@ angular.module('flatpcApp')
         + 'schoolcode='+ AppConfig.schoolCode + '&token=' + AppConfig.token
         + '&keyword=' + (param.keyword || "") + '&flatid=' + (param.flatid || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getListWithBedByClass = function (param) {
@@ -154,7 +154,7 @@ angular.module('flatpcApp')
         + (param.name?('&name='+param.name):'')+ (param.studentnumber?('&studentnumber='+param.studentnumber):'')
         + (param.collegeid?('&collegeid='+param.collegeid):'')+ (param.classid?('&classid='+param.classid):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var getCollegeclassByYear = function (param) {
@@ -162,7 +162,7 @@ angular.module('flatpcApp')
         + 'year='+ (param.year || "")
         +'&schoolcode='+(param.schoolCode || "");
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     return {

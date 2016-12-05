@@ -13,7 +13,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addVisit = function(param){
@@ -26,7 +26,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editVisit = function(param){
@@ -39,7 +39,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delVisit = function(param){
@@ -52,7 +52,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var dealVisit = function(param){
@@ -65,7 +65,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     
@@ -82,7 +82,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addKey = function(param){
@@ -95,7 +95,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editKey = function(param){
@@ -108,7 +108,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delKey = function(param){
@@ -121,7 +121,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var dealKey = function(param){
@@ -134,7 +134,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     
@@ -151,7 +151,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addLate = function(param){
@@ -164,7 +164,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editLate = function(param){
@@ -177,7 +177,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delLate = function(param){
@@ -190,7 +190,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     return {

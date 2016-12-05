@@ -85,11 +85,11 @@ function($scope,AppConfig,$rootScope,GradeService) {
                 AppConfig.wgphoto = $scope.media.wgphoto?0:1;
                 AppConfig.check = $scope.media.check?0:1;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         })
     }

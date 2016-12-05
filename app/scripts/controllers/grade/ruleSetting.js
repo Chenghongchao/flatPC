@@ -60,7 +60,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
                 $scope.media.status = 0;
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     $scope.editSave = function(){
@@ -78,7 +78,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
                 refresh();
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
         })
     }
@@ -106,7 +106,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
                         refresh();
                     }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 })
                 
         });
@@ -133,7 +133,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
                 refresh();
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         })
     }
@@ -149,7 +149,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
                 $rootScope.treeRule = data.data;
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
             
         });

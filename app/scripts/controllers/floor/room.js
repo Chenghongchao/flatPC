@@ -56,10 +56,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 $rootScope.treeFlat = data.data;
                 refresh();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error");
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning");
         });
     }
     else {
@@ -121,10 +121,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                         if(fun && typeof fun == 'function') fun();
                          refresh($scope.media.flatid);
                     }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error");
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning");
                         $rootScope.loading = false;
                     }
                 });
@@ -147,12 +147,12 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 RoomService.multiAdd(param).success(function(data){
                     $rootScope.loading = false;
                     if($scope.media.floor.typeid==null){
-                        swal("提示","请选择户型","error");
+                        swal("提示","请选择户型","warning");
                     }else
                      if($scope.media.flatid==null){
-                        swal("提示","请添加楼栋信息","error");
+                        swal("提示","请添加楼栋信息","warning");
                     }else if($scope.media.floor.floortype != $scope.sex && "混住" !=$scope.sex){
-                        swal("提示","与当前楼栋性别不符合","error"); 
+                        swal("提示","与当前楼栋性别不符合","warning"); 
                     }else if(data.code == 0){
                         //swal("提示", "添加成功！", "success");
 					swal({
@@ -169,11 +169,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
 						$('#floorAdd').removeClass('show');
 					});
                     }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                     else{
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     }
                 });
             }
@@ -197,7 +197,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             //     return false;
             }else 
             if( $scope.media.floor.floortype != $scope.sex ){
-                swal("提示","与当前楼栋性别不符合","error");
+                swal("提示","与当前楼栋性别不符合","warning");
                 return false;
             }
             $rootScope.loading = true;
@@ -219,10 +219,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             RoomService.editFloor(param).success(function(data){
                 $rootScope.loading = false;
                 // if($scope.media.typeid==null){
-                //     swal("提示","请选择户型","error");
+                //     swal("提示","请选择户型","warning");
                 // }else 
                 if($scope.media.flatid==null){
-                    swal("提示","请添加楼栋信息","error");
+                    swal("提示","请添加楼栋信息","warning");
                 }else if(data.code == 0){
                     //swal("提示", "修改成功！", "success");
                     swal({
@@ -241,11 +241,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
 
                          
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             });
         },
@@ -273,11 +273,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                          refresh($scope.media.flatid);
                        
                     }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                     else{
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     }
                 });
             });
@@ -328,7 +328,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             if($scope.sex == '混住'){
                 swal("提示", "添加成功！", "success");
             }else if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
-                swal("提示","与当前楼栋性别不符合","error");
+                swal("提示","与当前楼栋性别不符合","warning");
                 return false;
             }
             
@@ -358,26 +358,26 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 $rootScope.loading = false;
                 
                 if($scope.media.flatid==null){
-                         swal("提示","请添加楼栋信息","error");
+                         swal("提示","请添加楼栋信息","warning");
                 }else if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
-                     swal("提示","与当前楼栋性别不符合","error"); 
+                     swal("提示","与当前楼栋性别不符合","warning"); 
                 }else if(data.code == 0){
                     swal("提示", "添加成功！", "success");
                     if(fun && typeof fun == 'function') fun();
                          refresh($scope.media.flatid);
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             });
             
         },
         editSave:function (fun) {
              if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
-                swal("提示","与当前楼栋性别不符合","error");
+                swal("提示","与当前楼栋性别不符合","warning");
                 return false;
             }
             var param = {
@@ -400,9 +400,9 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             RoomService.editRoom(param).success(function(data){
                 $rootScope.loading = false;
                 if($scope.media.flatid==null){
-                         swal("提示","请添加楼栋信息","error");
+                         swal("提示","请添加楼栋信息","warning");
                 }else if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
-                     swal("提示","与当前楼栋性别不符合","error"); 
+                     swal("提示","与当前楼栋性别不符合","warning"); 
                 }else if(data.code == 0){
 
                     //swal("提示", "修改成功！", "success"); 
@@ -420,11 +420,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
 						$('#roomEdit').removeClass('show');
 					});
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             });
         },
@@ -451,11 +451,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                          if(fun && typeof fun == 'function') fun();
                          refresh($scope.media.flatid);
                     }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                     else{
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     }
                     
                 });
@@ -470,10 +470,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 if(data.code == 0)
                     $rootScope.treeType = data.data;
                 else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
                 $rootScope.loading = false;
             });
@@ -516,10 +516,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 });
                 $scope.flat = data.data;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }else{
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             }
             $rootScope.loading = false;
         })

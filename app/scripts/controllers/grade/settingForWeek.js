@@ -56,6 +56,7 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
         $scope.media.number = item.number || 0;
         $scope.media.fid = item.fid || 0;
         $scope.media.fullmark=item.fullMark || 0;
+        $scope.media.pointmark=item.pointmark || 0;
         $scope.media.standardtype=(item.standardType || (category?category.standardType || 0:0))  + '';
         $scope.media.listorder=item.listOrder || 1;
         $scope.media.title=item.title || '';
@@ -143,11 +144,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                 $scope.media.tableid = data.data.tableId || 0;
                 $scope.media.itemid = data.data.itemId || 0;
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     $scope.editSave = function(){
@@ -203,11 +204,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                 swal("提示", "修改成功！", "success"); 
                 refresh();
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
         })
     }
@@ -243,11 +244,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                         $scope.media.status=1;
                         refresh();
                     }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 })
                 
         });
@@ -287,11 +288,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                         if(fun) fun();
                         refresh();
                     }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                     else
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 });
         });
     },
@@ -309,11 +310,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                 $scope.week = data.data;
                 $scope.getFlatTypeList();
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
             
         });
@@ -326,11 +327,11 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
                 $scope.media.flatTypeList = data.data;
                 $scope.refreshCheckedFlatType();
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         });
     }

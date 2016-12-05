@@ -3,7 +3,7 @@ angular.module('flatpcApp')
     var getList = function(){
         var url = AppConfig.WEB_ROOT + 'evaluation/llsetups/get_type_list/?schoolcode='+AppConfig.schoolCode+'&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addRule = function(param){
@@ -16,7 +16,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editRule = function(param){
@@ -29,7 +29,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delRule = function(param){
@@ -42,14 +42,14 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getListByRoom = function (param) {
         var url = AppConfig.WEB_ROOT + 'evaluation/lllegal/get_special/?schoolcode='+AppConfig.schoolCode+'&token=' + AppConfig.token
         + '&specialid=' + (param.specialid||'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var checkByRoom = function(param){
@@ -62,7 +62,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var getListByFlat = function (param) {
@@ -80,7 +80,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var addCheck = function(param){
@@ -93,7 +93,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var editCheck = function(param){
@@ -106,7 +106,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var delCheck = function(param){
@@ -119,7 +119,7 @@ angular.module('flatpcApp')
             },
             params:param 
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     var download = function (param) {
@@ -167,7 +167,7 @@ angular.module('flatpcApp')
                 break;
         }
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var getStatisticsData = function(param){
@@ -181,7 +181,7 @@ angular.module('flatpcApp')
         + (param.campusid?('&campusid='+param.campusid):'')
         + (param.roomid?('&roomid='+param.roomid):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var downloadStatistics = function(param){

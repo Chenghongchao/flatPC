@@ -78,7 +78,7 @@ angular
             });
             $rootScope.$on('$stateChangeError', 
                 function(event, toState, toParams, fromState, fromParams, error){ 
-                    sweetAlert("页面加载出错", "错误信息：" + error.status, "error");
+                    sweetAlert("页面加载出错", "错误信息：" + error.status, "warning");
             });
 			
 		}

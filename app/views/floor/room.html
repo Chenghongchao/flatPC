@@ -112,7 +112,7 @@
                                     <!--<td><input type="text" ng-model="media.floor.suite" ng-disabled="(media.floor.type==2&&!menuCheck(152))" /></td>-->
                                     <td>
                                         <input type="text" ng-model="media.floor.suite"  ng-disabled="(media.floor.type==2&&!menuCheck(152))" />
-                                        <label><input type="checkbox" ng-model="media.floor.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间显示为101-1</label>
+                                        <label><input type="checkbox" ng-model="media.floor.line" ng-true-value="1" ng-false-value="0"/>勾选后套房房间中间加"-"</label>
                                     </td>
                                 </tr>
                                 <tr ng-show="media.floor.type == 2">
@@ -134,13 +134,23 @@
                                         <input type="text" ng-disabled="(media.floor.type==0&&!menuCheck(145)) || (media.floor.type==1&&!menuCheck(146))" ng-model="media.floor.listorder" />
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr ng-hide="media.floor.type == 2">
                                     <td class="require">户型</td>
                                     <td>
                                         <select id="hx" ng-model="media.floor.typeid" ng-disabled="(media.floor.type==0&&!menuCheck(145)) || (media.floor.type==1&&!menuCheck(146))||(media.floor.type==2&&!menuCheck(152))">
                                             
                                             <option ng-show="typeId==0" value="{{type.typeId}}">多种户型</option>
                                             <!--<option value="">多种户型</option>-->
+                                            <option ng-repeat="type in treeType" ng-selected="media.floor.typeid == type.typeId" value="{{type.typeId}}">{{type.title}}</option>
+                                        </select>
+                                        <span style="color:red">{{media.msg}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="media.floor.type == 2">
+                                    <td class="require">户型</td>
+                                    <td>
+                                        <select id="hx" ng-model="media.floor.typeid" ng-disabled="(media.floor.type==0&&!menuCheck(145)) || (media.floor.type==1&&!menuCheck(146))||(media.floor.type==2&&!menuCheck(152))">
+                                            <option value="">请选择户型</option>
                                             <option ng-repeat="type in treeType" ng-selected="media.floor.typeid == type.typeId" value="{{type.typeId}}">{{type.title}}</option>
                                         </select>
                                         <span style="color:red">{{media.msg}}</span>

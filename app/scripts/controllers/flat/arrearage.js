@@ -108,11 +108,11 @@ function($scope,AppConfig,$rootScope,FlatService,$filter,GraduationService) {
                     refresh();
                     if(fun && typeof fun == 'function')fun();
                 }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
                 $rootScope.loading = false;
             });
@@ -141,11 +141,11 @@ function($scope,AppConfig,$rootScope,FlatService,$filter,GraduationService) {
                     $scope.media.recordCount = data.data.recordCount;
                     $scope.media.pageCount = data.data.pageCount;
                 }else if(data.code == 4037){
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         location.href="#login";$rootScope.loading = false;
                     }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
                 //console.log(data.data);
                 $rootScope.loading = false;
@@ -157,11 +157,11 @@ function($scope,AppConfig,$rootScope,FlatService,$filter,GraduationService) {
                     $scope.media.recordCount = data.data.recordCount;
                     $scope.media.pageCount = data.data.pageCount;
                 }else if(data.code == 4037){
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         location.href="#login";$rootScope.loading = false;
                     }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
                 //console.log(data.data);
                 $rootScope.loading = false;
@@ -206,11 +206,11 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
             if(data.code == 0){
                 location.href=data.data.fileUrl;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         })
     }
@@ -222,11 +222,11 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
             if(data.code == 0){
                 location.href=data.data.fileUrl;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         })
     }
@@ -237,11 +237,11 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
             if(data.code == 0){
                 location.href=data.data.fileUrl;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         }) 
     }
@@ -250,7 +250,7 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
         var files = event.target.files;
         ////console.log(files);
         if(files[0].name.split(".").pop() != "xls" && files[0].name.split(".").pop() != "xlsx"){
-            swal('提示', '文件格式不正确！请上传*.xls或*.xlsx文件', 'error'); 
+            swal('提示', '文件格式不正确！请上传*.xls或*.xlsx文件', 'warning'); 
             return false;
         }//console.log(files[0].name);
         $scope.importFileName = files[0].name;
@@ -262,7 +262,7 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
         var form = document.createElement('form');
         form.enctype = 'multipart/form-data';
         var fdata = new FormData(form);
-        if (!fdata) { swal('提示', '你的浏览器不支持文件上传！', 'error'); return false; };
+        if (!fdata) { swal('提示', '你的浏览器不支持文件上传！', 'warning'); return false; };
         fdata.append('file', uploadExcel);
         fdata.append('title',$scope.importName);
         fdata.append('token',AppConfig.token);
@@ -279,16 +279,16 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
                     // swal({   
                     //     title: "提示",   
                     //     text: "'错误代码：'+ data.code + '，' + data.msg",   
-                    //     type: "error",  
+                    //     type: "warning",  
                     //     closeOnConfirm: true 
                     //     }, function(){   
                     //         $('#multiAdd').removeClass('show');
                     // });
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
             refresh();
         })
@@ -309,11 +309,11 @@ function($scope,AppConfig,$rootScope,GraduationService,CollegeService,$filter) {
                 $scope.media.recordCount = data.data.recordCount;
                 $scope.media.pageCount = data.data.pageCount;
             }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false; 
                 }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
             //console.log(data.data);
             $rootScope.loading = false;

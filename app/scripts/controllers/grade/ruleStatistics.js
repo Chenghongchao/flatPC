@@ -73,11 +73,11 @@ angular.module('flatpcApp')
                         $scope.flat = [];
                     }
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         }else{
             RuleService.getStatisticsData($scope.media).success(function (data) {
@@ -85,11 +85,11 @@ angular.module('flatpcApp')
                     $scope.media.data = data.list;
                     chartInit();
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         }
         
@@ -162,11 +162,11 @@ angular.module('flatpcApp')
             if(data.code == 0){
                 $scope.show(0,data.data);
             }else if(data.code == 4037){
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 location.href="#login";$rootScope.loading = false;
             }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }else{
        $scope.show(0,$rootScope.treeFlat);
@@ -180,11 +180,11 @@ angular.module('flatpcApp')
             // if(data.code == 0){
             //     location.href = data.data.fileUrl;
             // }else if(data.code == 4037){
-            //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             //                 location.href="#login";$rootScope.loading = false;
             //             }
             // else
-            //     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+            //     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
     $scope.loadInfo = function (room) {
@@ -214,11 +214,11 @@ angular.module('flatpcApp')
                     $scope.roomChart.myChart.setOption($scope.roomChart.option); 
                 });
             }else if(data.code == 4037){
-                        swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         location.href="#login";$rootScope.loading = false;
                     }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
   }]);

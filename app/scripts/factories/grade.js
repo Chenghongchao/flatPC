@@ -30,7 +30,7 @@ angular.module('flatpcApp')
         }
         
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     //获取快速打分列表
@@ -63,7 +63,7 @@ angular.module('flatpcApp')
                 break;
         }
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }; 
     //保存快速打分成绩
@@ -93,7 +93,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     
@@ -153,7 +153,7 @@ angular.module('flatpcApp')
                 break;
             }
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     //导入数据(周)
@@ -167,7 +167,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     //导入数据(日)
@@ -181,7 +181,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     //导入数据(月)
@@ -195,7 +195,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     //导入数据(抽查)
@@ -209,7 +209,7 @@ angular.module('flatpcApp')
             },
             data:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
 
@@ -236,7 +236,7 @@ angular.module('flatpcApp')
                 break;
         }
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
     var downloadImportfile = function(param){
@@ -244,7 +244,7 @@ angular.module('flatpcApp')
         var url = AppConfig.WEB_ROOT + 'public/uploadfile/export_import/?importid=' + param
         + "&token=" + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     }
 
@@ -278,7 +278,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editGrade = function (param,mold) {
@@ -311,7 +311,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var getGrade = function (param) {
@@ -336,7 +336,7 @@ angular.module('flatpcApp')
         url = url + 'token=' + AppConfig.token
         + '&roomscoreid=' + param.roomscoreid;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var getGradeImgs = function (param) {
@@ -369,7 +369,7 @@ angular.module('flatpcApp')
         }
         
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var uploadImg = function (param,type) {
@@ -402,7 +402,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var setBedGrade = function (param,mold) {
@@ -436,7 +436,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editBedGrade = function (param,mold) {
@@ -467,7 +467,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var getBedGrade = function (param) {
@@ -495,7 +495,7 @@ angular.module('flatpcApp')
         }
         url = url + '&token=' + AppConfig.token + '&roomid=' + param.roomid;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     
@@ -540,7 +540,7 @@ angular.module('flatpcApp')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var download = function (param) {
@@ -619,7 +619,7 @@ angular.module('flatpcApp')
         + (param.campusid?('&campusid='+param.campusid):'')
         + (param.tobed?('&tobed='+param.tobed):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var downloadTopList = function (param) {
@@ -698,7 +698,7 @@ angular.module('flatpcApp')
         + (param.campusid?('&campusid='+param.campusid):'');
         // alert(url);
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var downloadStatistics = function(param){
@@ -738,7 +738,7 @@ angular.module('flatpcApp')
         + (param.campusid?('&campusid='+param.campusid):'');
         
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     
@@ -749,7 +749,7 @@ angular.module('flatpcApp')
         + '&type=' + (param.type || 0) 
         + (param.isopen?('&isopen=' + param.isopen):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
 
@@ -763,7 +763,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         }); 
     };
 
@@ -779,7 +779,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editSetting = function (param) {
@@ -794,7 +794,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var delSetting = function (param) {
@@ -809,7 +809,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editSettingType = function (param) {
@@ -824,7 +824,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var addSettingTable = function (param) {
@@ -839,7 +839,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editSettingTable = function (param) {
@@ -854,7 +854,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var delSettingTable = function (param) {
@@ -869,7 +869,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var basicSetting = function (param) {
@@ -884,7 +884,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var getSettingListByTableId = function(param){
@@ -894,7 +894,7 @@ angular.module('flatpcApp')
         + '&tableid=' + (param.tableid || 0) 
         + (param.isopen?('&isopen=' + param.isopen):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var getSpotList = function(param){
@@ -905,7 +905,7 @@ angular.module('flatpcApp')
         + (param.schoolyearid?('&schoolyearid=' + param.schoolyearid):'')
         + (param.semesterid?('&semesterid=' + param.semesterid):'');
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
     var addSpot = function (param) {
@@ -920,7 +920,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var editSpot = function (param) {
@@ -935,7 +935,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var delSpot = function (param) {
@@ -950,7 +950,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     };
     var getFlatByCheckId = function(param){
@@ -959,7 +959,7 @@ angular.module('flatpcApp')
         + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
         + '&checkid=' + (param.checkid || 0);
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
 	var getListByDate = function(param){
@@ -971,7 +971,7 @@ angular.module('flatpcApp')
 		+ '&enddate=' + (param.enddate || null)
         + '&grade=' + (param.grade || null);
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
 
@@ -980,7 +980,7 @@ angular.module('flatpcApp')
         var url = AppConfig.WEB_ROOT + 'flatdata/school/random_flat/?'
          + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });
     };
 
@@ -995,7 +995,7 @@ angular.module('flatpcApp')
             },
             params:param
         }).error(function (error) {
-            swal("提示", "网络错误！", "error"); 
+            swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
     

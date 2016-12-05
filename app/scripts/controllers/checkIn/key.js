@@ -80,11 +80,11 @@ angular.module('flatpcApp')
 //                 $rootScope.treeFlat = data.data;
 //                 refresh();
 //             }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //             else
-//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //         });
 //     }
 //     else {
@@ -104,11 +104,11 @@ angular.module('flatpcApp')
 //                 $scope.media.recordCount = data.data.recordCount;
 //                 $scope.media.pageCount = data.data.pageCount;
 //             }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //             else
-//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //             $rootScope.loading = false;
 //         })
 //     }
@@ -137,11 +137,11 @@ angular.module('flatpcApp')
 //                 swal("提示", "修改成功！", "success"); 
 //                 refresh();
 //             }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //             else
-//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
 //         })
 //     }
@@ -168,11 +168,11 @@ angular.module('flatpcApp')
 //                     if(fun && typeof fun == 'function') fun();
 //                     refresh();
 //                 }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //                 else
-//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //             });
 //         });
 //     }
@@ -191,11 +191,11 @@ angular.module('flatpcApp')
 //                 if(fun && typeof fun == 'function') fun();
 //                 refresh();
 //             }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //             else
-//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //         });
 //     }
 //     //新增登记表单中的二级连选的select
@@ -258,11 +258,11 @@ angular.module('flatpcApp')
 //                 if(data.code == 0){
 //                     that.studentList = data.list;
 //                 }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //                 else
-//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
 //             })
 //         },
@@ -289,11 +289,11 @@ angular.module('flatpcApp')
 //                     refresh();
 //                     if(fun && typeof fun == 'function') fun();
 //                 }else if(data.code == 4037){
-//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //                             location.href="#login";$rootScope.loading = false;
 //                         }
 //                 else
-//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+//                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
 //             })
 //         }
 //     }

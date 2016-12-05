@@ -70,11 +70,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                 $rootScope.treeFlat = data.data;
                 getRule();
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         });
     }
     else {
@@ -93,11 +93,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                 $scope.media.recordCount = data.data.recordCount;
                 $scope.media.pageCount = data.data.pageCount;
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             $rootScope.loading = false;
         })
     }
@@ -132,11 +132,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                 swal("提示", "修改成功！", "success"); 
                 refresh();
             }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
             else
-                swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             
         })
     }
@@ -163,11 +163,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                     if(fun && typeof fun == 'function') fun();
                     refresh();
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             });
         });
     }
@@ -235,11 +235,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                     that.room = data.data;
                     if(that.room.roomId )that.room.roomNum = search;
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
             })
         },
@@ -269,11 +269,11 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                     refresh();
                     if(fun && typeof fun == 'function') fun();
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }
                 else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         }
     }
@@ -284,10 +284,10 @@ function($scope,AppConfig,$rootScope,RuleService,FlatService,RoomService,$filter
                     $rootScope.treeRule = data.data;
                     refresh();
                 }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
                         }else{
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "error"); 
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 }
             });
         else{
