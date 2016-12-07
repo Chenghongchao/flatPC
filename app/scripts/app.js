@@ -42,6 +42,7 @@ angular
     HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',
     EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
+    GONGCHE:'http://code.houqinbao.com:3338/gongche/',
     QUESTION:'http://120.26.48.150/question/',
     MEET:'http://code.houqinbao.com:3338/meet/',
       schoolCode:0,
@@ -1442,6 +1443,57 @@ angular
             "": {
                 templateUrl: 'views/hotel/persongrade.html',
                 controller: 'personGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('busbookinggrade', {
+        url: "/busbookinggrade",
+        views: {
+            "": {
+                templateUrl: 'views/busbooking/busbookinggrade.html',
+                controller: 'busbookingGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('relatedset', {
+        url: "/relatedset",
+        views: {
+            "": {
+                templateUrl: 'views/busbooking/relatedset.html',
+                controller: 'relatedSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('driver', {
+        url: "/driver",
+        views: {
+            "": {
+                templateUrl: 'views/busbooking/driver.html',
+                controller: 'DriverCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

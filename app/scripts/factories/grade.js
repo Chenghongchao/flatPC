@@ -406,7 +406,6 @@ angular.module('flatpcApp')
         });//.get(url,param);
     };
     var setBedGrade = function (param,mold) {
-        debugger;
         param.token = param.token || AppConfig.token;
         param.schoolcode = param.schoolcode || AppConfig.schoolCode;
         param.adminid = param.adminid || AppConfig.adminid;
@@ -998,6 +997,16 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
+
+    //获取打分基础设置
+    var getBaseSetup =function() {
+        var url = AppConfig.WEB_ROOT + 'evaluation/scsetups/get_base_setup/?'
+         + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "warning"); 
+        });
+    };
+
     
     return {
         getListByFlat:getListByFlat,
@@ -1044,7 +1053,8 @@ angular.module('flatpcApp')
         importScoresWeek:importScoresWeek,
         importScoresDay:importScoresDay,
         importScoresMonth:importScoresMonth,
-        importScoresCheck:importScoresCheck
+        importScoresCheck:importScoresCheck,
+        getBaseSetup:getBaseSetup
 
     }
 }]);

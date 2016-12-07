@@ -175,25 +175,25 @@
     <li ng-if="menuCheck(58)" ng-show="sysMenu[1]=='grade'">
         <div class="menu-title">查宿舍</div>
         <ul class="menu-list">
-            <li ng-if="menuCheck(60)">
+            <li ng-if="menuCheck(60) && week == 0">
                 <a href="#gradeForWeek">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#ff9c00; font-size:28px"></i>
                     周评分
                 </a>
             </li>
-            <li ng-if="menuCheck(277)">
+            <li ng-if="menuCheck(277) && day == 0">
                 <a href="#gradeForDay">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#fc7257; font-size:28px"></i>
                     日评分
                 </a>
             </li>
-            <li ng-if="menuCheck(278)">
+            <li ng-if="menuCheck(278) && month == 0">
                 <a href="#gradeForMonth">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#02cf97; font-size:28px"></i>
                     月评分
                 </a>
             </li>
-            <li ng-if="menuCheck(279)">
+            <li ng-if="menuCheck(279) && check == 0">
                 <!--<li>-->
                 <a href="#spot">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#38adff; font-size:28px"></i>
@@ -325,13 +325,13 @@
             <li ng-if="menuCheck(552)">
                 <a href="#lategoCounselor">
                     <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#02cf97; font-size:25px"></i>
-                    晚出
+                    晚出统计
                 </a>
             </li>
             <li ng-if="menuCheck(553)">
                 <a href="#lateCounselor">
                     <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#38adff; font-size:25px"></i>
-                    晚归
+                    晚归统计
                 </a>
             </li>
         </ul>

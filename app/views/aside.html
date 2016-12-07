@@ -223,6 +223,25 @@
     </li>
 </ul>
 
+<ul ng-show="sysMenu[0]=='busbooking'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(556)" ng-class="{'active':sysMenu[1]=='busbookinggrade'}" ng-click="switch('busbookinggrade')">
+        <a href="#busbookinggrade" title="预约管理">
+            <i class="ALiconfont icon-yuyuetixing" style="font-size:23px"></i> 预约管理
+        </a>
+    </li>
+    <li ng-if="menuCheck(558)" ng-class="{'active':sysMenu[1]=='driver'}" ng-click="switch('driver')">
+        <a href="#driver" title="司机管理">
+            <i class="ALiconfont icon-fangxing" style="font-size:24px"></i> 司机管理
+        </a>
+    </li> 
+    <li ng-if="menuCheck(557)" ng-class="{'active':sysMenu[1]=='relatedset'}" ng-click="switch('relatedset')">
+        <a href="#relatedset" title="相关设置">
+            <i class="ALiconfont icon-chart" style="font-size:20px"></i> 相关设置
+        </a>
+    </li>  
+</ul>
+
 <ul ng-show="sysMenu[0]=='question'">
     <!--默认选中哪一个选项-->
     <li ng-if="menuCheck(475)" ng-class="{'active':sysMenu[1]=='questionnaire'}" ng-click="switch('questionnaire')">

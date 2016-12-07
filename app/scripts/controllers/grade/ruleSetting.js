@@ -22,6 +22,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
         fullmark:0,
         listorder:1,
         title:'',
+        isconfiscat:'',
         itemid:0,
         role:AppConfig.role==0?true:false
     };
@@ -33,6 +34,7 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
         $scope.media.listorder=item.listOrder || 1;
         $scope.media.title=item.title;
         $scope.media.itemid=item.itemId;
+        $scope.media.isconfiscat=item.isconfiscat;
     }
     $scope.add = function(type,item){
         $scope.media.status = 1;
@@ -42,8 +44,13 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
         $scope.media.fullmark = 0;
         $scope.media.listorder =1;
         $scope.media.title = '';
+        $scope.media.isconfiscat='';
     }
     $scope.addSave = function(){
+        if($scope.media.title.length>8 && $scope.media.isconfiscat == 1){
+            swal("提示", "违章项目不得大于八个字", "warning"); 
+            return;
+        }
         $rootScope.loading = true;
         return RuleService.addRule({
             token:AppConfig.token,
@@ -51,7 +58,8 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
             fid:$scope.media.fid,
             title:$scope.media.title,
             fullmark:$scope.media.fullmark,
-            listorder:$scope.media.listorder
+            listorder:$scope.media.listorder,
+            isconfiscat: $scope.media.isconfiscat
         }).success(function(data){
             $rootScope.loading = false;
             if(data.code == 0){
@@ -64,13 +72,18 @@ function($scope,AppConfig,$rootScope,RuleService,GradeService) {
         })
     }
     $scope.editSave = function(){
+        if($scope.media.title.length>8 && $scope.media.isconfiscat == 1){
+            swal("提示", "违章项目不得大于八个字", "warning"); 
+            return;
+        }
         $rootScope.loading = true;
         return RuleService.editRule({
             token:AppConfig.token,
             itemid:$scope.media.itemid,
             title:$scope.media.title,
             fullmark:$scope.media.fullmark,
-            listorder:$scope.media.listorder
+            listorder:$scope.media.listorder,
+            isconfiscat: $scope.media.isconfiscat
         }).success(function(data){
             $rootScope.loading = false;
             if(data.code == 0){

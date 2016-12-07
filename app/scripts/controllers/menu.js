@@ -1,5 +1,5 @@
 angular.module('flatpcApp')
-  .controller('MenuCtrl', ['$scope','$rootScope','AppConfig','$stateParams',function ($scope,$rootScope,AppConfig,$stateParams) {
+  .controller('MenuCtrl', ['$scope','$rootScope','AppConfig','GradeService','$stateParams',function ($scope,$rootScope,AppConfig,GradeService,$stateParams) {
     $rootScope.loading = false;
     $scope.switch = {
         week : AppConfig.week==1?false:true,
@@ -98,13 +98,29 @@ angular.module('flatpcApp')
             case 'message':
                 menus.push($stateParams.p);
                 $rootScope.headerSwitch(1,$stateParams.p);
-                break;
-                
-                
-                
+                break;     
         }
         if(menus.length>0){
             $rootScope.sysMenu = menus;
         }
+    }
+    
+    refresh();
+    function refresh() {
+        $rootScope.loading = false;
+        return GradeService.getBaseSetup().success(function(data){
+            if(data.code == 0){
+                $scope.week = AppConfig.week;
+                $scope.month = AppConfig.month;
+                $scope.day = AppConfig.day;
+                $scope.check = AppConfig.check 
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            $rootScope.loading = false;
+        });
     }
   }]);

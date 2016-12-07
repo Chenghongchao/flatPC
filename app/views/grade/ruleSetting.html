@@ -41,8 +41,18 @@
                         <tr ng-show="media.type==2">
                             <td class="require">分类</td><td><input type="text" ng-model="media.parent" disabled /></td>
                         </tr>
-                        <tr>
-                            <td class="require">{{media.type==2?'违章项目':'分类'}}</td><td><input type="text" ng-model="media.title"/></td>
+
+                        <tr ng-hide="media.type==2">
+                            <td class="require">分类</td>
+                            <td><input type="text" ng-model="media.title"/></td>
+                        </tr>
+
+                        <tr ng-show="media.type==2">
+                            <td class="require">违章项目</td>
+                            <td>
+                                <input type="text" ng-model="media.title"/>
+                                <label><input type="checkbox" ng-model="media.isconfiscat" ng-true-value="1" ng-false-value="0"/>违章物品收缴登记（关联违章物品管理）</label>
+                            </td>
                         </tr>
                         <tr>
                             <td class="require">排序</td><td><input type="text" ng-model="media.listorder" /></td>

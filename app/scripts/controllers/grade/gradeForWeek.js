@@ -598,6 +598,63 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             }  
         },
         addRule:function (list,item) {
+            // if(item.isconfiscat == 1){
+            //     swal({   
+            //         title: "提示",   
+            //         text: "是否收缴该违章物品？",   
+            //         type: "warning",   
+            //         showCancelButton: true,   
+            //         confirmButtonColor: "#DD6B55",   
+            //         confirmButtonText: "收缴",   
+            //         cancelButtonText: "不收缴",   
+            //         closeOnConfirm: false 
+            //     }, 
+            //     function(){
+            //         alert(22);
+            //         var items = "[",that = this;
+            //         this.rule.itemList.forEach(function (item) {
+            //             items += '{"bedid": "","itemid": ' + item.itemId + '},';
+            //         });
+            //         this.rule.bedList.forEach(function (bed) {
+            //             if(bed.itemList)
+            //                 bed.itemList.forEach(function (item) {
+            //                     items += '{"bedid": "' + bed.bedId + '","itemid": ' + item.itemId + ',"confiscated": '+ 1 +'},';
+            //                 });
+            //         });
+            //         if(items.length > 2){
+            //             items = items.substring(0,items.length-1) + ']';
+            //         }else 
+            //             items += "]";
+            //         RuleService.checkByRoom({
+            //             token:AppConfig.token,
+            //             schoolcode:AppConfig.schoolCode,
+            //             roomid:this.item.roomId,
+            //             specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,
+            //             adminid:AppConfig.adminId,
+            //             itemlist:items,
+            //             source:0
+            //         }).success(function(data){
+            //             $rootScope.loading = false;
+            //             if(data.code == 0){
+            //                 swal("提示","收缴成功！", "success"); 
+            //                 refresh();
+            //                 if(fun && typeof fun == 'function') fun();
+            //                 that.rule = null;
+            //             }else if(data.code == 4037){
+            //                         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            //                         location.href="#login";$rootScope.loading = false;
+            //                     }else{
+            //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            //             }
+            //         });
+            //         // swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            //     });
+            // }
+
+
+
+
+
             for(var i=0;i <list.length;i++){
                 if(list[i].itemId == item.itemId)return;
             }
@@ -887,6 +944,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             });
         },
         ruleSave:function (fun) {
+            alert(112);
             var items = "[",that = this;
             this.rule.itemList.forEach(function (item) {
                 items += '{"bedid": "","itemid": ' + item.itemId + '},';

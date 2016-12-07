@@ -91,6 +91,15 @@ angular.module('flatpcApp')
                         }else if(menuCheck(473)){
                             menus.push('persongrade');
                         }else menus.push(' ');
+                    }else if(menuCheck(555)){
+                         menus.push('busbookinggrade');
+                        if(menuCheck(556)){
+                            menus.push('busbookinggrade');
+                        }else if(menuCheck(557)){
+                            menus.push('relatedset');
+                        }else if(menuCheck(558)){
+                            menus.push('driver');
+                        }else menus.push(' ');
                     }else if(menuCheck(474)){
                          menus.push('questionnaire');
                         if(menuCheck(475)){
@@ -773,6 +782,21 @@ angular.module('flatpcApp')
             case 'persongrade':
                 if(menuCheck(473))
                     return ['hotel','persongrade','persongrade'];
+                else
+                    return null; 
+            case 'busbookinggrade':
+                if(menuCheck(556))
+                    return ['busbooking','busbookinggrade','busbookinggrade'];
+                else
+                    return null; 
+            case 'relatedset':
+                if(menuCheck(557))
+                    return ['busbooking','relatedset','relatedset'];
+                else
+                    return null; 
+            case 'driver':
+                if(menuCheck(558))
+                    return ['busbooking','driver','driver'];
                 else
                     return null; 
              case 'questionnaire':

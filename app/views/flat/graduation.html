@@ -339,12 +339,12 @@
                                     <table class="table table-bordered bg-white">
                                         <thead>
                                             <tr>
-                                                <th>年级</th><th>学年制</th>
+                                                <th>年级</th><th>学年制</th><th>选择</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="fadeIn animated" ng-repeat="cla in form.collegeClassList || []">
-                                                <td>{{cla.Grades}}</td><td>{{cla.degreeYears}}</td>
+                                                <td>{{cla.Grades}}</td><td>{{cla.degreeYears}}</td><td><input type="checkbox"></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
@@ -362,7 +362,7 @@
                                     <table class="table table-bordered bg-white">
                                         <thead>
                                             <tr>
-                                                <th>年级</th><th>学年制</th><th>学院</th><th>班级</th>
+                                                <th>年级</th><th>学年制</th><th>学院</th><th>班级</th><th>选择</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -371,6 +371,7 @@
                                                 <td>{{cla.degreeYears}}</td>
                                                 <td>{{cla.collegeName}}</td>
                                                 <td>{{cla.className}}</td>
+                                                <td><input type="checkbox"></td>
                                             </tr>
                                         </tbody>
                                     </table>
