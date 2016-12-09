@@ -611,7 +611,7 @@
                                         </tbody>
                                     </table>
 
-                                    <table ng-if="cardMedia.bedGradeType!=1 " class="table table-bordered bg-white">
+                                    <table ng-if="cardMedia.bedGradeType==0" class="table table-bordered bg-white">
                                         <thead>
                                             <tr><th>序号</th><th>打分项目</th><th>打分</th></tr>
                                         </thead>
@@ -671,14 +671,12 @@
                                                 <td style="min-width:100px">寝室违章</td>
                                                 <td class="rule-handle">
                                                     <ul>
-                                                        <li class="rule-item" ng-repeat="item in cardMedia.rule.itemList" ng-click="cardMedia.removeRule(cardMedia.rule.itemList,$index)">{{item.itemName}}
-                                                            <span ng-if="item.confiscated==1" class="capture">收</span>
-                                                        </li>
+                                                        <li class="rule-item" ng-repeat="item in cardMedia.rule.itemList" ng-click="cardMedia.removeRule(cardMedia.rule.itemList,$index)">{{item.itemName}}</li>
                                                         <li ng-if="media.tab==1" class="dropdown">
                                                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                                 <li ng-repeat="rule in rules || []" ng-class="{'dropdown-header':!rule.fid}">
-                                                                    <a ng-if="rule.fid" ng-click="cardMedia.addRule(null, cardMedia.rule.itemList,rule)">{{rule.title}}</a>
+                                                                    <a ng-if="rule.fid" ng-click="cardMedia.addRule(cardMedia.rule.itemList,rule)">{{rule.title}}</a>
                                                                     <span ng-if="!rule.fid">{{rule.title}}</span>
                                                                 </li>
                                                             </ul>
@@ -693,14 +691,12 @@
                                                 <td style="min-width:100px">{{bed.bedName + '-' + bed.name + '（' + bed.studentNumber + '）'}}</td>
                                                 <td class="rule-handle">
                                                     <ul>
-                                                        <li class="rule-item" ng-repeat="item in bed.itemList" ng-click="cardMedia.removeRule(bed.itemList,$index)">{{item.itemName}}
-                                                            <span ng-if="item.confiscated==1" class="capture">收</span>
-                                                        </li>
+                                                        <li class="rule-item" ng-repeat="item in bed.itemList" ng-click="cardMedia.removeRule(bed.itemList,$index)">{{item.itemName}}</li>
                                                         <li ng-if="media.tab==1" class="dropdown">
                                                             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                                 <li ng-repeat="rule in rules|| []" ng-class="{'dropdown-header':!rule.fid}">
-                                                                    <a ng-if="rule.fid" ng-click="cardMedia.addRule(bed.bedId, bed.itemList, rule)">{{rule.title}}</a>
+                                                                    <a ng-if="rule.fid" ng-click="cardMedia.addRule(bed.itemList,rule)">{{rule.title}}</a>
                                                                     <span ng-if="!rule.fid">{{rule.title}}</span>
                                                                 </li>
                                                             </ul>

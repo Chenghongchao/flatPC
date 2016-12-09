@@ -115,7 +115,7 @@
                         <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">分值</td><td><input type="text" ng-model="media.fullmark" /></td>
                         </tr>
-                        <tr ng-if="media.isLeaf && media.standardtype==0">
+                        <tr ng-show="media.isLeaf && media.standardtype==0">
                             <td class="require">单次点击扣分数值</td><td><input type="text" ng-model="media.pointmark"/></td>
                         </tr>
                         <tr ng-hide="media.type==1">
