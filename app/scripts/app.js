@@ -42,7 +42,7 @@ angular
     HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',
     EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
-    GONGCHE:'http://code.houqinbao.com:3338/gongche/',
+    BUS:'http://code.houqinbao.com:3338/bus/',
     QUESTION:'http://120.26.48.150/question/',
     MEET:'http://code.houqinbao.com:3338/meet/',
       schoolCode:0,

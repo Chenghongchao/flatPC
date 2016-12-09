@@ -13,7 +13,7 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.GONGCHE + "public/?s=admin/driver/lists&schoolcode="+AppConfig.schoolCode;
+    a.href = AppConfig.BUS + "public/?s=admin/driver/lists&schoolcode="+AppConfig.schoolCode;
     a.target="page-frame";
     a.click();
 }]);

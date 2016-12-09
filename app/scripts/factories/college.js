@@ -98,6 +98,30 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });
     }
+    var getCollegectSort = function(schoolcode){
+        var url = AppConfig.WEB_ROOT + 'stmessage/collegeclass/get_sort/?schoolcode='+schoolcode;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "warning"); 
+        });
+    }
+    var sortApply = function(param){
+        var url = AppConfig.WEB_ROOT + 'stmessage/collegeclass/apply_sort/';
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function (error) {
+            swal("提示", "网络错误！", "warning"); 
+        });//.get(url,param);
+    }
+
+
+
+
+
     var getManagerList = function(param){
         var url = AppConfig.WEB_ROOT + 'management/instructor/get_list_instructor/?'
         + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
@@ -179,6 +203,8 @@ angular.module('flatpcApp')
         addManager:addManager,
         editManager:editManager,
         delManager:delManager,
-        getAdminclasslist:getAdminclasslist
+        getAdminclasslist:getAdminclasslist,
+        getCollegectSort:getCollegectSort,
+        sortApply:sortApply
     }
 }]);

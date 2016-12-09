@@ -437,3 +437,47 @@ div.imgError::before{
   border-radius: 4px;
 
 }
+
+
+//学院班级排序
+.table-sort{
+  width: 100%;
+  border:none;
+  text-align:left;
+}
+.table-sort tr td{
+  padding: 10px 0 10px 20px;
+  border-top:1px solid #eeeff1;
+  border-bottom:1px solid #eeeff1;
+}
+.table-sort tr td:first-child{
+  width:180px;
+  padding-left: 0;
+  text-align:center;
+  border-right:1px solid #eeeff1;
+
+}
+.table-sort tr td div{
+  padding: 5px 0;
+}
+.table-sort select{
+  width:160px;
+  padding: 3px 6px;
+  border: 1px solid #d6d8db;  
+}
+.table-sort button{
+  width:90px;
+
+}
+.capture{
+  width:24px;
+  height:24px;
+  display: inline-block;
+  line-height: 24px;
+  border: 1px solid #333;
+  border-radius: 90px;
+  color: #333;
+  text-align: center;
+
+}
+

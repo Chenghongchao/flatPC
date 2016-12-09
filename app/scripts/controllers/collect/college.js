@@ -13,9 +13,18 @@ angular.module('flatpcApp')
         grade:'',
         degree:'',
         degreeYear:'',
+        collegeSort:'',
+        collegeSortType:'',
+        classSort1:'',
+        classSortType1:'',
+        classSort2:'',
+        classSortType2:'',
+        classSort3:'',
+        classSortType3:'',
         classId:'',
         shortName:'',
         history:0,
+        collegeId:'',
         menuCheck : function () {
             switch (this.type){
                 case 0:
@@ -34,20 +43,33 @@ angular.module('flatpcApp')
         }
     };
     $scope.grades = CollegeService.getGrade();
-    $scope.show = function(type,item){
+    $scope.show = function(type,item, nodeName,parentId){
         $scope.media.status = 0;
         $scope.media.type = type;
         $scope.media.shortName= item.shortName || '';
         $scope.media.name= item.name || '';
         $scope.media.collegeName=item.collegeName || '';
-        $scope.media.collegeId = item.collegeId || '';
         $scope.media.className=item.className || '';
         $scope.media.classId=item.classId || '';
         $scope.media.grade=item.grade || '';
         $scope.media.degree=item.degree || '';
         $scope.media.degreeyear=item.degreeYear+'' || '';
+        $scope.media.collegeSort=item.collegeSort || '';
+        $scope.media.collegeSortType=item.collegeSortType || '';
+        $scope.media.classSort1=item.classSort1 || '';
+        $scope.media.classSortType1=item.classSortType1 || '';
+        $scope.media.classSort2=item.classSort2 || '';
+        $scope.media.classSortType2=item.classSortType2 || '';
+        $scope.media.classSort3=item.classSort3 || '';
+        $scope.media.classSortType3=item.classSortType3 || '';
         $scope.media.history = item.history?true:false || false;
         $scope.media.listOrder=item.listOrder || 1;
+        if($scope.media.type == 1) {
+            $scope.media.collegeId= (item.collegeId || '').toString();
+        }else if($scope.media.type == 2){
+            $scope.media.collegeId = (parentId || '').toString();  
+        }
+        $scope.getCollegectSort();
     }
     
     $scope.degreeChangeEvent = function () {
@@ -87,12 +109,45 @@ angular.module('flatpcApp')
         $scope.media.degree='';
         $scope.media.degreeyear='';
         $scope.media.listOrder= 1;
+        $scope.media.collegeId='';
 		if(item){
-			$scope.media.collegeId = item.collegeId || '';
+			$scope.media.collegeId = (item.collegeId || '').toString();
 		}
         $scope.media.history = false;
-        
     }
+
+    $scope.sortApply = function(){
+        $rootScope.loading = true;
+        (function(){
+            if($scope.media.type == 5){
+                return CollegeService.sortApply({
+                    schoolcode:AppConfig.schoolCode,
+                    collegesort:$scope.media.collegeSort, 
+                    collegesorttype:$scope.media.collegeSorTtype,
+                    classsort1:$scope.media.classSort1, 
+                    classsorttype1:$scope.media.classSortType1,
+                    classsort2:$scope.media.classSort2, 
+                    classsorttype2:$scope.media.classSortType2,
+                    classsort3:$scope.media.classSort3, 
+                    classsorttype3:$scope.media.classSortType3,
+                })
+            }
+        })().success(function(data){
+            $rootScope.loading = false;
+            if(data.code == 0){
+                swal("提示", "添加成功！", "success"); 
+                refresh();
+            }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            
+        })
+    }
+
+
     $scope.addSave = function(){
         $rootScope.loading = true;
         (function(){
@@ -108,13 +163,13 @@ angular.module('flatpcApp')
                 return CollegeService.addClass({
                     token:AppConfig.token,
                     schoolcode:AppConfig.schoolCode,
-                    collegeid:$scope.media.collegeId,
                     listorder:$scope.media.listOrder,
                     title:$scope.media.className,
                     grade:$scope.media.grade,
                     degree:$scope.media.degree,
                     degreeyear:$scope.media.degreeyear,
-                    status:$scope.media.history?1:0
+                    status:$scope.media.history?1:0,
+                    collegeid:$scope.media.collegeId
                 })
             }
         })().success(function(data){
@@ -140,7 +195,7 @@ angular.module('flatpcApp')
                     collegeid:$scope.media.collegeId,
                     listorder:$scope.media.listOrder,
                     title:$scope.media.collegeName,
-                    shortname:$scope.media.shortName
+                    shortname:$scope.media.shortName,
                 }).success(function(){
                     $rootScope.loading = false;
                 })
@@ -154,6 +209,7 @@ angular.module('flatpcApp')
                     grade:$scope.media.grade,
                     degree:$scope.media.degree,
                     degreeyear:$scope.media.degreeyear,
+                    collegeid:$scope.media.collegeId
                 }).success(function(){
                     $rootScope.loading = false;
                 })
@@ -215,7 +271,23 @@ angular.module('flatpcApp')
         });
         
     }
-    
+
+    $scope.getCollegectSort = function(){
+        $rootScope.loading = true;
+        return CollegeService.getCollegectSort(AppConfig.schoolCode).success(function(data){ 
+        }).success(function (data) {
+            $rootScope.loading = false;
+            if(data.code == 0){
+                refresh();
+            }else if(data.code == 4037){
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                location.href="#login";$rootScope.loading = false;
+            }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            ////console.log(data);
+        });
+    }
 	//批量导入班级
 	$scope.batImportClassHandler = function(){
 		$scope.add(-1);
