@@ -312,23 +312,6 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
         student:null,
         studentName:'',
         studentList:null,
-        year: null,
-        selectYear: null,
-        checkedAllGrade: false,
-        collegeClassList: null,
-        initSelectYearsData: function(){
-            this.year = new Date().getFullYear();
-            this.selectYear = [];
-            for(var i=this.year-5; i<=this.year+5; i++){
-                this.selectYear[this.selectYear.length] = {
-                    id: i,
-                    text: i+'年'
-                }
-            }
-        },
-        yearChangeEvent:function(){
-            this.collegeClassList = [];
-        },
         studentSearch:function () {
             if($scope.selecter.classId.length < 0 ||$scope.selecter.collegeId.length < 0 || this.studentName.length < 0)return;
             var that = this;
@@ -351,9 +334,24 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         },
+        year: null,
+        selectYear: null,
+        collegeClassList: null,
+        initSelectYearsData: function(){
+            this.year = new Date().getFullYear();
+            this.selectYear = [];
+            for(var i=this.year-5; i<=this.year+5; i++){
+                this.selectYear[this.selectYear.length] = {
+                    id: i,
+                    text: i+'年'
+                }
+            }
+        },
+        yearChangeEvent:function(){
+            this.collegeClassList = [];
+        },
         collegeClassSearch:function () {
             var that = this;
-            this.getGradeCheckedIds();
             this.classList = []; //重置数据
             $rootScope.loading = true;
             StudentService.getCollegeclassByYear({
@@ -436,51 +434,7 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                 console.log(data);
                 
             })
-        },
-        checkedAllGradeEvent:function(){
-            $scope.form.collegeClassList.forEach(function (data, index, array) {
-                data.checked = $scope.form.checkedAllGrade;
-            })
-        },
-        checkedGradeEvent:function(cla){
-            if(cla.checked){
-                var isCheckedAll = true;
-                for(var i=0; i<$scope.form.collegeClassList.length; i++){
-                    if(!$scope.form.collegeClassList[i].checked){
-                        isCheckedAll = false;
-                        break;
-                    }
-                }
-                $scope.form.checkedAllGrade = isCheckedAll;
-            }else{
-                $scope.form.checkedAllGrade = false;
-            }
-        },
-        getGradeCheckedIds: function(){
-            //接口没有传学年制ID，暂时
-            console.log(JSON.stringify($scope.form.collegeClassList));
-            alert(JSON.stringify($scope.form.collegeClassList));
-        },
-        checkedAllClassEvent:function(){
-            $scope.form.classList.forEach(function (data, index, array) {
-                data.checked = $scope.form.checkedAllClass;
-            })
-        },
-        checkedClassEvent:function(cla){
-            if(cla.checked){
-                var isCheckedAll = true;
-                for(var i=0; i<$scope.form.classList.length; i++){
-                    if(!$scope.form.classList[i].checked){
-                        isCheckedAll = false;
-                        break;
-                    }
-                }
-                $scope.form.checkedAllClass = isCheckedAll;
-            }else{
-                $scope.form.checkedAllClass = false;
-            }
         }
-        
     }
 
     //批量退宿舍时，初始化“请选择毕业年”范围
