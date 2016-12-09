@@ -286,7 +286,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
     
     $scope.cardMedia = {
         roomGradeType: 0, //寝室打分类型
-        bedGradeType: 0,  //床位打分类型
+        bedGradeType: -1,  //床位打分类型
         tab:1,
         setTab:function (n) {
             if(n < 1 || n > 4) return;
@@ -375,7 +375,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             var that = this;
             this.tab = n || this.tab;
             this.roomGradeType = 0; //初始化为寝室正常打分
-            this.bedGradeType = 0;  //初始化为床位正常打分
+            this.bedGradeType = -1;  //初始化为床位正常打分
             switch (this.tab) {
                 case 1:
                     if(this.item.roomScoreId){
@@ -443,26 +443,29 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         ////console.log(data);
                     });
                 case 4:
-                    $rootScope.loading = true;
-                    return RuleService.getListByRoom({
-                        token:AppConfig.token,
-                        schoolcode:AppConfig.schoolCode,
-                        specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week
-                    }).success(function (data) {
-                        $rootScope.loading = false;
-                        
-                        if(data.code == 0){
-                            that.rule = data.data;
-                        }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                            location.href="#login";$rootScope.loading = false;
-                        }
-                        else
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                        ////console.log(data);
-                    });
+                    $scope.cardMedia.getListByRoom();
             }
             return null;
+        },
+        getListByRoom: function(){
+            $rootScope.loading = true;
+            return RuleService.getListByRoom({
+                token:AppConfig.token,
+                schoolcode:AppConfig.schoolCode,
+                specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week
+            }).success(function (data) {
+                $rootScope.loading = false;
+                
+                if(data.code == 0){
+                    $scope.cardMedia.rule = data.data;
+                }else if(data.code == 4037){
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                    location.href="#login";$rootScope.loading = false;
+                }
+                else
+                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                ////console.log(data);
+            });
         },
         getBedData: function(){
             var that = this;
@@ -597,72 +600,87 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 bed.totalScore = bed.totalScore+n; 
             }  
         },
-        addRule:function (list,item) {
-            // if(item.isconfiscat == 1){
-            //     swal({   
-            //         title: "提示",   
-            //         text: "是否收缴该违章物品？",   
-            //         type: "warning",   
-            //         showCancelButton: true,   
-            //         confirmButtonColor: "#DD6B55",   
-            //         confirmButtonText: "收缴",   
-            //         cancelButtonText: "不收缴",   
-            //         closeOnConfirm: false 
-            //     }, 
-            //     function(){
-            //         alert(22);
-            //         var items = "[",that = this;
-            //         this.rule.itemList.forEach(function (item) {
-            //             items += '{"bedid": "","itemid": ' + item.itemId + '},';
-            //         });
-            //         this.rule.bedList.forEach(function (bed) {
-            //             if(bed.itemList)
-            //                 bed.itemList.forEach(function (item) {
-            //                     items += '{"bedid": "' + bed.bedId + '","itemid": ' + item.itemId + ',"confiscated": '+ 1 +'},';
-            //                 });
-            //         });
-            //         if(items.length > 2){
-            //             items = items.substring(0,items.length-1) + ']';
-            //         }else 
-            //             items += "]";
-            //         RuleService.checkByRoom({
-            //             token:AppConfig.token,
-            //             schoolcode:AppConfig.schoolCode,
-            //             roomid:this.item.roomId,
-            //             specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,
-            //             adminid:AppConfig.adminId,
-            //             itemlist:items,
-            //             source:0
-            //         }).success(function(data){
-            //             $rootScope.loading = false;
-            //             if(data.code == 0){
-            //                 swal("提示","收缴成功！", "success"); 
-            //                 refresh();
-            //                 if(fun && typeof fun == 'function') fun();
-            //                 that.rule = null;
-            //             }else if(data.code == 4037){
-            //                         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-            //                         location.href="#login";$rootScope.loading = false;
-            //                     }else{
-            //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-            //             }
-            //         });
-            //         // swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            //     });
-            // }
-
-
-
-
-
+        /**
+         * 违章收缴
+         * 传入bedId，则是床位收缴；不传入则是寝室收缴
+         */
+        addRule:function (bedId, list, rule) {
             for(var i=0;i <list.length;i++){
-                if(list[i].itemId == item.itemId)return;
+                if(list[i].itemId == rule.itemId)return;
             }
-            list.push({
-                itemId:item.itemId,
-                itemName:item.title
-            })
-              $scope.media.items=list;
+            //2016-12-07 加自动收缴
+            var item = {
+                itemId:rule.itemId,
+                itemName:rule.title,
+                confiscated: 0
+            }
+            if(!rule.isconfiscat){
+                list.push(item);
+                $scope.media.items=list;
+            }else if(rule.isconfiscat == 1){
+                swal({   
+                    title: "提示",   
+                    text: "是否收缴该违章物品？",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "收缴",   
+                    cancelButtonText: "不收缴",   
+                    closeOnConfirm: false 
+                }, 
+                function(confirm){
+                    if(confirm){
+                        item.confiscated = 1;
+                    }else{
+                        item.confiscated = 0;
+                    }
+                    $scope.$apply(function () {
+                    　　list.push(item);
+                    });
+                    $scope.media.items=list;
+                    if(confirm==false) return; //不收缴则只添加到页面上，不直接保存
+                    // alert(JSON.stringify($scope.cardMedia.rule.itemList));
+                    // alert(JSON.stringify($scope.cardMedia.rule.bedList));
+                    // return;
+                    var items = "[", that = $scope.cardMedia;
+                    that.rule.itemList.forEach(function (room_item) {
+                       items += '{"bedid": "","itemid": ' + room_item.itemId + ',"confiscated": '+ room_item.confiscated +'},';
+                    });
+                    that.rule.bedList.forEach(function (bed) {
+                        //if(bed.itemList && bed.bedId==bedId)
+                        if(bed.itemList)
+                            bed.itemList.forEach(function (bed_item) {
+                                items += '{"bedid": "' + bed.bedId + '","itemid": ' + bed_item.itemId + ',"confiscated": '+ bed_item.confiscated +'},';
+                            });
+                    });
+                    if(items.length > 2){
+                        items = items.substring(0,items.length-1) + ']';
+                    } else {
+                        items += "]";
+                    };
+                    RuleService.checkByRoom({
+                        token:AppConfig.token,
+                        schoolcode:AppConfig.schoolCode,
+                        roomid: that.item.roomId,
+                        specialid: that.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,
+                        adminid:AppConfig.adminId,
+                        itemlist:items,
+                        source:0
+                    }).success(function(data){
+                        $rootScope.loading = false;
+                        if(data.code == 0){
+                            swal("提示","收缴成功！", "success"); 
+                            that.getListByRoom();
+                            that.getBedData();
+                        }else if(data.code == 4037){
+                                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                                    location.href="#login";$rootScope.loading = false;
+                                }else{
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                        }
+                    });
+                });
+            }
         },
         removeRule:function (list,index) {
             if($scope.media.tab <2)
@@ -809,7 +827,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             this.bed.forEach(function (item,i) {
                 var list = item.itemList;
 
-                if(that.bedGradeType == 0){
+                if(that.bedGradeType!= 1){
                     for(var j = 0;j < list.length; j++){
                         grades += '{"itemid":' + list[j].itemId + ',"studentkey":"' + item.studentKey +  '","bedid":"' + item.bedId + '","score":' + list[j].score +'},';
                     }
@@ -835,7 +853,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             }
             if(grades.length > 0){
                 $rootScope.loading = true;
-                if(that.bedGradeType){
+                if(that.bedGradeType!=-1){
                     GradeService.editBedGrade({
                         token:AppConfig.token,
                         roomid:that.item.roomId,
@@ -879,7 +897,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         scoreitem:grades,
                         typeid:$rootScope.treeWeek[0].typeList[1].typeId,
                         tableid:$rootScope.treeWeek[0].tableId,
-                        type:that.bedGradeType,
+                        type:0,
                         score:that.score,
                         mold:0
                     }).success(function(data){
@@ -944,7 +962,6 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             });
         },
         ruleSave:function (fun) {
-            alert(112);
             var items = "[",that = this;
             this.rule.itemList.forEach(function (item) {
                 items += '{"bedid": "","itemid": ' + item.itemId + '},';

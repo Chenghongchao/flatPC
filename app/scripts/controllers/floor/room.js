@@ -1,6 +1,6 @@
 angular.module('flatpcApp')
-.controller('RoomCtrl', ['$scope', 'AppConfig','$rootScope','RoomService','FlatService','$filter',
-function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
+.controller('RoomCtrl', ['$scope', 'AppConfig','$rootScope','RoomService','FlatService','CollegeService','$filter',
+function($scope,AppConfig,$rootScope,RoomService,FlatService,CollegeService,$filter) {
     $scope.media = {
         flatid:'',
         title:'',
@@ -16,7 +16,10 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             startfloor:1,
 			isFour:0,
             line:0,
-            isletter:''
+            isletter:'',
+            selectCollegeList:[],
+            text:'',
+            collegeids:[],
         },
         room:{
             type:0,
@@ -30,9 +33,84 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             memo:'',
             line:0,
             isletter:''
-        }
-    }
+        },
     
+        collegeCheckEvent : function(floors){
+            var names = [];
+            var collegeids = [];
+             
+            floors.selectCollegeList.forEach(function (data, index, array) {
+              
+                if(data.checked){
+                    names[names.length] = data.collegeName;
+                    collegeids[collegeids.length] = data.collegeId
+                }
+            })
+             console.log(floors);
+            if(names.length>2){
+                floors.text = names[0]+","+names[1]+"…";
+            }else if(names.length==2){
+                floors.text = names[0]+","+names[1];
+            }else if(names.length==1){
+                floors.text = names[0];
+            }else{
+                floors.text = null;
+            }
+
+            $scope.media.floor.collegeids = collegeids.join(",");
+            console.log($scope.media.floor.collegeids);
+        },
+        // 获取学院列表
+        // getCollegeList:function(){
+        //     CollegeService.getList(AppConfig.schoolCode).success(function(data){
+        //         var collegelist = data.data[0].collegeList;
+        //         if(data.code == 0){
+        //                 for(var i = 0;i<collegelist.length;i++){
+        //                     $scope.floor.collegeName = collegelist[i].collegeName;
+        //                     $scope.floor.selectCollegeList = collegelist;
+                            
+        //                 }
+        //                 console.log($scope.floor.selectCollegeList);
+        //             }else if(data.code == 4037){
+        //                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        //                     location.href="#login";$rootScope.loading = false;
+        //                 }else
+        //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning");
+        //     });
+        // },
+    },
+    $scope.getCollegeList=function(college = []){
+            CollegeService.getList(AppConfig.schoolCode).success(function(data){
+                var collegelist = data.data[0].collegeList;
+                if(data.code == 0){
+                        for(var i = 0;i<collegelist.length;i++){
+                            $scope.floor.collegeName = collegelist[i].collegeName;
+                            // $scope.floor.selectCollegeList = collegelist;
+                            
+                        }
+                         $scope.floor.selectCollegeList = collegelist;
+            if(college.length > 0){
+                for(var i=0; i<college.length;i++){
+                    for( var j=0; j<$scope.floor.selectCollegeList.length;j++){
+                        if(college[i] == $scope.floor.selectCollegeList[j].collegeId){
+                            $scope.floor.selectCollegeList[j].checked = true;
+                        }
+                    }
+                }
+                            
+                    console.log($scope.floor.selectCollegeList);
+                    $scope.media.collegeCheckEvent($scope.floor)
+            }
+            $scope.media.collegeCheckEvent($scope.floor)
+            
+                    }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }else
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning");
+            });
+        },
+
     $scope.show = function (flat,liveArea,campus) {
         $scope.media.flatid = flat.flatId;
         var sex;
@@ -51,7 +129,6 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
     
     if(!$rootScope.treeFlat){
         FlatService.getList(AppConfig.schoolCode).success(function(data){
-            console.log(data.data);
             if(data.code == 0){
                 $rootScope.treeFlat = data.data;
                 refresh();
@@ -65,9 +142,9 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
     else {
         refresh();
     }
-    
-    $scope.floorInit = function (n,floor) {
-        $scope.media.floor.type = n;
+    //批量添加宿舍号
+    $scope.addfloorInit = function (n,floor) {
+       $scope.media.floor.type = n;
         if(floor){
             $scope.media.floor.floorid = floor.floorId || "";
             $scope.media.floor.floorname = floor.floorName || "";
@@ -75,6 +152,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             $scope.media.floor.typeid = floor.typeId || "";
             $scope.media.floor.floortype = floor.floorType || '男';
             $scope.media.floor.memo = floor.memo || "";
+            $scope.media.floor.collegeids = floor.collegeids || "";
         }else{
             $scope.media.floor.floorid = "";
             $scope.media.floor.floorname = "";
@@ -85,13 +163,72 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             $scope.media.floor.floornumber=1;
             $scope.media.floor.roomnumber=1;
             $scope.media.floor.startfloor=1;
+            $scope.media.floor.collegeids = "";
         }
+            
         typeInit();
+        $scope.getCollegeList();
+    //     CollegeService.getList(AppConfig.schoolCode).success(function(data){
+    //        var collegelist = data.data[0].collegeList;
+    //        if(data.code == 0){
+    //             for(var i = 0;i<collegelist.length;i++){
+    //                 $scope.floor.collegeName = collegelist[i].collegeName;
+    //                 $scope.floor.selectCollegeList = collegelist;
+    //             }
+    //         }else if(data.code == 4037){
+    //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+    //                 location.href="#login";$rootScope.loading = false;
+    //             }else
+    //             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning");
+    //    })
+
+    };
+
+    //楼层编辑
+    $scope.floorInit = function (n,floor) {
+        
+       $scope.media.floor.type = n;
+        if(floor){
+            $scope.media.floor.floorid = floor.floorId || "";
+            $scope.media.floor.floorname = floor.floorName || "";
+            $scope.media.floor.listorder = floor.listOrder || "";
+            $scope.media.floor.typeid = floor.typeId || "";
+            $scope.media.floor.floortype = floor.floorType || '男';
+            $scope.media.floor.memo = floor.memo || "";
+            $scope.media.floor.collegeids = floor.collegeids || "";
+        }else{
+            $scope.media.floor.floorid = "";
+            $scope.media.floor.floorname = "";
+            $scope.media.floor.listorder = "";
+            $scope.media.floor.typeid = "";
+            $scope.media.floor.floortype = '男';
+            $scope.media.floor.memo = "";
+            $scope.media.floor.floornumber=1;
+            $scope.media.floor.roomnumber=1;
+            $scope.media.floor.startfloor=1;
+            $scope.media.floor.collegeids = "";
+        }
+         typeInit();
+        var college = floor.roomList[0][0].collegeids.split(",");
+        $scope.getCollegeList(college);
+        // var college = floor.roomList[0][0].collegeids.split(",");
+        // for(var i=0; i<college.length;i++){
+        //     for( var j=0; j<$scope.floor.selectCollegeList.length;j++){
+        //         if(college[i] == $scope.floor.selectCollegeList[j].collegeId){
+        //             $scope.floor.selectCollegeList[j].checked = true;
+        //         }
+        //     }
+        //     }
+                    
+        //     console.log($scope.floor.selectCollegeList);
+        //     $scope.media.collegeCheckEvent($scope.floor)
+
+       
+   
     }
     $scope.floor = {
         addSave:function (fun) {
             if($scope.media.floor.type == 0){
-                alert($scope.media.floor.floortype);
                 $rootScope.loading = true;
                 RoomService.addFloor({
                     
@@ -110,11 +247,11 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     floortype:$scope.media.floor.floortype,
                     floorname:$scope.media.floor.floorname,
                     memo:$scope.media.floor.memo,
+                    collegeids:$scope.media.floor.collegeids,
 
                     isletter:$scope.media.floor.isletter
 
                 }).success(function(data){
-                    alert(0);
                     // console.log(data);
                     if(data.code == 0 ){
                         swal("提示", "添加成功！", "success"); 
@@ -129,6 +266,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     }
                 });
             }else if($scope.media.floor.type == 2){
+                
                 $rootScope.loading = true;
                 var param={
                     token:AppConfig.token,
@@ -142,7 +280,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     line: $scope.media.floor.line,
                     prefix:$scope.media.floor.prefix,
                     suite:$scope.media.floor.suite,
-                    isletter:$scope.media.floor.isletter
+                    isletter:$scope.media.floor.isletter,
+                    collegeids:$scope.media.floor.collegeids
                 };
                 RoomService.multiAdd(param).success(function(data){
                     $rootScope.loading = false;
@@ -214,7 +353,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 typeid:newtypeid,
                 floortype:$scope.media.floor.floortype,
                 floorname:$scope.media.floor.floorname,
-                memo:$scope.media.floor.memo
+                memo:$scope.media.floor.memo,
+                collegeids:$scope.media.floor.collegeids,
             };
             RoomService.editFloor(param).success(function(data){
                 $rootScope.loading = false;
@@ -285,7 +425,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
     }
     
     $scope.roomInit = function (room,floor) {
-        console.log(floor)
+        $scope.getCollegeList();
         typeInit();
         $scope.media.floor.floorid = floor.floorId || "";
         $scope.media.floor.floorname = floor.floorName || "";
@@ -316,6 +456,19 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             $scope.media.room.listtype  = "" + 2;
             $scope.media.room.listroom  = '';
         }
+         var college = floor.roomList[0][0].collegeids.split(",");
+         for(var i=0; i<college.length;i++){
+             for( var j=0; j<$scope.floor.selectCollegeList.length;j++){
+                 if(college[i] == $scope.floor.selectCollegeList[j].collegeId){
+                     $scope.floor.selectCollegeList[j].checked = true;
+                 }
+             }
+         }
+       
+         console.log($scope.floor.selectCollegeList);
+        //  $scope.floor.selectCollegeList[0].checked = true;
+         $scope.media.collegeCheckEvent($scope.floor)
+
     }
     $scope.room = {
 
@@ -345,7 +498,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 suite:$scope.media.room.suite,
                 memo:$scope.media.room.memo,
                 line:$scope.media.room.line,
-                isletter:$scope.media.room.isletter
+                isletter:$scope.media.room.isletter,
+                collegeids:$scope.media.floor.collegeids,
             };
             if($scope.media.room.listtype < 2){
                 if($scope.media.room.listroom.length > 0)
@@ -389,7 +543,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 typeid:$scope.media.room.typeid,
                 roomname:$scope.media.room.roomname,
                 memo:$scope.media.room.memo,
-                line:$scope.media.room.line
+                line:$scope.media.room.line,
+                collegeids:$scope.media.floor.collegeids,
             };
             if($scope.media.room.listtype < 2){
                 if($scope.media.room.listroom.length > 0)
@@ -495,7 +650,6 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
         }
         $rootScope.loading = true;
         RoomService.getList(flatid).success(function(data){
-            console.log(data);
             if(data.code == 0 ){
                 data.data.floorList = data.data.floorList || [];
                 data.data.floorList.forEach(function(list){

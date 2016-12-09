@@ -14,7 +14,7 @@
         {{media.title}}-{{sex}}
     </div>
     <!--div ng-if="menuCheck(145)"><a class="btn btn-success" ng-click="showCard('#floorAdd',floorInit(0))">新增楼层</a></div-->
-    <div ng-if="menuCheck(152)" class="bar-full"><a class="btn btn-info" ng-click="showCard('#floorAdd',floorInit(2))">批量添加</a></div>
+    <div ng-if="menuCheck(152)" class="bar-full"><a class="btn btn-info" ng-click="showCard('#floorAdd',addfloorInit(2))">批量添加</a></div>
     <div>
         楼层：{{flat.floorNum}}
 
@@ -168,25 +168,24 @@
                                          <span style="color:red">{{media.msex}}</span>
                                     </td>
                                 </tr>
-                                <!--<tr>
+                                <tr>
                                     <td>所属学院</td>
                                     <td>
                                         <div class="dropdown" style="float: left;">
-                                            <button class="btn btn-default claBtn" ng-click="cla.showClassMenu=!cla.showClassMenu">
-                                                 <span style="padding-right:10px;">{{cla.text ? cla.text : "选择班级"}}</span>
+                                            <button class="btn btn-default claBtn" ng-click="floor.showCollegeMenu=!floor.showCollegeMenu">
+                                                 <span style="padding-right:10px;">{{floor.text ? floor.text : "请选择学院"}}</span>
                                                  <span class="caret" style="position: absolute;top: 18px;right: 5px;"></span>
                                             </button>
-                                            <ul class="dropdownmenuClass" ng-show="cla.showClassMenu" >
-                                                <li value=""><label><input type="checkbox" ng-model="cla.checkedAll" ng-click="form.classCheckAll(cla)">全部班级</label></li>
-                                                <li ng-repeat="item in cla.classList">
+                                            <ul class="dropdownmenuClass" ng-show="floor.showCollegeMenu" >
+                                                <li ng-repeat="floors in floor.selectCollegeList">
                                                     <label>
-                                                        <input class="chkbox" type="checkbox" ng-model="item.checked" ng-click="form.classCheckEvent(cla)">{{item.className}}
+                                                        <input class="chkbox" type="checkbox" ng-model="floors.checked" ng-click="media.collegeCheckEvent(floor)">{{floors.collegeName}}
                                                     </label>
                                                 </li>
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>-->
+                                </tr>
                                 <tr ng-hide="media.floor.type == 2">
                                     <td>备注</td>
                                     <td><textarea class="form-control" rows="3" ng-disabled="(media.floor.type==0&&!menuCheck(145)) || (media.floor.type==1&&!menuCheck(146))" ng-model="media.floor.memo"></textarea></td>
@@ -295,6 +294,24 @@
                                             <option value="0" ng-selected="media.room.status==0">开启</option>
                                             <option value="1" ng-selected="media.room.status==1">关闭</option>
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>所属学院</td>
+                                    <td>
+                                        <div class="dropdown" style="float: left;">
+                                            <button class="btn btn-default claBtn" ng-click="room.showCollegeMenu=!room.showCollegeMenu">
+                                                 <span style="padding-right:10px;">{{floor.text ? floor.text : "请选择学院"}}</span>
+                                                 <span class="caret" style="position: absolute;top: 18px;right: 5px;"></span>
+                                            </button>
+                                            <ul class="dropdownmenuClass" ng-show="room.showCollegeMenu" >
+                                                <li ng-repeat="floors in floor.selectCollegeList">
+                                                    <label>
+                                                        <input class="chkbox" type="checkbox" ng-model="floors.checked" ng-click="media.collegeCheckEvent(floor)">{{floors.collegeName}}
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>

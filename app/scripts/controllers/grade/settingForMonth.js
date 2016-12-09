@@ -102,10 +102,10 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
     $scope.addSave = function(){
         (function () {
             if($scope.media.type){
-                if($scope.media.pointmark < 1){
+                if($scope.media.type == 3 && $scope.media.pointmark < 1){
                     swal("提示", "单次点击扣分数值不得小于1", "warning"); 
                     return;
-                }else if($scope.media.pointmark > $scope.media.fullmark){
+                }else if($scope.media.type == 3 && $scope.media.pointmark > $scope.media.fullmark){
                     swal("提示", "单次点击扣分数值不得大于分值", "warning"); 
                     return;
                 }
@@ -153,10 +153,10 @@ function($scope,AppConfig,$rootScope,RoomService,GradeService) {
     $scope.editSave = function(){
         (function () {
             if($scope.media.type){
-                if($scope.media.pointmark < 1){
+                if($scope.media.type == 3 && $scope.media.pointmark < 1){
                     swal("提示", "单次点击扣分数值不得小于1", "warning"); 
                     return;
-                }else if($scope.media.pointmark > $scope.media.fullmark){
+                }else if($scope.media.type == 3 && $scope.media.pointmark > $scope.media.fullmark){
                     swal("提示", "单次点击扣分数值不得大于分值", "warning"); 
                     return;
                 }
