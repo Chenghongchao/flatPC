@@ -163,7 +163,7 @@
                                     <td>
                                         <ul>    
                                             <li ng-repeat="cla in form.classes" class="clearfix">
-                                                <select class="form-control" style="height:40px;float: left;margin-right: 15px" ng-change="selecter.collegeSelecter(cla)" ng-model="cla.collegeId">
+                                                <select class="form-control add-select" style="" ng-change="selecter.collegeSelecter(cla)" ng-model="cla.collegeId">
                                                     <option value="">选择学院</option>
                                                     <option ng-repeat="college in treeCollege[0].collegeList"  value="{{college.collegeId}}">{{college.collegeName}}</option>
                                                 </select>
@@ -177,7 +177,7 @@
                                                 <div class="dropdown" style="float: left;">
                                                     <button class="btn btn-default claBtn" ng-click="cla.showClassMenu=!cla.showClassMenu">
                                                         <span style="padding-right:10px;">{{cla.text ? cla.text : "选择班级"}}</span>
-                                                        <span class="caret" style="position: absolute;top: 18px;right: 5px;"></span>
+                                                        <span class="caret" style="position: absolute;top: 12px;right: 5px;"></span>
                                                     </button>
                                                     <ul class="dropdownmenuClass" ng-show="cla.showClassMenu" >
                                                         <li value=""><label><input type="checkbox" ng-model="cla.checkedAll" ng-click="form.classCheckAll(cla)">全部班级</label></li>
@@ -198,7 +198,7 @@
                                 <tr>
                                     <td class="require">角色</td>
                                     <td>
-                                        <select ng-model="form.roleid">
+                                        <select class="add-select" ng-model="form.roleid">
                                             <option value="">请选择角色</option>
                                             <option ng-repeat="role in roles || []" value="{{role.roleId}}" ng-selected="form.roleid == role.roleId">{{role.title}}</option>
                                         </select>

@@ -1,9 +1,12 @@
 angular.module('flatpcApp')
-.controller('RoomCtrl', ['$scope', 'AppConfig','$rootScope','RoomService','FlatService','$filter',
-function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
+.controller('RoomCtrl', ['$scope', 'AppConfig','$rootScope','RoomService','CollegeService','FlatService','$filter',
+function($scope,AppConfig,$rootScope,RoomService,CollegeService,FlatService,$filter) {
     $scope.media = {
         flatid:'',
         title:'',
+        showCollegeMenu:false, //是否显示学院下拉
+        collegeSelectText:'',  //选择学院后显示的文字
+        collegeList: null,     //学院数据
         floor:{
             type:0,
             floorid:'',
@@ -30,6 +33,69 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             memo:'',
             line:0,
             isletter:''
+        },
+        //楼层和寝室公用学院选择逻辑
+        collegeCheckEvent: function(){
+            var icount = 0, college = null;
+            $scope.media.collegeSelectText = "";
+            for(var i=0; i<$scope.media.collegeList.length; i++){
+                college = $scope.media.collegeList[i];
+                if(college.checked){
+                    icount++;
+                    if(icount==1){
+                        $scope.media.collegeSelectText = college.collegeName;
+                    }else if(icount==2){
+                        $scope.media.collegeSelectText += ","+college.collegeName;
+                    }else{
+                        $scope.media.collegeSelectText += "...";
+                        break;
+                    }
+                } 
+            }
+        },
+        getCollegeCheckedIds: function(){
+            var ids = "";
+            $scope.media.collegeList.forEach(function(data, index, array){
+                if(data.checked){
+                    if(""!=ids) ids += ",";
+                    ids += data.collegeId;
+                }
+            });
+            return ids;
+        },
+        getCollegeIdsByFloor: function(floor){ //获取楼层中所有的学院ID
+            var ids = [floor];
+            if(floor && floor.roomList){
+                var row = null, room = null, arry = null;
+                for(var i=0; i<floor.roomList.length; i++){ //循环房间列表
+                    row = floor.roomList[i];
+                    for(var j=0; j<row.length; j++){   //循环每一行房间
+                        room = row[j];
+                        if(room.collegeids){ //分割学院ID
+                            arry = room.collegeids.split(",");
+                            for(var k=0; k<arry.length; k++){
+                                if(ids.indexOf(arry[k])==-1){
+                                    ids[ids.length] = arry[k];
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            return ids;
+        },
+        getCollegeIdsByRoom: function(room){ //获取房间的学院ID
+            var ids = [];
+            if(room.collegeids){ //分割学院ID
+                arry = room.collegeids.split(",");
+                for(var k=0; k<arry.length; k++){
+                    if(ids.indexOf(arry[k])==-1){
+                        ids[ids.length] = arry[k];
+                    }
+                }
+            }
+            return ids;
         }
     }
     
@@ -87,14 +153,18 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             $scope.media.floor.startfloor=1;
         }
         typeInit();
+        //加载学院
+        $scope.media.showCollegeMenu = false;
+        $scope.media.collegeSelectText = '';
+        var checkedIds= $scope.media.getCollegeIdsByFloor(floor);
+        $scope.getCollegeList(checkedIds);
     }
     $scope.floor = {
         addSave:function (fun) {
             if($scope.media.floor.type == 0){
-                alert($scope.media.floor.floortype);
+                var collegeIds = "";
                 $rootScope.loading = true;
                 RoomService.addFloor({
-                    
                     token:AppConfig.token,
                     universityid:AppConfig.schoolCode,
                     flatid:$scope.media.flatid,
@@ -110,11 +180,9 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     floortype:$scope.media.floor.floortype,
                     floorname:$scope.media.floor.floorname,
                     memo:$scope.media.floor.memo,
-
-                    isletter:$scope.media.floor.isletter
-
+                    isletter:$scope.media.floor.isletter,
+                    collegeids: $scope.media.getCollegeCheckedIds()
                 }).success(function(data){
-                    alert(0);
                     // console.log(data);
                     if(data.code == 0 ){
                         swal("提示", "添加成功！", "success"); 
@@ -142,7 +210,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                     line: $scope.media.floor.line,
                     prefix:$scope.media.floor.prefix,
                     suite:$scope.media.floor.suite,
-                    isletter:$scope.media.floor.isletter
+                    isletter:$scope.media.floor.isletter,
+                    collegeids: $scope.media.getCollegeCheckedIds()
                 };
                 RoomService.multiAdd(param).success(function(data){
                     $rootScope.loading = false;
@@ -207,6 +276,7 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             }else{
                 newtypeid=$scope.media.floor.typeid;
             }
+            var collegeIds = "";
             var param={
                 token:AppConfig.token,
                 floorid:$scope.media.floor.floorid,
@@ -214,7 +284,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 typeid:newtypeid,
                 floortype:$scope.media.floor.floortype,
                 floorname:$scope.media.floor.floorname,
-                memo:$scope.media.floor.memo
+                memo:$scope.media.floor.memo,
+                collegeids: $scope.media.getCollegeCheckedIds()
             };
             RoomService.editFloor(param).success(function(data){
                 $rootScope.loading = false;
@@ -285,7 +356,6 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
     }
     
     $scope.roomInit = function (room,floor) {
-        console.log(floor)
         typeInit();
         $scope.media.floor.floorid = floor.floorId || "";
         $scope.media.floor.floorname = floor.floorName || "";
@@ -316,22 +386,21 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
             $scope.media.room.listtype  = "" + 2;
             $scope.media.room.listroom  = '';
         }
+        //加载学院
+        $scope.media.showCollegeMenu = false;
+        $scope.media.collegeSelectText = '';
+        var checkedIds= $scope.media.getCollegeIdsByRoom(room);
+        $scope.getCollegeList(checkedIds);
     }
     $scope.room = {
-
-
-
-
-
         addSave:function (fun) {
-
             if($scope.sex == '混住'){
                 swal("提示", "添加成功！", "success");
             }else if($scope.media.room.roomstyle != $scope.sex && "混住" !=$scope.sex){
                 swal("提示","与当前楼栋性别不符合","warning");
                 return false;
             }
-            
+            var collegeIds = "";
             var param = {
                 token:AppConfig.token,
                 floorid:$scope.media.floor.floorid,
@@ -345,7 +414,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 suite:$scope.media.room.suite,
                 memo:$scope.media.room.memo,
                 line:$scope.media.room.line,
-                isletter:$scope.media.room.isletter
+                isletter:$scope.media.room.isletter,
+                collegeids: $scope.media.getCollegeCheckedIds()
             };
             if($scope.media.room.listtype < 2){
                 if($scope.media.room.listroom.length > 0)
@@ -389,7 +459,8 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 typeid:$scope.media.room.typeid,
                 roomname:$scope.media.room.roomname,
                 memo:$scope.media.room.memo,
-                line:$scope.media.room.line
+                line:$scope.media.room.line,
+                collegeids: $scope.media.getCollegeCheckedIds()
             };
             if($scope.media.room.listtype < 2){
                 if($scope.media.room.listroom.length > 0)
@@ -461,6 +532,36 @@ function($scope,AppConfig,$rootScope,RoomService,FlatService,$filter) {
                 });
             });
         }
+        
+    }
+    /**
+     * 获取学院数据
+    */
+    $scope.getCollegeList = function(checkedIds){
+        $rootScope.loading = true;
+        CollegeService.getList(AppConfig.schoolCode).success(function(data){
+            $rootScope.loading = false;
+            if(data.code == 0){
+                $scope.media.collegeList = data.data[0].collegeList;
+                if(checkedIds && checkedIds.length>0){
+                    $scope.media.collegeList.forEach(function(data, index, array){
+                        for(var i=0; i<checkedIds.length; i++){
+                            if(data.collegeId == checkedIds[i]){
+                                data.checked = true;
+                                break;
+                            }
+                        }
+                    });
+                    $scope.media.collegeCheckEvent();
+                }
+            }
+            else if(data.code == 4037){
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                location.href="#login";$rootScope.loading = false;
+            }else{
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            }
+        });
     }
     
     function typeInit() {

@@ -168,11 +168,11 @@
                                     <td>
                                         <ul>    
                                             <li style="padding:5px 0" ng-repeat="flat in form.flats" class="clearfix">
-                                                <select class="form-control" ng-change="selecter.campusSelecter(flat)" ng-model="flat.campusId" style="height:40px;float: left; margin-right:15px;">
+                                                <select class="form-control add-select" ng-change="selecter.campusSelecter(flat)" ng-model="flat.campusId">
                                                     <option value="">选择校区</option>
                                                     <option ng-repeat="campus in treeFlat.cmpusList" value="{{campus.campusId}}">{{campus.title}}</option>
                                                 </select>
-                                                <select class="form-control" ng-change="selecter.liveAreaSelecter(flat)" ng-model="flat.liveAreaId" style="height:40px;float: left; margin-right:15px;">
+                                                <select class="form-control add-select" ng-change="selecter.liveAreaSelecter(flat)" ng-model="flat.liveAreaId" style="min-width:120px;">
                                                     <option value="">选择生活区</option>
                                                     <option ng-repeat="liveArea in flat.liveAreaList" value="{{liveArea.liveAreaId}}">{{liveArea.title}}</option>
                                                 </select>
@@ -182,9 +182,9 @@
                                                     <option ng-if="flat.liveAreaId!='1'" ng-repeat="flat in flat.flatList" value="{{flat.flatId}}">{{flat.title}}</option>
                                                 </select>-->
                                                 <div class="dropdown" style="float: left;">
-                                                    <button class="btn btn-default claBtn" ng-click="flat.showFlatMenu=!flat.showFlatMenu" >
+                                                    <button class="btn btn-default claBtn" ng-click="flat.showFlatMenu=!flat.showFlatMenu" style="min-width:120px;">
                                                         <span style="padding-right:15px;">{{flat.text ? flat.text : "选择楼栋"}}</span>
-                                                        <span class="caret" style="position: absolute;top: 18px;right: 5px;"></span>
+                                                        <span class="caret" style="position: absolute;top: 12px;right: 5px;"></span>
                                                     </button>
                                                     <ul class="dropdownmenuClass" ng-show="flat.showFlatMenu" >
                                                         <li value=""><label><input type="checkbox" ng-model="flat.checkedAll" ng-click="form.flatCheckAll(flat)">全部楼栋</label></li>
@@ -204,7 +204,7 @@
                                 <tr>
                                     <td class="require">角色</td>
                                     <td>
-                                        <select ng-model="form.roleid">
+                                        <select class="add-select" ng-model="form.roleid">
                                             <option value="">请选择角色</option>
                                             <option ng-repeat="role in roles || []" value="{{role.roleId}}" ng-selected="form.roleid == role.roleId">{{role.title}}</option>
                                         </select>

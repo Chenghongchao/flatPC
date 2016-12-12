@@ -100,6 +100,17 @@ angular.module('flatpcApp')
                         }else if(menuCheck(558)){
                             menus.push('driver');
                         }else menus.push(' ');
+                    }else if(menuCheck(567)){
+                         menus.push('formNotice');
+                        if(menuCheck(568)){
+                            menus.push('formNotice');
+                        }else if(menuCheck(569)){
+                            menus.push('formMarketPrice');
+                        }else if(menuCheck(570)){
+                            menus.push('formPriceGrade');
+                        }else if(menuCheck(571)){
+                            menus.push('formPersonGrade');
+                        }else menus.push(' ');
                     }else if(menuCheck(474)){
                          menus.push('questionnaire');
                         if(menuCheck(475)){
@@ -798,7 +809,27 @@ angular.module('flatpcApp')
                 if(menuCheck(558))
                     return ['busbooking','driver','driver'];
                 else
+                    return null;
+            case 'formNotice':
+                if(menuCheck(568))
+                    return ['formining','formNotice','formNotice'];
+                else
                     return null; 
+            case 'formMarketPrice':
+                if(menuCheck(569))
+                    return ['formining','formMarketPrice','formMarketPrice'];
+                else
+                    return null; 
+            case 'formPriceGrade':
+                if(menuCheck(570))
+                    return ['formining','formPriceGrade','formPriceGrade'];
+                else
+                    return null;   
+            case 'formPersonGrade':
+                if(menuCheck(571))
+                    return ['formining','formPersonGrade','formPersonGrade'];
+                else
+                    return null;                           
              case 'questionnaire':
                 if(menuCheck(475))
                     return ['question','questionnaire','questionnaire'];

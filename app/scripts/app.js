@@ -43,6 +43,7 @@ angular
     EXAM:'http://test3.houqinbao.com/Examination/',
     HOTEL:'http://120.26.48.150/hotel/',
     BUS:'http://code.houqinbao.com:3338/bus/',
+    FORMINING:'http://code.houqinbao.com:3338/formining/',
     QUESTION:'http://120.26.48.150/question/',
     MEET:'http://code.houqinbao.com:3338/meet/',
       schoolCode:0,
@@ -1368,7 +1369,6 @@ angular
             }
         }
     })
-    
     .state('bookinggrade', {
         url: "/bookinggrade",
         views: {
@@ -1494,6 +1494,74 @@ angular
             "": {
                 templateUrl: 'views/busbooking/driver.html',
                 controller: 'DriverCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('formNotice', {
+        url: "/formNotice",
+        views: {
+            "": {
+                templateUrl: 'views/formining/formNotice.html',
+                controller: 'formNoticeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('formMarketPrice', {
+        url: "/formMarketPrice",
+        views: {
+            "": {
+                templateUrl: 'views/formining/formMarketPrice.html',
+                controller: 'formMarketPriceCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('formPriceGrade', {
+        url: "/formPriceGrade",
+        views: {
+            "": {
+                templateUrl: 'views/formining/formPriceGrade.html',
+                controller: 'formPriceGradeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('formPersonGrade', {
+        url: "/formPersonGrade",
+        views: {
+            "": {
+                templateUrl: 'views/formining/formPersonGrade.html',
+                controller: 'formPersonGradeCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

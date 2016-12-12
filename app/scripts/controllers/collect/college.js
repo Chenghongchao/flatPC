@@ -15,12 +15,32 @@ angular.module('flatpcApp')
         degreeYear:'',
         collegeSort:'',
         collegeSortType:'',
-        classSort1:'',
-        classSortType1:'',
-        classSort2:'',
-        classSortType2:'',
-        classSort3:'',
-        classSortType3:'',
+        sort:{ //排序
+            first:{ //第一优先级
+                sortId: "", //classsort1
+                type: "",//classstype1
+                list:[{id:1,text:'学历',enable:true}
+                    ,{id:2,text:'年级',enable:true}
+                    ,{id:3,text:'学年制',enable:true}
+                    ,{id:4,text:'班级首字字母',enable:true}]
+            },
+            second:{//第二优先级
+                sortId: "", //classsort2
+                type: "",//classstype2
+                list:[{id:1,text:'学历',enable:true}
+                    ,{id:2,text:'年级',enable:true}
+                    ,{id:3,text:'学年制',enable:true}
+                    ,{id:4,text:'班级首字字母',enable:true}]
+            },
+            third:{//第三优先级
+                sortId: "", //classsort3
+                type: "",//classstype3
+                list:[{id:1,text:'学历',enable:true}
+                    ,{id:2,text:'年级',enable:true}
+                    ,{id:3,text:'学年制',enable:true}
+                    ,{id:4,text:'班级首字字母',enable:true}]
+            },      
+        },
         classId:'',
         shortName:'',
         history:0,
@@ -54,14 +74,6 @@ angular.module('flatpcApp')
         $scope.media.grade=item.grade || '';
         $scope.media.degree=item.degree || '';
         $scope.media.degreeyear=item.degreeYear+'' || '';
-        $scope.media.collegeSort=item.collegeSort || '';
-        $scope.media.collegeSortType=item.collegeSortType || '';
-        $scope.media.classSort1=item.classSort1 || '';
-        $scope.media.classSortType1=item.classSortType1 || '';
-        $scope.media.classSort2=item.classSort2 || '';
-        $scope.media.classSortType2=item.classSortType2 || '';
-        $scope.media.classSort3=item.classSort3 || '';
-        $scope.media.classSortType3=item.classSortType3 || '';
         $scope.media.history = item.history?true:false || false;
         $scope.media.listOrder=item.listOrder || 1;
         if($scope.media.type == 1) {
@@ -119,17 +131,17 @@ angular.module('flatpcApp')
     $scope.sortApply = function(){
         $rootScope.loading = true;
         (function(){
-            if($scope.media.type == 5){
+            if($scope.media.type == 0){
                 return CollegeService.sortApply({
                     schoolcode:AppConfig.schoolCode,
                     collegesort:$scope.media.collegeSort, 
-                    collegesorttype:$scope.media.collegeSorTtype,
-                    classsort1:$scope.media.classSort1, 
-                    classsorttype1:$scope.media.classSortType1,
-                    classsort2:$scope.media.classSort2, 
-                    classsorttype2:$scope.media.classSortType2,
-                    classsort3:$scope.media.classSort3, 
-                    classsorttype3:$scope.media.classSortType3,
+                    collegesorttype:$scope.media.collegeSortType,
+                    classsort1:$scope.media.sort.first.sortId, 
+                    classsorttype1:$scope.media.sort.first.type,
+                    classsort2:$scope.media.sort.second.sortId,  
+                    classsorttype2:$scope.media.sort.second.type,
+                    classsort3:$scope.media.sort.third.sortId,  
+                    classsorttype3:$scope.media.sort.third.type,
                 })
             }
         })().success(function(data){
@@ -271,13 +283,69 @@ angular.module('flatpcApp')
         });
         
     }
-
+    /**
+     * 设置学院班级排序
+     * 三个优先级的选项不能相同
+     */
+    $scope.firstSortSelectEvent = function(){
+        alert(1);
+        $scope.setSecondSortData();
+        $scope.setThirdSortData();
+    }
+    $scope.secondSortSelectEvent = function(){
+        alert(2);
+        $scope.setFirstSortData();
+        $scope.setThirdSortData();
+    }
+    $scope.thirdSortSelectEvent = function(){
+        alert(3);
+        $scope.setFirstSortData();
+        $scope.setSecondSortData();
+    }
+    $scope.setFirstSortData = function(){
+        $scope.media.sort.first.list.forEach(function(data,index,array) {
+            if(($scope.media.sort.second.sortId && data.id == $scope.media.sort.second.sortId) 
+            || ($scope.media.sort.third.sortId && data.id == $scope.media.sort.third.sortId) ){
+                data.enable = false;  
+            }else{
+                data.enable = true;  
+            }
+        });
+    }
+    $scope.setSecondSortData = function(){
+        $scope.media.sort.second.list.forEach(function(data,index,array) {
+            if(($scope.media.sort.first.sortId && data.id == $scope.media.sort.first.sortId) 
+            || ($scope.media.sort.third.sortId && data.id == $scope.media.sort.third.sortId) ){
+                data.enable = false;  
+            }else{
+                data.enable = true;  
+            }
+        });
+    }
+    $scope.setThirdSortData = function(){
+        $scope.media.sort.third.list.forEach(function(data,index,array) {
+            if(($scope.media.sort.first.sortId && data.id == $scope.media.sort.first.sortId)  
+            || ($scope.media.sort.second.sortId && data.id == $scope.media.sort.second.sortId) ){
+                data.enable = false;  
+            }else{
+                data.enable = true;  
+            }
+        });
+    }     
     $scope.getCollegectSort = function(){
         $rootScope.loading = true;
         return CollegeService.getCollegectSort(AppConfig.schoolCode).success(function(data){ 
         }).success(function (data) {
             $rootScope.loading = false;
             if(data.code == 0){
+                $scope.media.collegeSort = data.data.collegesort, 
+                $scope.media.collegeSortType = data.data.collegesorttype, 
+                $scope.media.sort.first.sortId = data.data.classsort1, 
+                $scope.media.sort.first.type = data.data.classsorttype1, 
+                $scope.media.sort.second.sortId = data.data.classsort2,   
+                $scope.media.sort.second.type = data.data.classsorttype2, 
+                $scope.media.sort.third.sortId = data.data.classsort3,   
+                $scope.media.sort.third.type = data.data.classsorttype3, 
                 refresh();
             }else if(data.code == 4037){
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 

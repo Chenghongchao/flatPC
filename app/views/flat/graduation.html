@@ -60,7 +60,7 @@
                     <div class="tool-bar">
                         <div>
                             <button ng-if="menuCheck(32)" class="btn btn-addon btn-info" ng-click="resetForm('#multi',dataInit)">
-                                <i class="glyphicon glyphicon-plus"></i>
+                                <i class="ALiconfont icon-piliangxiugai" style="font-size:24px"></i>
                                 批量退宿
                             </button>
                         </div>
@@ -324,18 +324,19 @@
                             </ul>
                             <ul class="form-tabs-container">
                                 <li class="fadeIn animated">
-                                    <form class="form-tabs-tool-bar" ng-submit="form.collegeClassSearch()">
+                                    <div class="form-tabs-tool-bar">
                                         <div class="batch-tool-bar">
                                             <span>请选择毕业年</span>
                                             <select class="form-control" ng-change="form.yearChangeEvent()" ng-options="y.id as y.text for y in form.selectYear" ng-model="form.year"></select>
                                         </div>
                                         <div>
-                                            <button ng-hide="form.collegeClassList.length>0" type="submit" class="btn btn-stroke btn-info btn-batch">搜索</button>
+                                            <button ng-hide="form.collegeClassList.length>0" type="button" class="btn btn-stroke btn-info btn-batch" ng-click="form.gradesSearch()">搜索</button>
                                         </div>
                                         <div>
-                                            <button ng-show="form.collegeClassList.length>0" data-role="next" class="btn btn-stroke btn-info btn-batch">下一步</button>
+                                            <font class="xnzTips" ng-show="form.collegeClassList.length>0 && !form.isAble2Next">请勾选学年制</font>
+                                            <button ng-show="form.collegeClassList.length>0" ng-disabled="!form.isAble2Next" data-role="next" class="btn btn-batch" ng-class="{true: 'btn-info btn-stroke', false: 'btn-disable'}[form.isAble2Next]" ng-click="form.classesSearch()">下一步</button>
                                         </div>
-                                    </form>
+                                    </div>
                                     <table class="table table-bordered bg-white">
                                         <thead>
                                             <tr>

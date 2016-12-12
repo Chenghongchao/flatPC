@@ -306,6 +306,8 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
         $scope.form.studentName = '';
         $scope.form.studentList = null;
         $scope.form.collegeClassList = null;
+        $scope.form.checkedAllGrade = false;
+        $scope.form.isAble2Next = false;
     }
     $scope.form = {
         classList:[],
@@ -316,6 +318,7 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
         selectYear: null,
         checkedAllGrade: false,
         collegeClassList: null,
+        isAble2Next: false, //是否允许点击下一步
         initSelectYearsData: function(){
             this.year = new Date().getFullYear();
             this.selectYear = [];
@@ -327,6 +330,7 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
             }
         },
         yearChangeEvent:function(){
+            this.isAble2Next = false;
             this.collegeClassList = [];
         },
         studentSearch:function () {
@@ -351,10 +355,11 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
             })
         },
-        collegeClassSearch:function () {
+        /**
+         * 学年制查询
+         */
+        gradesSearch:function () {
             var that = this;
-            this.getGradeCheckedIds();
-            this.classList = []; //重置数据
             $rootScope.loading = true;
             StudentService.getCollegeclassByYear({
                 schoolCode:AppConfig.schoolCode,
@@ -364,17 +369,6 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                 $rootScope.loading = false;
                 if(result.code == 0){
                     that.collegeClassList = result.data;
-                    angular.forEach(result.data, function(data,index,array){
-                        angular.forEach(data.listClass, function(data_class,index_class,array_class){
-                            that.classList[that.classList.length] ={
-                                classId: data_class.classId,
-                                className: data_class.className,
-                                collegeName: data_class.collegeName,
-                                Grades: data.Grades,
-                                degreeYears: data.degreeYears
-                            }
-                        }); 
-                    });
                 }else if(result.code == 4037){
                     swal("提示","错误代码："+ result.code + '，' + result.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
@@ -382,6 +376,25 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                 else
                     swal("提示","错误代码："+ result.code + '，' + result.msg, "warning"); 
             })
+        },
+        /**
+         * 班级查询
+         */
+        classesSearch:function () {
+            $scope.form.classList = []; //重置数据
+            angular.forEach(this.collegeClassList, function(data,index,array){
+                if(data.checked){
+                    angular.forEach(data.listClass, function(data_class,index_class,array_class){
+                        $scope.form.classList[$scope.form.classList.length] ={
+                            classId: data_class.classId,
+                            className: data_class.className,
+                            collegeName: data_class.collegeName,
+                            Grades: data.Grades,
+                            degreeYears: data.degreeYears
+                        }
+                    }); 
+                }
+            });
         },
         studentChoose:function (student) {
             this.student = student;
@@ -413,9 +426,15 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
             if(this.classList.length < 1)return;
             var ids = "";
             this.classList.forEach(function (cla) {
-                ids += cla.classId + ',';
+                if(cla.checked){
+                    ids += cla.classId + ',';
+                }
             })
             ids = ids.substring(0,ids.length-1);
+            if(null==ids || ids.length==0){
+                swal("提示", "请勾选后再提交！", "warning"); 
+                return;
+            }
             $rootScope.loading = true;
             GraduationService.add({
                 type:1,
@@ -441,9 +460,15 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
             $scope.form.collegeClassList.forEach(function (data, index, array) {
                 data.checked = $scope.form.checkedAllGrade;
             })
+            if($scope.form.checkedAllGrade){
+                $scope.form.isAble2Next = true; //允许点击下一步
+            }else{
+                $scope.form.isAble2Next = false; //不允许点击下一步
+            }
         },
         checkedGradeEvent:function(cla){
             if(cla.checked){
+                $scope.form.isAble2Next = true; //允许点击下一步
                 var isCheckedAll = true;
                 for(var i=0; i<$scope.form.collegeClassList.length; i++){
                     if(!$scope.form.collegeClassList[i].checked){
@@ -454,12 +479,16 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                 $scope.form.checkedAllGrade = isCheckedAll;
             }else{
                 $scope.form.checkedAllGrade = false;
+                //是否允许点击下一步
+                var isAllUnChecked = true;
+                for(var i=0; i<$scope.form.collegeClassList.length; i++){
+                    if($scope.form.collegeClassList[i].checked){
+                        isAllUnChecked = false;
+                        break;
+                    }
+                }
+                $scope.form.isAble2Next = !isAllUnChecked;
             }
-        },
-        getGradeCheckedIds: function(){
-            //接口没有传学年制ID，暂时
-            //console.log(JSON.stringify($scope.form.collegeClassList));
-            //alert(JSON.stringify($scope.form.collegeClassList));
         },
         checkedAllClassEvent:function(){
             $scope.form.classList.forEach(function (data, index, array) {
