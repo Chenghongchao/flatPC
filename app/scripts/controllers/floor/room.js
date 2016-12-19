@@ -79,16 +79,15 @@ function($scope,AppConfig,$rootScope,RoomService,CollegeService,FlatService,$fil
                                 }
                             }
                         }
-                        
                     }
                 }
             }
             return ids;
         },
         getCollegeIdsByRoom: function(room){ //获取房间的学院ID
-            var ids = [];
+            var ids = [], arry = null;
             if(room.collegeids){ //分割学院ID
-                arry = room.collegeids.split(",");
+                 arry = room.collegeids.split(",");
                 for(var k=0; k<arry.length; k++){
                     if(ids.indexOf(arry[k])==-1){
                         ids[ids.length] = arry[k];

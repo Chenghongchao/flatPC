@@ -82,6 +82,7 @@ angular.module('flatpcApp')
             $scope.media.collegeId = (parentId || '').toString();  
         }
         $scope.getCollegectSort();
+        
     }
     
     $scope.degreeChangeEvent = function () {
@@ -149,6 +150,7 @@ angular.module('flatpcApp')
             if(data.code == 0){
                 swal("提示", "添加成功！", "success"); 
                 refresh();
+                $scope.getCollegectList();
             }else if(data.code == 4037){
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                     location.href="#login";$rootScope.loading = false;
@@ -288,17 +290,14 @@ angular.module('flatpcApp')
      * 三个优先级的选项不能相同
      */
     $scope.firstSortSelectEvent = function(){
-        alert(1);
         $scope.setSecondSortData();
         $scope.setThirdSortData();
     }
     $scope.secondSortSelectEvent = function(){
-        alert(2);
         $scope.setFirstSortData();
         $scope.setThirdSortData();
     }
     $scope.thirdSortSelectEvent = function(){
-        alert(3);
         $scope.setFirstSortData();
         $scope.setSecondSortData();
     }
@@ -356,6 +355,25 @@ angular.module('flatpcApp')
             ////console.log(data);
         });
     }
+
+    $scope.getCollegectList = function(){
+        $rootScope.loading = true;
+        return CollegeService.getList(AppConfig.schoolCode).success(function(data){ 
+        }).success(function (data) {
+            $rootScope.loading = false;
+            if(data.code == 0){
+                $rootScope.treeCollege = data.data;
+                refresh();
+            }else if(data.code == 4037){
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                location.href="#login";$rootScope.loading = false;
+            }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            ////console.log(data);
+        });
+    }
+
 	//批量导入班级
 	$scope.batImportClassHandler = function(){
 		$scope.add(-1);
@@ -443,6 +461,7 @@ angular.module('flatpcApp')
 					}
 				}else{
 					$rootScope.treeCollege = data.data;
+                    console.log(JSON.stringify($rootScope.treeCollege));
 				}
             }else if(data.code == 4037){
                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 

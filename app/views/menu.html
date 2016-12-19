@@ -81,7 +81,18 @@
             </li>
         </ul>
     </li>
-     <li ng-if="menuCheck(17)" ng-show="sysMenu[1]=='flat'">
+   <li ng-if="menuCheck(368)" ng-show="sysMenu[1]=='flat'">
+        <div class="menu-title">寒暑假留宿</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(369)">
+                <a href="#holiday">
+                    <i class="ALiconfont icon-my-rili" style="background-color:#38adff; font-size:30px"></i>
+                    寒暑假留宿
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li ng-if="menuCheck(17)" ng-show="sysMenu[1]=='flat'">
         <div class="menu-title">毕业退宿管理</div>
         <ul class="menu-list">
             <li ng-if="menuCheck(32)">
@@ -159,17 +170,6 @@
                     新生入住
                     </a>
                 </li>
-        </ul>
-    </li>
-   <li ng-if="menuCheck(368)" ng-show="sysMenu[1]=='flat'">
-        <div class="menu-title">寒暑假留宿</div>
-        <ul class="menu-list">
-            <li ng-if="menuCheck(369)">
-                <a href="#holiday">
-                    <i class="ALiconfont icon-my-rili" style="background-color:#38adff; font-size:30px"></i>
-                    寒暑假留宿
-                </a>
-            </li>
         </ul>
     </li>
     <li ng-if="menuCheck(58)" ng-show="sysMenu[1]=='grade'">
@@ -282,19 +282,13 @@
         <ul class="menu-list">
             <li ng-if="menuCheck(73)">
                 <a href="#visit">
-                    <i class="ALiconfont icon-crmtubiao67" style="background-color:#ff9c00;font-size:28px;line-height:44px;"></i>
+                    <i class="ALiconfont icon-crmtubiao67" style="background-color:#02cf97;font-size:28px;line-height:44px;"></i>
                     访客登记
-                </a>
-            </li>
-            <li ng-if="menuCheck(74)">
-                <a href="#key">
-                    <i class="ALiconfont icon-iconfontkey" style="line-height:43px; background-color:#fc7257; font-size:25px"></i>
-                    借钥匙
                 </a>
             </li>
             <li ng-if="menuCheck(395)">
                 <a href="#latego">
-                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#02cf97; font-size:25px"></i>
+                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#fc7257; font-size:25px"></i>
                     晚出
                 </a>
             </li>
@@ -302,6 +296,12 @@
                 <a href="#late">
                     <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#38adff; font-size:25px"></i>
                     晚归
+                </a>
+            </li>
+            <li ng-if="menuCheck(74)">
+                <a href="#key">
+                    <i class="ALiconfont icon-iconfontkey" style="line-height:43px; background-color:#9c59b8; font-size:25px"></i>
+                    借钥匙
                 </a>
             </li>
             <!--<li ng-if="menuCheck(392)">
@@ -312,19 +312,32 @@
             </li>-->
             <li ng-if="menuCheck(394)">
                 <a href="#large">
-                    <i class="ALiconfont icon-chumendengji" style="line-height:42px; background-color:#fc7257; font-size:25px"></i>
-                   大宗物品出门登记
+                    <i class="ALiconfont icon-chumendengji" style="line-height:42px; background-color:#02cf97; font-size:25px"></i>
+                   大宗物品进出登记
+                </a>
+            </li>
+            <li ng-if="menuCheck(572)">
+                <a href="#illegalManage">
+                    <i class="ALiconfont icon-weizhangchuli" style="line-height:42px; background-color:#fc7257; font-size:25px"></i>
+                   违章物品管理
                 </a>
             </li>
         </ul>
     </li>
 
+
     <li ng-if="menuCheck(551)" ng-show="sysMenu[1]=='check'">
         <div class="menu-title">辅导员查看</div>
         <ul class="menu-list">
+            <li ng-if="menuCheck(573)">
+                <a href="#visitorStatistics">
+                    <i class="ALiconfont icon-users" style="line-height:43px; background-color:#02cf97; font-size:27px"></i>
+                    访客登记统计
+                </a>
+            </li>
             <li ng-if="menuCheck(552)">
                 <a href="#lategoCounselor">
-                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#02cf97; font-size:25px"></i>
+                    <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#fc7257; font-size:25px"></i>
                     晚出统计
                 </a>
             </li>
@@ -332,6 +345,18 @@
                 <a href="#lateCounselor">
                     <i class="ALiconfont icon-iconfontkey1" style="line-height:43px; background-color:#38adff; font-size:25px"></i>
                     晚归统计
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li ng-if="menuCheck(574)" ng-show="sysMenu[1]=='check'">
+        <div class="menu-title">基础设置</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(575)">
+                <a href="#checkSet">
+                    <i class="ALiconfont icon-set" style="line-height:43px; background-color:#38adff; font-size:25px"></i>
+                    基础设置
                 </a>
             </li>
         </ul>
@@ -488,6 +513,12 @@
                 <a href="#counselor">
                     <i class="ALiconfont icon-zhanghaoguanli" style="background-color:#ff6600;font-size:28px"></i>
                     辅导员
+                </a>
+            </li>
+            <li ng-if="menuCheck(576)">
+                <a href="#collegeAccount">
+                    <i class="ALiconfont icon-xueyuan" style="background-color:#ff9c00;font-size:28px"></i>
+                    学院账号
                 </a>
             </li>
         </ul>

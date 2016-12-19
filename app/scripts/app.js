@@ -1148,6 +1148,23 @@ angular
             }
         }
     })
+    .state('collegeAccount', {
+        url: "/collegeAccount",
+        views: {
+            "": {
+                templateUrl: 'views/admin/collegeAccount.html',
+                controller: 'collegeAccountCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('role', {
         url: "/role",
         views: {
@@ -1743,7 +1760,57 @@ angular
             }
         }
     })
-
+    .state('illegalManage', {
+        url: "/illegalManage",
+        views: {
+            "": {
+                templateUrl: 'views/checkIn/illegalManage.html',
+                controller: 'illegalManageCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('visitorStatistics', {
+        url: "/visitorStatistics",
+        views: {
+            "": {
+                templateUrl: 'views/checkIn/visitorStatistics.html',
+                controller: 'visitorStatisticsCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('checkSet', {
+        url: "/checkSet",
+        views: {
+            "": {
+                templateUrl: 'views/checkIn/checkSet.html',
+                controller: 'checkSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
     .state('repdc', {
         url: "/repdc",
         views: {

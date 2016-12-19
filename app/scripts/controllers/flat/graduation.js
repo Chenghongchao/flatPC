@@ -435,26 +435,38 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
                 swal("提示", "请勾选后再提交！", "warning"); 
                 return;
             }
-            $rootScope.loading = true;
-            GraduationService.add({
-                type:1,
-                adminid:AppConfig.adminId,
-                classids:ids
-            }).success(function (data) {
-                $rootScope.loading = false;
-                if(data.code == 0){
-                    swal("提示", "提交成功！", "success"); 
-                    refresh();
-                    if(fun && typeof fun == 'function')fun();
-                }else if(data.code == 4037){
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                    location.href="#login";$rootScope.loading = false;
-                }
-                else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                console.log(data);
-                
-            })
+            swal({   
+                title: "确认",   
+                text: "确定要批量退宿吗？",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#2772ee",   
+                confirmButtonText: "确定",   
+                cancelButtonText: "取消",   
+                closeOnConfirm: false 
+            }, 
+            function(){
+                $rootScope.loading = true;
+                GraduationService.add({
+                    type:1,
+                    adminid:AppConfig.adminId,
+                    classids:ids
+                }).success(function (data) {
+                    $rootScope.loading = false;
+                    if(data.code == 0){
+                        swal("提示", "提交成功！", "success"); 
+                        refresh();
+                        if(fun && typeof fun == 'function')fun();
+                    }else if(data.code == 4037){
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                        location.href="#login";$rootScope.loading = false;
+                    }
+                    else
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                    console.log(data);
+                    
+                });
+            });
         },
         checkedAllGradeEvent:function(){
             $scope.form.collegeClassList.forEach(function (data, index, array) {

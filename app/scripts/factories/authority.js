@@ -414,6 +414,11 @@ angular.module('flatpcApp')
                 if(menuCheck(523))
                     return ['admin','admin','counselor'];
                 else
+                    return null; 
+            case 'collegeAccount':
+                if(menuCheck(576))
+                    return ['admin','admin','collegeAccount'];
+                else
                     return null;        
             case 'role':
                 if(menuCheck(123))
@@ -514,6 +519,16 @@ angular.module('flatpcApp')
                     return ['flat','check','large'];
                 else
                     return null;
+            case 'illegalManage':
+                if(menuCheck(572))
+                    return ['flat','check','illegalManage'];
+                else
+                    return null;
+            case 'visitorStatistics':
+                if(menuCheck(573))
+                    return ['flat','check','visitorStatistics'];
+                else
+                    return null;
             case 'latego':
                 if(menuCheck(395))
                     return ['flat','check','latego'];
@@ -527,6 +542,11 @@ angular.module('flatpcApp')
             case 'lateCounselor':
                 if(menuCheck(553))
                     return ['flat','check','lateCounselor'];
+                else
+                    return null;
+            case 'checkSet':
+                if(menuCheck(575))
+                    return ['flat','check','checkSet'];
                 else
                     return null;
             case 'logs':
