@@ -669,7 +669,14 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
-                            swal("提示","收缴成功！", "success"); 
+                            swal({
+                            title: "提示",
+                            text: "收缴成功！",
+                            type: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                            });
+                            // swal("提示","收缴成功！", "success"); 
                             that.getListByRoom();
                             that.getBedData();
                         }else if(data.code == 4037){
@@ -679,6 +686,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                         }
                     });
+
                 });
             }
         },

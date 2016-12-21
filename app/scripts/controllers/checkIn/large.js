@@ -11,7 +11,7 @@ angular.module('flatpcApp')
 .controller('largeCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '公寓管理','登记管理','大宗物品出门登记'
+        '公寓管理','登记管理','大宗物品出入登记'
     ];
     //跳转到什么地方去
     $scope.parent = "flat";
