@@ -46,6 +46,8 @@ angular
     FORMINING:'http://code.houqinbao.com:3338/formining/',
     QUESTION:'http://120.26.48.150/question/',
     MEET:'http://code.houqinbao.com:3338/meet/',
+    WENJUAN:'http://code.houqinbao.com:3338/wenjuan2/',
+    HUICHANG:'http://code.houqinbao.com:3338/huichang/',
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -1267,6 +1269,40 @@ angular
             }
         }
     })
+    .state('basicsetting', {
+        url: "/basicsetting",
+        views: {
+            "": {
+                templateUrl: 'views/grade/basicsetting.html',
+                controller: 'basicsettingCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('accountmanagement', {
+        url: "/accountmanagement",
+        views: {
+            "": {
+                templateUrl: 'views/grade/accountmanagement.html',
+                controller: 'accountmanagementCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
      .state('newstudent', {
         url: "/newstudent",
         views: {
@@ -1613,6 +1649,91 @@ angular
             "": {
                 templateUrl: 'views/question/questionstatist.html',
                 controller: 'questionStatistCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('questionsetting', {
+        url: "/questionsetting",
+        views: {
+            "": {
+                templateUrl: 'views/serviceevaluation/questionsetting.html',
+                controller: 'questionSettingCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('questionmanagement', {
+        url: "/questionmanagement",
+        views: {
+            "": {
+                templateUrl: 'views/serviceevaluation/questionmanagement.html',
+                controller: 'questionManagementCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bookingdetails', {
+        url: "/bookingdetails",
+        views: {
+            "": {
+                templateUrl: 'views/venuebooking/bookingdetails.html',
+                controller: 'bookingDetailsCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('personnelmanagement', {
+        url: "/personnelmanagement",
+        views: {
+            "": {
+                templateUrl: 'views/venuebooking/personnelmanagement.html',
+                controller: 'personnelManagementCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('relatedsetting', {
+        url: "/relatedsetting",
+        views: {
+            "": {
+                templateUrl: 'views/venuebooking/relatedsetting.html',
+                controller: 'relatedSettingCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

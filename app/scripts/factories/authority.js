@@ -118,6 +118,22 @@ angular.module('flatpcApp')
                         }else if(menuCheck(476)){
                             menus.push('questionstatist');
                         }else menus.push(' ');
+                    }else if(menuCheck(584)){
+                         menus.push('questionsetting');
+                        if(menuCheck(585)){
+                            menus.push('questionsetting');
+                        }else if(menuCheck(586)){
+                            menus.push('questionmanagement');
+                        }else menus.push(' ');
+                    }else if(menuCheck(587)){
+                         menus.push('bookingdetails');
+                        if(menuCheck(588)){
+                            menus.push('bookingdetails');
+                        }else if(menuCheck(589)){
+                            menus.push('personnelmanagement');
+                        }else if(menuCheck(590)){
+                            menus.push('relatedsetting');
+                        }else menus.push(' ');
                     }else if(menuCheck(5)){
                         menus.push('hydropower');
                         if(menuCheck(526)){
@@ -448,6 +464,16 @@ angular.module('flatpcApp')
             case 'graduatepeople':
                 if(menuCheck(371))
                     return ['graduate','graduate','leaveschoolpeople'];
+                else
+                    return null;
+            case 'basicsetting':
+                if(menuCheck(582))
+                    return ['graduate','graduate','basicsetting'];
+                else
+                    return null;
+            case 'accountmanagement':
+                if(menuCheck(583))
+                    return ['graduate','graduate','accountmanagement'];
                 else
                     return null;
                     //case为在定义menu.html定义的跳转地址，return 里面flat为跳转到的头部当行条菜单，flat跳转到的左侧菜单，newstudents为自定义的规则名
@@ -860,6 +886,31 @@ angular.module('flatpcApp')
                     return ['question','questionstatist','questionstatist'];
                 else
                     return null; 
+            case 'questionsetting':
+                if(menuCheck(585))
+                    return ['serviceevaluation','questionsetting','questionsetting'];
+                else
+                    return null;
+             case 'questionmanagement':
+                if(menuCheck(586))
+                    return ['serviceevaluation','questionmanagement','questionmanagement'];
+                else
+                    return null;
+             case 'bookingdetails':
+                if(menuCheck(588))
+                    return ['venuebooking','bookingdetails','bookingdetails'];
+                else
+                    return null;
+             case 'personnelmanagement':
+                if(menuCheck(589))
+                    return ['venuebooking','personnelmanagement','personnelmanagement'];
+                else
+                    return null;
+             case 'relatedsetting':
+                if(menuCheck(590))
+                    return ['venuebooking','relatedsetting','relatedsetting'];
+                else
+                    return null;
              case 'hydropower':
                 if(menuCheck(526))
                     return ['hydropower','hydropower','hydropower'];

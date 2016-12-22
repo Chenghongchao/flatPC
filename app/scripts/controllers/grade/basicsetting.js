@@ -8,10 +8,10 @@
  * Controller of the flatpcApp
  */
 angular.module('flatpcApp')
-.controller('leaveschoolpeopleCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
+.controller('basicsettingCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '毕业离校','各部门审批结果'
+        '毕业离校','基础设置'
     ];
     //跳转到什么地方去
     $scope.parent = "graduate";
@@ -20,7 +20,7 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.FRAME + "index.php?m=LeavingSchool&c=Approval&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    a.href = AppConfig.FRAME + "index.php?m=LeavingSchool&c=Setting&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
     a.target="page-frame";
     a.click();
 }]);

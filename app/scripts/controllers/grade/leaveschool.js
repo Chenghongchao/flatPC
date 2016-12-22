@@ -20,7 +20,7 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.FRAME + "index.php?m=Apartment&c=LeavingSchool&a=search&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    a.href = AppConfig.FRAME + "index.php?m=LeavingSchool&c=Leave&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
     a.target="page-frame";
     a.click();
 }]);

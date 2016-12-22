@@ -280,6 +280,38 @@
     </li> 
 </ul>
 
+<ul ng-show="sysMenu[0]=='serviceevaluation'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(585)" ng-class="{'active':sysMenu[1]=='questionsetting'}" ng-click="switch('questionsetting')">
+        <a href="#questionsetting" title="问卷设置">
+            <i class="ALiconfont icon-yixiangdengji" style="font-size:23px"></i> 问卷设置
+        </a>
+    </li>
+    <li ng-if="menuCheck(586)" ng-class="{'active':sysMenu[1]=='questionmanagement'}" ng-click="switch('questionmanagement')">
+        <a href="#questionmanagement" title="统计管理">
+            <i class="ALiconfont icon-toupiao" style="font-size:23px"></i> 统计管理
+        </a>
+    </li> 
+</ul>
+<ul ng-show="sysMenu[0]=='venuebooking'">
+    <!--默认选中哪一个选项-->
+    <li ng-if="menuCheck(588)" ng-class="{'active':sysMenu[1]=='bookingdetails'}" ng-click="switch('bookingdetails')">
+        <a href="#bookingdetails" title="预约详情">
+            <i class="ALiconfont icon-lishijilu" style="font-size:23px"></i> 预约详情
+        </a>
+    </li>
+    <li ng-if="menuCheck(589)" ng-class="{'active':sysMenu[1]=='personnelmanagement'}" ng-click="switch('personnelmanagement')">
+        <a href="#personnelmanagement" title="人员管理">
+            <i class="ALiconfont icon-iconfonticonfontzhiweiguanli" style="font-size:23px"></i> 人员管理
+        </a>
+    </li> 
+    <li ng-if="menuCheck(590)" ng-class="{'active':sysMenu[1]=='relatedsetting'}" ng-click="switch('relatedsetting')">
+        <a href="#relatedsetting" title="相关设置">
+            <i class="ALiconfont icon-shezhi" style="font-size:23px"></i> 相关设置
+        </a>
+    </li>
+</ul>
+
 <ul ng-show="sysMenu[0]=='hydropower'">
     <!--默认选中哪一个选项-->
     <li ng-if="menuCheck(526)" ng-class="{'active':sysMenu[1]=='hydropower'}" ng-click="switch('hydropower')">
