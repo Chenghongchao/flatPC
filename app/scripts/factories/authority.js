@@ -406,6 +406,11 @@ angular.module('flatpcApp')
                     return ['center','center','form'];
                 else
                     return null;
+           case 'staff':
+                if(menuCheck(603))
+                    return ['center','center','staff'];
+                else
+                    return null;
             case 'user':
                 if(menuCheck(114))
                     return ['admin','admin','user'];

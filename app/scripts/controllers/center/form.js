@@ -17,7 +17,7 @@ angular.module('flatpcApp')
     $scope.parent = "center";
     $rootScope.loading = false;
     var a = document.createElement('a');
-    a.href =AppConfig.UCENTER+"/index.php?m=Admin&c=Index&a=config&schoolcode="+AppConfig.schoolCode+"&token="+AppConfig.token;
+    a.href = AppConfig.FRAME + "index.php?m=Ucenter&c=Auth&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
     a.target="page-frame";
     a.click();
 }]);

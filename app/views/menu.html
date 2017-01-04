@@ -850,12 +850,12 @@
                     用户列表
                 </a>
             </li>
-            <li ng-if="menuCheck(358)">
+            <!--<li ng-if="menuCheck(358)">
                 <a href="#verify">
                     <i class="ALiconfont icon-smrenz" style="background-color:#ff9c00; font-size:27px"></i>
                     实名审核
                 </a>
-            </li>
+            </li>-->
         </ul>
     </li>
     <li ng-if="menuCheck(356)" ng-show="sysMenu[1]=='center'">
@@ -920,7 +920,13 @@
                     住宿信息
                 </a>
             </li>
-             <li ng-if="menuCheck(381)">
+            <li ng-if="menuCheck(603)">
+                <a href="#staff">
+                    <i class="ALiconfont icon-smrenz" style="background-color:#02cf97; font-size:25px"></i>
+                    教职工认证列表
+                </a>
+            </li>
+            <li ng-if="menuCheck(381)">
                 <a >
                     <i class="ALiconfont icon-tongbu" style="background-color:#d3d6d9;font-size:26px"></i>
                     数据同步开发中...

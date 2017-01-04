@@ -37,7 +37,7 @@ angular
     //FRAME:'http://192.168.2.138/Apartment/',
     REPORT:'http://test.houqinbao.com/Report/',
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
-    UCENTER:'http://code.houqinbao.com:3338/ucenter',
+    UCENTER:'http://code.houqinbao.com:3338/ucenter/',
     PHYSICAL:'http://code.houqinbao.com:3338/physical/',
     HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',
     EXAM:'http://test3.houqinbao.com/Examination/',
@@ -1047,7 +1047,25 @@ angular
             }
         }
     })
-    //认证方式
+    //教职工认证列表
+      .state('staff', {
+        url: "/staff",
+        views: {
+            "": {
+                templateUrl: 'views/center/staff.html',
+                controller: 'staffCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    //统一身份配置
       .state('identity', {
         url: "/identity",
         views: {
