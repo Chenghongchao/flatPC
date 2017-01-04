@@ -22,7 +22,7 @@
             <div class="page-main" style="top:90px;">
                 <div class="page-tree" tree>
                     <ul>
-                        <li class="open">
+                        <li class="open" ng-if="extend != 't_rbac_flat_admin'">
                             <a ng-class="{'branch':treeCollege[0].collegeList,'leaf':!treeCollege[0].collegeList}" ng-click="show(0,treeCollege[0])">{{treeCollege[0].name}}</a>
                             <ul ng-show="treeCollege[0].collegeList">
                                 <li class="" ng-repeat="college in treeCollege[0].collegeList||[]">
@@ -35,7 +35,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="open">
+                        <li class="open" ng-if="extend != 't_rbac_instructor'">
                             <a ng-class="{'branch':treeFlat.cmpusList,'leaf':!treeFlat.cmpusList}" ng-click="show(0,treeFlat)">{{treeFlat.title}}</a>
                             <ul ng-show="treeFlat.cmpusList">
                                 <li class="open" ng-repeat="campus in treeFlat.cmpusList||[]">

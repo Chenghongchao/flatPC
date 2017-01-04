@@ -272,6 +272,7 @@ angular.module('flatpcApp')
                         sessionStorage.takephoto = data.data.takephoto;
                         sessionStorage.check = data.data.check;
                         sessionStorage.loginoutTag = "GY";//标记是从公寓系统登录
+                        sessionStorage.extend = data.data.extend;
                         
                         setcookie('adminId', data.data.adminId);
                         setcookie('token', data.data.token);
@@ -292,6 +293,7 @@ angular.module('flatpcApp')
                         setcookie('takephoto', data.data.takephoto);
                         setcookie('check', data.data.check);
                         setcookie('loginoutTag', "GY");//标记是从公寓系统登录
+                        setcookie('extend', data.data.extend);
 
                         // document.cookie = "adminId="+data.data.adminId;
                         // document.cookie = "token="+data.data.token;

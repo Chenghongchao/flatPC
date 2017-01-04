@@ -33,6 +33,8 @@ function($scope,AppConfig,$rootScope,FlatService,GraduationService,$filter,Colle
             return sum || 0;
         }
     }
+    $scope.extend = sessionStorage.extend;
+    console.log($scope.extend);
     //换页
     $scope.setPage = function(n){
         if($scope.media.epage + n >0 && $scope.media.epage + n <= $scope.media.pageCount){
