@@ -132,6 +132,7 @@ angular.module('flatpcApp')
         + (param.collegeid?('&collegeid='+param.collegeid):'')
         + (param.classid?('&classid='+param.classid):'')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
+        + (param.keyword?('&keyword='+param.keyword):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
@@ -189,6 +190,23 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });//.post(url,param,{'Content-Type':'application/x-www-form-urlencoded'});
     }
+    var resetPwd = function(param){
+        var url = AppConfig.WEB_ROOT + 'management/instructor/reset_password';
+        // return $http.post(url).error(function (error) {
+        //     swal("提示", "网络错误！", "warning"); 
+        // });
+        return $http({
+            url:url,
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function(error){
+            swal("提示","网络错误！","warning");
+        });
+    }
+    
     return {
         getList:getList,
         addCollege:addCollege,
@@ -205,6 +223,7 @@ angular.module('flatpcApp')
         delManager:delManager,
         getAdminclasslist:getAdminclasslist,
         getCollegectSort:getCollegectSort,
-        sortApply:sortApply
+        sortApply:sortApply,
+        resetPwd:resetPwd
     }
 }]);

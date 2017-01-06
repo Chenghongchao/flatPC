@@ -16,6 +16,8 @@ angular.module('flatpcApp')
         password:'',
         password1:'',
         useraccount:'',
+        newpassword:'',
+        renewpassword:'',
         phone:'',
         collegeid:'',
         jobnumber:'',
@@ -153,6 +155,62 @@ angular.module('flatpcApp')
                 cla.text = null;
             }
         }
+    }
+    //搜索姓名/账号
+    $scope.searchBtn = function(fun){
+        $rootScope.loading = true;
+         console.log($scope.media);
+        CollegeService.getManagerList($scope.media).success(function (data){
+            console.log(data);
+           if(data.code == 0){
+                $scope.list = data.list.dataList;
+                $scope.media.recordCount = data.list?data.list.recordCount:0;
+                $scope.media.pageCount = data.list?data.list.pageCount:0;
+                //班级名称处理成数组
+                angular.forEach($scope.list, function(data,index,array){
+                    angular.forEach(data.classList, function(data_class,index_class,array_class){
+                        var name_array = [];
+                        if(data_class.classname){
+                            name_array = data_class.classname.split(",");
+                        }
+                        data_class.classname = name_array;                        
+                    });
+                });
+            }else if(data.code == 4037){
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                location.href="#login";$rootScope.loading = false;
+            }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            
+            $rootScope.loading = false;
+        })
+        
+
+    }
+
+    // 重置密码
+    $scope.resetSave = function(fun){
+        $rootScope.loading = true;
+        CollegeService.resetPwd({
+            useraccount:$scope.form.useraccount,
+            newpassword:$scope.form.newpassword,
+            renewpassword:$scope.form.renewpassword
+        }).success(function(data){
+            console.log(data)
+
+            $rootScope.loading = false;
+            if(data.code == 0){
+                swal("提示", "保存成功！", "success"); 
+                refresh();
+                if(fun && typeof fun == 'function') fun();
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        })
     }
 
     $scope.adddataInit = function (user) {
@@ -388,7 +446,8 @@ angular.module('flatpcApp')
         classid:'',
         orderfield:'',
         ordertype:'',
-        title:''
+        title:'',
+        keyword:''
     }
     //换页
     $scope.setPage = function(n){

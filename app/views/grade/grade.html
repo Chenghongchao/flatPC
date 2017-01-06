@@ -85,10 +85,10 @@
             <div class="progress-bar progress-bar-success" style="width:{{(media.tab == 1 ? (flat.roomNumber - flat.notRoomNumber)/flat.roomNumber : (media.tab == 2? (rooms.roomNumber - rooms.notRoomNumber)/rooms.roomNumber : 0 )) * 100}}%"></div>
         </div>
     </div>
-    <div class="progress-number" ng-hide="media.tab == 3">
+    <div class="progress-number" ng-hide="media.tab == 3 || media.tab == 4 || media.tab == 5">
         <span>{{media.tab == 1 ? flat.roomNumber - flat.notRoomNumber : (media.tab == 2? rooms.roomNumber - rooms.notRoomNumber : 0 )}}</span>/{{media.tab == 1 ? flat.roomNumber : (media.tab == 2 ? rooms.roomNumber : '')}}
     </div>
-    <div class="grade-number" ng-hide="media.tab == 3">
+    <div class="grade-number" ng-hide="media.tab == 3 || media.tab == 4 || media.tab == 5">
         <span>{{media.tab == 1 ? flat.average : (media.tab == 2 ? rooms.average : '')}}</span>分
     </div>
 </div>
@@ -124,6 +124,7 @@
 
         <ul class="page-tabs-nav">
             <li ng-if="media.menuCheck(1)" ng-class="{'active':media.tab == 1}" ng-click="media.setTab(1)">打分信息</li>
+            <li ng-if="media.menuCheck(6) && media.source == 0" ng-class="{'active':media.tab == 6}" ng-click="media.setTab(6)">复查</li>
             <li ng-if="media.menuCheck(2)" ng-class="{'active':media.tab == 2}" ng-click="media.setTab(2)">快速打分</li>
             <li ng-if="media.menuCheck(3)" ng-class="{'active':media.tab == 3}" ng-click="media.setTab(3)">打分成绩导入</li>
             <li ng-if="media.menuCheck(4)" ng-class="{'active':media.tab == 4}" ng-click="media.setTab(4)">打分查询</li>
@@ -512,12 +513,51 @@
                     </div>
                 </div>
             </li>
+            <li ng-if="media.menuCheck(6)" class="fadeIn animated" ng-class="{'active':media.tab == 6}">
+                <ul class="floor-list">
+                    <li ng-repeat="floor in flat.floorList">
+                        <div class="floor-title">
+                            <div class="title-full">
+                                {{floor.floorName}}
+                            </div>
+             
+                            <div class="progress-box">
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar progress-bar-success" style="width:{{floor.notRoomNumber/floor.roomNumber * 100}}%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-number">
+                                <span>{{floor.notRoomNumber}}</span>/{{floor.roomNumber}}
+                            </div>
+                            <div class="grade-number">
+                                <span>{{floor.average}}</span>分
+                            </div>
+                        </div>
+                        <ul class="room-list" ng-repeat="rooms in floor.roomList">
+                            <li class="room-item" ng-repeat="room in rooms">
+                                <div ng-class="{'graded':room.roomScoreId}">{{room.purpose?room.purpose:room.roomNum}}</div>
+                                <ul>
+                                    <li>
+                                        <a ng-if="room.grade!=2" ng-class="{'fail':room.grade==-1}" ng-click="showCard('#gradeCard',cardMedia.dataInit(room))">
+                                            {{room.roomScoreId?room.score:'尚未打分'}}
+                                        </a>
+                                        <a class="passed" ng-if="room.grade == 2">
+                                            免
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
     </div>
     
 </div>
 <!--  -->
-<div class="info-card fadeIn animated" id="gradeCard" ng-class="{'grade-simple':!(media.tab==1 && cardMedia.menuCheck(5))}" info-card>
+<div class="info-card fadeIn animated" id="gradeCard" ng-class="{'grade-simple':!(media.tab==1 || media.tab==6) && cardMedia.menuCheck(5)}" info-card>
     <div class="info-card-wrapper">
         <div class="info-card-dialog">
             <div class="info-card-content">
@@ -653,7 +693,7 @@
                                                 <img ng-if="img.picUrl" ng-src="{{img.picUrl}}" err-src="http://7xp0c4.com2.z0.glb.qiniucdn.com/default.png"/>
                                                 <p>{{img.checkTime}}</p>
                                             </li>
-                                            <li class="album-plus" input-file change="uploadImg" ng-hide="media.tab>1 || !cardMedia.menuCheck(3)"><span class="ALiconfont icon-plus3"></span></li> 
+                                            <li class="album-plus" input-file change="uploadImg" ng-hide="!media.menuCheck(1) || !media.menuCheck(6) || !cardMedia.menuCheck(3)"><span class="ALiconfont icon-plus3"></span></li> 
                                         </ul>
                                         <div class="album-frame" style="bottom:50px;top:40px;">
                                             <div>
@@ -661,7 +701,7 @@
                                             </div>
                                         </div>
                                         <div class="album-frame-off" style="top:50px;"><i class="ALiconfont icon-close"></i></div>
-                                        <div class="album-empty" ng-show="(media.tab>1 || !cardMedia.menuCheck(3)) && cardMedia.img.length < 1">没有照片上传记录</div>
+                                        <div class="album-empty" ng-show="(!media.menuCheck(1) || !media.menuCheck(6) || !cardMedia.menuCheck(3)) && cardMedia.img.length < 1">没有照片上传记录</div>
                                     </div>
                                 </li>
                                 <li ng-if="cardMedia.menuCheck(4)" class="fadeIn animated" style="min-height:300px" ng-class="{'active':cardMedia.tab ==4}">
@@ -674,7 +714,7 @@
                                                         <li class="rule-item" ng-repeat="item in cardMedia.rule.itemList" ng-click="cardMedia.removeRule(cardMedia.rule.itemList,$index)">{{item.itemName}}
                                                             <span ng-if="item.confiscated==1" class="capture">收</span>
                                                         </li>
-                                                        <li ng-if="media.tab==1" class="dropdown">
+                                                        <li ng-if="media.tab==1 || media.tab==6" class="dropdown">
                                                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                                 <li ng-repeat="rule in rules || []" ng-class="{'dropdown-header':!rule.fid}">
@@ -683,8 +723,8 @@
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                        <li ng-if="media.tab>1 &&cardMedia.rule.itemList.length<1" class="dropdown">
-                                                            <button class="btn btn-default" type="button"></button>
+                                                        <li ng-if="(!media.menuCheck(1) || !media.menuCheck(6)) && cardMedia.rule.itemList.length<1" class="dropdown">
+                                                            <button class="btn btn-default" type="button">1111</button>
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -696,7 +736,7 @@
                                                         <li class="rule-item" ng-repeat="item in bed.itemList" ng-click="cardMedia.removeRule(bed.itemList,$index)">{{item.itemName}}
                                                             <span ng-if="item.confiscated==1" class="capture">收</span>
                                                         </li>
-                                                        <li ng-if="media.tab==1" class="dropdown">
+                                                        <li ng-if="media.tab==1 || media.tab==6" class="dropdown">
                                                             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                                 <li ng-repeat="rule in rules|| []" ng-class="{'dropdown-header':!rule.fid}">
@@ -705,7 +745,7 @@
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                        <li ng-if="media.tab>1 && bed.itemList.length<1" class="dropdown">
+                                                        <li ng-if="(!media.menuCheck(1) || !media.menuCheck(6)) && bed.itemList.length<1" class="dropdown">
                                                             <button class="btn btn-default" type="button" ></button>
                                                         </li>
                                                     </ul>
@@ -730,7 +770,7 @@
                                 <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab-1)" ng-class="{'btn-default disabled':cardMedia.tab-1<1,'btn-stroke btn-info':cardMedia.tab-1>0}" style="border-radius: 5px;"><i class="ALiconfont icon-sortleft"></i></a>
                             </div>
                             <div style="float:left; width:80%; text-align: center" >
-                                <a ng-if="media.tab==1 && cardMedia.menuCheck(5)" class="btn btn-info" ng-click="cardMedia.gradeSave(closeCard('#gradeCard'))" style="padding: 9px 12px; width: 200px;border-radius: 5px;">保存并关闭</a>
+                                <a ng-if="(media.tab==1 || media.tab==6) && cardMedia.menuCheck(5)" class="btn btn-info" ng-click="cardMedia.gradeSave(closeCard('#gradeCard'))" style="padding: 9px 12px; width: 200px;border-radius: 5px;">保存并关闭</a>
                             </div>
                             <div style="float:right">
                                 <a class="btn" ng-click="cardMedia.setTab(cardMedia.tab+1)" ng-class="{'disabled btn-default':cardMedia.tab+1>4,'btn-stroke btn-info':cardMedia.tab+1<5}" style="border-radius: 5px;"><i class="ALiconfont icon-sortright"></i></a>

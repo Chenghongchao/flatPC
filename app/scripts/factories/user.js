@@ -4,8 +4,9 @@ angular.module('flatpcApp')
         var url = AppConfig.WEB_ROOT + 'accountmanage/users/get_list/?schoolcode=' + AppConfig.schoolCode
         +'&token='+AppConfig.token
         + (param && param.groupid?('&groupid=' + param.groupid):'')
-        +(param.epage?'&epage='+param.epage:'')
-        +(param.pagesize?'&pagesize='+param.pagesize:'');
+        + (param.epage?'&epage='+param.epage:'')
+        + (param.keyword?'&keyword='+param.keyword:'')
+        + (param.pagesize?'&pagesize='+param.pagesize:'');
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
         });
@@ -99,6 +100,22 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
+    var resetPwd = function(param){
+        var url = AppConfig.WEB_ROOT + 'accountmanage/users/reset_password';
+        // return $http.post(url).error(function (error) {
+        //     swal("提示", "网络错误！", "warning"); 
+        // });
+        return $http({
+            url:url,
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function(error){
+            swal("提示","网络错误！","warning");
+        });
+    }
     return {
         getList:getList,
         addUser:addUser,
@@ -107,6 +124,7 @@ angular.module('flatpcApp')
         getGroupList:getGroupList,
         addGroup:addGroup,
         editGroup:editGroup,
-        delGroup:delGroup
+        delGroup:delGroup,
+        resetPwd:resetPwd
     }
 }]);

@@ -47,7 +47,8 @@ angular.module('flatpcApp')
     }
     var getListByRoom = function (param) {
         var url = AppConfig.WEB_ROOT + 'evaluation/lllegal/get_special/?schoolcode='+AppConfig.schoolCode+'&token=' + AppConfig.token
-        + '&specialid=' + (param.specialid||'');
+        + '&specialid=' + (param.specialid||'')
+        + '&isreview=' + param.isreview;
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
         });

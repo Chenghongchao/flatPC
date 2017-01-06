@@ -19,7 +19,8 @@ angular.module('flatpcApp')
         groupid:'',
         orderfield:'',
         ordertype:'',
-        title:''
+        title:'',
+        keyword:''
     }
     
     $scope.form = {
@@ -33,6 +34,8 @@ angular.module('flatpcApp')
         roleid:'',
         groupid:'',
         adminid:'',
+        newpassword:'',
+        renewpassword:'',
         roleList : []
     }
     $scope.dataInit = function (user) {
@@ -104,6 +107,61 @@ angular.module('flatpcApp')
                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
         })
     }
+
+  //搜索姓名/账号
+    $scope.searchBtn = function(fun){
+        $rootScope.loading = true;
+         console.log($scope.media);
+        UserService.getList({
+            groupid:$scope.media.groupid,
+            epage:$scope.media.epage,
+            pagesize:$scope.media.pagesize,
+            keyword:$scope.media.keyword
+        }).success(function (data) {
+            console.log(data);
+            if(data.code == 0){
+                $scope.list = data.list;
+                $scope.media.recordCount = data?data.recordCount:0;
+                $scope.media.pageCount = data?data.pageCount:0;
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            
+            $rootScope.loading = false;
+        })
+    }
+
+
+    // 重置密码
+    $scope.resetSave = function(fun){
+        $rootScope.loading = true;
+        UserService.resetPwd({
+            useraccount:$scope.form.useraccount,
+            newpassword:$scope.form.newpassword,
+            renewpassword:$scope.form.renewpassword
+        }).success(function(data){
+            console.log(data)
+
+            $rootScope.loading = false;
+            if(data.code == 0){
+                swal("提示", "保存成功！", "success"); 
+                refresh();
+                if(fun && typeof fun == 'function') fun();
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        })
+    }
+
+
+
+
     $scope.delete = function (fun) {
         swal({   
             title: "确认删除",   

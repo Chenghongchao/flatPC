@@ -228,17 +228,19 @@ angular.module('flatpcApp')
             });
         if(arguments.length > 1){
             if(item.open){
-                for(var i= 1;i <arguments.length; i++){
+                for(var i= 0;i <arguments.length; i++){
                     arguments[i].open = true;
                 }
             }else{
-                for(var i = 1; i <arguments.length; i++){
-                    for(var j = 1; j < arguments[i].subNodes.length; j++){
+                for(var i = 0; i <arguments.length; i++){
+                    var isAllClose = true;
+                    for(var j = 0; j < arguments[i].subNodes.length; j++){
                         if(arguments[i].subNodes[j].open) {
-                            return;
+                            isAllClose = false;
+                            break;
                         }
                     }
-                    arguments[i].open = false;
+                    arguments[i].open = !isAllClose;
                 }
             }
         }

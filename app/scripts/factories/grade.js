@@ -8,7 +8,8 @@ angular.module('flatpcApp')
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_list/?'
                 + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token
                 + '&flatid=' + (param.flatid || "") + '&semesterid=' + (param.semesterid || "")
-                + '&currentweek=' + (param.currentweek || "");
+                + '&currentweek=' + (param.currentweek || "") 
+                + '&isreview=' + param.isreview + '&grade=' + param.grade;
                 break;
             case 1:
                 url = AppConfig.WEB_ROOT + 'evaluation/dayscore/get_list/?'
@@ -33,6 +34,7 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });
     };
+
     //获取快速打分列表
     var getQuickScoreList = function (param) {
         param.type = param.type || 0;
@@ -319,22 +321,22 @@ angular.module('flatpcApp')
         var url = "";
         switch (param.mold) {
             case 0:
-                url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_room_message/?';
+                url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_room_message/?'
+                + '&isreview=' + param.isreview;
                 break;
             case 1:
-                url = AppConfig.WEB_ROOT + 'evaluation/dayscore/get_room_message/?';
+                url = AppConfig.WEB_ROOT + 'evaluation/dayscore/get_room_message/?'
                 break;
             case 2:
-                url = AppConfig.WEB_ROOT + 'evaluation/monthscore/get_room_message/?';
+                url = AppConfig.WEB_ROOT + 'evaluation/monthscore/get_room_message/?'
                 break;
             case 3:
-                url = AppConfig.WEB_ROOT + 'evaluation/scorecheck/get_room_message/?';
+                url = AppConfig.WEB_ROOT + 'evaluation/scorecheck/get_room_message/?' 
                 break;
             default:
                 break;
         }
-        url = url + 'token=' + AppConfig.token
-        + '&roomscoreid=' + param.roomscoreid;
+        url = url + '&token=' + AppConfig.token + '&roomscoreid=' + param.roomscoreid;
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
         });
@@ -367,7 +369,6 @@ angular.module('flatpcApp')
             default:
                 break;
         }
-        
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
         });
@@ -475,7 +476,8 @@ angular.module('flatpcApp')
         switch (param.mold) {
             case 0:
                 url = AppConfig.WEB_ROOT + 'evaluation/weekscore/get_bed_message/?'
-                + 'semesterid=' + (param.semesterid || "") + '&currentweek=' + (param.currentweek || "");
+                + 'semesterid=' + (param.semesterid || "") + '&currentweek=' + (param.currentweek || "")
+                + '&isreview=' + param.isreview;
                 break;
             case 1:
                 url = AppConfig.WEB_ROOT + 'evaluation/dayscore/get_bed_message/?'

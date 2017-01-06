@@ -179,6 +179,7 @@ angular.module('flatpcApp')
         + (param.liveareaid?('&liveareaid='+param.liveareaid):'')
         + (param.campusid?('&campusid='+param.campusid):'')
         + (param.orderfield?('&orderfield='+param.orderfield):'')
+        + (param.keyword?('&keyword='+param.keyword):'')
         + (param.ordertype?('&ordertype='+param.ordertype):'');
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
@@ -236,6 +237,22 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });
     }
+    var resetPwd = function(param){
+        var url = AppConfig.WEB_ROOT + 'management/flatadmin/reset_password';
+        // return $http.post(url).error(function (error) {
+        //     swal("提示", "网络错误！", "warning"); 
+        // });
+        return $http({
+            url:url,
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function(error){
+            swal("提示","网络错误！","warning");
+        });
+    }
     return {
         getList:getList,
         getFlat:getFlat,
@@ -256,6 +273,7 @@ angular.module('flatpcApp')
         addManager:addManager,
         editManager:editManager,
         delManager:delManager,
-        getAdminFlatlist:getAdminFlatlist
+        getAdminFlatlist:getAdminFlatlist,
+        resetPwd:resetPwd
     }
 }]);

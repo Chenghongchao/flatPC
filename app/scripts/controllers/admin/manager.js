@@ -16,6 +16,8 @@ angular.module('flatpcApp')
         password:'',
         password1:'',
         useraccount:'',
+        newpassword:'',
+        renewpassword:'',
         phone:'',
         jobnumber:'',
         roleid:'',
@@ -175,7 +177,7 @@ angular.module('flatpcApp')
                 }
                 
             })
-            if(names.length==flat.flatList.length){
+            if(names.length==flat.flatList.length && flat.flatList.length>0){
                 flat.checkedAll = true;
             }
             if(names.length>2){
@@ -189,9 +191,63 @@ angular.module('flatpcApp')
             }
         }
     }
-    
 
+    //搜索姓名/账号
+    $scope.searchBtn = function(fun){
+        $rootScope.loading = true;
+         console.log($scope.media);
+        FlatService.getManagerList($scope.media).success(function (data){
+           
+          if(data.code == 0){
+                $scope.list = data.list.dataList;
+                $scope.media.recordCount = data.list?data.list.recordCount:0;
+                $scope.media.pageCount = data.list?data.list.pageCount:0;
+                //楼栋名称处理成数组
+                angular.forEach($scope.list, function(data,index,array){
+                    angular.forEach(data.flatlist, function(data_flat,index_flat,array_flat){
+                        var name_array = [];
+                        if(data_flat.flatname){
+                            name_array = data_flat.flatname.split(",");
+                        }
+                        data_flat.flatname = name_array;                        
+                    });
+                });
+            }else if(data.code == 4037){
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                location.href="#login";$rootScope.loading = false;
+            }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            
+            $rootScope.loading = false;
+        })
+        
+
+    }
     
+    // 重置密码
+    $scope.resetSave = function(fun){
+        $rootScope.loading = true;
+        FlatService.resetPwd({
+            useraccount:$scope.form.useraccount,
+            newpassword:$scope.form.newpassword,
+            renewpassword:$scope.form.renewpassword
+        }).success(function(data){
+            console.log(data)
+
+            $rootScope.loading = false;
+            if(data.code == 0){
+                swal("提示", "保存成功！", "success"); 
+                refresh();
+                if(fun && typeof fun == 'function') fun();
+            }else if(data.code == 4037){
+                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                            location.href="#login";$rootScope.loading = false;
+                        }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        })
+    }
 
     $scope.adddataInit = function (user) {
         $scope.form.status= user.adminId ? 1 : 0;
@@ -440,7 +496,8 @@ angular.module('flatpcApp')
         flatid:'',
         orderfield:'',
         ordertype:'',
-        title:''
+        title:'',
+        keyword:'',
     }
     //换页
     $scope.setPage = function(n){

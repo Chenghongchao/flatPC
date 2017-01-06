@@ -302,8 +302,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     }
                     else{
                         return this.setTab(n+1);
-                    }
-                        
+                    }    
                 case 2:
                     if($scope.switch.bed && $rootScope.menuCheck(189)){
                         this.tab = n;
@@ -373,7 +372,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         },
         getData:function (n,fun) {
             var that = this;
-            this.tab = n || this.tab;
+            this.tab = n || this.tab;           
             this.roomGradeType = 0; //初始化为寝室正常打分
             this.bedGradeType = -1;  //初始化为床位正常打分
             switch (this.tab) {
@@ -383,7 +382,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         return GradeService.getGrade({
                             token:AppConfig.token,
                             roomscoreid:this.item.roomScoreId,
-                            mold:0
+                            mold:0,
+                            isreview:($scope.media.tab == 1)?0:1
                         }).success(function (data) {
                             $rootScope.loading = false;
                             if(data.code == 0){
@@ -391,7 +391,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                                 that.roomGradeType =data.type;
                                 that.score =data.score;
                                 that.getSum(true);
-                                that.getBedData();
+                                // that.getBedData();
                             }else if(data.code == 4037){
                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
@@ -402,11 +402,11 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         });
                     }
                     else{
-                        if($rootScope.treeWeek[0] && $rootScope.treeWeek[0].typeList && $rootScope.treeWeek[0].typeList[0].itemList && $scope.media.tab==1)
+                        if($rootScope.treeWeek[0] && $rootScope.treeWeek[0].typeList && $rootScope.treeWeek[0].typeList[0].itemList && ($scope.media.tab==1 || $scope.media.tab==6))
                         {
                             that.room = $rootScope.treeWeek[0].typeList[0].itemList;
                             that.getSum(true);
-                            that.getBedData();
+                            // that.getBedData();
                             //$rootScope.treeWeek[0].tableId;
                             //$rootScope.treeWeek[0].typeList[0].typeId;
                         }    
@@ -414,12 +414,13 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                             that.room = [];
                         
                         //console.log($rootScope.treeWeek[0]);
-                        
                     }
                     break;
                 case 2:
-                    this.getBedData();
-                case 3:
+                    // this.getBedData();
+                    $scope.cardMedia.getBedData();
+                    break;
+                case 3:　
                     $rootScope.loading = true;
                     //console.log(this.item);
                     return GradeService.getGradeImgs({
@@ -427,7 +428,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         roomid:that.item.roomId,
                         semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
                         currentweek:$scope.media.week,
-                        mold:0
+                        mold:0,
                     }).success(function (data) {
                         $rootScope.loading = false;
                         
@@ -440,10 +441,12 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         }
                         else
                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                        ////console.log(data);
+                        ////console.log(data); 
                     });
+                    // break;
                 case 4:
                     $scope.cardMedia.getListByRoom();
+                     break;
             }
             return null;
         },
@@ -452,7 +455,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             return RuleService.getListByRoom({
                 token:AppConfig.token,
                 schoolcode:AppConfig.schoolCode,
-                specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week
+                specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,
+                isreview:($scope.media.tab == 1)?0:1
             }).success(function (data) {
                 $rootScope.loading = false;
                 
@@ -475,9 +479,9 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 roomid:this.item.roomId,
                 semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
                 currentweek:$scope.media.week,
-                mold:0
+                mold:0,
+                isreview:($scope.media.tab == 1)?0:1
             }).success(function (data) {
-                
                 
                 $rootScope.loading = false;
                 if(data.code == 0){
@@ -582,7 +586,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             }
         },
         grade:function (n,item) {
-            if($scope.media.tab == 1 && this.menuCheck(5)){
+            if(($scope.media.tab == 1 || $scope.media.tab == 6) && this.menuCheck(5)){
                 if(item.score < 0){
                     item.score = item.score==-1?-2:-1;
                 }else if(item.score + n <= (item.fullMark || item.maxScore) && item.score + n >= 0){
@@ -691,7 +695,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             }
         },
         removeRule:function (list,index) {
-            if($scope.media.tab <2)
+            if($scope.media.tab == 1 || $scope.media.tab == 6)
             list.splice(index,1);
         },
         gradeSave:function (fun) {
@@ -760,7 +764,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     scoreitem:grades,
                     type: that.roomGradeType ? that.roomGradeType : null,
                     score: that.roomGradeType ? that.score : null,
-                    mold:0
+                    mold:0,
+                    isreview:($scope.media.tab == 1)?0:1
                 }).success(function(data){
                     $rootScope.loading = false;
                     if(data.code == 0){
@@ -798,6 +803,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     mold:0,
                     type: that.roomGradeType ? that.roomGradeType : null,
                     score: that.roomGradeType ? that.score : null,
+                    isreview:($scope.media.tab == 1)?0:1
                 }).success(function(data){
                     $rootScope.loading = false;
                     if(data.code == 0){
@@ -872,7 +878,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         tableid:$rootScope.treeWeek[0].tableId,
                         type:that.bedGradeType,
                         score:that.score,
-                        mold:0
+                        mold:0,
+                        isreview:($scope.media.tab == 1)?0:1
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -881,9 +888,9 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                             }
                             else if(that.rule)that.ruleSave(fun);
                             else{
-                                refresh();
                                 swal("提示","保存成功！", "success");
                                 if(fun && typeof fun == 'function') fun();
+                                refresh();
                             }
                             that.bed = null;
                         }else if(data.code == 4037){
@@ -907,7 +914,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                         tableid:$rootScope.treeWeek[0].tableId,
                         type:0,
                         score:that.score,
-                        mold:0
+                        mold:0,
+                        isreview:($scope.media.tab == 1)?0:1
                     }).success(function(data){
                         $rootScope.loading = false;
                         if(data.code == 0){
@@ -949,7 +957,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 currentweek:$scope.media.week,
                 adminid:AppConfig.adminId,
                 fileids:imgs,
-                type:0
+                type:0,
+                isreview:($scope.media.tab == 1)?0:1
             }).success(function(data){
                 $rootScope.loading = false;
                 if(data.code == 0){
@@ -991,7 +1000,8 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,
                 adminid:AppConfig.adminId,
                 itemlist:items,
-                source:0
+                source:0,
+                isreview:($scope.media.tab == 1)?0:1
             }).success(function(data){
                 $rootScope.loading = false;
                 if(data.code == 0){
@@ -1220,36 +1230,70 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         swal("提示","没有设置学期", "warning"); 
         $rootScope.loading = false;
     };
+
+    function getWeekGradeList(){
+        GradeService.getListByFlat({
+            flatid:$scope.media.flatid,
+            semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
+            currentweek:$scope.media.week || 1,
+            type:0,
+            isreview:($scope.media.tab == 1)?0:1,
+            grade:($scope.media.tab == 1)?"":-1
+        }).success(function (data) {
+            $rootScope.loading = false;
+            if(data.code == 0){
+                data.list.floorList = data.list.floorList || [];
+                data.list.floorList.forEach(function(list,index){
+                    list.roomList = list.roomList || [];
+                    list.roomList =  $filter('sliceArray')(list.roomList,10,index);
+                    // //console.log(index);
+                });
+                $scope.flat = data.list;
+                $scope.flat.flatName = $scope.media.campus + '-' + $scope.media.liveArea + '-' + $scope.media.title;
+            }else if(data.code == 4037){
+                        swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                        location.href="#login";$rootScope.loading = false;
+                    }
+            else
+                swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            
+            //console.log(data);
+        })   
+    }
+
     function refresh(n) {
         if($scope.media.flatid.length<1 || $scope.media.week<1)return;
         if(!n)$scope.media.epage = 1;
         $rootScope.loading = true;
-        if($scope.media.tab == 1){
-            GradeService.getListByFlat({
-                flatid:$scope.media.flatid,
-                semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
-                currentweek:$scope.media.week || 1,
-                type:0
-            }).success(function (data) {
-                $rootScope.loading = false;
-                if(data.code == 0){
-                    data.list.floorList = data.list.floorList || [];
-                    data.list.floorList.forEach(function(list,index){
-                        list.roomList = list.roomList || [];
-                        list.roomList =  $filter('sliceArray')(list.roomList,10,index);
-                        // //console.log(index);
-                    });
-                    $scope.flat = data.list;
-                    $scope.flat.flatName = $scope.media.campus + '-' + $scope.media.liveArea + '-' + $scope.media.title;
-                }else if(data.code == 4037){
-                            swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-                            location.href="#login";$rootScope.loading = false;
-                        }
-                else
-                    swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        if($scope.media.tab == 1 || $scope.media.tab == 6){
+            getWeekGradeList();
+            // GradeService.getListByFlat({
+            //     flatid:$scope.media.flatid,
+            //     semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
+            //     currentweek:$scope.media.week || 1,
+            //     type:0,
+            //     isreview:($scope.media.tab == 1)?0:1,
+            //     grade:($scope.media.tab == 1)?"":-1
+            // }).success(function (data) {
+            //     $rootScope.loading = false;
+            //     if(data.code == 0){
+            //         data.list.floorList = data.list.floorList || [];
+            //         data.list.floorList.forEach(function(list,index){
+            //             list.roomList = list.roomList || [];
+            //             list.roomList =  $filter('sliceArray')(list.roomList,10,index);
+            //             // //console.log(index);
+            //         });
+            //         $scope.flat = data.list;
+            //         $scope.flat.flatName = $scope.media.campus + '-' + $scope.media.liveArea + '-' + $scope.media.title;
+            //     }else if(data.code == 4037){
+            //                 swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+            //                 location.href="#login";$rootScope.loading = false;
+            //             }
+            //     else
+            //         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                 
-                //console.log(data);
-            })
+            //     //console.log(data);
+            // })
         }else if($scope.media.tab == 2){
             GradeService.getQuickScoreList({
                 flatid:$scope.media.flatid,
@@ -1350,6 +1394,36 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                 // //console.log(data);
             })
         }
+        
+        // else if($scope.media.tab == 6){
+        //     GradeService.getWeekGradeList({
+        //         flatid:$scope.media.flatid,
+        //         semesterid:$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId,
+        //         currentweek:$scope.media.week || 1,
+        //         grade:-1,
+        //         isreview:1,
+        //         type:0
+        //     }).success(function (data) {
+        //         $rootScope.loading = false;
+        //         if(data.code == 0){
+        //             data.list.floorList = data.list.floorList || [];
+        //             data.list.floorList.forEach(function(list,index){
+        //                 list.roomList = list.roomList || [];
+        //                 list.roomList =  $filter('sliceArray')(list.roomList,10,index);
+        //                 // //console.log(index);
+        //             });
+        //             $scope.flat = data.list;
+        //             $scope.flat.flatName = $scope.media.campus + '-' + $scope.media.liveArea + '-' + $scope.media.title;
+        //         }else if(data.code == 4037){
+        //                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+        //                     location.href="#login";$rootScope.loading = false;
+        //                 }
+        //         else
+        //             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
+                
+        //         //console.log(data);
+        //     })
+        // }
     };
     
     //快速打分(周)
