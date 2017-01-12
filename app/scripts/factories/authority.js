@@ -381,6 +381,11 @@ angular.module('flatpcApp')
                     return ['center','collect','stay'];
                 else
                     return null;
+            case 'staff':
+                if(menuCheck(603))
+                    return ['center','collect','staff'];
+                else
+                    return null;
             case 'class':
                 if(menuCheck(107))
                     return ['center','collect','class'];
@@ -404,11 +409,6 @@ angular.module('flatpcApp')
            case 'form':
                 if(menuCheck(359))
                     return ['center','center','form'];
-                else
-                    return null;
-           case 'staff':
-                if(menuCheck(603))
-                    return ['center','center','staff'];
                 else
                     return null;
             case 'user':

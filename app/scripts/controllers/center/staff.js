@@ -11,7 +11,7 @@ angular.module('flatpcApp')
 .controller('staffCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '用户中心','教职工认证列表'
+        '师生信息','教职工信息'
     ];
     //跳转到什么地方去
     $scope.parent = "center";

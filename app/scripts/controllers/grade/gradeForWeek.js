@@ -490,7 +490,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
                     that.bedScoreId = 1;
                     that.bedGradeType =data.type; 
                     // that.totalScore =data.totalScore;
-                    if(data.data.length>0 && $scope.media.tab==1){
+                    if(data.data.length>0 && ($scope.media.tab==1 || $scope.media.tab==6)){
                         that.bed.forEach(function (bed) {
                             if(bed.itemList.length < 1){
                                 that.bedScoreId = 0;
@@ -1154,7 +1154,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
             return GradeService.getSettingList({type:0,isopen:1}).success(function(data){
                 if(data.code == 0){
                     $rootScope.treeWeek = data.data;
-                    getRule();
+                    getRule();      
                 }else if(data.code == 4037){
                             swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
                             location.href="#login";$rootScope.loading = false;
