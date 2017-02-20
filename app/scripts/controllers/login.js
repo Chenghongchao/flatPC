@@ -358,6 +358,7 @@ angular.module('flatpcApp')
                             form.submit();
                             
                             login();
+                            loginZnbx();
                         }
                         
                     }
@@ -387,6 +388,36 @@ angular.module('flatpcApp')
                     AppConfig.schoolCode = data.data.schoolcode;
                     AppConfig.schoolname = data.data.schoolname || 'test';
                     AppConfig.roleName = data.data.rolename;
+                }
+            })
+        }
+
+        function loginZnbx() {
+            // $.ajax({
+            //     url:'http://bx.s1.natapp.cc/repair/login',
+            //     type:'POST',
+            //     data:{
+            //         // useraccount:$scope.media.user,
+            //         // password:$scope.media.pass
+            //         useraccount:'hzdzkjdx',
+            //         password:'hzdzkjdx123'
+            //     },
+            //     success:function(data){
+            //         // alert(JSON.stringify(data));
+            //         console.log(data);
+            //     }
+            // });
+
+            PublicService.loginZnbx({
+                useraccount:$scope.media.user,
+                password:$scope.media.pass
+            }).success(function (data) {
+                // alert(JSON.stringify(data));
+                $rootScope.loading = false;
+                if(data.code == 100000){
+                    sessionStorage.tokenZnbx = data.data.token;
+                    AppConfig.tokenZnbx = data.data.token;
+
                 }
             })
         }

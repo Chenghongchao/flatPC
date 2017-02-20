@@ -40,6 +40,25 @@ angular.module('flatpcApp')
             swal("提示", "网络错误！", "warning"); 
         });//.get(url,param);
     }
+
+    var loginZnbx = function(param){
+        var url = 'http://bx.s1.natapp.cc/repair/login?';
+        return $http({
+            url:url,
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params:param
+        }).error(function (error) {
+            swal("提示", "网络错误 智能报修！", "warning"); 
+        });//.get(url,param);
+    }
+
+
+
+
+
     var logout = function(param){
         var url = AppConfig.WEB_ROOT + 'public/login/login_out/?token=' + AppConfig.token || '';
         
@@ -74,6 +93,7 @@ angular.module('flatpcApp')
         logout:logout,
         password:password,
         session:session,
-        loginMessage:loginMessage
+        loginMessage:loginMessage,
+        loginZnbx:loginZnbx
     }
 }]);

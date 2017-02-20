@@ -27,7 +27,7 @@
             <li ng-if="headerMenu(421)" data-toggle="entry" ng-class="{'active':sysMenu[0]=='entry'}"><a ng-click="headerSwitch(0,'entry')" href="#index">出入管理</a></li>
             <li ng-if="headerMenu(466)" data-toggle="bookinggrade" ng-class="{'active':sysMenu[0]=='bookinggrade'}"><a ng-click="headerSwitch(0,'bookinggrade')" href="#bookinggrade">宾馆预约</a></li>
             <li ng-if="headerMenu(555)" data-toggle="busbooking" ng-class="{'active':sysMenu[0]=='busbooking'}"><a ng-click="headerSwitch(0,'busbooking')" href="#busbookinggrade">公车预约</a></li>
-            <li ng-if="headerMenu(587)" data-toggle="venuebooking" ng-class="{'active':sysMenu[0]=='venuebooking'}"><a ng-click="headerSwitch(0,'venuebooking')" href="#bookingdetails">会场预定</a></li>
+            <li ng-if="headerMenu(587)" data-toggle="venuebooking" ng-class="{'active':sysMenu[0]=='venuebooking'}"><a ng-click="headerSwitch(0,'venuebooking')" href="#bookingdetails">会场预约</a></li>
             <li ng-if="headerMenu(567)" data-toggle="formNotice" ng-class="{'active':sysMenu[0]=='formNotice'}"><a ng-click="headerSwitch(0,'formNotice')" href="#formNotice">采供系统</a></li>
             <li ng-if="headerMenu(474)" data-toggle="questionnaire" ng-class="{'active':sysMenu[0]=='questionnaire'}"><a ng-click="headerSwitch(0,'questionnaire')" href="#questionnaire">问卷系统</a></li>
             <li ng-if="headerMenu(584)" data-toggle="serviceevaluation" ng-class="{'active':sysMenu[0]=='serviceevaluation'}"><a ng-click="headerSwitch(0,'serviceevaluation')" href="#questionsetting">服务测评</a></li>
@@ -78,7 +78,7 @@
                 <li ng-if="headerMenu(421)" data-toggle="entry" ng-class="{'active':sysMenu[0]=='entry'}"><a ng-click="headerSwitch(0,'entry')" href="#index">出入管理</a></li>
                 <li ng-if="headerMenu(466)" data-toggle="bookinggrade" ng-class="{'active':sysMenu[0]=='bookinggrade'}"><a ng-click="headerSwitch(0,'bookinggrade')" href="#bookinggrade">宾馆预约</a></li>
                 <li ng-if="headerMenu(555)" data-toggle="busbooking" ng-class="{'active':sysMenu[0]=='busbooking'}"><a ng-click="headerSwitch(0,'busbooking')" href="#busbookinggrade">公车预约</a></li>
-                <li ng-if="headerMenu(587)" data-toggle="venuebooking" ng-class="{'active':sysMenu[0]=='venuebooking'}"><a ng-click="headerSwitch(0,'venuebooking')" href="#bookingdetails">会场预定</a></li>
+                <li ng-if="headerMenu(587)" data-toggle="venuebooking" ng-class="{'active':sysMenu[0]=='venuebooking'}"><a ng-click="headerSwitch(0,'venuebooking')" href="#bookingdetails">会场预约</a></li>
                 <li ng-if="headerMenu(567)" data-toggle="formNotice" ng-class="{'active':sysMenu[0]=='formNotice'}"><a ng-click="headerSwitch(0,'formNotice')" href="#formNotice">采供系统</a></li>
                 <li ng-if="headerMenu(474)" data-toggle="question" ng-class="{'active':sysMenu[0]=='question'}"><a ng-click="headerSwitch(0,'question')" href="#questionnaire">问卷系统</a></li>
                 <li ng-if="headerMenu(584)" data-toggle="serviceevaluation" ng-class="{'active':sysMenu[0]=='serviceevaluation'}"><a ng-click="headerSwitch(0,'serviceevaluation')" href="#questionsetting">服务测评</a></li>
@@ -269,7 +269,7 @@
                             </li>
                             <li>
                                 <a class="list-group-item b-l-primary">
-                                    会场预定
+                                    会场预约
                                     <div style="float:right">
                                         <input bs-switch ng-change="toggleSave()" ng-model="media.venuebooking" type="checkbox" switch-size="mini"  switch-on-text="开" switch-off-text="关">
                                     </div>

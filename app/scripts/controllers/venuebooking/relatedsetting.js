@@ -4,7 +4,7 @@ angular.module('flatpcApp')
 .controller('relatedSettingCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-       '会场预定','相关设置'
+       '会场预约','相关设置'
     ];
     //跳转到什么地方去
     $scope.parent = "relatedsetting";

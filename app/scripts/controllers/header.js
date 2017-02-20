@@ -62,7 +62,8 @@ angular.module('flatpcApp')
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
-                    a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
+                    a.href="http://bx.s1.natapp.cc/repair/index?token="+sessionStorage.tokenZnbx;
+                    // a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
                     a.click();
                     break;
                     
@@ -187,6 +188,7 @@ angular.module('flatpcApp')
                         delcookie('role');
                         delcookie('takephoto');
                         delcookie('tokenMessage');
+                        delcookie('tokenZnbx');
                         delcookie('schoolname');
                         delcookie('check');
                         delcookie('loginoutTag');
@@ -210,6 +212,7 @@ angular.module('flatpcApp')
                         sessionStorage.removeItem('takephoto');
                         sessionStorage.removeItem('check');
                         sessionStorage.removeItem('tokenMessage');
+                        sessionStorage.removeItem('tokenZnbx');
                         sessionStorage.removeItem('schoolname');
                         sessionStorage.removeItem('loginoutTag');
                         var form = document.createElement("form");

@@ -4,7 +4,7 @@ angular.module('flatpcApp')
 .controller('DriverCtrl', ['$scope','$rootScope','AppConfig',function($scope,$rootScope,AppConfig) {
         //存储列表头到frame.html中
     $scope.menus = [
-        '公车预约','司机管理'
+        '公车预约','人员管理'
     ];
     //跳转到什么地方去
     $scope.parent = "driver";
