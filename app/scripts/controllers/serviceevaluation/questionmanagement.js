@@ -7,7 +7,7 @@ angular.module('flatpcApp')
         '服务测评','统计管理'
     ];
     //跳转到什么地方去
-    $scope.parent = "questionmanagement";
+    $scope.parent = "questionsetting";
     $scope.loaded = function(){
         $rootScope.loading = false;
         $scope.$apply();

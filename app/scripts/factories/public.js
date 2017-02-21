@@ -56,9 +56,6 @@ angular.module('flatpcApp')
     }
 
 
-
-
-
     var logout = function(param){
         var url = AppConfig.WEB_ROOT + 'public/login/login_out/?token=' + AppConfig.token || '';
         

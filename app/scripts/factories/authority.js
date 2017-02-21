@@ -62,6 +62,11 @@ angular.module('flatpcApp')
                         }else if(menuCheck(384)){
                             menus.push('setting');
                         }else menus.push(' ');
+                     }else if(menuCheck(549)){
+                         menus.push('meet');
+                        if(menuCheck(550)){
+                            menus.push('meet');
+                        }else menus.push(' ');
                     }else if(menuCheck(416)){
                          menus.push('exams');
                         if(menuCheck(417)){
@@ -146,6 +151,29 @@ angular.module('flatpcApp')
                             menus.push('hydset');
                         }else if(menuCheck(530)){
                             menus.push('hydhistory');
+                        }else menus.push(' ');
+                    }else if(menuCheck(371)){
+                        menus.push('graduate');
+                        if(menuCheck(377)){
+                            menus.push('graduate');
+                        }else menus.push(' ');
+                    }else if(menuCheck(401)){
+                        menus.push('report');
+                        if(menuCheck(403)){
+                            menus.push('report');
+                        }else if(menuCheck(402)){
+                            menus.push('quiltreserve');
+                        }else if(menuCheck(433)){
+                            menus.push('package');
+                        }else if(menuCheck(437)){
+                            menus.push('preset');
+                        }else menus.push(' ');
+                    }else if(menuCheck(421)){
+                        menus.push('entry');
+                        if(menuCheck(422)){
+                            menus.push('entry');
+                        }else if(menuCheck(423)){
+                            menus.push('daily');
                         }else menus.push(' ');
                     }
                     menus.push(' ')
@@ -823,97 +851,97 @@ angular.module('flatpcApp')
                     return null;
              case 'bookinggrade':
                 if(menuCheck(467))
-                    return ['hotel','bookinggrade','bookinggrade'];
+                    return ['bookinggrade','bookinggrade','bookinggrade'];
                 else
                     return null; 
              case 'datastatistics':
                 if(menuCheck(511))
-                    return ['hotel','datastatistics','datastatistics'];
+                    return ['bookinggrade','datastatistics','datastatistics'];
                 else
                     return null; 
              case 'roomgrade':
                 if(menuCheck(468))
-                    return ['hotel','roomgrade','roomgrade'];
+                    return ['bookinggrade','roomgrade','roomgrade'];
                 else
                     return null; 
              case 'hotelset':
                 if(menuCheck(469))
-                    return ['hotel','hotelset','hotelset'];
+                    return ['bookinggrade','hotelset','hotelset'];
                 else
                     return null; 
             case 'persongrade':
                 if(menuCheck(473))
-                    return ['hotel','persongrade','persongrade'];
+                    return ['bookinggrade','persongrade','persongrade'];
                 else
                     return null; 
             case 'busbookinggrade':
                 if(menuCheck(556))
-                    return ['busbooking','busbookinggrade','busbookinggrade'];
+                    return ['busbookinggrade','busbookinggrade','busbookinggrade'];
                 else
                     return null; 
             case 'relatedset':
                 if(menuCheck(557))
-                    return ['busbooking','relatedset','relatedset'];
+                    return ['busbookinggrade','relatedset','relatedset'];
                 else
                     return null; 
             case 'driver':
                 if(menuCheck(558))
-                    return ['busbooking','driver','driver'];
+                    return ['busbookinggrade','driver','driver'];
                 else
                     return null;
             case 'formNotice':
                 if(menuCheck(568))
-                    return ['formining','formNotice','formNotice'];
+                    return ['formNotice','formNotice','formNotice'];
                 else
                     return null; 
             case 'formMarketPrice':
                 if(menuCheck(569))
-                    return ['formining','formMarketPrice','formMarketPrice'];
+                    return ['formNotice','formMarketPrice','formMarketPrice'];
                 else
                     return null; 
             case 'formPriceGrade':
                 if(menuCheck(570))
-                    return ['formining','formPriceGrade','formPriceGrade'];
+                    return ['formNotice','formPriceGrade','formPriceGrade'];
                 else
                     return null;   
             case 'formPersonGrade':
                 if(menuCheck(571))
-                    return ['formining','formPersonGrade','formPersonGrade'];
+                    return ['formNotice','formPersonGrade','formPersonGrade'];
                 else
                     return null;                           
              case 'questionnaire':
                 if(menuCheck(475))
-                    return ['question','questionnaire','questionnaire'];
+                    return ['questionnaire','questionnaire','questionnaire'];
                 else
                     return null;
              case 'questionstatist':
                 if(menuCheck(476))
-                    return ['question','questionstatist','questionstatist'];
+                    return ['questionnaire','questionstatist','questionstatist'];
                 else
                     return null; 
             case 'questionsetting':
                 if(menuCheck(585))
-                    return ['serviceevaluation','questionsetting','questionsetting'];
+                    return ['questionsetting','questionsetting','questionsetting'];
                 else
                     return null;
              case 'questionmanagement':
                 if(menuCheck(586))
-                    return ['serviceevaluation','questionmanagement','questionmanagement'];
+                    return ['questionsetting','questionmanagement','questionmanagement'];
                 else
                     return null;
              case 'bookingdetails':
                 if(menuCheck(588))
-                    return ['venuebooking','bookingdetails','bookingdetails'];
+                    return ['bookingdetails','bookingdetails','bookingdetails'];
                 else
                     return null;
              case 'personnelmanagement':
                 if(menuCheck(589))
-                    return ['venuebooking','personnelmanagement','personnelmanagement'];
+                    return ['bookingdetails','personnelmanagement','personnelmanagement'];
                 else
                     return null;
              case 'relatedsetting':
                 if(menuCheck(590))
-                    return ['venuebooking','relatedsetting','relatedsetting'];
+                    return ['bookingdetails','relatedsetting','relatedsetting'];
                 else
                     return null;
              case 'hydropower':

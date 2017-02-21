@@ -257,11 +257,11 @@ angular.module('flatpcApp')
             physical:!new RegExp(",physical,").test(","+toggles+","),
             entry:!new RegExp(",entry,").test(","+toggles+","),
             bookinggrade:!new RegExp(",bookinggrade,").test(","+toggles+","),
-            busbooking:!new RegExp(",busbooking,").test(","+toggles+","),
-            venuebooking:!new RegExp(",venuebooking,").test(","+toggles+","),
+            busbookinggrade:!new RegExp(",busbookinggrade,").test(","+toggles+","),
+            bookingdetails:!new RegExp(",bookingdetails,").test(","+toggles+","),
             formNotice:!new RegExp(",formNotice,").test(","+toggles+","),
             questionnaire:!new RegExp(",questionnaire,").test(","+toggles+","),
-            serviceevaluation:!new RegExp(",serviceevaluation,").test(","+toggles+","),
+            questionsetting:!new RegExp(",questionsetting,").test(","+toggles+","),
             meet:!new RegExp(",meet,").test(","+toggles+","),
         }
         // $scope.change = function name(params) {
@@ -332,12 +332,11 @@ angular.module('flatpcApp')
             if(!$scope.media.physical)str += "physical,";
             if(!$scope.media.entry)str += "entry,";
             if(!$scope.media.bookinggrade)str += "bookinggrade,";
+            if(!$scope.media.busbookinggrade)str += "busbookinggrade,";
+            if(!$scope.media.bookingdetails)str += "bookingdetails,";
             if(!$scope.media.questionnaire)str += "questionnaire,";
-
-if(!$scope.media.busbooking)str += "busbooking,";
-if(!$scope.media.venuebooking)str += "venuebooking,";
-if(!$scope.media.serviceevaluation)str += "serviceevaluation,";
-if(!$scope.media.formNotice)str += "formNotice,";
+            if(!$scope.media.questionsetting)str += "questionsetting,";
+            if(!$scope.media.formNotice)str += "formNotice,";
 
 
 
