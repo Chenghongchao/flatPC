@@ -481,7 +481,37 @@
             </li>
         </ul>
     </li>
-    
+
+    <li ng-if="menuCheck(610)" ng-show="sysMenu[1]=='bedroomGrade'">
+        <div class="menu-title">查寝室</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(611)">
+                <a href="#bedroomGradeDay">
+                    <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#fc7257;font-size:28px"></i>
+                    日评分
+                </a>
+            </li>
+            <li ng-if="menuCheck(612)">
+                <a href="#bedroomGradeRule">
+                    <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#9c59b8;font-size:28px"></i>
+                    违章管理
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li ng-if="menuCheck(613)" ng-show="sysMenu[1]=='bedroomGrade'">
+        <div class="menu-title">设置</div>
+        <ul class="menu-list">
+            <li ng-if="menuCheck(614)">
+                <a href="#bedroomGradeSet">
+                    <i class="ALiconfont icon-set" style="line-height:42px; background-color:#38adff;font-size:28px"></i>
+                    基础设置
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li ng-if="menuCheck(106)" ng-show="sysMenu[1]=='admin'">
         <div class="menu-title">账号管理</div>
         <ul class="menu-list">

@@ -841,6 +841,59 @@ angular
             }
         }
     })
+
+    .state('bedroomGradeDay', {
+        url: "/bedroomGradeDay",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/bedroomGradeDay.html',
+                controller: 'bedroomGradeDayCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bedroomGradeRule', {
+        url: "/bedroomGradeRule",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/bedroomGradeRule.html',
+                controller: 'bedroomGradeRuleCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bedroomGradeSet', {
+        url: "/bedroomGradeSet",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/bedroomGradeSet.html',
+                controller: 'bedroomGradeSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+
     .state('logs', {
         url: "/logs",
         views: {

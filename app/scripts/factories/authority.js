@@ -334,6 +334,22 @@ angular.module('flatpcApp')
                     return ['flat','bedroomCheck','bedroomCheckSet'];
                 else
                     return null;
+
+             case 'bedroomGradeDay':
+                if(menuCheck(611))
+                    return ['flat','bedroomGrade','bedroomGradeDay'];
+                else
+                    return null;
+             case 'bedroomGradeRule':
+                if(menuCheck(612))
+                    return ['flat','bedroomGrade','bedroomGradeRule'];
+                else
+                    return null;
+             case 'bedroomGradeSet':
+                if(menuCheck(614))
+                    return ['flat','bedroomGrade','bedroomGradeSet'];
+                else
+                    return null;
             case 'scoreStatistics':
                 if(menuCheck(301))
                     return ['flat','grade','scoreStatistics'];
