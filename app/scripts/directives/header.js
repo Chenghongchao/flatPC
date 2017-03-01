@@ -1,11 +1,15 @@
 //菜单点击事件
+
 $(document).click(function(event){
     var a = event.target;
     $(".user-nav").removeClass("active");
-    if(a && a.parentNode && a.parentNode.parentNode.className && a.parentNode.parentNode.className == "user-nav"){
-        $(a.parentNode.parentNode).addClass("active");
-    }
+    // if(a && a.parentNode && a.parentNode.parentNode.className && a.parentNode.parentNode.className == "user-nav"){
+    //     $(a.parentNode.parentNode).addClass("active");
+    // }
 })
+
+
+
 angular.module('flatpcApp')
 .directive('headerNavbar', function() {
     return {

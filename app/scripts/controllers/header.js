@@ -10,6 +10,13 @@
 angular.module('flatpcApp')
   .controller('HeaderCtrl', ['$scope','$rootScope','PublicService','AppConfig',
   function($scope,$rootScope,PublicService,AppConfig) {
+
+       //顶部菜单点击事件
+        $(".user-nav").click(function(event){
+            $(this).toggleClass("active");
+            return false;
+        })
+        
         $rootScope.headerSwitch = function(t,name){
             $rootScope.frame = t?true:false;
             var a = document.createElement('a');

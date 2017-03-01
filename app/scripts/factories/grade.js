@@ -1000,9 +1000,18 @@ angular.module('flatpcApp')
         });//.get(url,param);
     }
 
-    //获取打分基础设置
+    //获取寝室打分基础设置
     var getBaseSetup =function() {
         var url = AppConfig.WEB_ROOT + 'evaluation/scsetups/get_base_setup/?'
+         + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token;
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "warning"); 
+        });
+    };
+
+    //获取宿舍打分基础设置
+    var getBaseSetupDormmark =function() {
+        var url = AppConfig.WEB_ROOT + 'dormmark/scoresetup/get_base_setup/?'
          + 'schoolcode=' + AppConfig.schoolCode + '&token=' + AppConfig.token;
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
@@ -1056,7 +1065,8 @@ angular.module('flatpcApp')
         importScoresDay:importScoresDay,
         importScoresMonth:importScoresMonth,
         importScoresCheck:importScoresCheck,
-        getBaseSetup:getBaseSetup
+        getBaseSetup:getBaseSetup,
+        getBaseSetupDormmark:getBaseSetupDormmark
 
     }
 }]);

@@ -47,12 +47,22 @@ angular.module('flatpcApp')
     }
     var getListByRoom = function (param) {
         var url = AppConfig.WEB_ROOT + 'evaluation/lllegal/get_special/?schoolcode='+AppConfig.schoolCode+'&token=' + AppConfig.token
+        + '&specialid=' + (param.specialid||'');
+        return $http.get(url).error(function (error) {
+            swal("提示", "网络错误！", "warning"); 
+        });
+    }
+    // 周打分增加是否复查isreview
+    var getListByRoomForDay = function (param) {
+        var url = AppConfig.WEB_ROOT + 'evaluation/lllegal/get_special/?schoolcode='+AppConfig.schoolCode+'&token=' + AppConfig.token
         + '&specialid=' + (param.specialid||'')
         + '&isreview=' + param.isreview;
         return $http.get(url).error(function (error) {
             swal("提示", "网络错误！", "warning"); 
         });
     }
+
+
     var checkByRoom = function(param){
         var url = AppConfig.WEB_ROOT + 'evaluation/lllegal/special/';
         return $http({
@@ -205,6 +215,7 @@ angular.module('flatpcApp')
         editRule:editRule,
         delRule:delRule,
         getListByRoom:getListByRoom,
+        getListByRoomForDay:getListByRoomForDay,
         checkByRoom:checkByRoom,
         getListByFlat:getListByFlat,
         addCheck:addCheck,

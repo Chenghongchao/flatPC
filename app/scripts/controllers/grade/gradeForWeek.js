@@ -452,7 +452,7 @@ function($scope,AppConfig,$rootScope,FlatService,TermService,$filter,GradeServic
         },
         getListByRoom: function(){
             $rootScope.loading = true;
-            return RuleService.getListByRoom({
+            return RuleService.getListByRoomForDay({
                 token:AppConfig.token,
                 schoolcode:AppConfig.schoolCode,
                 specialid:this.item.roomId+'-'+$rootScope.treeTerm[$scope.media.yearIndex].semesterList[$scope.media.termIndex].semesterId+'-'+$scope.media.week,

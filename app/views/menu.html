@@ -119,16 +119,14 @@
                 </a>
             </li>-->
             <!--注意添加check时间和a标签才能跳转-->
-              <!--<a href="#newstudent">-->
-                <li ng-if="menuCheck(31)">
-                    <a href="#newstudent">
-                    <i class="ALiconfont icon-xueshengfenpei" style="background-color:#38adff; font-size:30px"></i>
-                    新生排宿
-                    </a>
-                </li>
-                 
+            <li ng-if="menuCheck(31)">
+                <a href="#newstudent">
+                <i class="ALiconfont icon-xueshengfenpei" style="background-color:#38adff; font-size:30px"></i>
+                新生排宿
+                </a>
+            </li>     
         </ul>
-             <ul class="menu-list">
+        <ul class="menu-list">
             <!--<li >
                 <a>
                     <i class="glyphicon glyphicon-console" style="background-color:#d3d6d9;font-size:20px"></i>
@@ -136,14 +134,12 @@
                 </a>
             </li>-->
             <!--注意添加check时间和a标签才能跳转-->
-              <!--<a href="#newstudent">-->
-                <li ng-if="menuCheck(415)">
-                    <a href="#newstudentschool">
-                    <i class="ALiconfont icon-xueshengfenpei" style="background-color:#9c59b8; font-size:30px"></i>
-                    新生排宿(学院)
-                    </a>
-                </li>
-                 
+            <li ng-if="menuCheck(415)">
+                <a href="#newstudentschool">
+                <i class="ALiconfont icon-xueshengfenpei" style="background-color:#9c59b8; font-size:30px"></i>
+                新生排宿(学院)
+                </a>
+            </li>     
         </ul>
         <ul class="menu-list">
                 <li ng-if="menuCheck(408)">
@@ -485,13 +481,13 @@
     <li ng-if="menuCheck(610)" ng-show="sysMenu[1]=='bedroomGrade'">
         <div class="menu-title">查寝室</div>
         <ul class="menu-list">
-            <li ng-if="menuCheck(611)">
+            <li ng-if="menuCheck(611) && dayDormmark == 1">
                 <a href="#bedroomGradeDay">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#fc7257;font-size:28px"></i>
                     日评分
                 </a>
             </li>
-            <li ng-if="menuCheck(612)">
+            <li ng-if="menuCheck(612) && illegalDormmark == 1">
                 <a href="#bedroomGradeRule">
                     <i class="ALiconfont icon-yixiangdengji" style="line-height:42px; background-color:#9c59b8;font-size:28px"></i>
                     违章管理
