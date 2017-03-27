@@ -51,7 +51,7 @@ angular.module('flatpcApp')
                         if(menuCheck(13)){
                             menus.push('admin');
                         }else if(menuCheck(12)){
-                            menus.push('role');order
+                            menus.push('role');
                         }else menus.push(' ');
                     }else if(menuCheck(367)){
                          menus.push('shower');
@@ -290,7 +290,7 @@ angular.module('flatpcApp')
                 else
                     return null;
              case 'dormitoryMarkSet':
-                if(menuCheck(444))
+                if(menuCheck(446))
                     return ['flat','dormitoryCheck','dormitoryMarkSet'];
                 else
                     return null;
@@ -305,12 +305,12 @@ angular.module('flatpcApp')
                 else
                     return null;
              case 'checkResult':
-                if(menuCheck(444))
+                if(menuCheck(463))
                     return ['flat','safetyCheck','checkResult'];
                 else
                     return null;
              case 'safeSet':
-                if(menuCheck(444))
+                if(menuCheck(465))
                     return ['flat','safetyCheck','safeSet'];
                 else
                     return null;
@@ -505,6 +505,11 @@ angular.module('flatpcApp')
                     return ['admin','pad','padmanage'];
                 else
                     return null;   
+            case 'baseSetup':
+                if(menuCheck(617))
+                    return ['admin','baseSetup','baseSetup'];
+                else
+                    return null;   
             case 'graduate':
                 if(menuCheck(377))
                     return ['graduate','graduate','leaveschool'];
@@ -664,6 +669,41 @@ angular.module('flatpcApp')
                    return ['report','quiltreserve','quiltse'];
                 else
                     return null;
+            case 'newStudentOrder':
+                if(menuCheck(627))
+                    return ['reportSecond','reportSecond','newStudentOrder'];
+                else
+                    return null;  
+            case 'reportMode':
+                if(menuCheck(628))
+                    return ['reportSecond','reportSecond','reportMode'];
+                else
+                    return null;    
+            case 'bedBooking':
+                if(menuCheck(629))
+                    return ['reportSecond','reportSecond','bedBooking'];
+                else
+                    return null; 
+            case 'newQuestion':
+                if(menuCheck(630))
+                    return ['reportSecond','reportSecond','newQuestion'];
+                else
+                    return null; 
+            case 'newPackage':
+                if(menuCheck(631))
+                    return ['reportSecond','reportSecond','newPackage'];
+                else
+                    return null; 
+            case 'safeEdu':
+                if(menuCheck(632))
+                    return ['reportSecond','reportSecond','safeEdu'];
+                else
+                    return null;
+            case 'reportSecondBaseSet':
+                if(menuCheck(633))
+                    return ['reportSecond','reportSecond','reportSecondBaseSet'];
+                else
+                    return null; 
             case 'entrycount':
                 if(menuCheck(426))
                     return ['entry','entry','entrycount'];

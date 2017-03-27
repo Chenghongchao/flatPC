@@ -13,7 +13,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.BUS + "public/?s=admin/forms/config&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.BUS + "public/?s=admin/forms/config&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.BUS + "public/?s=admin/forms/config&schoolcode="+AppConfig.schoolCode) 
     a.target="page-frame";
     a.click();
 }]);

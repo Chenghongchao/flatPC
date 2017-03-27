@@ -13,7 +13,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.PHYSICAL + "index.php?m=Physical&c=Physical&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.PHYSICAL + "index.php?m=Physical&c=Physical&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.PHYSICAL + "index.php?m=Physical&c=Physical&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode)
     a.target="page-frame";
     a.click();
 }]);

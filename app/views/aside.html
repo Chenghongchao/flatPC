@@ -70,6 +70,14 @@
     </li>
 </ul>
 
+<ul ng-show="sysMenu[0]=='reportSecond'">
+     <li ng-if="menuCheck(619)" ng-class="{'active':sysMenu[1]=='reportSecond'}" ng-click="switch('reportSecond')">
+        <a href="#index" title="迎新系统">
+            <i class="ALiconfont icon-qiandao"></i> 迎新系统
+        </a>
+    </li>
+</ul>
+
 <ul ng-show="sysMenu[0]=='entry'">
     <li ng-if="menuCheck(422)" ng-class="{'active':sysMenu[1]=='entry'}" ng-click="switch('entry')">
         <a href="#index" title="统计管理">
@@ -128,6 +136,11 @@
     <li ng-if="menuCheck(508)" ng-class="{'active':sysMenu[1]=='pad'}" ng-click="switch('pad')">
         <a href="#index" title="PAD管理">
             <i class="ALiconfont icon-yubaodao" style="font-size:22px"></i> PAD管理
+        </a>
+    </li>
+    <li ng-if="menuCheck(616)" ng-class="{'active':sysMenu[1]=='baseSetup'}" ng-click="switch('baseSetup')">
+        <a href="#index" title="基础设置">
+            <i class="ALiconfont icon-shezhi" style="font-size:22px"></i> 基础设置
         </a>
     </li>
 </ul>

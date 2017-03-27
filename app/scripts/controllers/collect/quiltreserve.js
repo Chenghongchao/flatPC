@@ -13,7 +13,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.REPORT + "index.php?m=Admin&c=Reserve&a=index";
+    //a.href = AppConfig.REPORT + "index.php?m=Admin&c=Reserve&a=index";
+    $("#mainframe",parent.document.body).attr("src", AppConfig.REPORT + "index.php?m=Admin&c=Reserve&a=index") 
     a.target="page-frame";
     a.click();
 }]);

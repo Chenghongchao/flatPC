@@ -13,7 +13,9 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.FRAME+"index.php?m=SafetyCheck&c=CheckResult&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.FRAME+"index.php?m=SafetyCheck&c=CheckResult&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.FRAME+"index.php?m=SafetyCheck&c=CheckResult&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode)
+    // $("#mainframe",parent.document.body).attr("src", "http://www.baidu.com")
     a.target="page-frame";
     a.click();
 }]);

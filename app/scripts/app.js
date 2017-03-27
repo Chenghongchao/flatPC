@@ -36,6 +36,7 @@ angular
     FRAME:'http://code.houqinbao.com:3338/Apartment/',
     //FRAME:'http://192.168.2.138/Apartment/',
     REPORT:'http://test.houqinbao.com/Report/',
+    REPORTNEW:'http://code.houqinbao.com:3338/ReportNew/',
     SHOWER:'http://code.houqinbao.com:3338/Shower/',
     UCENTER:'http://code.houqinbao.com:3338/ucenter/',
     PHYSICAL:'http://code.houqinbao.com:3338/physical/',
@@ -48,6 +49,7 @@ angular
     MEET:'http://code.houqinbao.com:3338/meet/',
     WENJUAN:'http://code.houqinbao.com:3338/wenjuan2/',
     HUICHANG:'http://code.houqinbao.com:3338/huichang/',
+    NEWREPAIR:'http://testbx.houqinbao.com/',  // 新版报修
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -1306,6 +1308,23 @@ angular
             }
         }
     })
+    .state('baseSetup', {
+        url: "/baseSetup",
+        views: {
+            "": {
+                templateUrl: 'views/admin/baseSetup.html',
+                controller: 'baseSetupCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
      .state('graduate', {
         url: "/leaveschool",
         views: {
@@ -1992,6 +2011,125 @@ angular
             "": {
                 templateUrl: 'views/checkIn/checkSet.html',
                 controller: 'checkSetCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('newStudentOrder', {
+        url: "/newStudentOrder",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/newStudentOrder.html',
+                controller: 'newStudentOrderCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('reportMode', {
+        url: "/reportMode",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/reportMode.html',
+                controller: 'reportModeCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('bedBooking', {
+        url: "/bedBooking",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/bedBooking.html',
+                controller: 'bedBookingCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('newQuestion', {
+        url: "/newQuestion",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/newQuestion.html',
+                controller: 'newQuestionCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('newPackage', {
+        url: "/newPackage",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/newPackage.html',
+                controller: 'newPackageCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('safeEdu', {
+        url: "/safeEdu",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/safeEdu.html',
+                controller: 'safeEduCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('reportSecondBaseSet', {
+        url: "/reportSecondBaseSet",
+        views: {
+            "": {
+                templateUrl: 'views/reportSecond/reportSecondBaseSet.html',
+                controller: 'reportSecondBaseSetCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

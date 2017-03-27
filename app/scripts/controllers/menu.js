@@ -151,19 +151,5 @@ angular.module('flatpcApp')
         $rootScope.loading = false;
         getBaseSetup();
         getBaseSetupQs();
-        // return GradeService.getBaseSetup().success(function(data){
-        //     if(data.code == 0){
-        //         $scope.week = AppConfig.week;
-        //         $scope.month = AppConfig.month;
-        //         $scope.day = AppConfig.day;
-        //         $scope.check = AppConfig.check 
-        //     }else if(data.code == 4037){
-        //                     swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-        //                     location.href="#login";$rootScope.loading = false;
-        //                 }
-        //     else
-        //         swal("提示","错误代码："+ data.code + '，' + data.msg, "warning"); 
-        //     $rootScope.loading = false;
-        // });
     }
   }]);

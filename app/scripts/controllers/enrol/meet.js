@@ -20,7 +20,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.MEET + "public/?s=admin/activity/lists&schoolcode="+AppConfig.schoolCode; //    index.php?m=Order&c=Manager&a=orderSearch&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.MEET + "public/?s=admin/activity/lists&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.MEET + "public/?s=admin/activity/lists&schoolcode="+AppConfig.schoolCode)
     a.target="page-frame";
     a.click();
 }]);

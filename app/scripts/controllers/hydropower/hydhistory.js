@@ -14,6 +14,7 @@
 //     }
 //     var a = document.createElement('a');
 //     a.href = AppConfig.HYDROPOWER + "index.php?m=Pay&c=Record&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
+//     $("#mainframe",parent.document.body).attr("src", AppConfig.HYDROPOWER + "index.php?m=Pay&c=Record&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode)
 //     a.target="page-frame";
 //     a.click();
 // }]);

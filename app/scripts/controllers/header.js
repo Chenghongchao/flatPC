@@ -64,16 +64,29 @@ angular.module('flatpcApp')
                         return;
                     }
                     break;
+
+                //    老版报修
                 case 'repair':
                     if(!$rootScope.menuCheck(4)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
-                    a.href="http://bx.s1.natapp.cc/repair/index?token="+sessionStorage.tokenZnbx;
+                    // a.href="http://bx.s1.natapp.cc/repair/index?token="+sessionStorage.tokenZnbx;
+                    a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
+                    a.click();
+                    break;
+
+                //    新版报修    
+                case 'newrepair':
+                    if(!$rootScope.menuCheck(637)){
+                        swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
+                        return;
+                    }
+                    a.href=AppConfig.NEWREPAIR + "repair/index?token="+sessionStorage.tokenZnbx;
                     // a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
                     a.click();
                     break;
-                    
+                        
                 case 'shuidian':
                     if(!$rootScope.menuCheck(5)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
@@ -250,6 +263,7 @@ angular.module('flatpcApp')
             wechat:!new RegExp(",wechat,").test(","+toggles+","),
             flat:!new RegExp(",flat,").test(","+toggles+","),
             repair:!new RegExp(",repair,").test(","+toggles+","),
+            newrepair:!new RegExp(",newrepair,").test(","+toggles+","),
             food:!new RegExp(",food,").test(","+toggles+","),
             water:!new RegExp(",water,").test(","+toggles+","),
             mall:!new RegExp(",mall,").test(","+toggles+","),
@@ -325,6 +339,7 @@ angular.module('flatpcApp')
             if(!$scope.media.wechat)str += "wechat,";
             if(!$scope.media.flat)str += "flat,";
             if(!$scope.media.repair)str += "repair,";
+            if(!$scope.media.newrepair)str += "newrepair,";
             if(!$scope.media.food)str += "food,";
             if(!$scope.media.water)str += "water,";
             if(!$scope.media.mall)str += "mall,";
@@ -344,9 +359,6 @@ angular.module('flatpcApp')
             if(!$scope.media.questionnaire)str += "questionnaire,";
             if(!$scope.media.questionsetting)str += "questionsetting,";
             if(!$scope.media.formNotice)str += "formNotice,";
-
-
-
             if(!$scope.media.meet)str += "meet,";
 
             if(str.length>0){

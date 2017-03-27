@@ -13,7 +13,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.FORMINING + "index.php?m=Admin&c=MarketQuotation&a=index&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.FORMINING + "index.php?m=Admin&c=MarketQuotation&a=index&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.FORMINING + "index.php?m=Admin&c=MarketQuotation&a=index&schoolcode="+AppConfig.schoolCode)
     a.target="page-frame";
     a.click();
 }]);

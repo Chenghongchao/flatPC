@@ -13,7 +13,8 @@ angular.module('flatpcApp')
         $scope.$apply();
     }
     var a = document.createElement('a');
-    a.href = AppConfig.HOTEL + "index.php?m=Admin&c=Hourse&a=lists&schoolcode="+AppConfig.schoolCode;
+    //a.href = AppConfig.HOTEL + "index.php?m=Admin&c=Hourse&a=lists&schoolcode="+AppConfig.schoolCode;
+    $("#mainframe",parent.document.body).attr("src", AppConfig.HOTEL + "index.php?m=Admin&c=Hourse&a=lists&schoolcode="+AppConfig.schoolCode)
     a.target="page-frame";
     a.click();
 }]);
