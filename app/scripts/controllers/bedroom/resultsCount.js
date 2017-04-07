@@ -14,7 +14,7 @@ angular.module('flatpcApp')
     }
     var a = document.createElement('a');
     //a.href = AppConfig.FRAME+"index.php?m=RoomCheck&c=ScoreForCount&a=search&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode;
-    $("#mainframe",parent.document.body).attr("src", AppConfig.FRAME+"index.php?m=RoomCheck&c=ScoreForCount&a=search&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode) 
+    $("#mainframe",parent.document.body).attr("src", AppConfig.FRAME+"index.php?m=RoomCheck&c=ScoreForCount&a=day&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode) 
     a.target="page-frame";
     a.click();
 }]);

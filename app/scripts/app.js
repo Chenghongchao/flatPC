@@ -30,7 +30,7 @@ angular
         //WEB_ROOT:'http://192.168.2.138:8080/Geese_Apartment/',
 
         // WEB_ROOT:'http://114.55.17.193/Geese_Apartment/',
-    // WEB_ROOT:'http://127.0.0.1:8080/Geese_Apartment/',
+     //WEB_ROOT:'http://127.0.0.1:8080/Geese_Apartment/',
      //WEB_ROOT:'http://ap.houqinbao.com/Geese_Apartment/',
     WEB_ROOT_MESSAGE:'http://120.55.84.193:8080/Geese_Quality_Supervision/',
     FRAME:'http://code.houqinbao.com:3338/Apartment/',
@@ -49,7 +49,7 @@ angular
     MEET:'http://code.houqinbao.com:3338/meet/',
     WENJUAN:'http://code.houqinbao.com:3338/wenjuan2/',
     HUICHANG:'http://code.houqinbao.com:3338/huichang/',
-    NEWREPAIR:'http://testbx.houqinbao.com/',  // 新版报修
+    NEWREPAIR:'http://testbx.houqinbao.com/', //新版报修
       schoolCode:0,
 	  token:'',
       adminId:0,
@@ -798,6 +798,23 @@ angular
             "": {
                 templateUrl: 'views/bedroom/weekCheck.html',
                 controller: 'weekCheckCtrl'
+            },
+            "aside": {
+                templateUrl: "views/aside.html",
+                controller: 'AsideCtrl'
+            },
+            "header": {
+                templateUrl: "views/header.html",
+                controller: 'HeaderCtrl'
+            }
+        }
+    })
+    .state('dayCheck', {
+        url: "/dayCheck",
+        views: {
+            "": {
+                templateUrl: 'views/bedroom/dayCheck.html',
+                controller: 'dayCheckCtrl'
             },
             "aside": {
                 templateUrl: "views/aside.html",

@@ -319,6 +319,11 @@ angular.module('flatpcApp')
                     return ['flat','bedroomCheck','checkResults'];
                 else
                     return null;
+            case 'dayCheck':
+                if(menuCheck(638))
+                    return ['flat','bedroomCheck','dayCheck'];
+                else
+                    return null;
              case 'weekCheck':
                 if(menuCheck(525))
                     return ['flat','bedroomCheck','weekCheck'];

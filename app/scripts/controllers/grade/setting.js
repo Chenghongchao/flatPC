@@ -27,7 +27,6 @@ function($scope,AppConfig,$rootScope,GradeService) {
         role :  AppConfig.role==1?false:true,
        
     };
-    console.log(AppConfig);
 	$scope.switchChangeEvent = function(photo, takephoto, wgphoto){
 		if(null!=photo && false==photo){ //关闭 “开启寝室实拍”
 			$scope.media.takephoto = false;

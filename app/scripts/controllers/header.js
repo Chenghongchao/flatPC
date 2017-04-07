@@ -21,14 +21,12 @@ angular.module('flatpcApp')
             $rootScope.frame = t?true:false;
             var a = document.createElement('a');
             a.target="page-tab";
-            
             switch(name){
                 case 'wechat':
                     if(!$rootScope.menuCheck(318)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
-                    
                     a.href = "/index.php?s=/addon/HomePage/HomePage/lists.html";
                     a.click();
                     break;
@@ -37,8 +35,6 @@ angular.module('flatpcApp')
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
-
-                    
                     a.href="/index.php?s=/addon/Dingcan/Dingcan/lists.html";
                     a.click();
                     break;
@@ -64,7 +60,6 @@ angular.module('flatpcApp')
                         return;
                     }
                     break;
-
                 //    老版报修
                 case 'repair':
                     if(!$rootScope.menuCheck(4)){
@@ -82,11 +77,10 @@ angular.module('flatpcApp')
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
-                    a.href=AppConfig.NEWREPAIR + "repair/index?token="+sessionStorage.tokenZnbx;
-                    // a.href="/index.php?s=/addon/RepairSystem/RepairSystem/lists.html";
+                    // a.href=AppConfig.NEWREPAIR + "repair/index?token="+sessionStorage.tokenZnbx;
+                    a.href=AppConfig.NEWREPAIR + "index?token="+sessionStorage.tokenZnbx;
                     a.click();
-                    break;
-                        
+                    break;   
                 case 'shuidian':
                     if(!$rootScope.menuCheck(5)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
@@ -95,7 +89,6 @@ angular.module('flatpcApp')
                     a.href= AppConfig.HYDROPOWER + "index.php?m=Pay&c=Index&a=index&token="+AppConfig.token+"&schoolcode="+AppConfig.schoolCode; 
                     a.click();
                     break;
-                    
                 case 'center':
                     if(!$rootScope.menuCheck(2)){
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
@@ -125,7 +118,6 @@ angular.module('flatpcApp')
                     break;
                 case 'order':
                     if(!$rootScope.menuCheck(367)){
-                        
                         swal("提示","请联系客服电话0571-28256212 开通权限", "info"); 
                         return;
                     }
@@ -212,7 +204,9 @@ angular.module('flatpcApp')
                         delcookie('schoolname');
                         delcookie('check');
                         delcookie('loginoutTag');
+                        delcookie('extend');
                         var loginoutTag = sessionStorage.getItem("loginoutTag");
+                        var extend = sessionStorage.getItem("extend");
                         sessionStorage.removeItem('adminId');
                         sessionStorage.removeItem('token');
                         sessionStorage.removeItem('nodeIds');
@@ -235,6 +229,7 @@ angular.module('flatpcApp')
                         sessionStorage.removeItem('tokenZnbx');
                         sessionStorage.removeItem('schoolname');
                         sessionStorage.removeItem('loginoutTag');
+                        sessionStorage.removeItem('extend');
                         var form = document.createElement("form");
                         form.target = "test";
                         form.method = "post";
@@ -264,16 +259,17 @@ angular.module('flatpcApp')
             flat:!new RegExp(",flat,").test(","+toggles+","),
             repair:!new RegExp(",repair,").test(","+toggles+","),
             newrepair:!new RegExp(",newrepair,").test(","+toggles+","),
+            shuidian:!new RegExp(",shuidian,").test(","+toggles+","),
             food:!new RegExp(",food,").test(","+toggles+","),
             water:!new RegExp(",water,").test(","+toggles+","),
             mall:!new RegExp(",mall,").test(","+toggles+","),
-            hydropower:!new RegExp(",hydropower,").test(","+toggles+","),
             center:!new RegExp(",center,").test(","+toggles+","),
             admin:!new RegExp(",admin,").test(","+toggles+","),
             message:!new RegExp(",message,").test(","+toggles+","),
             graduate:!new RegExp(",graduate,").test(","+toggles+","),
             order:!new RegExp(",order,").test(","+toggles+","),
             report:!new RegExp(",report,").test(","+toggles+","),
+            reportSecond:!new RegExp(",reportSecond,").test(","+toggles+","),
             exammessage:!new RegExp(",exammessage,").test(","+toggles+","),
             physical:!new RegExp(",physical,").test(","+toggles+","),
             entry:!new RegExp(",entry,").test(","+toggles+","),
@@ -289,7 +285,7 @@ angular.module('flatpcApp')
         //     swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
         // }
         $scope.change = function name(params) {
-			if(AppConfig.roleId == 2 ){
+			if( sessionStorage.getItem("extend") == 't_rbac_admin' ){
 				swal("提示","请联系客服电话0571-28256212 修改密码", "info"); 
 			}else{
                 $('#newPassword').addClass('show');
@@ -340,16 +336,17 @@ angular.module('flatpcApp')
             if(!$scope.media.flat)str += "flat,";
             if(!$scope.media.repair)str += "repair,";
             if(!$scope.media.newrepair)str += "newrepair,";
+            if(!$scope.media.shuidian)str += "shuidian,";
             if(!$scope.media.food)str += "food,";
             if(!$scope.media.water)str += "water,";
             if(!$scope.media.mall)str += "mall,";
-            if(!$scope.media.hydropower)str += "hydropower,";
             if(!$scope.media.center)str += "center,";
             if(!$scope.media.admin)str += "admin,";
             if(!$scope.media.message)str += "message,";
             if(!$scope.media.graduate)str += "graduate,";
             if(!$scope.media.order)str += "order,";
             if(!$scope.media.report)str += "report,";
+            if(!$scope.media.reportSecond)str += "reportSecond,";
             if(!$scope.media.exammessage)str += "exammessage,";
             if(!$scope.media.physical)str += "physical,";
             if(!$scope.media.entry)str += "entry,";

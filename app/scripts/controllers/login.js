@@ -261,6 +261,7 @@ angular.module('flatpcApp')
                         sessionStorage.roleId = data.data.roleId;
                         sessionStorage.userAccount = data.data.userAccount;
                         sessionStorage.isOpenBed = data.data.isOpenBed;
+                        sessionStorage.extend = data.data.extend;
                         
                         sessionStorage.week = data.data.week;
                         sessionStorage.month = data.data.month;
@@ -358,7 +359,7 @@ angular.module('flatpcApp')
                             form.submit();
                             
                             login();
-                            loginZnbx();
+                            //loginZnbx();
                         }
                         
                     }

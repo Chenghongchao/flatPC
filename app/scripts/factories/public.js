@@ -42,7 +42,8 @@ angular.module('flatpcApp')
     }
 
     var loginZnbx = function(param){
-        var url = AppConfig.NEWREPAIR +'repair/login?';
+        // var url = AppConfig.NEWREPAIR +'repair/login?';
+        var url = AppConfig.NEWREPAIR +'login?';
         return $http({
             url:url,
             method:"POST",
