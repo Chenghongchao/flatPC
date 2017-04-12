@@ -19,36 +19,26 @@ angular
     'frapontillo.bootstrap-switch'
   ])
   .constant('AppConfig',{
-    //   
-      //WEB_ROOT:'http://120.55.84.193/Geese_Apartment/',
 
-     WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',
-      //WEB_ROOT_DOWNLOAD:'http://test.houqinbao.com/gyxt_api/',
-      
-    //WEB_ROOT:'http://192.168.2.116:8080/Geese_Apartment/',
+     WEB_ROOT:'http://code.houqinbao.com/Geese_Apartment/',//公寓系统-code测试
+     //WEB_ROOT:'http://ap.houqinbao.com/Geese_Apartment/', //公寓系统-正式地址
 
-        //WEB_ROOT:'http://192.168.2.138:8080/Geese_Apartment/',
-
-        // WEB_ROOT:'http://114.55.17.193/Geese_Apartment/',
-     //WEB_ROOT:'http://127.0.0.1:8080/Geese_Apartment/',
-     //WEB_ROOT:'http://ap.houqinbao.com/Geese_Apartment/',
-    WEB_ROOT_MESSAGE:'http://120.55.84.193:8080/Geese_Quality_Supervision/',
-    FRAME:'http://code.houqinbao.com:3338/Apartment/',
-    //FRAME:'http://192.168.2.138/Apartment/',
-    REPORT:'http://test.houqinbao.com/Report/',
-    REPORTNEW:'http://code.houqinbao.com:3338/ReportNew/',
-    SHOWER:'http://code.houqinbao.com:3338/Shower/',
-    UCENTER:'http://code.houqinbao.com:3338/ucenter/',
-    PHYSICAL:'http://code.houqinbao.com:3338/physical/',
-    HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',
-    EXAM:'http://test3.houqinbao.com/Examination/',
-    HOTEL:'http://120.26.48.150/hotel/',
-    BUS:'http://code.houqinbao.com:3338/bus/',
-    FORMINING:'http://code.houqinbao.com:3338/formining/',
-    QUESTION:'http://120.26.48.150/question/',
-    MEET:'http://code.houqinbao.com:3338/meet/',
-    WENJUAN:'http://code.houqinbao.com:3338/wenjuan2/',
-    HUICHANG:'http://code.houqinbao.com:3338/huichang/',
+    WEB_ROOT_MESSAGE:'http://120.55.84.193:8080/Geese_Quality_Supervision/',//服务监督
+    FRAME:'http://code.houqinbao.com:3338/Apartment/',//系统设置
+    REPORT:'http://test.houqinbao.com/Report/',//预报到管理
+    REPORTNEW:'http://code.houqinbao.com:3338/ReportNew/',//迎新系统
+    SHOWER:'http://code.houqinbao.com:3338/Shower/',//浴室预定
+    UCENTER:'http://code.houqinbao.com:3338/ucenter/',//数据中心
+    PHYSICAL:'http://code.houqinbao.com:3338/physical/',//体检查询
+    HYDROPOWER:'http://code.houqinbao.com:3338/hydropower/',//水电缴费
+    EXAM:'http://test3.houqinbao.com/Examination/',//考试系统
+    HOTEL:'http://120.26.48.150/hotel/',//宾馆预约
+    BUS:'http://code.houqinbao.com:3338/bus/',//公车预约
+    FORMINING:'http://code.houqinbao.com:3338/formining/',//采供系统
+    QUESTION:'http://120.26.48.150/question/',//问卷系统
+    MEET:'http://code.houqinbao.com:3338/meet/',//报名系统
+    WENJUAN:'http://code.houqinbao.com:3338/wenjuan2/',//服务测评
+    HUICHANG:'http://code.houqinbao.com:3338/huichang/',//会场预约
     NEWREPAIR:'http://testbx.houqinbao.com/', //新版报修
       schoolCode:0,
 	  token:'',
